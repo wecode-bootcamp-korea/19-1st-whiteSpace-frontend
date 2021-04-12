@@ -1,0 +1,26 @@
+@import url("https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css");
+
+$black: #000;
+$white: #fff;
+$yellow: #fab126;
+$blue: #88b8ee;
+$background: #fbfafa;
+$border: #888;
+$titleColor: #555555;
+$hoverColor: #ccc;
+$subTitleColor: #999;
+$phone: "(max-width: 768px)";
+$tablet: "(max-width: 1078px)";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Nanum Barun Gothic", sans-serif;
+  font-size: 1rem;
+}
+
+%flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
