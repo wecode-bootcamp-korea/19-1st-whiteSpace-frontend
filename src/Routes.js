@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import './Styles/reset.scss';
 
 import Login from './Pages/Login/Login';
 import Main from './Pages/Main/Main';
