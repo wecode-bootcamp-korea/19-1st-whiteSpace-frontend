@@ -1,6 +1,14 @@
 @import '../../Styles/common.scss';
 @import url(https://use.fontawesome.com/releases/v5.15.3/css/all.css);
 
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 %hover {
   &:hover {
     color: $yellow;
@@ -10,58 +18,65 @@
 
 #root {
   position: relative;
-  #nav {
+  height: 10000px;
+  #navWrapper {
+    border: 1px solid black;
     position: fixed;
     width: 100vw;
-    height: 10vh;
+    height: 16vh;
     color: black;
+    z-index: 9;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 9;
-    // &.scrollTopOn {
-    // }
     &.scrollTopOff {
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 15%);
       background-color: rgba(255, 255, 255, 0.8);
       transition: box-shadow 0.25s ease-in-out,
         background-color 0.25s ease-in-out;
     }
+    > nav {
+      width: 86vw;
+      height: 15vh;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
 
-    > h1 {
-      font-family: 'Nanum Barun Gothic', sans-serif;
-      font-size: 3em;
-      color: $border;
-    }
-    .navLeftMenu {
-      width: 40vw;
-      // border: 1px solid rgb(51, 41, 41);
+      > h1 {
+        width: 14vw;
+        font-family: 'NEXON Lv1 Gothic OTF Light';
+        font-size: 2em;
+        color: $border;
+      }
+      .navLeftMenu {
+        width: 40vw;
 
-      > ul {
-        display: flex;
-        > li {
-          margin-left: 1vw;
-          font-weight: bold;
-          @extend %hover;
+        > ul {
+          display: flex;
+          > li {
+            margin-left: 1.1vw;
+            font-weight: bold;
+            @extend %hover;
+          }
         }
       }
-    }
-    .navRightMenu {
-      font-size: 0.8em;
-      width: 40vw;
-      // border: 1px solid red;
-      > ul {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        > li {
-          margin-right: 1vw;
-          font-weight: bold;
-          @extend %hover;
-          button {
-            background-color: transparent;
-            border: 0px;
+      .navRightMenu {
+        font-size: 0.8em;
+        width: 40vw;
+        // border: 1px solid red;
+        > ul {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          > li {
+            margin-right: 1.8vw;
+            font-weight: bold;
             @extend %hover;
+            button {
+              background-color: transparent;
+              border: 0px;
+              @extend %hover;
+            }
           }
         }
       }
@@ -71,14 +86,16 @@
 
 @media all and (min-width: 769px) and #{$tablet} {
   #root {
-    #nav {
-      > h1 {
-        display: flex;
-        align-items: center;
-        width: 10vw;
-        height: 10vh;
-        font-size: 2.2em;
-        font-family: 'Nanum Barun Gothic', sans-serif;
+    #navWrapper {
+      nav {
+        > h1 {
+          display: flex;
+          align-items: center;
+          width: 10vw;
+          height: 10vh;
+          // font-size: 2.2em;
+          font-family: 'NEXON Lv1 Gothic OTF Light';
+        }
       }
     }
   }
@@ -86,28 +103,39 @@
 
 @media all and #{$phone} {
   #root {
-    #nav {
-      > h1 {
-        display: flex;
-        align-items: center;
-        width: 10vw;
-        height: 9vh;
-        font-size: 1.5em;
-        font-family: 'Nanum Barun Gothic', sans-serif;
-      }
-      .navLeftMenu {
-        width: 43vw;
+    #navWrapper {
+      nav {
+        > h1 {
+          display: flex;
+          align-items: center;
+          width: 10vw;
+          font-size: 1.5em;
+          font-family: 'NEXON Lv1 Gothic OTF Light';
+        }
+        .navLeftMenu {
+          width: 43vw;
 
-        > ul {
-          > li {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-width: 48px;
-            margin-left: 1vw;
-            font-weight: bold;
+          > ul {
+            > li {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-width: 48px;
+              margin-left: 1vw;
+              font-weight: bold;
+            }
           }
         }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 550px) {
+  #root {
+    #navWrapper {
+      nav {
+        flex-wrap: wrap;
       }
     }
   }

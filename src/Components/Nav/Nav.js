@@ -29,42 +29,47 @@ export class Nav extends Component {
 
   render() {
     return (
-      <div id="nav" className={this.state.checkScrollTop ? '' : 'scrollTopOff'}>
-        <h1>여백 0100</h1>
-        <div className="navLeftMenu">
-          <ul>
-            <li>
-              <Link to="/">ALL</Link>
-            </li>
-            <li>
-              <Link to="/">패브릭</Link>
-            </li>
-            <li>
-              <Link to="/">주방/욕실</Link>
-            </li>
-            <li>
-              <Link to="/">생활/홈케어</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="navRightMenu">
-          <ul>
-            <li>
-              <Link to="/">로그인</Link>
-            </li>
-            <li>
-              <Link to="/">회원가입</Link>
-            </li>
-            <li>
-              <Link to="/">장바구니</Link>
-            </li>
-            <li>
-              <button>
-                <i class="fas fa-search"></i>
-              </button>
-            </li>
-          </ul>
-        </div>
+      <div
+        id="navWrapper"
+        className={this.state.checkScrollTop ? '' : 'scrollTopOff'}
+      >
+        <nav>
+          <h1>여백 0100</h1>
+          <div className="navLeftMenu">
+            <ul>
+              <li>
+                <Link to="/">ALL</Link>
+              </li>
+              <li>
+                <Link to="/">패브릭</Link>
+              </li>
+              <li>
+                <Link to="/">주방/욕실</Link>
+              </li>
+              <li>
+                <Link to="/">생활/홈케어</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="navRightMenu">
+            <ul>
+              <li>
+                <Link to="/">로그인</Link>
+              </li>
+              <li>
+                <Link to="/">회원가입</Link>
+              </li>
+              <li>
+                <Link to="/">장바구니</Link>
+              </li>
+              <li>
+                <button>
+                  <i class="fas fa-search"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </nav>
       </div>
     );
   }
