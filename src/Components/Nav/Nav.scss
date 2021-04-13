@@ -1,2 +1,106 @@
-.navWrapper {
+@import '../../Styles/common.scss';
+@import url(https://use.fontawesome.com/releases/v5.15.3/css/all.css);
+
+%hover {
+  &:hover {
+    color: $yellow;
+    cursor: pointer;
+  }
+}
+
+@media all and #{$phone} {
+  #root {
+    #nav {
+      > h1 {
+        display: flex;
+        align-items: center;
+        width: 10vw;
+        height: 9vh;
+        font-size: 1.5em !important;
+      }
+      .navLeftMenu {
+        width: 43vw;
+
+        > ul {
+          > li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 48px;
+            margin-left: 1vw;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (min-width: 769px) and #{$tablet} {
+  #root {
+    #nav {
+      > h1 {
+        display: flex;
+        align-items: center;
+        width: 10vw;
+        height: 10vh;
+        font-size: 2.2em !important;
+      }
+    }
+  }
+}
+#root {
+  position: relative;
+  #nav {
+    position: fixed;
+    width: 100vw;
+    height: 10vh;
+    border: 1px solid black;
+    color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 9;
+    &.fixed {
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 15%);
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    > h1 {
+      font-size: 3em;
+      color: $border;
+    }
+    .navLeftMenu {
+      width: 40vw;
+      // border: 1px solid rgb(51, 41, 41);
+
+      > ul {
+        display: flex;
+        > li {
+          margin-left: 1vw;
+          font-weight: bold;
+          @extend %hover;
+        }
+      }
+    }
+    .navRightMenu {
+      font-size: 0.8em;
+      width: 40vw;
+      // border: 1px solid red;
+      > ul {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        > li {
+          margin-right: 1vw;
+          font-weight: bold;
+          @extend %hover;
+          button {
+            background-color: $white;
+            border: 0px;
+            @extend %hover;
+          }
+        }
+      }
+    }
+  }
 }
