@@ -1,0 +1,73 @@
+@import url('//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
+@import '../../../../Styles/common.scss';
+
+.product {
+  display: block;
+  padding: 1rem;
+
+  a {
+    .imageWrap {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+
+      img {
+        width: 300px;
+        height: 300px;
+        &:hover {
+          transform: scale(1.1);
+          -webkit-transform: scale(1.1);
+          -moz-transform: scale(1.1);
+          -o-transform: scale(1.1);
+          transition: all 0.2s;
+        }
+      }
+
+      .like {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: $hoverColor;
+        font-size: 2rem;
+        font-weight: 100;
+
+        .colorHeart {
+          color: salmon;
+        }
+      }
+    }
+  }
+
+  .contentWrap {
+    padding: 0.5rem 0 0.5rem 0;
+
+    span,
+    p {
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .productName {
+      color: $titleColor;
+    }
+
+    .badgeWrap {
+      display: inline-block;
+
+      .badge {
+        padding: 0.1rem 0.3rem 0 0.3rem;
+        margin: 0.2rem;
+        font-size: 0.3rem;
+        background-color: $yellow;
+        color: $white;
+        border-radius: 2px;
+      }
+    }
+
+    .productPrice {
+      padding: 1rem 0 1rem 0;
+      color: #008bcc;
+    }
+  }
+}

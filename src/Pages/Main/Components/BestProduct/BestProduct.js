@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Product from '../Product/Product';
+import ProductList from '../ProductList/ProductList';
 import './BestProduct.scss';
 
 export default class BestProduct extends Component {
   render() {
     return (
-      <div>
-        <h1>Best Product</h1>
-        <Product />
+      <div className="bestProduct">
+        <h1>Best Products</h1>
+        <ProductList />
       </div>
     );
   }
