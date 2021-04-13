@@ -8,64 +8,28 @@
   }
 }
 
-@media all and #{$phone} {
-  #root {
-    #nav {
-      > h1 {
-        display: flex;
-        align-items: center;
-        width: 10vw;
-        height: 9vh;
-        font-size: 1.5em !important;
-      }
-      .navLeftMenu {
-        width: 43vw;
-
-        > ul {
-          > li {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-width: 48px;
-            margin-left: 1vw;
-            font-weight: bold;
-          }
-        }
-      }
-    }
-  }
-}
-@media all and (min-width: 769px) and #{$tablet} {
-  #root {
-    #nav {
-      > h1 {
-        display: flex;
-        align-items: center;
-        width: 10vw;
-        height: 10vh;
-        font-size: 2.2em !important;
-      }
-    }
-  }
-}
 #root {
   position: relative;
   #nav {
     position: fixed;
     width: 100vw;
     height: 10vh;
-    border: 1px solid black;
     color: black;
     display: flex;
     justify-content: space-around;
     align-items: center;
     z-index: 9;
-    &.fixed {
+    // &.scrollTopOn {
+    // }
+    &.scrollTopOff {
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 15%);
       background-color: rgba(255, 255, 255, 0.8);
+      transition: box-shadow 0.25s ease-in-out,
+        background-color 0.25s ease-in-out;
     }
 
     > h1 {
+      font-family: 'Nanum Barun Gothic', sans-serif;
       font-size: 3em;
       color: $border;
     }
@@ -95,9 +59,53 @@
           font-weight: bold;
           @extend %hover;
           button {
-            background-color: $white;
+            background-color: transparent;
             border: 0px;
             @extend %hover;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 769px) and #{$tablet} {
+  #root {
+    #nav {
+      > h1 {
+        display: flex;
+        align-items: center;
+        width: 10vw;
+        height: 10vh;
+        font-size: 2.2em;
+        font-family: 'Nanum Barun Gothic', sans-serif;
+      }
+    }
+  }
+}
+
+@media all and #{$phone} {
+  #root {
+    #nav {
+      > h1 {
+        display: flex;
+        align-items: center;
+        width: 10vw;
+        height: 9vh;
+        font-size: 1.5em;
+        font-family: 'Nanum Barun Gothic', sans-serif;
+      }
+      .navLeftMenu {
+        width: 43vw;
+
+        > ul {
+          > li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 48px;
+            margin-left: 1vw;
+            font-weight: bold;
           }
         }
       }
