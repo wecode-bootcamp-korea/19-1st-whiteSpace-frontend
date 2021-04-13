@@ -1,0 +1,19 @@
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import '../../Styles/common.scss';
+
+.main {
+  .BrainhubCarousel__custom-arrowLeft {
+    cursor: pointer;
+    .arrowLeft {
+      position: absolute;
+      z-index: 999;
+      margin-left: 0.5rem;
+    }
+
+    .arrowRight {
+      position: absolute;
+      right: 0;
+      margin-right: 0.5rem;
+    }
+  }
+}
