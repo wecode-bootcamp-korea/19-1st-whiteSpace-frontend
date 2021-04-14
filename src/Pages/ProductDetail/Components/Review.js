@@ -4,27 +4,27 @@ import './Review.scss';
 const STARS = [
   {
     value: 5,
-    star: '★★★★★',
+    reviewStar: '★★★★★',
     comment: '아주 좋아요',
   },
   {
     value: 4,
-    star: '★★★★☆',
+    reviewStar: '★★★★☆',
     comment: '맘에 들어요',
   },
   {
     value: 3,
-    star: '★★★☆☆',
+    reviewStar: '★★★☆☆',
     comment: '보통이예요',
   },
   {
     value: 2,
-    star: '★★☆☆☆',
+    reviewStar: '★★☆☆☆',
     comment: '그냥 그래요',
   },
   {
     value: 1,
-    star: '★☆☆☆☆',
+    reviewStar: '★☆☆☆☆',
     comment: '별로예요',
   },
 ];
@@ -33,6 +33,9 @@ export default class Review extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      review: [],
+      reviewContents: '',
+      star: '5',
       fileArr: [],
     };
   }
@@ -45,17 +48,24 @@ export default class Review extends Component {
         fileArr: [
           ...fileArr,
           {
-            id: fileArr.length + 1,
-            files: files[0],
+            // id: fileArr.length + 1,
+            // files: files[0],
             src: window.URL.createObjectURL(files[0]),
           },
         ],
       },
       () => {
-        console.log(fileArr);
+        // console.log(fileArr);
       }
     );
   }
+
+  handleReviewValue = e => {
+    const { value, name } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
 
   deletePhoto = id => {
     const { fileArr } = this.state;
@@ -64,9 +74,31 @@ export default class Review extends Component {
     });
   };
 
+  addReview = () => {
+    const { reviewContents, review, star } = this.state;
+    if (!reviewContents) {
+      alert('리뷰 내용을 입력해주세요.');
+    } else {
+      this.setState(
+        {
+          review: [
+            ...review,
+            {
+              star,
+              reviewContents,
+            },
+          ],
+        },
+        () => {
+          // console.log(review);
+        }
+      );
+    }
+  };
+
   render() {
     const { fileArr } = this.state;
-    const { deletePhoto } = this;
+    const { deletePhoto, handleReviewValue, handleFileInput, addReview } = this;
     return (
       <div className="reviewWrap">
         <p>후기</p>
@@ -79,7 +111,10 @@ export default class Review extends Component {
           </span>
         </div>
         <div className="textareaWrap">
-          <textarea></textarea>
+          <textarea
+            onChange={e => handleReviewValue(e)}
+            name="reviewContents"
+          ></textarea>
           {fileArr.map(image => {
             const { id, src } = image;
             return (
@@ -91,6 +126,7 @@ export default class Review extends Component {
                 }}
               >
                 <img src={src} alt="reviewImage" />
+                <div className="deleteImage">삭제</div>
               </div>
             );
           })}
@@ -106,15 +142,21 @@ export default class Review extends Component {
             <input
               type="file"
               id="inputFile"
-              onChange={e => this.handleFileInput(e)}
+              onChange={e => handleFileInput(e)}
             />
           </div>
-          <select>
-            {STARS.map (star) => {
-              <option value={star.value}>{star.star}{star.comment}</option>
-            }}
+          <select onChange={e => handleReviewValue(e)} name="star">
+            {STARS.map(star => {
+              const { value, reviewStar, comment } = star;
+              return (
+                <option value={value}>
+                  {reviewStar}
+                  {comment}
+                </option>
+              );
+            })}
           </select>
-          <button className="addReview">
+          <button className="addReview" onClick={addReview}>
             <i className="xi-check-circle"></i>
             리뷰 등록하기
           </button>
