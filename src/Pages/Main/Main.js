@@ -12,6 +12,18 @@ export default class Main extends Component {
       productArr: [],
     };
   }
+  // componentDidMount() {
+  //   fetch('http://10.58.0.130:8000')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(data.banner_images);
+  //       this.setState({
+  //         mainImageArr: data.banner_images,
+  //         productArr: data.best_sellers,
+  //       });
+  //     });
+  // }
+
   componentDidMount() {
     fetch('data/productData.json')
       .then(res => res.json())

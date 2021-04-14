@@ -33,8 +33,9 @@ export default class Product extends Component {
     // console.log('props : ', productArr);
     return (
       <>
-        {productArr.map((product, index) => {
+        {productArr.map(product => {
           const {
+            id,
             name,
             price,
             thumbnail_url,
@@ -43,7 +44,7 @@ export default class Product extends Component {
             // isLiked,
           } = product;
           return (
-            <li className="product" key={index}>
+            <li className="product" key={id}>
               <a href="#!">
                 <div className="imageWrap">
                   <img
@@ -66,11 +67,15 @@ export default class Product extends Component {
                   <a href="#!">
                     <span className="productName">{name}</span>
                   </a>
-                  {is_new === 1 && (
-                    <StatusBtn text="NEW" color="yellow" stock={stock} />
-                  )}
-                  {stock <= 20 && (
-                    <StatusBtn text="LIMITED" color="blue" stock={stock} />
+                  {!stock ? (
+                    <StatusBtn text="SOLDOUT" color="red" />
+                  ) : (
+                    (is_new && (
+                      <StatusBtn text="NEW" color="yellow" stock={stock} />
+                    ),
+                    stock <= 20 && (
+                      <StatusBtn text="LIMITED" color="blue" stock={stock} />
+                    ))
                   )}
                 </div>
                 <p className="productPrice">{price.toLocaleString()}원</p>
