@@ -1,0 +1,104 @@
+@import url('//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
+@import '../../../Styles/common.scss';
+
+.reviewWrap {
+  width: 100%;
+  font-size: 0.8rem;
+
+  p {
+    padding: 0 0 1.5rem;
+    font-weight: bold;
+  }
+
+  .reviewHeader {
+    padding: 0 0 0.5rem;
+
+    span {
+      margin-right: 0.5rem;
+    }
+
+    .reviewDesc {
+      color: $subTitleColor;
+    }
+  }
+
+  .textareaWrap {
+    border: solid 1px $hoverColor;
+    padding: 1rem;
+
+    .reviewImageWrap {
+      img {
+        display: flex;
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    border: none;
+    resize: none;
+    font-size: 0.8rem;
+  }
+
+  .reviewFooter {
+    margin-top: 0.5rem;
+    height: 35px;
+
+    button,
+    select {
+      height: 100%;
+      margin-right: 1rem;
+      font-size: 0.8rem;
+    }
+
+    button {
+      width: 200px;
+    }
+
+    select {
+      width: 60%;
+      padding: 0.5rem;
+      border: 1px solid $hoverColor;
+    }
+
+    i {
+      margin: 0 0.5rem 0 0.5rem;
+    }
+
+    input[type='file'] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .addPhoto {
+      display: inline-block;
+
+      label {
+        color: #999;
+        padding: 0.5rem 2.5rem 0.5rem 2.5rem;
+        margin-right: 1rem;
+        background-color: $white;
+        cursor: pointer;
+        border: 1px solid $hoverColor;
+      }
+    }
+
+    .addReview {
+      float: right;
+      margin: 0;
+      background-color: $titleColor;
+      border: none;
+      color: $white;
+      cursor: pointer;
+    }
+  }
+}
