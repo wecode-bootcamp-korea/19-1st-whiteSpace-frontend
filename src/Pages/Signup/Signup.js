@@ -23,12 +23,25 @@ class Signup extends Component {
 
   handleValueInput = e => {
     const { id, value } = e.target;
-    this.setState({ [id]: value }, () => {});
+    this.setState({ [id]: value }, () => {
+      this.checkSignup();
+    });
+  };
+
+  checkSignup = () => {
+    const { loginId, loginPw } = this.state;
+    this.setState({
+      IsDisabled: !(
+        loginPw.length >= 8 &&
+        loginPw.length <= 16 &&
+        loginId.includes('@')
+      ),
+    });
   };
 
   render() {
     const { loginId, loginPw, loginPwCheck } = this.state;
-    const { handleValueInput } = this;
+    const { handleValueInput, checkValidation } = this;
 
     return (
       <div className="Signup">
@@ -45,7 +58,7 @@ class Signup extends Component {
               value={loginId}
               onChange={handleValueInput}
             />
-            <span> (영문소문자/숫자, 4~16자) </span>
+            <span> (이메일형식, 4~16자) </span>
           </div>
           <div className="container">
             <div className="nameContainer">
@@ -99,8 +112,8 @@ class Signup extends Component {
             </div>
             <input type="text" />
           </div>
-          <button className="signupBtn">
-            <Link to="/">회원가입</Link>
+          <button className="signupBtn" onClick={checkValidation}>
+            <Link to="/Welcome">회원가입</Link>
           </button>
         </div>
       </div>

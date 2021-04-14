@@ -1,0 +1,42 @@
+@import '../../../Styles/common.scss';
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#mainBox {
+  @extend %flexCenter;
+  height: 100vh;
+
+  main {
+    @extend %flexCenter;
+    flex-direction: column;
+
+    p {
+      font-family: 'NEXON Lv1 Gothic OTF Light';
+      font-size: 2rem;
+      margin: 1% 0;
+      &:nth-child(3) {
+        margin: 10% 0;
+        font-size: 1.5rem;
+      }
+    }
+
+    button {
+      width: 20%;
+      height: 8vh;
+      border: none;
+      outline: none;
+      background-color: $hoverColor;
+      color: $white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $black;
+      }
+    }
+  }
+}
