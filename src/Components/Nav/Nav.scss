@@ -18,16 +18,16 @@
 
 #root {
   position: relative;
-  #navWrapper {
+  #nav {
     position: fixed;
     left: 0;
     top: 0;
-    width: 100vw;
-    color: black;
-    z-index: 9;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 100vw;
+    color: black;
+    z-index: 9;
     &.scrollTopOff {
       padding-bottom: 20px;
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 15%);
@@ -36,49 +36,16 @@
         background-color 0.25s ease-in-out, padding 0.25s ease-in-out;
     }
     > nav {
-      width: 86vw;
-      display: flex;
+      @extend %flexCenter;
       justify-content: space-around;
-      align-items: center;
+      width: 86vw;
 
       > h1 {
         width: 14vw;
         padding: 20px 0 13px 0;
+        color: $border;
         font-family: 'NEXON Lv1 Gothic OTF Light';
         font-size: 2em;
-        color: $border;
-      }
-      .navLeftMenu {
-        width: 40vw;
-
-        > ul {
-          display: flex;
-          > li {
-            margin-left: 1.1vw;
-            font-weight: bold;
-            @extend %hover;
-          }
-        }
-      }
-      .navRightMenu {
-        font-size: 0.8em;
-        width: 40vw;
-        // border: 1px solid red;
-        > ul {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          > li {
-            margin-right: 1.8vw;
-            font-weight: bold;
-            @extend %hover;
-            button {
-              background-color: transparent;
-              border: 0px;
-              @extend %hover;
-            }
-          }
-        }
       }
     }
   }
@@ -86,7 +53,7 @@
 
 @media all and (min-width: 769px) and #{$tablet} {
   #root {
-    #navWrapper {
+    #nav {
       nav {
         > h1 {
           display: flex;
@@ -102,7 +69,7 @@
 
 @media all and #{$phone} {
   #root {
-    #navWrapper {
+    #nav {
       nav {
         > h1 {
           display: flex;
@@ -119,6 +86,7 @@
               display: flex;
               justify-content: center;
               align-items: center;
+              // @extend %flexCenter;
               min-width: 10vw;
               margin-left: 1vw;
               font-weight: bold;
@@ -132,7 +100,7 @@
 
 @media all and (max-width: 550px) {
   #root {
-    #navWrapper {
+    #nav {
       nav {
         flex-wrap: wrap;
         ul {
