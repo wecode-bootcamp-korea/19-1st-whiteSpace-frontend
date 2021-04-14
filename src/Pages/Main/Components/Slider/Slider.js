@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { left, right } from '../../../../config';
-import Carousel, { arrowsPlugin } from '@brainhubeu/react-carousel';
 import SlideContents from '../SliderContents/SliderContents';
-import '@brainhubeu/react-carousel/lib/style.css';
 import './Slider.scss';
 
 let slideIndex = 0;
+let slideWrapper,
+  slider = '';
 
 export default class Slider extends Component {
   constructor() {
@@ -13,6 +13,8 @@ export default class Slider extends Component {
     this.state = {
       mainImageArr: [],
     };
+    this.slideWrapper = React.createRef();
+    this.slider = React.createRef();
   }
   componentDidMount() {
     fetch('data/mainImageData.json')
@@ -22,27 +24,25 @@ export default class Slider extends Component {
           mainImageArr: mainImageData,
         });
       });
+    slideWrapper = this.slideWrapper.current;
+    slider = this.slider.current;
   }
 
   showSlides(num) {
-    const slideWrapper = document.querySelector('.sliderWrap');
     const slides = document.querySelectorAll('.slideImageWrap');
-    const slider = document.querySelector('.slider');
     const totalSlides = slides.length;
-
     // let sliderWidth = 100 / totalSlides + '%';
     let sliderWidth = slideWrapper.clientWidth;
-    slider.style.width = sliderWidth * totalSlides + 'px';
-
+    slider.style.width = `${sliderWidth * totalSlides}px`;
     slideIndex = num;
 
-    if (slideIndex === -1) {
-      slideIndex = totalSlides - 1;
-    } else if (slideIndex === totalSlides) {
+    if (slideIndex === totalSlides) {
       slideIndex = 0;
+    } else if (slideIndex < 0) {
+      slideIndex = totalSlides - 1;
     }
 
-    slider.style.left = -(sliderWidth * slideIndex) + 'px';
+    slider.style.left = `-${sliderWidth * slideIndex}px`;
   }
 
   plusSlide = num => {
@@ -52,12 +52,14 @@ export default class Slider extends Component {
 
   render() {
     const { mainImageArr } = this.state;
+    const { slideWrapper, slider, plusSlide } = this;
     return (
-      <div className="sliderWrap">
+      <div className="sliderWrap" ref={slideWrapper}>
         <div className="sliderContainer">
-          <ul className="slider">
+          <ul className="slider" ref={slider}>
             {mainImageArr.map((mainImage, index) => {
-              return <SlideContents key={index} imgSrc={mainImage.imgSrc} />;
+              const { imgSrc } = mainImage;
+              return <SlideContents key={index} imgSrc={imgSrc} />;
             })}
           </ul>
         </div>
@@ -65,7 +67,7 @@ export default class Slider extends Component {
           <svg
             className="prev"
             onClick={() => {
-              this.plusSlide(-1);
+              plusSlide(-1);
             }}
           >
             {left.one}
@@ -75,7 +77,7 @@ export default class Slider extends Component {
           <svg
             className="next"
             onClick={() => {
-              this.plusSlide(1);
+              plusSlide(1);
             }}
           >
             {right.one}
