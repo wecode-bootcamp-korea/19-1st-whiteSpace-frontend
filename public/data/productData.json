@@ -1,26 +1,34 @@
 [
   {
-    "id": 1,
-    "name": "발이 가벼운 에어리 욕실화",
-    "price": 14900,
-    "isNew": 1,
-    "idLiked": true,
-    "imgSrc": "https://imagena1.lacoste.com/dw/image/v2/AAUP_PRD/on/demandware.static/-/Sites-master/default/dw42b11508/39CFA0036_21G_01.jpg?imwidth=375&impolicy=product"
-  },
-  {
-    "id": 2,
-    "name": "사계절 이불 오트밀&베이지",
-    "price": 99000,
-    "isNew": 0,
-    "idLiked": false,
-    "imgSrc": "http://cdn.shopify.com/s/files/1/0894/5382/products/Product_Page_Main_Image_1400x1400_White_3_1024x1024.jpg?v=1614829643"
-  },
-  {
-    "id": 3,
-    "name": "청정커튼 그레이",
-    "price": 159000,
-    "isNew": 0,
-    "idLiked": false,
-    "imgSrc": "https://static.coupangcdn.com/image/retail/images/2018/01/18/18/5/cc23bcab-e739-4c9f-be90-6c9c92638656.jpg"
+    "banner_images": [
+      "https://images.unsplash.com/photo-1546177461-3283e4aa3b0c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80",
+      "https://images.unsplash.com/photo-1564019472667-e568a3c0cde5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80",
+      "https://images.unsplash.com/photo-1567227697470-db02e82749d1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+      "https://images.unsplash.com/photo-1545590148-584b2278bb37?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+      "https://images.unsplash.com/photo-1546617956-17c132905cab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+    ],
+    "best_sellers": [
+      {
+        "name": "발이 가벼운 에어리 욕실화",
+        "price": 14900,
+        "thumbnail_url": "https://imagena1.lacoste.com/dw/image/v2/AAUP_PRD/on/demandware.static/-/Sites-master/default/dw42b11508/39CFA0036_21G_01.jpg?imwidth=375&impolicy=product",
+        "stock": 30,
+        "is_new": 0
+      },
+      {
+        "name": "사계절 이불 오트밀&베이지",
+        "price": 99000,
+        "thumbnail_url": "http://cdn.shopify.com/s/files/1/0894/5382/products/Product_Page_Main_Image_1400x1400_White_3_1024x1024.jpg?v=1614829643",
+        "stock": 10,
+        "is_new": 1
+      },
+      {
+        "name": "청정커튼 그레이",
+        "price": 159000,
+        "thumbnail_url": "https://static.coupangcdn.com/image/retail/images/2018/01/18/18/5/cc23bcab-e739-4c9f-be90-6c9c92638656.jpg",
+        "stock": 0,
+        "is_new": 0
+      }
+    ]
   }
 ]

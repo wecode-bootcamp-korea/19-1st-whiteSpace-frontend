@@ -10,20 +10,10 @@ let slideWrapper,
 export default class Slider extends Component {
   constructor() {
     super();
-    this.state = {
-      mainImageArr: [],
-    };
     this.slideWrapper = React.createRef();
     this.slider = React.createRef();
   }
   componentDidMount() {
-    fetch('data/mainImageData.json')
-      .then(res => res.json())
-      .then(mainImageData => {
-        this.setState({
-          mainImageArr: mainImageData,
-        });
-      });
     slideWrapper = this.slideWrapper.current;
     slider = this.slider.current;
   }
@@ -31,7 +21,6 @@ export default class Slider extends Component {
   showSlides(num) {
     const slides = document.querySelectorAll('.slideImageWrap');
     const totalSlides = slides.length;
-    // let sliderWidth = 100 / totalSlides + '%';
     let sliderWidth = slideWrapper.clientWidth;
     slider.style.width = `${sliderWidth * totalSlides}px`;
     slideIndex = num;
@@ -51,15 +40,14 @@ export default class Slider extends Component {
   };
 
   render() {
-    const { mainImageArr } = this.state;
+    const { mainImageArr } = this.props;
     const { slideWrapper, slider, plusSlide } = this;
     return (
       <div className="sliderWrap" ref={slideWrapper}>
         <div className="sliderContainer">
           <ul className="slider" ref={slider}>
             {mainImageArr.map((mainImage, index) => {
-              const { imgSrc } = mainImage;
-              return <SlideContents key={index} imgSrc={imgSrc} />;
+              return <SlideContents key={index} imgSrc={mainImage} />;
             })}
           </ul>
         </div>

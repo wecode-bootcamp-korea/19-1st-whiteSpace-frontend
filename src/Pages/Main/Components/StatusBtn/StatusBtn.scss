@@ -1,0 +1,25 @@
+@import '../../../../Styles/common.scss';
+
+.badgeWrap {
+  display: inline-block;
+
+  .badge {
+    padding: 0.1rem 0.3rem 0 0.3rem;
+    margin: 0.2rem;
+    font-size: 0.3rem;
+    color: $white;
+    border-radius: 2px;
+  }
+
+  .yellow {
+    background-color: $yellow;
+  }
+
+  .red {
+    background-color: $red;
+  }
+
+  .blue {
+    background-color: $blue;
+  }
+}

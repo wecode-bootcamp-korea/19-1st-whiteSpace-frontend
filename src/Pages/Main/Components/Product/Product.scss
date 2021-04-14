@@ -33,7 +33,7 @@
         font-weight: 100;
 
         .colorHeart {
-          color: salmon;
+          color: $red;
         }
       }
     }
@@ -50,19 +50,6 @@
 
     .productName {
       color: $titleColor;
-    }
-
-    .badgeWrap {
-      display: inline-block;
-
-      .badge {
-        padding: 0.1rem 0.3rem 0 0.3rem;
-        margin: 0.2rem;
-        font-size: 0.3rem;
-        background-color: $yellow;
-        color: $white;
-        border-radius: 2px;
-      }
     }
 
     .productPrice {

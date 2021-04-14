@@ -4,10 +4,11 @@ import './ProductList.scss';
 
 export default class ProductList extends Component {
   render() {
+    const { productArr } = this.props;
     return (
       <div className="productList">
         <ul>
-          <Product />
+          <Product productArr={productArr} />
         </ul>
       </div>
     );

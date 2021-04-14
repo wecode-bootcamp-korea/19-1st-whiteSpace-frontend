@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StatusBtn from '../StatusBtn/StatusBtn';
 import './Product.scss';
 
 export default class Product extends Component {
@@ -27,12 +28,20 @@ export default class Product extends Component {
   };
 
   render() {
-    const { productArr } = this.state;
+    const { productArr } = this.props;
     const { likeProduct } = this;
+    // console.log('props : ', productArr);
     return (
       <>
         {productArr.map((product, index) => {
-          const { id, name, price, imgSrc, isNew, isLiked } = product;
+          const {
+            name,
+            price,
+            thumbnail_url,
+            stock,
+            is_new,
+            // isLiked,
+          } = product;
           return (
             <li className="product" key={index}>
               <a href="#!">
@@ -40,16 +49,16 @@ export default class Product extends Component {
                   <img
                     className="productImage"
                     alt="productImage"
-                    src={imgSrc}
+                    src={thumbnail_url}
                   />
-                  <div className="like">
+                  {/* <div className="like">
                     <i
                       className={isLiked ? 'xi-heart colorHeart' : 'xi-heart-o'}
                       onClick={() => {
                         likeProduct(id);
                       }}
                     ></i>
-                  </div>
+                  </div> */}
                 </div>
               </a>
               <div className="contentWrap">
@@ -57,13 +66,14 @@ export default class Product extends Component {
                   <a href="#!">
                     <span className="productName">{name}</span>
                   </a>
-                  {isNew === 1 && (
-                    <div className="badgeWrap">
-                      <span className="badge">NEW</span>
-                    </div>
+                  {is_new === 1 && (
+                    <StatusBtn text="NEW" color="yellow" stock={stock} />
+                  )}
+                  {stock <= 20 && (
+                    <StatusBtn text="LIMITED" color="blue" stock={stock} />
                   )}
                 </div>
-                <p className="productPrice">{price.toLocaleString('en')}원</p>
+                <p className="productPrice">{price.toLocaleString()}원</p>
               </div>
             </li>
           );
