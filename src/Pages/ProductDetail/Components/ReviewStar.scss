@@ -1,0 +1,55 @@
+@import '../../../Styles/common.scss';
+
+.reviewStar {
+  border: 1px solid $hoverColor;
+  display: flex;
+  text-align: center;
+
+  div {
+    // border: 1px solid black;
+  }
+
+  .starAvgWrap {
+    display: flex;
+    padding: 0.5rem;
+
+    .starAvg {
+      padding: 1rem;
+      background-color: $black;
+      color: $white;
+      font-size: 3rem;
+    }
+
+    span {
+      font-size: 0.8rem;
+      color: $titleColor;
+    }
+  }
+
+  .starBarWrap {
+    padding: 0.5rem;
+    text-align: left;
+    font-size: 0.8rem;
+    color: $titleColor;
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    a {
+      .starBarContentWrap {
+        margin: 0.5rem 0 0.5rem 0;
+
+        span {
+        }
+      }
+    }
+
+    .starBar {
+      width: 500px;
+      height: 1rem;
+      background-color: salmon;
+    }
+  }
+}
