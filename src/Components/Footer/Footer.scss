@@ -1,0 +1,24 @@
+@import '../../Styles/common.scss';
+
+#footerWrapper {
+  footer {
+    margin-top: 70px;
+    @extend %flexCenter;
+
+    .termsOfService {
+      width: 100vw;
+      background-color: #787878;
+      > div {
+        width: 86vw;
+        border: 1px solid red;
+        margin: auto;
+        span {
+          display: inline-block;
+          font-size: 0.8rem;
+          color: $white;
+          margin: 10px 5px 10px 0;
+        }
+      }
+    }
+  }
+}
