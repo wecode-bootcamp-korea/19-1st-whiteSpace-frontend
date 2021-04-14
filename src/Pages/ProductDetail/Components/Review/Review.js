@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import AddReview from './AddReview';
-import ReviewStar from './ReviewStar';
+import AddReview from '../AddReview/AddReview';
+import ReviewStar from '../ReviewStar/ReviewStar';
 
 export default class Review extends Component {
   render() {
     return (
-      <div>
+      <>
         <AddReview />
         <ReviewStar />
-      </div>
+      </>
     );
   }
 }

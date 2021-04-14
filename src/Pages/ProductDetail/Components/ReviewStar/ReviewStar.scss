@@ -1,4 +1,4 @@
-@import '../../../Styles/common.scss';
+@import '../../../../Styles/common.scss';
 
 .reviewStar {
   border: 1px solid $hoverColor;
@@ -42,6 +42,7 @@
         margin: 0.5rem 0 0.5rem 0;
 
         span {
+          margin: 0 0.2rem 0 0.2rem;
         }
       }
     }
@@ -49,7 +50,7 @@
     .starBar {
       width: 500px;
       height: 1rem;
-      background-color: salmon;
+      background-color: $hoverColor;
     }
   }
 }
