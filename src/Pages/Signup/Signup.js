@@ -8,6 +8,7 @@ class Signup extends Component {
     loginId: '',
     loginPw: '',
     loginPwCheck: '',
+    idAvailable: '',
   };
 
   checkValidation = () => {
@@ -29,24 +30,28 @@ class Signup extends Component {
   };
 
   checkSignup = () => {
-    const { loginId, loginPw } = this.state;
+    const { loginId } = this.state;
     this.setState({
-      IsDisabled: !(
-        loginPw.length >= 8 &&
-        loginPw.length <= 16 &&
-        loginId.includes('@')
-      ),
+      idAvailable:
+        loginId.length >= 8 && loginId.length <= 16 && loginId.includes('@')
+          ? '사용가능한 아이디입니다'
+          : null,
     });
   };
 
   render() {
-    const { loginId, loginPw, loginPwCheck } = this.state;
+    const { loginId, loginPw, loginPwCheck, idAvailable } = this.state;
     const { handleValueInput, checkValidation } = this;
 
     return (
       <div className="Signup">
         <header>회원가입</header>
         <div className="containers">
+          <div className="process">
+            <span>정보입력</span>
+            <span>></span>
+            <span>가입완료</span>
+          </div>
           <div className="container">
             <div className="nameContainer">
               <span>아이디(이메일)</span>
@@ -58,7 +63,8 @@ class Signup extends Component {
               value={loginId}
               onChange={handleValueInput}
             />
-            <span> (이메일형식, 4~16자) </span>
+            <span> (이메일형식, 8~16자) </span>
+            <span id="idAvailable">{idAvailable}</span>
           </div>
           <div className="container">
             <div className="nameContainer">

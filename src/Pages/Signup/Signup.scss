@@ -15,13 +15,29 @@
 
   header {
     font-family: 'NEXON Lv1 Gothic OTF Light';
-    font-size: 2rem;
+    font-size: 2.5rem;
     text-align: center;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
   }
   .containers {
     width: 80vw;
     margin: 0 auto;
+    .process {
+      @extend %flexCenter;
+      height: 10vh;
+      margin: 1% auto;
+      text-align: center;
+      span:nth-child(1) {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      span:nth-child(2),
+      span:nth-child(3) {
+        color: $hoverColor;
+        font-size: 0.9rem;
+        text-indent: 1vw;
+      }
+    }
     .container {
       display: flex;
       align-items: center;
@@ -38,7 +54,7 @@
       }
 
       input {
-        height: 50%;
+        height: 40%;
         border: 1px solid $hoverColor;
         text-indent: 5%;
       }
@@ -51,14 +67,18 @@
         margin: 0 1%;
         font-size: 0.9rem;
       }
+      #idAvailable {
+        color: green;
+        font-size: 0.9rem;
+      }
     }
     .signupBtn {
       @extend %flexCenter;
       width: 20%;
       height: 10vh;
       margin: 2rem auto;
-      font-size: 1rem;
       border: none;
+      font-size: 1rem;
       background-color: $hoverColor;
       color: $white;
       cursor: pointer;
