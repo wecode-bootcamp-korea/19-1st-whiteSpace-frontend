@@ -18,7 +18,7 @@ export class navMenuList extends Component {
             const linkToData =
               className === 'navLeftMenu'
                 ? {
-                    pathname: '/category',
+                    pathname: '/products',
                     state: {
                       categoryId: data[keys[0]],
                     },

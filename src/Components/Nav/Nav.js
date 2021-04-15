@@ -14,7 +14,7 @@ export class Nav extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     fetch('http://localhost:3000/data/category.json', {
-      // fetch('http://10.58.0.130:8000/nav', {
+      // fetch('http://10.58.0.130:8000/nav', {  (back-end와 통신 테스트 성공 - category 목록 받아오기)
       method: 'GET',
     })
       .then(res => res.json())
@@ -42,12 +42,13 @@ export class Nav extends Component {
     // console.log(this.state.checkScrollTop);
     // console.log(this.state.checkScrollTop === true);
     // console.log(this.state.checkScrollTop === false);
+
+    // 스크롤이 최상단이거나 아니거나 변경할 필요가 있을 때만 변경해주도록 함.
     const checkScroll =
       (this.state.checkScrollTop === true && myScroll > 0) ||
       (this.state.checkScrollTop === false && Number(myScroll) === 0);
 
     // console.log(checkScroll);
-    // 스크롤이 최상단이거나 아니거나 변경할 필요가 있을 때만 변경해주도록 함.
     if (checkScroll) {
       this.setState({
         checkScrollTop: myScroll > 0 ? false : true,
@@ -67,6 +68,7 @@ export class Nav extends Component {
           <h1>여백 0100</h1>
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={navRightMenu} />
+          {/* Component화 하기 전의 오른쪽 menu 구조 (아래) 참고용으로 보존함 */}
           {/* <div className="navRightMenu">
             <ul>
               <li>
@@ -97,16 +99,16 @@ const navRightMenu = [
   {
     id: 1,
     text: '로그인',
-    path: '/login',
+    path: '/users/sign-in',
   },
   {
     id: 2,
     text: '회원가입',
-    path: '/signup',
+    path: '/users/sign-up',
   },
   {
     id: 3,
     text: '장바구니',
-    path: '/basket',
+    path: '/cart',
   },
 ];
