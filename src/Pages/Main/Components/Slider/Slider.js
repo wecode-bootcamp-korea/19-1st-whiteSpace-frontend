@@ -3,40 +3,48 @@ import { left, right } from '../../../../config';
 import SlideContents from '../SliderContents/SliderContents';
 import './Slider.scss';
 
-let slideIndex = 0;
-let slideWrapper,
-  slider = '';
-
 export default class Slider extends Component {
   constructor() {
     super();
+    this.state = {
+      slideIndex: 1,
+    };
     this.slideWrapper = React.createRef();
     this.slider = React.createRef();
   }
-  componentDidMount() {
-    slideWrapper = this.slideWrapper.current;
-    slider = this.slider.current;
-  }
 
-  showSlides(num) {
-    const slides = document.querySelectorAll('.slideImageWrap');
-    const totalSlides = slides.length;
-    let sliderWidth = slideWrapper.clientWidth;
-    slider.style.width = `${sliderWidth * totalSlides}px`;
-    slideIndex = num;
+  showSlides = num => {
+    const { slideIndex } = this.state;
+    const { mainImageArr } = this.props;
+    let totalSlides = mainImageArr.length - 1;
+    const sliderStyle = this.slider.current.style;
+    let sliderWidth = this.slideWrapper.current.clientWidth;
+
+    sliderStyle.width = `${sliderWidth * totalSlides}px`;
 
     if (slideIndex === totalSlides) {
-      slideIndex = 0;
+      this.setState({
+        slideIndex: 0,
+      });
     } else if (slideIndex < 0) {
-      slideIndex = totalSlides - 1;
+      this.setState({
+        slideIndex: (totalSlides -= 1),
+      });
     }
 
-    slider.style.left = `-${sliderWidth * slideIndex}px`;
-  }
+    sliderStyle.left = `-${sliderWidth * slideIndex}px`;
+  };
 
   plusSlide = num => {
+    const { slideIndex } = this.state;
     const { showSlides } = this;
-    showSlides((slideIndex += num));
+    console.log('current', slideIndex);
+    this.setState(
+      prevState => ({
+        slideIndex: (prevState.slideIndex += num),
+      }),
+      showSlides(slideIndex)
+    );
   };
 
   render() {

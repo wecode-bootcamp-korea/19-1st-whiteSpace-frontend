@@ -20,29 +20,12 @@ export default class Product extends Component {
       });
   }
 
-  likeProduct = id => {
-    const { productArr } = this.state;
-    this.setState(
-      () => (productArr[id - 1].isLiked = !productArr[id - 1].isLiked)
-    );
-  };
-
   render() {
     const { productArr } = this.props;
-    const { likeProduct } = this;
-    // console.log('props : ', productArr);
     return (
       <>
         {productArr.map(product => {
-          const {
-            id,
-            name,
-            price,
-            thumbnail_url,
-            stock,
-            is_new,
-            // isLiked,
-          } = product;
+          const { id, name, price, thumbnail_url, stock, is_new } = product;
           return (
             <li className="product" key={id}>
               <a href="#!">
@@ -52,14 +35,6 @@ export default class Product extends Component {
                     alt="productImage"
                     src={thumbnail_url}
                   />
-                  {/* <div className="like">
-                    <i
-                      className={isLiked ? 'xi-heart colorHeart' : 'xi-heart-o'}
-                      onClick={() => {
-                        likeProduct(id);
-                      }}
-                    ></i>
-                  </div> */}
                 </div>
               </a>
               <div className="contentWrap">

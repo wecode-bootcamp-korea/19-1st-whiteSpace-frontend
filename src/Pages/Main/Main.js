@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Slider from './Components/Slider/Slider';
+import SlideTest from './Components/Slider/slideTest';
 import BestProduct from './Components/BestProduct/BestProduct';
 import '@brainhubeu/react-carousel/lib/style.css';
 import './Main.scss';
@@ -28,7 +29,6 @@ export default class Main extends Component {
     fetch('data/productData.json')
       .then(res => res.json())
       .then(data => {
-        // console.log(data[0].best_sellers);
         this.setState({
           mainImageArr: data[0].banner_images,
           productArr: data[0].best_sellers,
@@ -39,7 +39,8 @@ export default class Main extends Component {
     const { mainImageArr, productArr } = this.state;
     return (
       <div className="main">
-        <Slider mainImageArr={mainImageArr} />
+        {/* <Slider mainImageArr={mainImageArr} /> */}
+        <SlideTest mainImageArr={mainImageArr} />
         <BestProduct productArr={productArr} />
       </div>
     );
