@@ -34,18 +34,21 @@ export default class ReviewStar extends Component {
         <div className="starBarWrap">
           {REVIEW_STAR.map((star, index) => {
             return (
-              <a href="#!" key={index}>
-                <div className="starBarContentWrap">
-                  <span>{star} stars</span>
-                  <div className="starBar"></div>
-                  <span>(76)</span>
-                </div>
-              </a>
+              <div className="starBarContentWrap" key={index}>
+                <span>{star} stars</span>
+                <div className="starBar"></div>
+                <span>(76)</span>
+              </div>
             );
           })}
         </div>
-        <div>
-          <span>이 상품의 포토/동영상 모아보기</span>
+        <div className="reviewThumWrap">
+          <div>
+            {REVIEW_THUM_ARR.map((image, index) => {
+              <img key={index} className="reviewThum" src={image} alt="" />;
+            })}
+          </div>
+          <p>이 상품의 포토/동영상 모아보기</p>
         </div>
       </div>
     );
@@ -53,3 +56,12 @@ export default class ReviewStar extends Component {
 }
 
 const REVIEW_STAR = [...Array(5).keys()].reverse().map(v => v + 1);
+const REVIEW_THUM_ARR = [
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
+];

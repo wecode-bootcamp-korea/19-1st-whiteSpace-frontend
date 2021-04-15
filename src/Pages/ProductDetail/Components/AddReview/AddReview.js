@@ -20,8 +20,7 @@ export default class AddReview extends Component {
         fileArr: [
           ...fileArr,
           {
-            // id: fileArr.length + 1,
-            // files: files[0],
+            id: fileArr.length + 1,
             src: window.URL.createObjectURL(files[0]),
           },
         ],
