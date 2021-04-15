@@ -7,7 +7,7 @@ export default class Slider extends Component {
   constructor() {
     super();
     this.state = {
-      slideIndex: 1,
+      slideIndex: 0,
     };
     this.slideWrapper = React.createRef();
     this.slider = React.createRef();
@@ -16,7 +16,7 @@ export default class Slider extends Component {
   showSlides = num => {
     const { slideIndex } = this.state;
     const { mainImageArr } = this.props;
-    let totalSlides = mainImageArr.length - 1;
+    let totalSlides = mainImageArr.length;
     const sliderStyle = this.slider.current.style;
     let sliderWidth = this.slideWrapper.current.clientWidth;
 

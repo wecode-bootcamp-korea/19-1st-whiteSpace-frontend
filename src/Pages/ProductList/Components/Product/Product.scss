@@ -23,19 +23,6 @@
           transition: all 0.2s;
         }
       }
-
-      .like {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        color: $hoverColor;
-        font-size: 2rem;
-        font-weight: 100;
-
-        .colorHeart {
-          color: $red;
-        }
-      }
     }
   }
 
@@ -52,9 +39,14 @@
       color: $titleColor;
     }
 
-    .productPrice {
+    .bestProductPrice {
       padding: 1rem 0 1rem 0;
       color: #008bcc;
+    }
+
+    .productPrice {
+      padding: 1rem 0 1rem 0;
+      color: $black;
     }
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Slider from './Components/Slider/Slider';
 import SlideTest from './Components/Slider/SlideTest';
+import Paging from '../../Components/Paging/Paging';
 import BestProduct from './Components/BestProduct/BestProduct';
 import '@brainhubeu/react-carousel/lib/style.css';
 import './Main.scss';
@@ -39,9 +40,10 @@ export default class Main extends Component {
     const { mainImageArr, productArr } = this.state;
     return (
       <div className="main">
-        {/* <Slider mainImageArr={mainImageArr} /> */}
-        <SlideTest mainImageArr={mainImageArr} />
+        <Slider mainImageArr={mainImageArr} />
+        {/* <SlideTest mainImageArr={mainImageArr} /> */}
         <BestProduct productArr={productArr} />
+        {/* <Paging /> */}
       </div>
     );
   }

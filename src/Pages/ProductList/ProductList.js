@@ -4,11 +4,11 @@ import './ProductList.scss';
 
 export default class ProductList extends Component {
   render() {
-    const { productArr } = this.props;
+    const { productArr, type } = this.props;
     return (
       <div className="productList">
         <ul>
-          <Product productArr={productArr} />
+          <Product type={type} productArr={productArr} />
         </ul>
       </div>
     );

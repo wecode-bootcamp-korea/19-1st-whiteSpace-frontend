@@ -17,10 +17,12 @@ export default class Slider extends Component {
     let totalSlides = mainImageArr.length;
 
     if (num < 0) {
+      //전 버튼 눌렀을때
       this.setState({
         slideIndex: slideIndex === 0 ? totalSlides : slideIndex - 1,
       });
     } else {
+      // 다음 버튼 눌렀을때
       this.setState({
         slideIndex: totalSlides === slideIndex ? 0 : slideIndex + 1,
       });

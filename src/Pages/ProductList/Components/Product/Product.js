@@ -21,7 +21,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { productArr } = this.props;
+    const { productArr, type } = this.props;
     return (
       <>
         {productArr.map(product => {
@@ -53,7 +53,15 @@ export default class Product extends Component {
                     ))
                   )}
                 </div>
-                <p className="productPrice">{price.toLocaleString()}원</p>
+                {
+                  <p
+                    className={
+                      type === 'best' ? 'bestProductPrice' : 'productPrice'
+                    }
+                  >
+                    {price.toLocaleString()}원
+                  </p>
+                }
               </div>
             </li>
           );

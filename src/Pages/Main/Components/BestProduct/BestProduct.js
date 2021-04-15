@@ -8,7 +8,7 @@ export default class BestProduct extends Component {
     return (
       <div className="bestProduct">
         <h1>Best Products</h1>
-        <ProductList productArr={productArr} />
+        <ProductList type="best" productArr={productArr} />
       </div>
     );
   }

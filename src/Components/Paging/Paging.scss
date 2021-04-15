@@ -1,0 +1,15 @@
+@import '../../Styles/common.scss';
+
+.paging {
+  @extend %flexCenter;
+
+  .pagingBtn {
+    @extend %flexCenter;
+    width: 30px;
+    height: 30px;
+    border: 1px solid $hoverColor;
+    color: $titleColor;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+}
