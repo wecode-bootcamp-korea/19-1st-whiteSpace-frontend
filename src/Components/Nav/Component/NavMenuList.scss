@@ -1,12 +1,5 @@
 @import '../../../Styles/common.scss';
 
-%hover {
-  &:hover {
-    color: $yellow;
-    cursor: pointer;
-  }
-}
-
 #root {
   #nav {
     > nav {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Category from './Component/Category';
+import NavMenuList from './Component/NavMenuList';
 import './Nav.scss';
 
 export class Nav extends Component {
@@ -20,7 +19,7 @@ export class Nav extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data.categories);
+        // console.log(data.categories);
         data.categories.unshift({
           category_id: 0,
           category_name: 'All',
@@ -28,7 +27,8 @@ export class Nav extends Component {
         this.setState({
           categoryList: data.categories,
         });
-        console.log(this.state.categoryList);
+        // console.log(this.state.categoryList);
+        // console.log(this.state.categoryList);
       });
   }
 
@@ -65,10 +65,9 @@ export class Nav extends Component {
       <div id="nav" className={!checkScrollTop && 'scrollTopOff'}>
         <nav>
           <h1>여백 0100</h1>
-          <div className="navLeftMenu">
-            <Category categoryList={categoryList} />
-          </div>
-          <div className="navRightMenu">
+          <NavMenuList className="navLeftMenu" dataList={categoryList} />
+          <NavMenuList className="navRightMenu" dataList={navRightMenu} />
+          {/* <div className="navRightMenu">
             <ul>
               <li>
                 <Link to="/">로그인</Link>
@@ -85,7 +84,7 @@ export class Nav extends Component {
                 </button>
               </li>
             </ul>
-          </div>
+          </div> */}
         </nav>
       </div>
     );
@@ -98,13 +97,16 @@ const navRightMenu = [
   {
     id: 1,
     text: '로그인',
+    path: '/login',
   },
   {
     id: 2,
     text: '회원가입',
+    path: '/signup',
   },
   {
     id: 3,
     text: '장바구니',
+    path: '/basket',
   },
 ];
