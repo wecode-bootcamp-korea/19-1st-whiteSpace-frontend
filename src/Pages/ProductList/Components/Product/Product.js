@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import StatusBtn from '../StatusBtn/StatusBtn';
 import './Product.scss';
 
@@ -34,7 +35,7 @@ export default class Product extends Component {
                 // style={{ (type !== 'best') && padding: 2 + 'rem' }}
                 style={{ padding: 2 + 'rem' }}
               >
-                <a href="#!">
+                <Link to="#!">
                   <div className="imageWrap">
                     <img
                       className="productImage"
@@ -42,12 +43,12 @@ export default class Product extends Component {
                       src={thumbnail_url}
                     />
                   </div>
-                </a>
+                </Link>
                 <div className="contentWrap">
                   <div>
-                    <a href="#!">
+                    <Link to="#!">
                       <span className="productName">{name}</span>
-                    </a>
+                    </Link>
                     {!stock ? (
                       <StatusBtn text="SOLDOUT" color="red" />
                     ) : (

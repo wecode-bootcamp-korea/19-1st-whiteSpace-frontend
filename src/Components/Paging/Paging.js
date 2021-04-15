@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Paging.scss';
 
 export default class Paging extends Component {
@@ -6,31 +7,31 @@ export default class Paging extends Component {
     return (
       <>
         <div className="paging">
-          <a href="#!">
+          <Link to="#!">
             <div className="prevBtn">
               <i className="xi-angle-left-min"></i>
             </div>
-          </a>
-          <a href="#!">
+          </Link>
+          <Link to="#!">
             <div className="pagingBtn">1</div>
-          </a>
-          <a href="#!">
+          </Link>
+          <Link to="#!">
             <div className="pagingBtn">2</div>
-          </a>
-          <a href="#!">
+          </Link>
+          <Link to="#!">
             <div className="pagingBtn">3</div>
-          </a>
-          <a href="#!">
+          </Link>
+          <Link to="#!">
             <div className="pagingBtn">4</div>
-          </a>
-          <a href="#!">
+          </Link>
+          <Link to="#!">
             <div className="pagingBtn">5</div>
-          </a>
-          <a href="#!">
+          </Link>
+          <Link to="#!">
             <div className="nextBtn">
               <i className="xi-angle-right-min"></i>
             </div>
-          </a>
+          </Link>
         </div>
       </>
     );

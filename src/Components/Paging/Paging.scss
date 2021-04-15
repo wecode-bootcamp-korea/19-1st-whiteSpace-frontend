@@ -17,4 +17,13 @@
       color: $yellow;
     }
   }
+
+  .prevBtn,
+  .nextBtn {
+    transition: 0.3s;
+
+    &:hover {
+      color: $yellow;
+    }
+  }
 }
