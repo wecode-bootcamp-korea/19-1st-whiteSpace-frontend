@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.scss';
-import '../../Styles/common.scss';
 
 class Login extends Component {
   state = {
     loginId: '',
     loginPw: '',
-    IsDisabled: true,
   };
 
   checkValidation = () => {
     const { loginId, loginPw } = this.state;
-    fetch('url', {
+    fetch('http://10.58.0.130:8000/users/sign_in', {
       method: 'POST',
       body: JSON.stringify({
         email: loginId,
@@ -31,21 +29,17 @@ class Login extends Component {
 
   handleValueInput = e => {
     const { id, value } = e.target;
-    this.setState({ [id]: value }, () => {
-      this.checkLogin();
-    });
-  };
-
-  checkLogin = () => {
-    const { loginId, loginPw } = this.state;
-    this.setState({
-      IsDisabled: !(loginPw.length >= 5 && loginId.includes('@')),
-    });
+    this.setState({ [id]: value });
   };
 
   render() {
-    const { loginId, loginPw, IsDisabled } = this.state;
+    const { loginId, loginPw } = this.state;
     const { handleValueInput, checkValidation } = this;
+    const isDisabledBtn = !(
+      loginId.includes('@') &&
+      loginId.includes('.com') &&
+      loginPw.length >= 8
+    );
 
     return (
       <div className="Login">
@@ -74,10 +68,10 @@ class Login extends Component {
             </div>
             <button
               className="loginButton"
-              disabled={IsDisabled}
+              disabled={isDisabledBtn}
               onClick={checkValidation}
             >
-              <Link to="/Main">Login</Link>
+              Login
             </button>
           </div>
 
