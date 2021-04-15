@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Slider from './Components/Slider/Slider';
-import SlideTest from './Components/Slider/SlideTest';
-import Paging from '../../Components/Paging/Paging';
 import BestProduct from './Components/BestProduct/BestProduct';
-import '@brainhubeu/react-carousel/lib/style.css';
 import './Main.scss';
 
 export default class Main extends Component {
@@ -14,11 +11,11 @@ export default class Main extends Component {
       productArr: [],
     };
   }
+  //백이랑 통신하는 코드
   // componentDidMount() {
   //   fetch('http://10.58.0.130:8000')
   //     .then(res => res.json())
   //     .then(data => {
-  //       console.log(data.banner_images);
   //       this.setState({
   //         mainImageArr: data.banner_images,
   //         productArr: data.best_sellers,
@@ -30,6 +27,7 @@ export default class Main extends Component {
     fetch('data/productData.json')
       .then(res => res.json())
       .then(data => {
+        console.log(data[0].banner_images);
         this.setState({
           mainImageArr: data[0].banner_images,
           productArr: data[0].best_sellers,
@@ -41,9 +39,7 @@ export default class Main extends Component {
     return (
       <div className="main">
         <Slider mainImageArr={mainImageArr} />
-        {/* <SlideTest mainImageArr={mainImageArr} /> */}
         <BestProduct productArr={productArr} />
-        {/* <Paging /> */}
       </div>
     );
   }

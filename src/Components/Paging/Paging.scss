@@ -1,4 +1,5 @@
 @import '../../Styles/common.scss';
+@import url('//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
 
 .paging {
   @extend %flexCenter;
@@ -7,9 +8,13 @@
     @extend %flexCenter;
     width: 30px;
     height: 30px;
-    border: 1px solid $hoverColor;
     color: $titleColor;
     font-size: 0.8rem;
     font-weight: bold;
+    transition: 0.3s;
+
+    &:hover {
+      color: $yellow;
+    }
   }
 }

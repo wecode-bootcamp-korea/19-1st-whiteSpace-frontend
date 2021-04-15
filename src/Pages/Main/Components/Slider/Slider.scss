@@ -1,10 +1,10 @@
+@import '../../../../Styles/common.scss';
+
 .sliderWrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %flexCenter;
 
   .sliderContainer {
-    width: 100vw;
+    width: 1425px;
     height: 118vh;
     position: relative;
     overflow: hidden;

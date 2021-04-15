@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { nativeTouchData } from 'react-dom/test-utils';
 import { left, right } from '../../../../config';
 import SlideContents from '../SliderContents/SliderContents';
 import './Slider.scss';
-
 export default class Slider extends Component {
   constructor() {
     super();
@@ -13,14 +13,15 @@ export default class Slider extends Component {
     this.slider = React.createRef();
   }
 
-  showSlides = num => {
+  componentDidUpdate() {
+    const { slideIndex } = this.state;
+    this.slider.current.style.left = `-${slideIndex * 100}%`;
+  }
+
+  plusSlide = num => {
     const { slideIndex } = this.state;
     const { mainImageArr } = this.props;
-    let totalSlides = mainImageArr.length;
-    const sliderStyle = this.slider.current.style;
-    let sliderWidth = this.slideWrapper.current.clientWidth;
-
-    sliderStyle.width = `${sliderWidth * totalSlides}px`;
+    const totalSlides = mainImageArr.length - 1;
 
     if (slideIndex === totalSlides) {
       this.setState({
@@ -28,23 +29,13 @@ export default class Slider extends Component {
       });
     } else if (slideIndex < 0) {
       this.setState({
-        slideIndex: (totalSlides -= 1),
+        slideIndex: totalSlides - 1,
+      });
+    } else {
+      this.setState({
+        slideIndex: slideIndex + num,
       });
     }
-
-    sliderStyle.left = `-${sliderWidth * slideIndex}px`;
-  };
-
-  plusSlide = num => {
-    const { slideIndex } = this.state;
-    const { showSlides } = this;
-    console.log('current', slideIndex);
-    this.setState(
-      prevState => ({
-        slideIndex: (prevState.slideIndex += num),
-      }),
-      showSlides(slideIndex)
-    );
   };
 
   render() {

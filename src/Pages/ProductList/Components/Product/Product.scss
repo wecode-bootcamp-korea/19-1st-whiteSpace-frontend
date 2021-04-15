@@ -1,52 +1,59 @@
 @import url('//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
 @import '../../../../Styles/common.scss';
 
-.product {
-  display: block;
-  padding: 1rem;
+.productList {
+  ul {
+    @extend %flexCenter;
+    flex-wrap: wrap;
+  }
 
-  a {
-    .imageWrap {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      overflow: hidden;
+  .product {
+    display: block;
+    padding: 1rem;
 
-      img {
+    a {
+      .imageWrap {
+        position: relative;
         width: 300px;
         height: 300px;
-        &:hover {
-          transform: scale(1.1);
-          -webkit-transform: scale(1.1);
-          -moz-transform: scale(1.1);
-          -o-transform: scale(1.1);
-          transition: all 0.2s;
+        overflow: hidden;
+
+        img {
+          width: 300px;
+          height: 300px;
+          &:hover {
+            transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transition: all 0.2s;
+          }
         }
       }
     }
-  }
 
-  .contentWrap {
-    padding: 0.5rem 0 0.5rem 0;
+    .contentWrap {
+      padding: 0.5rem 0 0.5rem 0;
 
-    span,
-    p {
-      font-size: 0.8rem;
-      font-weight: bold;
-    }
+      .productName,
+      p {
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
 
-    .productName {
-      color: $titleColor;
-    }
+      .productName {
+        color: $titleColor;
+      }
 
-    .bestProductPrice {
-      padding: 1rem 0 1rem 0;
-      color: #008bcc;
-    }
+      .bestProductPrice {
+        padding: 1rem 0 1rem 0;
+        color: #008bcc;
+      }
 
-    .productPrice {
-      padding: 1rem 0 1rem 0;
-      color: $black;
+      .productPrice {
+        padding: 1rem 0 1rem 0;
+        color: $black;
+      }
     }
   }
 }

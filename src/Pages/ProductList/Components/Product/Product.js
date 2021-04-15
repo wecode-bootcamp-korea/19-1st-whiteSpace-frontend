@@ -23,50 +23,63 @@ export default class Product extends Component {
   render() {
     const { productArr, type } = this.props;
     return (
-      <>
-        {productArr.map(product => {
-          const { id, name, price, thumbnail_url, stock, is_new } = product;
-          return (
-            <li className="product" key={id}>
-              <a href="#!">
-                <div className="imageWrap">
-                  <img
-                    className="productImage"
-                    alt="productImage"
-                    src={thumbnail_url}
-                  />
+      <div className="productList">
+        <ul>
+          {productArr.map(product => {
+            const { id, name, price, thumbnail_url, stock, is_new } = product;
+            return (
+              <li
+                className="product"
+                key={id}
+                // style={{ (type !== 'best') && padding: 2 + 'rem' }}
+                style={{ padding: 2 + 'rem' }}
+              >
+                <a href="#!">
+                  <div className="imageWrap">
+                    <img
+                      className="productImage"
+                      alt="productImage"
+                      src={thumbnail_url}
+                    />
+                  </div>
+                </a>
+                <div className="contentWrap">
+                  <div>
+                    <a href="#!">
+                      <span className="productName">{name}</span>
+                    </a>
+                    {!stock ? (
+                      <StatusBtn text="SOLDOUT" color="red" />
+                    ) : (
+                      <>
+                        {is_new && (
+                          <StatusBtn text="NEW" color="yellow" stock={stock} />
+                        )}
+                        {stock <= 20 && (
+                          <StatusBtn
+                            text="LIMITED"
+                            color="blue"
+                            stock={stock}
+                          />
+                        )}
+                      </>
+                    )}
+                  </div>
+                  {
+                    <p
+                      className={
+                        (type === 'best' ? 'bestProduct' : 'product') + 'Price'
+                      }
+                    >
+                      {price.toLocaleString()}원
+                    </p>
+                  }
                 </div>
-              </a>
-              <div className="contentWrap">
-                <div>
-                  <a href="#!">
-                    <span className="productName">{name}</span>
-                  </a>
-                  {!stock ? (
-                    <StatusBtn text="SOLDOUT" color="red" />
-                  ) : (
-                    (is_new && (
-                      <StatusBtn text="NEW" color="yellow" stock={stock} />
-                    ),
-                    stock <= 20 && (
-                      <StatusBtn text="LIMITED" color="blue" stock={stock} />
-                    ))
-                  )}
-                </div>
-                {
-                  <p
-                    className={
-                      type === 'best' ? 'bestProductPrice' : 'productPrice'
-                    }
-                  >
-                    {price.toLocaleString()}원
-                  </p>
-                }
-              </div>
-            </li>
-          );
-        })}
-      </>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     );
   }
 }

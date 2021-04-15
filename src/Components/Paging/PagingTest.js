@@ -8,16 +8,10 @@ export default class Paging extends Component {
     super();
     this.state = {
       product: [],
-      currentIdx: 1,
-      offset: 0,
     };
   }
 
   fetchProduct = e => {
-    this.setState({
-      offset: e.target.dataset.idx,
-    });
-
     fetch(
       `http://10.58.2.83:8000/products?limit=${LIMIT}&offset=${offset * LIMIT}`
     )
@@ -30,7 +24,6 @@ export default class Paging extends Component {
     const { fetchProduct } = this;
     return (
       <>
-        {/* <ProductList product={product} /> */}
         <Paging
           currentIdx={currentIdx}
           btnAmount={product.length / LIMIT}
