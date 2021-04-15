@@ -1,0 +1,18 @@
+#Popup {
+  display: flex;
+  justify-content: flex-start;
+  width: 200vw;
+  border: 1px solid red;
+  div {
+    width: 100vw;
+    &:nth-child(1) {
+      background-color: yellow;
+      border: 1px solid blue;
+      margin-left: -50vw;
+    }
+    &:nth-child(2) {
+      background-color: gray;
+      border: 1px solid blue;
+    }
+  }
+}
