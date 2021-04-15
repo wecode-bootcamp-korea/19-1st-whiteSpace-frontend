@@ -6,6 +6,7 @@
   font-weight: normal;
   font-style: normal;
 }
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
 
 .Signup {
   display: flex;
@@ -41,7 +42,7 @@
     .container {
       display: flex;
       align-items: center;
-      height: 7vw;
+      height: 8vw;
       border-bottom: 1px solid $hoverColor;
       .nameContainer {
         @extend %flexCenter;
@@ -53,25 +54,59 @@
         }
       }
 
-      input {
-        height: 40%;
-        border: 1px solid $hoverColor;
-        text-indent: 5%;
+      .caution {
+        // border: 3px solid purple;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(30%);
+        width: 20%;
+        height: 100%;
+
+        input {
+          height: 40%;
+          border: 1px solid $hoverColor;
+          text-indent: 5%;
+          &:focus {
+            border: 0.5px solid $yellow;
+          }
+          &::placeholder {
+            font-size: 0.7rem;
+          }
+        }
+
+        #validPass {
+          margin-top: 0.5rem;
+          color: rgb(28, 131, 0);
+          font-size: 0.7rem;
+          font-weight: 450;
+          text-indent: 1%;
+        }
+
+        #validFail {
+          margin-top: 0.5rem;
+          color: rgb(254, 42, 42);
+          font-size: 0.7rem;
+          font-weight: 450;
+          text-indent: 1%;
+        }
       }
-      .phoneNumber {
-        width: 8%;
+      .checkId {
+        width: 10%;
+        height: 35%;
+        margin: 0 1%;
+        border: none;
+        font-size: 0.8rem;
+        background-color: $black;
+        color: $white;
+        cursor: pointer;
       }
 
-      span:nth-child(3),
-      span:nth-child(5) {
+      .required {
         margin: 0 1%;
-        font-size: 0.9rem;
-      }
-      #idAvailable {
-        color: green;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
     }
+
     .signupBtn {
       @extend %flexCenter;
       width: 20%;
@@ -79,12 +114,12 @@
       margin: 2rem auto;
       border: none;
       font-size: 1rem;
-      background-color: $hoverColor;
+      background-color: $black;
       color: $white;
       cursor: pointer;
 
-      &:hover {
-        background-color: $black;
+      &:disabled {
+        background-color: $hoverColor;
       }
     }
   }
