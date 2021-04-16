@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { LOGIN } from '../../config';
-import Nav from '../../Components/Nav/Nav';
 import './Login.scss';
 
 class Login extends Component {
@@ -48,7 +47,6 @@ class Login extends Component {
 
     return (
       <>
-        <Nav />
         <div className="Login">
           <div className="LoginContainer">
             <header>로그인</header>
