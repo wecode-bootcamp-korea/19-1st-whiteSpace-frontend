@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Nav from '../../Components/Nav/Nav';
 import { prefix } from '../../config';
 import './Login.scss';
 
@@ -11,9 +12,9 @@ class Login extends Component {
 
   checkValidation = () => {
     const { loginId, loginPw } = this.state;
-    const { api } = prefix;
+    const { login } = prefix;
 
-    fetch(`${api}/users/sign_in`, {
+    fetch(`${login}/users/sign_in`, {
       method: 'POST',
       body: JSON.stringify({
         email: loginId,
@@ -45,52 +46,55 @@ class Login extends Component {
     );
 
     return (
-      <div className="Login">
-        <div className="LoginContainer">
-          <header>로그인</header>
-          <div className="Containers">
-            <div className="inputContainer">
-              <div className="idContainer">
-                <input
-                  type="text"
-                  id="loginId"
-                  value={loginId}
-                  onChange={handleValueInput}
-                  placeholder="아이디"
-                />
+      <>
+        <Nav />
+        <div className="Login">
+          <div className="LoginContainer">
+            <header>로그인</header>
+            <div className="Containers">
+              <div className="inputContainer">
+                <div className="idContainer">
+                  <input
+                    type="text"
+                    id="loginId"
+                    value={loginId}
+                    onChange={handleValueInput}
+                    placeholder="아이디"
+                  />
+                </div>
+                <div className="passwordContainer">
+                  <input
+                    type="password"
+                    id="loginPw"
+                    value={loginPw}
+                    onChange={handleValueInput}
+                    placeholder="비밀번호"
+                  />
+                </div>
               </div>
-              <div className="passwordContainer">
-                <input
-                  type="password"
-                  id="loginPw"
-                  value={loginPw}
-                  onChange={handleValueInput}
-                  placeholder="비밀번호"
-                />
-              </div>
+              <button
+                className="loginButton"
+                disabled={isDisabledBtn}
+                onClick={checkValidation}
+              >
+                Login
+              </button>
             </div>
-            <button
-              className="loginButton"
-              disabled={isDisabledBtn}
-              onClick={checkValidation}
-            >
-              Login
-            </button>
-          </div>
 
-          <footer>
-            <span>
-              <Link to="/Signup">회원가입</Link>
-            </span>
-            <span>
-              <Link to="/">아이디찾기</Link>
-            </span>
-            <span>
-              <Link to="/">비밀번호찾기</Link>
-            </span>
-          </footer>
+            <footer>
+              <span>
+                <Link to="/Signup">회원가입</Link>
+              </span>
+              <span>
+                <Link to="/">아이디찾기</Link>
+              </span>
+              <span>
+                <Link to="/">비밀번호찾기</Link>
+              </span>
+            </footer>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

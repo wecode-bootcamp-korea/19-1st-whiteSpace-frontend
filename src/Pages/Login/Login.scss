@@ -1,0 +1,214 @@
+@import '../../Styles/common.scss';
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Login {
+  height: 100vh;
+  @extend %flexCenter;
+
+  .LoginContainer {
+    header {
+      margin-bottom: 2.5rem;
+      font-family: 'NEXON Lv1 Gothic OTF Light';
+      font-size: 2rem;
+      text-align: center;
+    }
+    .Containers {
+      @extend %flexCenter;
+
+      .inputContainer {
+        margin-right: 0.5rem;
+
+        .idContainer {
+          input {
+            width: 20rem;
+            height: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'NEXON Lv1 Gothic OTF Light';
+            text-indent: 10px;
+          }
+        }
+
+        .passwordContainer {
+          input {
+            width: 20rem;
+            height: 3.5rem;
+            font-family: 'NEXON Lv1 Gothic OTF Light';
+            text-indent: 10px;
+          }
+        }
+      }
+      .loginButton {
+        width: 9.375rem;
+        height: 7.5rem;
+        margin: auto;
+        border: none;
+        background-color: $subTitleColor;
+        font-family: 'NEXON Lv1 Gothic OTF Light';
+        font-size: 2rem;
+        cursor: pointer;
+
+        &:disabled {
+          background-color: $hoverColor;
+        }
+      }
+    }
+  }
+  footer {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 2.5rem auto;
+    color: $border;
+
+    span:nth-child(1) {
+      color: $yellow;
+    }
+  }
+}
+
+@media #{$tablet} {
+  .Login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .LoginContainer {
+      header {
+        margin-bottom: 2rem;
+        font-family: 'NEXON Lv1 Gothic OTF Light';
+        font-size: 1.5rem;
+        text-align: center;
+      }
+      .Containers {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .inputContainer {
+          margin-right: 0.5rem;
+
+          .idContainer {
+            input {
+              width: 17rem;
+              height: 3.5rem;
+              margin-bottom: 0.5rem;
+              font-family: 'NEXON Lv1 Gothic OTF Light';
+              text-indent: 10px;
+            }
+          }
+
+          .passwordContainer {
+            input {
+              width: 17rem;
+              height: 3.5rem;
+              font-family: 'NEXON Lv1 Gothic OTF Light';
+              text-indent: 10px;
+            }
+          }
+        }
+        .loginButton {
+          width: 7rem;
+          height: 7.5rem;
+          margin: auto;
+          border: none;
+          background-color: $subTitleColor;
+          font-family: 'NEXON Lv1 Gothic OTF Light';
+          font-size: 1rem;
+          cursor: pointer;
+
+          &:disabled {
+            background-color: $hoverColor;
+          }
+        }
+      }
+    }
+    footer {
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+      margin: 2.5rem auto;
+      color: $border;
+
+      span:nth-child(1) {
+        color: $yellow;
+      }
+    }
+  }
+}
+
+@media #{$phone} {
+  .Login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .LoginContainer {
+      header {
+        margin-bottom: 1.5rem;
+        font-family: 'NEXON Lv1 Gothic OTF Light';
+        font-size: 1rem;
+        text-align: center;
+      }
+      .Containers {
+        display: flex;
+
+        .inputContainer {
+          margin-right: 0.5rem;
+
+          .idContainer {
+            input {
+              width: 10rem;
+              height: 3.5rem;
+              margin-bottom: 0.5rem;
+              font-family: 'NEXON Lv1 Gothic OTF Light';
+              text-indent: 10px;
+            }
+          }
+
+          .passwordContainer {
+            input {
+              width: 10rem;
+              height: 3.5rem;
+              font-family: 'NEXON Lv1 Gothic OTF Light';
+              text-indent: 10px;
+            }
+          }
+        }
+        .loginButton {
+          width: 5rem;
+          height: 7.5rem;
+          margin: auto;
+          border: none;
+          background-color: $subTitleColor;
+          font-family: 'NEXON Lv1 Gothic OTF Light';
+          font-size: 1rem;
+          cursor: pointer;
+
+          &:disabled {
+            background-color: $hoverColor;
+          }
+        }
+      }
+    }
+    footer {
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+      margin: 2.5rem auto;
+      color: $border;
+      font-size: 0.8rem;
+
+      span:nth-child(1) {
+        color: $yellow;
+      }
+    }
+  }
+}
