@@ -1,0 +1,11 @@
+@import '../../Styles/common.scss';
+
+.productMainImg {
+  @extend %flexCetner;
+}
+
+.productDetailImg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
