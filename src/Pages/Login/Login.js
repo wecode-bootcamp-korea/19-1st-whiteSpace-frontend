@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { LOGIN } from '../../config';
 import Nav from '../../Components/Nav/Nav';
-import { prefix } from '../../config';
 import './Login.scss';
 
 class Login extends Component {
@@ -12,15 +12,16 @@ class Login extends Component {
 
   checkValidation = () => {
     const { loginId, loginPw } = this.state;
-    const { login } = prefix;
-
-    fetch(`${login}/users/sign_in`, {
-      method: 'POST',
-      body: JSON.stringify({
-        email: loginId,
-        password: loginPw,
-      }),
-    })
+    fetch(
+      { LOGIN },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: loginId,
+          password: loginPw,
+        }),
+      }
+    )
       .then(res => res.json())
       .then(res => {
         if (res.access_token) {
@@ -53,7 +54,7 @@ class Login extends Component {
             <header>로그인</header>
             <div className="Containers">
               <div className="inputContainer">
-                <div className="idContainer">
+                <div className="container id">
                   <input
                     type="text"
                     id="loginId"
@@ -62,7 +63,7 @@ class Login extends Component {
                     placeholder="아이디"
                   />
                 </div>
-                <div className="passwordContainer">
+                <div className="container pw">
                   <input
                     type="password"
                     id="loginPw"

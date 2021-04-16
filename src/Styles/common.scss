@@ -1,9 +1,17 @@
 @import url('https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css');
+@font-face {
+  font-family: 'NEXON Lv1 Gothic OTF Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 $black: #000;
 $white: #fff;
 $yellow: #fab126;
 $blue: #88b8ee;
+$red: #ff4f59;
 $background: #fbfafa;
 $border: #888;
 $titleColor: #555555;
@@ -11,6 +19,7 @@ $hoverColor: #ccc;
 $subTitleColor: #999;
 $phone: '(max-width: 768px)';
 $tablet: '(max-width: 1078px)';
+$font-nexon: 'NEXON Lv1 Gothic OTF Light';
 
 * {
   box-sizing: border-box;

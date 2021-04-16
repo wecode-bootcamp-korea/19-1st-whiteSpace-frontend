@@ -1,0 +1,41 @@
+@import '../../../../Styles/common.scss';
+
+.sliderWrap {
+  @extend %flexCenter;
+
+  .sliderContainer {
+    width: 1425px;
+    height: 118vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slider {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 0.3s cubic-bezier(1, 0.01, 0.32, 1);
+    -o-transition: all 0.3s cubic-bezier(1, 0.01, 0.32, 1);
+    transition: all 0.3s cubic-bezier(1, 0.01, 0.32, 1);
+  }
+
+  .btn {
+    cursor: pointer;
+
+    svg {
+      margin: 1rem;
+      width: 53px;
+      height: 44px;
+      position: absolute;
+    }
+
+    .prev {
+      left: 0;
+    }
+
+    .next {
+      right: 0%;
+    }
+  }
+}
