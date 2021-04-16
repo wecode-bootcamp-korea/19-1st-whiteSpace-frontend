@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Signup.scss';
-import '../../Styles/common.scss';
+import { prefix } from '../../config';
 
 const ID_REGEX = /^[a-zA-Z0-9+-_]+@[a-z]+\.[a-z]+$/;
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(\S){8,16}$/;
@@ -15,10 +15,10 @@ class Signup extends Component {
     phone_number: '',
   };
 
-  checkValidation = () => {
-    console.log('dd');
+  signUp = () => {
     const { signId, signPw, signPwCheck, name, phone_number } = this.state;
-    fetch('http://10.58.4.98:8000/users/sign-up', {
+    const { signUp } = prefix;
+    fetch(`${signUp}/users/sign-up`, {
       method: 'POST',
       body: JSON.stringify({
         email: signId,
@@ -31,9 +31,6 @@ class Signup extends Component {
       .then(res => res.json())
       .then(res => {
         console.log(res);
-        // if (res['MESSAGE'] === 'INVALID PASSWORD') {
-        //   alert('비밀번호 유효하지 않음');
-        // }
         if (res['MESSAGE'] === 'SUCCESS') {
           this.props.history.push({
             pathname: '/welcome',
@@ -45,7 +42,9 @@ class Signup extends Component {
 
   checkIdValid = () => {
     const { signId } = this.state;
-    fetch('http://10.58.4.98:8000/users/check-email', {
+    const { emailCheck } = prefix;
+
+    fetch(`${emailCheck}/users/check-email`, {
       method: 'POST',
       body: JSON.stringify({
         email: signId,
@@ -66,7 +65,7 @@ class Signup extends Component {
 
   render() {
     const { signId, signPw, signPwCheck, name, phone_number } = this.state;
-    const { handleValueInput, checkValidation, checkIdValid } = this;
+    const { handleValueInput, signUp, checkIdValid } = this;
     const isAllValid =
       ID_REGEX.test(signId) &&
       signPw === signPwCheck &&
@@ -194,11 +193,7 @@ class Signup extends Component {
               )}
             </div>
           </div>
-          <button
-            className="signupBtn"
-            disabled={!isAllValid}
-            onClick={checkValidation}
-          >
+          <button className="signupBtn" disabled={!isAllValid} onClick={signUp}>
             회원가입
           </button>
         </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Welcome.scss';
-import '../../../Styles/common.scss';
 
 class Welcome extends Component {
   render() {
