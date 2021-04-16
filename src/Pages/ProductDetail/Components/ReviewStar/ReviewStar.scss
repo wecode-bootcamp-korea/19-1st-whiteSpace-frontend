@@ -1,19 +1,17 @@
 @import '../../../../Styles/common.scss';
 
 .reviewStar {
-  border: 1px solid $hoverColor;
   display: flex;
+  padding: 1rem;
+  border: 1px solid $hoverColor;
   text-align: center;
-
-  div {
-    // border: 1px solid black;
-  }
 
   .starAvgWrap {
     @extend %flexCenter;
     padding: 0.5rem 2rem 0.5rem 2rem;
 
     .starAvg {
+      margin-bottom: 0.5rem;
       padding: 1rem;
       background-color: $black;
       color: $white;
@@ -57,17 +55,24 @@
   }
 
   .reviewThumWrap {
+    @extend %flexCenter;
     margin: 0 auto;
-    font-size: 0.8rem;
-    color: $titleColor;
 
     div {
-      width: 70%;
-      margin: 0 auto;
+      width: 80%;
+      margin: 0 0.5rem 0 1.5rem;
     }
     .reviewThum {
       width: 50px;
-      margin: 0.1rem;
+      margin: 0.2rem;
+      filter: $border;
+      -webkit-filter: grayscale(100%);
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        filter: none;
+        -webkit-filter: grayscale(0%);
+      }
     }
   }
 }

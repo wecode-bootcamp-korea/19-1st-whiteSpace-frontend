@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from './Components/Modal/Modal';
 import './ReviewStar.scss';
 
 export default class ReviewStar extends Component {
@@ -6,8 +7,15 @@ export default class ReviewStar extends Component {
     super();
     this.state = {
       reviewArr: [],
+      modalOpen: false,
     };
   }
+
+  handelModal = modalOpen => {
+    this.setState({
+      modalOpen,
+    });
+  };
 
   componentDidMount() {
     const { reviewArr } = this.state;
@@ -23,6 +31,9 @@ export default class ReviewStar extends Component {
     });
   }
   render() {
+    const { children } = this.props;
+    const { modalOpen } = this.state;
+    const { handelModal } = this;
     return (
       <div className="reviewStar">
         <div className="starAvgWrap">
@@ -45,11 +56,30 @@ export default class ReviewStar extends Component {
         <div className="reviewThumWrap">
           <div>
             {REVIEW_THUM_ARR.map((image, index) => {
-              <img key={index} className="reviewThum" src={image} alt="" />;
+              return (
+                <a href="#!">
+                  <img
+                    key={index}
+                    className="reviewThum"
+                    src={image}
+                    alt=""
+                    onClick={() => {
+                      handelModal(1);
+                    }}
+                  />
+                </a>
+              );
             })}
           </div>
-          <p>이 상품의 포토/동영상 모아보기</p>
         </div>
+        <Modal
+          open={modalOpen}
+          close={() => {
+            handelModal(0);
+          }}
+        >
+          <main> {children} </main>
+        </Modal>
       </div>
     );
   }
@@ -57,6 +87,7 @@ export default class ReviewStar extends Component {
 
 const REVIEW_STAR = [...Array(5).keys()].reverse().map(v => v + 1);
 const REVIEW_THUM_ARR = [
+  'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
   'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
   'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
   'https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/69/75/image1/thumbnail_4d06231defbcfa21.jpg',
