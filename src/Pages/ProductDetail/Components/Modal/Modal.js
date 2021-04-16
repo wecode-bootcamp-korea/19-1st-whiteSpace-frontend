@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './Modal.scss';
 
 export default class Modal extends Component {
   render() {
-    const { open, close, header } = this.props;
+    const { open, close, header, children } = this.props;
 
     return (
-      <div className={open ? 'openModal modal' : 'modal'}>
+      <div className={(open && 'openModal') + ' modal'}>
         {open && (
-          <section>
+          <section className="modalSection">
             <header>
               {header}
               <button className="close" onClick={close}>
-                {' '}
-                &times;{' '}
+                <i className="xi-close"></i>
               </button>
             </header>
-            <main>{this.props.children}</main>
+            <main>{children}</main>
           </section>
         )}
       </div>

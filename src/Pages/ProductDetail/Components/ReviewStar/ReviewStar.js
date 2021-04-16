@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Modal from './Components/Modal/Modal';
+import ReactDOM from 'react-dom';
+import Modal from '../Modal/Modal';
 import './ReviewStar.scss';
 
 export default class ReviewStar extends Component {
@@ -11,13 +12,9 @@ export default class ReviewStar extends Component {
     };
   }
 
-  handelModal = modalOpen => {
-    this.setState({
-      modalOpen,
-    });
-  };
-
   componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside, true);
+
     const { reviewArr } = this.state;
     this.setState({
       reviewArr: [
@@ -30,6 +27,26 @@ export default class ReviewStar extends Component {
       ],
     });
   }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside, true);
+  }
+
+  handelModal = modalOpen => {
+    this.setState({
+      modalOpen,
+    });
+  };
+
+  handleClickOutside = e => {
+    const { className } = e.target;
+    if (className.includes('openModal')) {
+      this.setState({
+        modalOpen: false,
+      });
+    }
+  };
+
   render() {
     const { children } = this.props;
     const { modalOpen } = this.state;
@@ -57,12 +74,11 @@ export default class ReviewStar extends Component {
           <div>
             {REVIEW_THUM_ARR.map((image, index) => {
               return (
-                <a href="#!">
+                <a href="#!" key={index}>
                   <img
-                    key={index}
                     className="reviewThum"
                     src={image}
-                    alt=""
+                    alt="reviewThumnail"
                     onClick={() => {
                       handelModal(1);
                     }}
@@ -78,7 +94,7 @@ export default class ReviewStar extends Component {
             handelModal(0);
           }}
         >
-          <main> {children} </main>
+          <main>{children}</main>
         </Modal>
       </div>
     );

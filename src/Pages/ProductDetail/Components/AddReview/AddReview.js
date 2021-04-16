@@ -21,6 +21,7 @@ export default class AddReview extends Component {
           ...fileArr,
           {
             id: fileArr.length + 1,
+            files: files[0],
             src: window.URL.createObjectURL(files[0]),
           },
         ],
@@ -45,9 +46,10 @@ export default class AddReview extends Component {
     });
   };
 
-  addReview = () => {
-    const { reviewContents, review, star } = this.state;
-    if (!reviewContents) {
+  addReview = e => {
+    console.log(e);
+    const { reviewContents, review, star, fileArr } = this.state;
+    if (!reviewContents.trim()) {
       alert('리뷰 내용을 입력해주세요.');
     } else {
       this.setState(
@@ -56,7 +58,7 @@ export default class AddReview extends Component {
             ...review,
             {
               star,
-              reviewContents,
+              reviewContents: reviewContents.trim(),
             },
           ],
         },
@@ -64,6 +66,17 @@ export default class AddReview extends Component {
           // console.log(review);
         }
       );
+
+      const data = new FormData();
+      data.append('data', fileArr.files);
+
+      //   fetch('url', {
+      //     method: 'POST',
+      //     body: data,
+      //   })
+      //     .then(res => {})
+      //     .then(res => {});
+      // }
     }
   };
 
@@ -126,7 +139,7 @@ export default class AddReview extends Component {
               );
             })}
           </select>
-          <button className="addReview" onClick={addReview}>
+          <button type="submit" className="addReview">
             <i className="xi-check-circle"></i>
             리뷰 등록하기
           </button>
