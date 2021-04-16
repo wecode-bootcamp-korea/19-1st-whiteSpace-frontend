@@ -32,8 +32,7 @@ export default class Product extends Component {
               <li
                 className="product"
                 key={id}
-                // style={{ (type !== 'best') && padding: 2 + 'rem' }}
-                style={{ padding: 2 + 'rem' }}
+                style={{ padding: type !== 'best' ? 2 + 'rem' : '' }}
               >
                 <Link to="#!">
                   <div className="imageWrap">
