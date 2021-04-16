@@ -27,7 +27,6 @@ export default class Main extends Component {
     fetch('data/productData.json')
       .then(res => res.json())
       .then(data => {
-        console.log(data[0].banner_images);
         this.setState({
           mainImageArr: data[0].banner_images,
           productArr: data[0].best_sellers,

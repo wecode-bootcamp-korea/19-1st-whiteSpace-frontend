@@ -4,26 +4,22 @@
 .paging {
   @extend %flexCenter;
 
-  .pagingBtn {
-    @extend %flexCenter;
-    width: 30px;
-    height: 30px;
-    color: $titleColor;
-    font-size: 0.8rem;
-    font-weight: bold;
+  button {
+    background: none;
+    border: none;
+    margin: 0.2rem;
     transition: 0.3s;
 
     &:hover {
+      cursor: pointer;
       color: $yellow;
     }
   }
 
-  .prevBtn,
-  .nextBtn {
-    transition: 0.3s;
-
-    &:hover {
-      color: $yellow;
-    }
+  .pagingBtn {
+    @extend %flexCenter;
+    color: $titleColor;
+    font-size: 0.8rem;
+    font-weight: bold;
   }
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import Paging from './Paging';
 import './Paging.scss';
 
 const LIMIT = 9;
 
-export default class Paging extends Component {
+export default class PagingTest extends Component {
   constructor() {
     super();
     this.state = {
@@ -19,16 +20,22 @@ export default class Paging extends Component {
       .then(res => this.setState({ product: res }));
   };
 
+  pagingBtnOnClick = e => {
+    console.log(e.target.dataset.idx);
+  };
+
   render() {
-    const { product, currentIdx, offset } = this.state;
+    const { product, currentIdx } = this.state;
     const { fetchProduct } = this;
+    const offset = (currentIdx - 1) * LIMIT;
     return (
       <>
         <Paging
           currentIdx={currentIdx}
-          btnAmount={product.length / LIMIT}
+          // btnAmount={Math.ceil(total / LIMIT)}
           offset={offset}
           fetchProduct={fetchProduct}
+          pagingBtnOnClick={this.pagingBtnOnClick}
         />
       </>
     );

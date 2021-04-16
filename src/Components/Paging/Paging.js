@@ -1,37 +1,47 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './Paging.scss';
 
 export default class Paging extends Component {
   render() {
+    const { pagingBtnOnClick, currentIdx, btnAmount } = this.props;
+    const pagesArr = [...Array(btnAmount).keys()].map(v => v + 1);
+
     return (
       <>
         <div className="paging">
-          <Link to="#!">
-            <div className="prevBtn">
+          {currentIdx !== 1 && (
+            <button
+              className="prevBtn"
+              onClick={() => {
+                pagingBtnOnClick('prev');
+              }}
+            >
               <i className="xi-angle-left-min"></i>
-            </div>
-          </Link>
-          <Link to="#!">
-            <div className="pagingBtn">1</div>
-          </Link>
-          <Link to="#!">
-            <div className="pagingBtn">2</div>
-          </Link>
-          <Link to="#!">
-            <div className="pagingBtn">3</div>
-          </Link>
-          <Link to="#!">
-            <div className="pagingBtn">4</div>
-          </Link>
-          <Link to="#!">
-            <div className="pagingBtn">5</div>
-          </Link>
-          <Link to="#!">
-            <div className="nextBtn">
+            </button>
+          )}
+          {pagesArr.map(page => {
+            return (
+              <button
+                key={page}
+                className="pagingBtn"
+                onClick={() => {
+                  pagingBtnOnClick(page);
+                }}
+              >
+                {page}
+              </button>
+            );
+          })}
+          {currentIdx < btnAmount && (
+            <button
+              className="nextBtn"
+              onClick={() => {
+                pagingBtnOnClick('next');
+              }}
+            >
               <i className="xi-angle-right-min"></i>
-            </div>
-          </Link>
+            </button>
+          )}
         </div>
       </>
     );
