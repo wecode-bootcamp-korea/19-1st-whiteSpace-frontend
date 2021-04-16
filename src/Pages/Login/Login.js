@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { prefix } from '../../config';
 import './Login.scss';
 
 class Login extends Component {
@@ -10,7 +11,9 @@ class Login extends Component {
 
   checkValidation = () => {
     const { loginId, loginPw } = this.state;
-    fetch('http://10.58.0.130:8000/users/sign_in', {
+    const { api } = prefix;
+
+    fetch(`${api}/users/sign_in`, {
       method: 'POST',
       body: JSON.stringify({
         email: loginId,
