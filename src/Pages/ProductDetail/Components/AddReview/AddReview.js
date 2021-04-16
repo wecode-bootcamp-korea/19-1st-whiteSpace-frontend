@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { stars } from './reviewData';
 import './AddReview.scss';
 
 export default class AddReview extends Component {
@@ -15,21 +16,16 @@ export default class AddReview extends Component {
   handleFileInput = e => {
     const { fileArr } = this.state;
     const { files } = e.target;
-    this.setState(
-      {
-        fileArr: [
-          ...fileArr,
-          {
-            id: fileArr.length + 1,
-            files: files[0],
-            src: window.URL.createObjectURL(files[0]),
-          },
-        ],
-      },
-      () => {
-        // console.log(fileArr);
-      }
-    );
+    this.setState({
+      fileArr: [
+        ...fileArr,
+        {
+          id: fileArr.length + 1,
+          files: files[0],
+          src: window.URL.createObjectURL(files[0]),
+        },
+      ],
+    });
   };
 
   handleReviewValue = e => {
@@ -47,25 +43,13 @@ export default class AddReview extends Component {
   };
 
   addReview = e => {
-    console.log(e);
     const { reviewContents, review, star, fileArr } = this.state;
     if (!reviewContents.trim()) {
       alert('리뷰 내용을 입력해주세요.');
     } else {
-      this.setState(
-        {
-          review: [
-            ...review,
-            {
-              star,
-              reviewContents: reviewContents.trim(),
-            },
-          ],
-        },
-        () => {
-          // console.log(review);
-        }
-      );
+      this.setState({
+        review: [...review, { star, reviewContents: reviewContents.trim() }],
+      });
 
       const data = new FormData();
       data.append('data', fileArr.files);
@@ -94,19 +78,14 @@ export default class AddReview extends Component {
           </span>
         </div>
         <div className="textareaWrap">
-          <textarea
-            onChange={e => handleReviewValue(e)}
-            name="reviewContents"
-          ></textarea>
+          <textarea onChange={handleReviewValue} name="reviewContents" />
           {fileArr.map(image => {
             const { id, src } = image;
             return (
               <div
                 key={id}
                 className="reviewImageWrap"
-                onClick={() => {
-                  deletePhoto(id);
-                }}
+                onClick={() => deletePhoto(id)}
               >
                 <img src={src} alt="reviewImage" />
                 <div className="deleteImage">삭제</div>
@@ -122,14 +101,10 @@ export default class AddReview extends Component {
                 <span>+ 사진 추가</span>
               </label>
             </div>
-            <input
-              type="file"
-              id="inputFile"
-              onChange={e => handleFileInput(e)}
-            />
+            <input type="file" id="inputFile" onChange={handleFileInput} />
           </div>
-          <select onChange={e => handleReviewValue(e)} name="star">
-            {STARS.map(star => {
+          <select onChange={handleReviewValue} name="star">
+            {stars.map(star => {
               const { value, reviewStar, comment } = star;
               return (
                 <option key={value} value={value}>
@@ -139,7 +114,7 @@ export default class AddReview extends Component {
               );
             })}
           </select>
-          <button type="submit" className="addReview">
+          <button type="submit" className="addReview" onClick={addReview}>
             <i className="xi-check-circle"></i>
             리뷰 등록하기
           </button>
@@ -148,31 +123,3 @@ export default class AddReview extends Component {
     );
   }
 }
-
-const STARS = [
-  {
-    value: 5,
-    reviewStar: '★★★★★',
-    comment: '아주 좋아요',
-  },
-  {
-    value: 4,
-    reviewStar: '★★★★☆',
-    comment: '맘에 들어요',
-  },
-  {
-    value: 3,
-    reviewStar: '★★★☆☆',
-    comment: '보통이예요',
-  },
-  {
-    value: 2,
-    reviewStar: '★★☆☆☆',
-    comment: '그냥 그래요',
-  },
-  {
-    value: 1,
-    reviewStar: '★☆☆☆☆',
-    comment: '별로예요',
-  },
-];
