@@ -1,0 +1,7 @@
+@import '../../Styles/common.scss';
+
+.productList {
+  ul {
+    @extend %flexCenter;
+  }
+}
