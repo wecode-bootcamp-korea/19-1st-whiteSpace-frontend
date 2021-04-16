@@ -22,7 +22,7 @@ export class Popup extends Component {
   render() {
     return (
       <div id="Popup">
-        <div className="slider_item" ref={this.firstSlide}>
+        <div className="slider_item " ref={this.firstSlide}>
           <span>팝업1</span>
         </div>
         <div className="slider_item">
