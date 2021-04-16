@@ -12,7 +12,7 @@ export default class CategoryProduct extends Component {
     this.state = {
       categoryProductArr: [],
       categoryName: '',
-      currentIdx: 1,
+      currentIdx: 2,
     };
   }
 
@@ -37,21 +37,31 @@ export default class CategoryProduct extends Component {
 
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
+    const { currentIdx } = this.state;
     switch (idx) {
       case 'prev':
-        console.log('currentIdx - 1');
+        this.setState({
+          currentIdx: currentIdx - 1,
+        });
         break;
       case 'next':
-        console.log('currentIdx + 1');
+        this.setState({
+          currentIdx: currentIdx + 1,
+        });
+        // console.log('currentIdx + 1');
         break;
       default:
         // fetchProduct(idx);
-        console.log(idx);
+        this.setState({
+          currentIdx: idx,
+        });
+      // console.log(idx);
     }
   };
 
   render() {
     const { categoryProductArr, categoryName, currentIdx } = this.state;
+    const { pagingBtnOnClick } = this;
     const total = 30;
     const btnAmount = Math.ceil(total / LIMIT);
     return (
@@ -62,7 +72,7 @@ export default class CategoryProduct extends Component {
         <Paging
           currentIdx={currentIdx}
           btnAmount={btnAmount}
-          pagingBtnOnClick={this.pagingBtnOnClick}
+          pagingBtnOnClick={pagingBtnOnClick}
         />
       </>
     );
