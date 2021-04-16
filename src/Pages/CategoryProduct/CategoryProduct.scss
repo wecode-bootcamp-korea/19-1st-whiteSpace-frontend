@@ -1,0 +1,13 @@
+.categoryProduct {
+  width: 1200px;
+  margin: auto;
+
+  .productList {
+    display: flex;
+    flex-flow: wrap;
+  }
+
+  .contentWrap {
+    text-align: center;
+  }
+}
