@@ -57,7 +57,7 @@ export class Nav extends Component {
   render() {
     const { categoryList, checkScrollTop } = this.state;
     return (
-      <div id="nav" className={!checkScrollTop && 'scrollTopOff'}>
+      <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <nav>
           <h1>
             <Link to="/">여백 0100</Link>
