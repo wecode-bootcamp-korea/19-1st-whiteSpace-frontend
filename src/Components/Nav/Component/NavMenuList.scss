@@ -8,6 +8,7 @@
 
         > ul {
           display: flex;
+
           > li {
             margin-left: 1.1vw;
             font-weight: bold;
@@ -18,14 +19,16 @@
       .navRightMenu {
         font-size: 0.8em;
         width: 40vw;
-        // border: 1px solid red;
+
         > ul {
           @extend %flexCenter;
           justify-content: flex-end;
+
           > li {
             margin-right: 1.8vw;
             font-weight: bold;
             @extend %hover;
+
             button {
               background-color: transparent;
               border: 0px;

@@ -19,7 +19,6 @@ export class Nav extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        // console.log(data.categories);
         data.categories.unshift({
           category_id: 0,
           category_name: 'All',
@@ -27,8 +26,6 @@ export class Nav extends Component {
         this.setState({
           categoryList: data.categories,
         });
-        // console.log(this.state.categoryList);
-        // console.log(this.state.categoryList);
       });
   }
 
@@ -39,16 +36,12 @@ export class Nav extends Component {
     // console.log('전체 body 의 높이 : ' + scrollHeight);
     // console.log('전체 스크롤바 높이 : ' + innerHeight);
     // console.log('현재 스크롤 위치 : ' + myScroll);
-    // console.log(this.state.checkScrollTop);
-    // console.log(this.state.checkScrollTop === true);
-    // console.log(this.state.checkScrollTop === false);
 
     // 스크롤이 최상단이거나 아니거나 변경할 필요가 있을 때만 변경해주도록 함.
     const checkScroll =
       (this.state.checkScrollTop === true && myScroll > 0) ||
       (this.state.checkScrollTop === false && Number(myScroll) === 0);
 
-    // console.log(checkScroll);
     if (checkScroll) {
       this.setState({
         checkScrollTop: myScroll > 0 ? false : true,
@@ -67,7 +60,7 @@ export class Nav extends Component {
         <nav>
           <h1>여백 0100</h1>
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
-          <NavMenuList className="navRightMenu" dataList={navRightMenu} />
+          <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
           {/* Component화 하기 전의 오른쪽 menu 구조 (아래) 참고용으로 보존함 */}
           {/* <div className="navRightMenu">
             <ul>
@@ -95,7 +88,7 @@ export class Nav extends Component {
 
 export default Nav;
 
-const navRightMenu = [
+const NAV_RIGHT_MENU = [
   {
     id: 1,
     text: '로그인',

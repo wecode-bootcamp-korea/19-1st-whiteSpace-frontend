@@ -10,29 +10,22 @@ export class navMenuList extends Component {
       <div className={className}>
         <ul>
           {dataList.map(data => {
-            // console.log(data);
-            // console.log(Object.keys(data));
             const keys = Object.keys(data);
-            // console.log(keys[2]);
-            // console.log(data[keys[2]]);
-            const linkToData =
-              className === 'navLeftMenu'
-                ? {
-                    pathname: '/products',
-                    state: {
-                      categoryId: data[keys[0]],
-                    },
-                  }
-                : {
-                    pathname: data[keys[2]],
-                    state: {
-                      categoryId: data[keys[0]],
-                    },
-                  };
+            const urlName =
+              className === 'navRightMenu' ? data[keys[2]] : '/products';
 
             return (
               <li key={data[keys[0]]}>
-                <Link to={linkToData}>{data[keys[1]]}</Link>
+                <Link
+                  to={{
+                    pathname: urlName,
+                    state: {
+                      categoryId: data[keys[0]],
+                    },
+                  }}
+                >
+                  {data[keys[1]]}
+                </Link>
               </li>
             );
           })}
