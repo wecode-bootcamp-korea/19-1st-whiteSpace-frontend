@@ -25,3 +25,10 @@ $tablet: '(max-width: 1078px)';
   justify-content: center;
   align-items: center;
 }
+
+%hover {
+  &:hover {
+    color: $yellow;
+    cursor: pointer;
+  }
+}
