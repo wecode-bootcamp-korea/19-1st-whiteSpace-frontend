@@ -13,20 +13,18 @@ export default class CategoryProduct extends Component {
     this.state = {
       categoryProductArr: [],
       categoryName: '',
-      currentIdx: 2,
+      currentIdx: 1,
     };
   }
 
-  // fetchProduct = e => {
-  //   fetch(
-  //     `http://10.58.2.83:8000/products?limit=${LIMIT}&offset=${offset * LIMIT}`
-  //   )
-  //     .then(res => res.json())
-  //     .then(res => this.setState({ categoryProductArr: res }));
-  // };
-
   componentDidMount() {
-    fetch('data/categoryProductData.json')
+    const { categoryId } = this.props.location.state;
+
+    fetch(
+      `http://10.58.2.83:8000/products${categoryId !== 0}`
+        ? `?category=${categoryId}`
+        : ``
+    )
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -38,7 +36,7 @@ export default class CategoryProduct extends Component {
 
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
-    const { currentIdx } = this.state;
+    const { currentIdx, categoryName } = this.state;
     switch (idx) {
       case 'prev':
         this.setState({
@@ -49,15 +47,25 @@ export default class CategoryProduct extends Component {
         this.setState({
           currentIdx: currentIdx + 1,
         });
-        // console.log('currentIdx + 1');
         break;
       default:
-        // fetchProduct(idx);
         this.setState({
           currentIdx: idx,
         });
-      // console.log(idx);
+        fetchProduct(idx);
     }
+  };
+
+  fetchProduct = idx => {
+    const { currentIdx } = this.state;
+    const { categoryId } = this.props.location.state;
+    fetch(
+      `http://10.58.2.83:8000/products${
+        categoryId === 0 ? `` : `?category=${categoryId}`
+      }?limit=${LIMIT}&offset=${(currentIdx - 1) * LIMIT}`
+    )
+      .then(res => res.json())
+      .then(res => this.setState({ categoryProductArr: res }));
   };
 
   render() {
