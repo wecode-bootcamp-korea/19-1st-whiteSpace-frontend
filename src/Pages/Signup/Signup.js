@@ -4,6 +4,7 @@ import './Signup.scss';
 import { SIGNUP } from '../../config';
 import { EMAIL_CHECK } from '../../config';
 
+
 const ID_REGEX = /^[a-zA-Z0-9+-_]+@[a-z]+\.[a-z]+$/;
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(\S){8,16}$/;
 const PHONE_NUMBER_REGEX = /^\d{9,11}$/;
@@ -91,7 +92,6 @@ class Signup extends Component {
               <span>정보입력</span>
               <span>&gt;</span>
               <span>가입완료</span>
-            </div>
             <div className="container">
               <div className="nameContainer">
                 <span>아이디(이메일)</span>
