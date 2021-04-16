@@ -22,9 +22,11 @@ export class Popup extends Component {
   render() {
     return (
       <div id="Popup">
-        <div className="slider_item " ref={this.firstSlide}>
-          <span>팝업1</span>
-        </div>
+        POPUP_DATA.map(popup => {
+          <div className="slider_item " ref={this.currentSlide}>
+            <span>popup.content</span>
+          </div>
+        })
         <div className="slider_item">
           <span>팝업2</span>
         </div>
