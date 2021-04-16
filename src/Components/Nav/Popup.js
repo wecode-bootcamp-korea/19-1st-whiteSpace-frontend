@@ -7,16 +7,16 @@ export class Popup extends Component {
   constructor() {
     super();
     this.state = {};
-    this.firstSlide = React.createRef();
     this.currentSlide = React.createRef();
   }
 
   componentDidMount() {
-    this.firstSlide.current.classList.add(SHOWING_CLASS);
+    this.currentSlide.current.classList.add(SHOWING_CLASS);
   }
 
   slide() {
     // currentSlide =
+    const currentSlide = 
   }
 
   render() {
