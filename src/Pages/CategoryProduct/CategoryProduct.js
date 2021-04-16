@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Nav from '../../Components/Nav/Nav';
 import ProductList from '../ProductList/ProductList';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import Paging from '../../Components/Paging/Paging';
@@ -66,6 +67,7 @@ export default class CategoryProduct extends Component {
     const btnAmount = Math.ceil(total / LIMIT);
     return (
       <>
+        <Nav />
         <ProductWrap category="categoryList" text={categoryName}>
           <ProductList type="category" productArr={categoryProductArr} />
         </ProductWrap>
