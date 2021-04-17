@@ -10,6 +10,7 @@ export class Popup extends Component {
       isMouseEvent: false,
       startX: 0,
       scrollLeft: 0,
+      walk: 0,
     };
     this.Slides = [];
     this.currentSlide = React.createRef();
@@ -34,10 +35,11 @@ export class Popup extends Component {
     // currentSlide =
     // const currentSlide =
   };
+
   onMouseDown = (e, index) => {
-    console.log(e.pageX);
-    console.log(this.Slides[index].offsetLeft);
-    console.log(this.Slides[index].scrollLeft);
+    // console.log(e.pageX);
+    // console.log(this.Slides[index].offsetLeft);
+    // console.log(this.Slides[index].scrollLeft);
     this.setState({
       isMouseEvent: true,
       startX: e.pageX - this.Slides[index].offsetLeft,
@@ -46,17 +48,31 @@ export class Popup extends Component {
     // console.log(index);
     this.Slides[index].classList.add('active');
   };
+
   onMouseMove = (e, index) => {
     if (!this.state.isMouseEvent) return;
+    console.log(this.Slides[index]);
+    // console.log('pageX =' + e.pageX);
+    // console.log('scrollLeft =' + this.Slides[index].scrollLeft);
 
     e.preventDefault();
     const x = e.pageX - this.Slides[index].offsetLeft;
-    console.log(x);
+    // console.log(x);
 
     const walk = (x - this.state.startX) * 1;
-    console.log(walk);
+    console.log('walk' + walk);
+    console.log(
+      'this.Slides[index].scrollLeft' + this.Slides[index].scrollLeft
+    );
+    console.log('this.state.scrollLeft' + this.state.scrollLeft);
     this.Slides[index].scrollLeft = this.state.scrollLeft - walk;
   };
+
+  //페이징할 스크롤 양을 계산하기. 양옆에 padding 만큼을 빼준다.
+  getPageSize(index) {
+    // const padding = this.getSliderPadding() * 2;
+    return this.Slides[index].offsetWidth; //- padding
+  }
 
   onMouseLeave = index => {
     this.setState({
@@ -75,9 +91,9 @@ export class Popup extends Component {
   render() {
     return (
       <div id="Popup">
-        <div className="items">
+        <ul className="items">
           {POPUP_DATA.map((popup, index) => (
-            <div
+            <li
               className="slider_item "
               ref={ref => (this.Slides[index] = ref)}
               // ref={this.setRef(ref, index)}
@@ -88,9 +104,9 @@ export class Popup extends Component {
               onClick={() => this.slide(index)}
             >
               <span>{popup.content}</span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
         {/* <div className="slider_item">
           <span>팝업2</span>
         </div> */}
