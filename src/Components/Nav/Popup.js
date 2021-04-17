@@ -9,7 +9,7 @@ export class Popup extends Component {
     this.state = {
       isMouseEvent: false,
       startX: 0,
-      scrollLeft: 0,
+      offsetLeft: 0,
       walk: 0,
     };
     this.Slides = [];
@@ -39,11 +39,11 @@ export class Popup extends Component {
   onMouseDown = (e, index) => {
     // console.log(e.pageX);
     // console.log(this.Slides[index].offsetLeft);
-    // console.log(this.Slides[index].scrollLeft);
+    // console.log(this.Slides[index].offsetLeft);
     this.setState({
       isMouseEvent: true,
       startX: e.pageX - this.Slides[index].offsetLeft,
-      scrollLeft: this.Slides[index].scrollLeft,
+      offsetLeft: this.Slides[index].offsetLeft,
     });
     // console.log(index);
     this.Slides[index].classList.add('active');
@@ -53,19 +53,30 @@ export class Popup extends Component {
     if (!this.state.isMouseEvent) return;
     console.log(this.Slides[index]);
     // console.log('pageX =' + e.pageX);
-    // console.log('scrollLeft =' + this.Slides[index].scrollLeft);
+    // console.log('offsetLeft =' + this.Slides[index].offsetLeft);
 
     e.preventDefault();
     const x = e.pageX - this.Slides[index].offsetLeft;
     // console.log(x);
 
     const walk = (x - this.state.startX) * 1;
-    console.log('walk' + walk);
+
     console.log(
-      'this.Slides[index].scrollLeft' + this.Slides[index].scrollLeft
+      'this.Slides[index].offsetLeft' + this.Slides[index].offsetLeft
     );
-    console.log('this.state.scrollLeft' + this.state.scrollLeft);
-    this.Slides[index].scrollLeft = this.state.scrollLeft - walk;
+    console.log('this.Slides[index]' + this.Slides[index]);
+    console.log('this.Slides[index].crrunet' + this.Slides[index].current);
+    // console.log(
+    //   'this.Slides[index].crrunet.classList' +
+    //     this.Slides[index].current.classList
+    // );
+    console.log(this.currentSlide);
+    // console.log('walk' + walk);
+    // console.log(
+    //   'this.Slides[index].offsetLeft' + this.Slides[index].offsetLeft
+    // );
+    // console.log('this.state.offsetLeft' + this.state.offsetLeft);
+    // this.Slides[index].offsetLeft = this.state.offsetLeft - walk;
   };
 
   //페이징할 스크롤 양을 계산하기. 양옆에 padding 만큼을 빼준다.
@@ -103,7 +114,7 @@ export class Popup extends Component {
               onMouseMove={e => this.onMouseMove(e, index)}
               onClick={() => this.slide(index)}
             >
-              <span>{popup.content}</span>
+              <span ref={this.currentSlide}>{popup.content}</span>
             </li>
           ))}
         </ul>
