@@ -13,30 +13,45 @@ export default class CategoryProduct extends Component {
     this.state = {
       categoryProductArr: [],
       categoryName: '',
+      // categoryId: this.props.location.state.categoryId,
       currentIdx: 1,
     };
   }
 
   componentDidMount() {
-    const { categoryId } = this.props.location.state;
+    console.log(this.props);
+    // const { categoryId } = this.state;
 
-    fetch(
-      `http://10.58.2.83:8000/products${categoryId !== 0}`
-        ? `?category=${categoryId}`
-        : ``
-    )
+    // fetch(
+    //   `http://10.58.2.83:8000/products${categoryId !== 0}`
+    //     ? `?category=${categoryId}`
+    //     : ``
+    // )
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({
+    //       categoryProductArr: data[0].product,
+    //       categoryName: data[0].product[0].categoryName,
+    //     });
+    //   });
+
+    fetch('data/categoryProductData.json')
       .then(res => res.json())
       .then(data => {
         this.setState({
-          categoryProductArr: data[0].product,
-          categoryName: data[0].product[0].categoryName,
+          categoryProductArr: data.products,
+          categoryName: data.category,
         });
+        // this.setState({
+        //   categoryProductArr: data[0].product,
+        //   categoryName: data[0].product[0].categoryName,
+        // });
       });
   }
 
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
-    const { currentIdx, categoryName } = this.state;
+    const { currentIdx } = this.state;
     switch (idx) {
       case 'prev':
         this.setState({
@@ -57,8 +72,9 @@ export default class CategoryProduct extends Component {
   };
 
   fetchProduct = idx => {
-    const { currentIdx } = this.state;
-    const { categoryId } = this.props.location.state;
+    console.log('fetchProduct');
+    const { currentIdx, categoryId } = this.state;
+    // const { categoryId } = this.props.location.state;
     fetch(
       `http://10.58.2.83:8000/products${
         categoryId === 0 ? `` : `?category=${categoryId}`
@@ -71,7 +87,7 @@ export default class CategoryProduct extends Component {
   render() {
     const { categoryProductArr, categoryName, currentIdx } = this.state;
     const { pagingBtnOnClick } = this;
-    const total = 30;
+    const total = categoryProductArr.count;
     const btnAmount = Math.ceil(total / LIMIT);
     return (
       <>
@@ -79,11 +95,11 @@ export default class CategoryProduct extends Component {
         <ProductWrap category="categoryList" text={categoryName}>
           <ProductList type="category" productArr={categoryProductArr} />
         </ProductWrap>
-        <Paging
+        {/* <Paging
           currentIdx={currentIdx}
           btnAmount={btnAmount}
           pagingBtnOnClick={pagingBtnOnClick}
-        />
+        /> */}
       </>
     );
   }
