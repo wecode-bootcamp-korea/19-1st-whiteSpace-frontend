@@ -6,30 +6,94 @@ const SHOWING_CLASS = 'showing';
 export class Popup extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      isMouseEvent: false,
+      startX: 0,
+      scrollLeft: 0,
+    };
+    this.Slides = [];
     this.currentSlide = React.createRef();
   }
 
   componentDidMount() {
-    this.currentSlide.current.classList.add(SHOWING_CLASS);
+    // console.log(this.Slides[0]);
+    // console.log(this.Slides[1]);
+    // this.firstSlide.current.classList.add(SHOWING_CLASS);
+    // this.firstSlide.querySelector('.slider_item:first-child');
+    // console.log(this.state.firstSlide);
   }
 
-  slide() {
+  setRef = (ref, index) => {
+    this.Slides[index] = ref;
+    // console.log(this.Slides[index]);
+    // console.log(index);
+  };
+
+  slide = key => {
+    this.Slides[key].style.color = 'red';
     // currentSlide =
-    const currentSlide = 
-  }
+    // const currentSlide =
+  };
+  onMouseDown = (e, index) => {
+    console.log(e.pageX);
+    console.log(this.Slides[index].offsetLeft);
+    console.log(this.Slides[index].scrollLeft);
+    this.setState({
+      isMouseEvent: true,
+      startX: e.pageX - this.Slides[index].offsetLeft,
+      scrollLeft: this.Slides[index].scrollLeft,
+    });
+    // console.log(index);
+    this.Slides[index].classList.add('active');
+  };
+  onMouseMove = (e, index) => {
+    if (!this.state.isMouseEvent) return;
+
+    e.preventDefault();
+    const x = e.pageX - this.Slides[index].offsetLeft;
+    console.log(x);
+
+    const walk = (x - this.state.startX) * 1;
+    console.log(walk);
+    this.Slides[index].scrollLeft = this.state.scrollLeft - walk;
+  };
+
+  onMouseLeave = index => {
+    this.setState({
+      isMouseEvent: false,
+    });
+    this.Slides[index].classList.remove('active');
+  };
+
+  onMouseUp = index => {
+    this.setState({
+      isMouseEvent: false,
+    });
+    this.Slides[index].classList.remove('active');
+  };
 
   render() {
     return (
       <div id="Popup">
-        POPUP_DATA.map(popup => {
-          <div className="slider_item " ref={this.currentSlide}>
-            <span>popup.content</span>
-          </div>
-        })
-        <div className="slider_item">
-          <span>팝업2</span>
+        <div className="items">
+          {POPUP_DATA.map((popup, index) => (
+            <div
+              className="slider_item "
+              ref={ref => (this.Slides[index] = ref)}
+              // ref={this.setRef(ref, index)}
+              onMouseDown={e => this.onMouseDown(e, index)}
+              onMouseLeave={() => this.onMouseLeave(index)}
+              onMouseUp={() => this.onMouseUp(index)}
+              onMouseMove={e => this.onMouseMove(e, index)}
+              onClick={() => this.slide(index)}
+            >
+              <span>{popup.content}</span>
+            </div>
+          ))}
         </div>
+        {/* <div className="slider_item">
+          <span>팝업2</span>
+        </div> */}
       </div>
     );
   }
