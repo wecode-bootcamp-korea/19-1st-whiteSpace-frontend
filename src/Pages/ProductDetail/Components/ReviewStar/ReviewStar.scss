@@ -2,6 +2,7 @@
 
 .reviewStar {
   display: flex;
+  margin-bottom: 3rem;
   padding: 1rem;
   border: 1px solid $hoverColor;
   text-align: center;
@@ -64,6 +65,7 @@
     }
     .reviewThum {
       width: 50px;
+      height: 50px;
       margin: 0.2rem;
       filter: $border;
       -webkit-filter: grayscale(100%);
@@ -73,6 +75,86 @@
         filter: none;
         -webkit-filter: grayscale(0%);
       }
+    }
+  }
+
+  .modalReviewWrap {
+    display: flex;
+
+    div {
+      display: contents;
+      text-align: left;
+    }
+
+    .reviewImageWrap {
+      width: 100%;
+    }
+
+    .reviewContentWrap {
+      display: block;
+      padding: 3rem 1rem 0rem 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      overflow: auto;
+
+      > div {
+        display: flex;
+        justify-content: space-around;
+
+        div {
+          width: 60%;
+          display: block;
+          padding: 1rem;
+
+          p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-top: 0.2rem;
+          }
+
+          .reviewAuthor {
+            color: $hoverColor;
+          }
+        }
+      }
+
+      img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .reviewOption {
+        justify-content: center;
+        padding: 1rem 0;
+        margin: 1rem 0;
+        text-align: center;
+        border-top: 1px dashed $hoverColor;
+        border-bottom: 1px dashed $hoverColor;
+
+        span:first-child {
+          font-weight: bold;
+          text-overflow: ellipsis;
+        }
+        span:last-child {
+          padding-left: 2rem;
+          text-align: right;
+        }
+      }
+    }
+
+    .reviewContent {
+      height: 100px;
+      margin-bottom: 1.5rem;
+      padding: 0 1.5rem;
+      color: $titleColor;
+      line-height: 1.8;
+      font-weight: 100;
+    }
+
+    img {
+      width: 50%;
+      margin: 0;
     }
   }
 }
