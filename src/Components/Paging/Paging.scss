@@ -5,15 +5,11 @@
   @extend %flexCenter;
 
   button {
+    @extend %hover;
     background: none;
     border: none;
     margin: 0.2rem;
     transition: 0.3s;
-
-    &:hover {
-      cursor: pointer;
-      color: $yellow;
-    }
   }
 
   .pagingBtn {

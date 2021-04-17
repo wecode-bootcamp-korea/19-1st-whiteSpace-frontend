@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { stars } from './reviewData';
+import { stars } from '../Review/reviewData';
 import './AddReview.scss';
 
 export default class AddReview extends Component {
@@ -44,6 +44,7 @@ export default class AddReview extends Component {
 
   addReview = e => {
     const { reviewContents, review, star, fileArr } = this.state;
+    console.log(fileArr);
     if (!reviewContents.trim()) {
       alert('리뷰 내용을 입력해주세요.');
     } else {
@@ -68,7 +69,7 @@ export default class AddReview extends Component {
     const { fileArr } = this.state;
     const { deletePhoto, handleReviewValue, handleFileInput, addReview } = this;
     return (
-      <div className="reviewWrap">
+      <div className="addReviewWrap">
         <p>후기</p>
         <div className="reviewHeader">
           <span>REVIEW&emsp;| </span>
