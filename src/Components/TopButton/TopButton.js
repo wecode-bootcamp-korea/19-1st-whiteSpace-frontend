@@ -34,7 +34,7 @@ export default class TopButton extends Component {
       <div className="topButton">
         {show && (
           <button onClick={scrollToTop}>
-            <i className="xi-caret-up-circle-o"></i>
+            <i className="xi-angle-up-thin"></i>
           </button>
         )}
       </div>
