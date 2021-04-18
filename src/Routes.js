@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Main from './Pages/Main/Main';
 import CategoryProduct from './Pages/CategoryProduct/CategoryProduct';
 import Signup from './Pages/Signup/Signup';
+import TopButton from './Components/TopButton/TopButton';
 
 export default class Routes extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class Routes extends Component {
           {/* <Route exact path="/login" component={Login} /> */}
           <Route exact path="/signup" component={Signup} />
         </Switch>
+        <TopButton />
       </Router>
     );
   }
