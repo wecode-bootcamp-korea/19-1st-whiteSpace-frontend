@@ -19,35 +19,36 @@ export default class CategoryProduct extends Component {
   }
 
   fetchProduct = () => {
+    console.log('dddd');
     const { currentIdx } = this.state;
     fetch(`http://192.168.0.74:8000/products?page=${currentIdx}`)
       .then(res => res.json())
-      .then(
-        productData => console.log(productData)
-        // this.setState({ categoryProductArr: data })
-      );
+      .then(productData => {
+        // this.setState({ categoryProductArr: productData.products });
+      });
   };
 
   componentDidMount() {
-    fetch('data/categoryProductData.json')
-      .then(res => res.json())
-      .then(productData => {
-        const { products, category } = productData;
-        this.setState({
-          categoryProductArr: products,
-          categoryName: category,
-        });
-      });
-    // fetch('http://192.168.0.74:8000/products?page=1')
+    // fetch('data/categoryProductData.json')
     //   .then(res => res.json())
-    //   .then(productList => {
-    //     const { products, category, count } = productList;
+    //   .then(productData => {
+    //     const { products, category } = productData;
     //     this.setState({
     //       categoryProductArr: products,
     //       categoryName: category,
-    //       totalAmount: count,
     //     });
     //   });
+    fetch('http://192.168.0.74:8000/products?page=1')
+      // fetch('http://192.168.0.74:8000/products?category=2&page=1')
+      .then(res => res.json())
+      .then(productList => {
+        const { products, category, count } = productList;
+        this.setState({
+          categoryProductArr: products,
+          categoryName: category,
+          totalAmount: count,
+        });
+      });
   }
 
   pagingBtnOnClick = idx => {
@@ -65,7 +66,7 @@ export default class CategoryProduct extends Component {
         });
         break;
       default:
-        // fetchProduct(idx);
+        fetchProduct(idx);
         this.setState({
           currentIdx: idx,
         });
