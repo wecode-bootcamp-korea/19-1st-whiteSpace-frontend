@@ -44,7 +44,6 @@ export default class AddReview extends Component {
 
   addReview = e => {
     const { reviewContents, review, star, fileArr } = this.state;
-    console.log(fileArr);
     if (!reviewContents.trim()) {
       alert('리뷰 내용을 입력해주세요.');
     } else {

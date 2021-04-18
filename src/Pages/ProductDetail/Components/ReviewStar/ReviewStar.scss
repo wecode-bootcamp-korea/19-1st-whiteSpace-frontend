@@ -145,7 +145,7 @@
 
     .reviewContent {
       height: 100px;
-      margin-bottom: 1.5rem;
+      margin: 1.5rem 0;
       padding: 0 1.5rem;
       color: $titleColor;
       line-height: 1.8;
@@ -156,5 +156,18 @@
       width: 50%;
       margin: 0;
     }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $hoverColor;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
   }
 }

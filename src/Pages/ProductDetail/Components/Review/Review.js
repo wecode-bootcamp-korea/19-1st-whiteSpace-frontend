@@ -17,7 +17,6 @@ export default class Review extends Component {
     fetch('data/review.json')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
           reviewArr: data.reviews,
           productName: data.product_name,

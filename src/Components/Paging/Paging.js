@@ -4,7 +4,6 @@ import './Paging.scss';
 export default class Paging extends Component {
   render() {
     const { pagingBtnOnClick, currentIdx, btnAmount } = this.props;
-    console.log(currentIdx);
     const pagesArr = [...Array(btnAmount).keys()].map(v => v + 1);
 
     return (
