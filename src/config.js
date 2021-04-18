@@ -1,3 +1,7 @@
+export const EMAIL_CHECK = 'http://10.58.4.98:8000/users/check-email';
+export const SIGNUP = 'http://10.58.4.98:8000/users/sign-up';
+export const LOGIN = 'http://10.58.0.130:8000/users/sign_in';
+
 export const left = {
   one: (
     <line
@@ -68,10 +72,4 @@ export const right = {
       strokeWidth="2"
     ></line>
   ),
-};
-
-export const prefix = {
-  emailCheck: 'http://10.58.4.98:8000',
-  signUp: 'http://10.58.4.98:8000',
-  api: 'http://10.58.0.130:8000',
 };
