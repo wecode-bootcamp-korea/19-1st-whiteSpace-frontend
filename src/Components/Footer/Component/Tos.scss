@@ -1,17 +1,17 @@
 @import '../../../Styles/common.scss';
 
 #Tos {
-  width: 100vw;
   display: flex;
   justify-content: center;
+  width: 100vw;
   background-color: #787878;
-  font-size: 0.8rem;
   color: $white;
+  font-size: 0.8rem;
 
   > div {
-    width: 86vw;
     display: flex;
     justify-content: space-between;
+    width: 86vw;
 
     div {
       padding: 8px 0;

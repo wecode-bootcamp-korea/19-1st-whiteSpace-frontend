@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './Pages/Login/Login';
 import Main from './Pages/Main/Main';
 import Signup from './Pages/Signup/Signup';
+import Tos from './Components/Footer/Component/Tos';
+import Footer from './Components/Footer/Footer';
 
 export default class Routes extends Component {
   render() {

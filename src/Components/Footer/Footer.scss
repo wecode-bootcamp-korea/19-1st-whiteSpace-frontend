@@ -1,16 +1,16 @@
 @import '../../Styles/common.scss';
 
 #footer {
-  width: 100vw;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  width: 100vw;
   margin-bottom: 25px;
 
   footer {
-    width: 86vw;
     display: flex;
     justify-content: space-between;
+    width: 86vw;
 
     > div {
       // padding: 10px;
@@ -20,9 +20,9 @@
       padding-top: 24px;
 
       h1 {
+        margin-bottom: 14px;
         font-weight: bold;
         font-size: 0.8rem;
-        margin-bottom: 14px;
         // display: block;
       }
     }
