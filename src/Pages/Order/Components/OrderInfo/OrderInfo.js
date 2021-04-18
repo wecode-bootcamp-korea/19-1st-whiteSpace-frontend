@@ -10,12 +10,9 @@ export default class OrderInfo extends Component {
           <table>
             <thead>
               <tr>
-                <th>이미지</th>
-                <th>상품정보</th>
-                <th>판매가</th>
-                <th>수량</th>
-                <th>적립금</th>
-                <th>합계</th>
+                {THEADS.map((head, index) => {
+                  return <th key={index}>{head}</th>;
+                })}
               </tr>
             </thead>
             <tbody>
@@ -52,3 +49,5 @@ export default class OrderInfo extends Component {
     );
   }
 }
+
+const THEADS = ['이미지', '상품정보', '판매가', '수량', '적립금', '합계'];
