@@ -4,7 +4,7 @@ import Login from './Pages/Login/Login';
 import Main from './Pages/Main/Main';
 import Signup from './Pages/Signup/Signup';
 import Popup from './Components/Nav/Popup';
-import App from './Components/Nav/App';
+import App from './Components/Nav/Popup';
 
 export default class Routes extends Component {
   render() {

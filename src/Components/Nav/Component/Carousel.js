@@ -46,8 +46,8 @@ class Carousel extends Component {
     const x = e.pageX - this.transRef.current.offsetLeft;
     const walk = (x - this.state.startX) * 1;
 
-    // console.log(x);
-    // console.log(walk);
+    console.log(x);
+    console.log(walk);
     if (walk > 150) {
       this.prev();
     }
@@ -87,23 +87,44 @@ class Carousel extends Component {
   // }
 
   next = () => {
-    this.contentParent.style.justifyContent = 'flex-start';
-
-    // if (this.state.currentIndex < this.state.length - 1) {
+    // if (this.state.currentIndex === this.state.length - 1) {
     //   this.setState({
-    //     currentIndex: this.state.currentIndex + 1,
-    //     isMouseEvent: false,
+    //     direction: 1,
     //   });
+    //   this.contentParent.style.justifyContent = 'flex-start';
+    //   this.transitionEnd();
     // }
+    if (this.state.currentIndex < this.state.length - 1) {
+      this.setState({
+        currentIndex: this.state.currentIndex + 1,
+        isMouseEvent: false,
+      });
+    }
   };
 
+  transitionEnd() {
+    if (this.state.direction === 1) {
+      this.contentParent.style.justifyContent = 'flex-end';
+      this.contentParent.prepend(this.contentParent);
+    } else {
+      this.contentParent.style.justifyContent = 'flex-start';
+      this.contentParent.appendChild(this.contentParent);
+    }
+  }
+
   prev = () => {
+    // if (this.state.currentIndex === 0) {
+    //   this.setState({
+    //     direction: -1,
+    //   });
+    // }
     if (this.state.currentIndex > 0) {
       this.setState({
         currentIndex: this.state.currentIndex - 1,
         isMouseEvent: false,
       });
     }
+    // this.transitionEnd();
   };
 
   render() {
@@ -112,11 +133,11 @@ class Carousel extends Component {
     return (
       <div className="carousel-container">
         <div className="carousel-wrapper">
-          {this.state.currentIndex > 0 && (
+          {/* {this.state.currentIndex > 0 && (
             <button className="left-arrow" onClick={this.prev}>
               &lt;
             </button>
-          )}
+          )} */}
           <div
             className="carousel-content-wrapper"
             onMouseDown={e => this.onMouseDown(e)}
@@ -136,11 +157,11 @@ class Carousel extends Component {
               {children}
             </div>
           </div>
-          {this.state.currentIndex < this.state.length - 1 && (
+          {/* {this.state.currentIndex < this.state.length - 1 && (
             <button className="right-arrow" onClick={this.next}>
               &gt;
             </button>
-          )}
+          )} */}
         </div>
       </div>
     );
