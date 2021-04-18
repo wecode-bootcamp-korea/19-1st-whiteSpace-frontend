@@ -1,22 +1,118 @@
 @import '../../Styles/common.scss';
 
-#footerWrapper {
-  footer {
-    margin-top: 70px;
-    @extend %flexCenter;
+#footer {
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 25px;
 
-    .termsOfService {
-      width: 100vw;
-      background-color: #787878;
-      > div {
-        width: 86vw;
-        border: 1px solid red;
-        margin: auto;
-        span {
-          display: inline-block;
+  footer {
+    width: 86vw;
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      // padding: 10px;
+    }
+
+    .footerLeftBox {
+      padding-top: 24px;
+
+      h1 {
+        font-weight: bold;
+        font-size: 0.8rem;
+        margin-bottom: 14px;
+        // display: block;
+      }
+    }
+
+    .footerRightBox {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-top: 35px;
+
+      > div,
+      > ul {
+        padding: 16px 30px;
+        border: 1px solid $black;
+
+        &:last-child {
+          border-left: 0;
+        }
+
+        h2 {
+          font-weight: bold;
           font-size: 0.8rem;
-          color: $white;
-          margin: 10px 5px 10px 0;
+        }
+
+        div {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+
+        li {
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1210px) {
+  #root {
+    #footer {
+      .footerLeftBox {
+        padding-top: 15px;
+      }
+
+      .footerRightBox {
+        padding-top: 25px;
+
+        > div,
+        > ul {
+          // padding: 10px 20px;
+          // border: 1px solid $black;
+
+          h2 {
+            font-weight: bold;
+            font-size: 0.6rem;
+          }
+
+          div {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1174px) {
+  #root {
+    #footer {
+      .footerLeftBox {
+        padding-top: 15px;
+      }
+
+      .footerRightBox {
+        padding-top: 25px;
+
+        > div,
+        > ul {
+          // padding: 10px 20px;
+          border: 1px solid $black;
+
+          h2 {
+            font-weight: bold;
+            font-size: 0.6rem;
+          }
+
+          div {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
         }
       }
     }

@@ -1,0 +1,30 @@
+@import '../../../Styles/common.scss';
+
+#Tos {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #787878;
+  font-size: 0.8rem;
+  color: $white;
+
+  > div {
+    width: 86vw;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      padding: 8px 0;
+    }
+
+    .tosLeftBox {
+      > span {
+        margin-right: 10px;
+      }
+    }
+
+    .tosRightBox {
+      color: #9d9d9d;
+    }
+  }
+}
