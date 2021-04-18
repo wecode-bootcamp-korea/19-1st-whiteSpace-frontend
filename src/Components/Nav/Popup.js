@@ -71,11 +71,6 @@ export class Popup extends Component {
     //     this.Slides[index].current.classList
     // );
     console.log(this.currentSlide);
-    // console.log('walk' + walk);
-    // console.log(
-    //   'this.Slides[index].offsetLeft' + this.Slides[index].offsetLeft
-    // );
-    // console.log('this.state.offsetLeft' + this.state.offsetLeft);
     // this.Slides[index].offsetLeft = this.state.offsetLeft - walk;
   };
 
