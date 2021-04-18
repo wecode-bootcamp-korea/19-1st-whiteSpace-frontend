@@ -4,8 +4,7 @@ import './Welcome.scss';
 
 class Welcome extends Component {
   render() {
-    // const name = this.props.location.state.name;
-    const name = 'dd';
+    const name = this.props.location.state.name;
 
     return (
       <div id="mainBox">
