@@ -75,17 +75,6 @@ class Carousel extends Component {
     // this.Slides[index].classList.remove('active');
   };
 
-  //페이징할 스크롤 양을 계산하기. 양옆에 padding 만큼을 빼준다.
-  // getPageSize(index) {
-  //   // const padding = this.getSliderPadding() * 2;
-  //   return this.Slides[index].offsetWidth; //- padding
-  // }
-  // stopMove() {
-  //   this.setState({
-  //     isMouseEvent: false,
-  //   });
-  // }
-
   next = () => {
     // if (this.state.currentIndex === this.state.length - 1) {
     //   this.setState({
