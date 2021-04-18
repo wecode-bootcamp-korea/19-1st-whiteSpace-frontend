@@ -12,6 +12,7 @@ export default class ReviewStar extends Component {
       modalContents: '',
       modalAutor: '',
       modalOption: '',
+      starAvg: 0,
     };
   }
 
@@ -47,14 +48,20 @@ export default class ReviewStar extends Component {
     }
   };
 
-  // starAvg = arr => {
-  //   const newArr = [];
-  //   for (let i = 1; i <= arr.length; i++) {
-  //     newArr.push(arr[i - 1] * i);
-  //   }
-  //   const totalScore = newArr.reduce((prev, current) => (prev += current));
-  //   return totalScore / newArr.length;
-  // };
+  starAvg = str => {
+    console.log(str);
+    const { starArr } = this.props;
+    console.log(this.props.starArr);
+    /* ((5 * 5점 개수) + (4 * 4점 개수) + (3 * 3점 개수) + (2 * 2점 개수) + (1 * 1점 개수) ) / 5 */
+    const newArr = [];
+    for (let i = 5; i <= 1; i--) {
+      // newArr.push(arr[i - 1] * i);
+      console.log(i);
+    }
+    // const totalScore = newArr.reduce((prev, current) => (prev += current));
+    // return totalScore / 5;
+    return 1;
+  };
 
   render() {
     const { total, reviewArr, productName, productUrl, starArr } = this.props;
@@ -67,12 +74,13 @@ export default class ReviewStar extends Component {
       modalOption,
     } = this.state;
     const { handelModal } = this;
+    console.log(starArr);
 
     return (
       <div className="reviewStar">
         <div className="starAvgWrap">
           <div>
-            <div className="starAvg">4.5</div>
+            <div className="starAvg">요기</div>
             <span>{total}개 리뷰 평점</span>
           </div>
         </div>
@@ -81,7 +89,16 @@ export default class ReviewStar extends Component {
             return (
               <div className="starBarContentWrap" key={index}>
                 <span>{star} stars</span>
-                <div className="starBar"></div>
+                <div className="starBar">
+                  <div
+                    className="innerStarBar redStarBar"
+                    style={{
+                      // width: starArr[index] * (total / 500) + 'px',
+                      // width: (500 / 100) * (100 / total) * starArr[index] + '%',
+                      width: (100 / total) * starArr[index] + 'px',
+                    }}
+                  ></div>
+                </div>
                 <span>({starArr[index]})</span>
               </div>
             );

@@ -52,6 +52,14 @@
       width: 500px;
       height: 1rem;
       background-color: $hoverColor;
+
+      .innerStarBar {
+        height: 100%;
+      }
+
+      .redStarBar {
+        background-color: $red;
+      }
     }
   }
 
@@ -60,7 +68,7 @@
     margin: 0 auto;
 
     div {
-      width: 100%;
+      width: 80%;
       margin: 0 0.5rem 0 1.5rem;
     }
     .reviewThum {
