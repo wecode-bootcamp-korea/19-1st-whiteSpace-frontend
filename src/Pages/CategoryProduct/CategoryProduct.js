@@ -27,40 +27,41 @@ export default class CategoryProduct extends Component {
   };
 
   componentDidMount() {
-    // fetch('data/categoryProductData.json')
-    //   .then(res => res.json())
-    //   .then(productData => {
-    //     const { products, category } = productData;
-    //     this.setState({
-    //       categoryProductArr: products,
-    //       categoryName: category,
-    //     });
-    //   });
-    const { categoryId } = this.props.location.state;
+    fetch('data/categoryProductData.json')
+      .then(res => res.json())
+      .then(productData => {
+        const { products, category } = productData;
+        this.setState({
+          categoryProductArr: products,
+          categoryName: category,
+        });
+      });
 
-    if (!categoryId) {
-      fetch('http://10.58.4.178:8000/products?page=1')
-        .then(res => res.json())
-        .then(productList => {
-          const { products, category, count } = productList;
-          this.setState({
-            categoryProductArr: products,
-            categoryName: category,
-            totalAmount: count,
-          });
-        });
-    } else {
-      fetch(`http://10.58.4.178:8000/products?category=${categoryId}&page=1`)
-        .then(res => res.json())
-        .then(productList => {
-          const { products, category, count } = productList;
-          this.setState({
-            categoryProductArr: products,
-            categoryName: category,
-            totalAmount: count,
-          });
-        });
-    }
+    // const { categoryId } = this.props.location.state;
+
+    // if (!categoryId) {
+    //   fetch('http://10.58.4.178:8000/products?page=1')
+    //     .then(res => res.json())
+    //     .then(productList => {
+    //       const { products, category, count } = productList;
+    //       this.setState({
+    //         categoryProductArr: products,
+    //         categoryName: category,
+    //         totalAmount: count,
+    //       });
+    //     });
+    // } else {
+    //   fetch(`http://10.58.4.178:8000/products?category=${categoryId}&page=1`)
+    //     .then(res => res.json())
+    //     .then(productList => {
+    //       const { products, category, count } = productList;
+    //       this.setState({
+    //         categoryProductArr: products,
+    //         categoryName: category,
+    //         totalAmount: count,
+    //       });
+    //     });
+    // }
   }
 
   pagingBtnOnClick = idx => {
@@ -96,7 +97,6 @@ export default class CategoryProduct extends Component {
     const btnAmount = Math.ceil(totalAmount / LIMIT);
     return (
       <>
-        <Nav />
         <ProductWrap category="categoryList" text={categoryName}>
           <ProductList type="category" productArr={categoryProductArr} />
         </ProductWrap>
