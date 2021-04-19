@@ -1,0 +1,19 @@
+@import '../../../../Styles/common.scss';
+
+.shippingLocation {
+  @extend %flexCenter;
+  padding-top: 3rem;
+
+  th,
+  td {
+    &:first-child {
+      background-color: $background;
+    }
+  }
+
+  th {
+    &:first-child {
+      width: 15%;
+    }
+  }
+}
