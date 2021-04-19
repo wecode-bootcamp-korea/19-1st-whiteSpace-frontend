@@ -1,6 +1,8 @@
 @import '../../../../Styles/common.scss';
 
 .reviewListWrap {
+  height: 500px;
+  overflow: auto;
   font-size: 0.8rem;
 
   .listHeader {
@@ -20,9 +22,6 @@
   }
 
   .reviewContentWrap {
-    height: 600px;
-    overflow: auto;
-
     .reviewContentSection {
       padding: 2rem 0;
       border-bottom: 1px solid $hoverColor;
@@ -108,17 +107,17 @@
       transform: translate3d(0, 0, 0);
     }
   }
+}
 
-  ::-webkit-scrollbar {
-    width: 0.3rem;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: #f0f0f0;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: $hoverColor;
-  }
-  ::-webkit-scrollbar-button {
-    display: none;
-  }
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+::-webkit-scrollbar-thumb {
+  background: $hoverColor;
+}
+::-webkit-scrollbar-button {
+  display: none;
 }

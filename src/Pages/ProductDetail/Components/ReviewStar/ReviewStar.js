@@ -48,19 +48,13 @@ export default class ReviewStar extends Component {
     }
   };
 
-  starAvg = str => {
-    console.log(str);
+  starAvg = () => {
     const { starArr } = this.props;
-    console.log(this.props.starArr);
-    /* ((5 * 5점 개수) + (4 * 4점 개수) + (3 * 3점 개수) + (2 * 2점 개수) + (1 * 1점 개수) ) / 5 */
-    const newArr = [];
-    for (let i = 5; i <= 1; i--) {
-      // newArr.push(arr[i - 1] * i);
-      console.log(i);
+    let sum = 0;
+    for (let i = 0; i < starArr.length; i++) {
+      sum += starArr[i] * i;
     }
-    // const totalScore = newArr.reduce((prev, current) => (prev += current));
-    // return totalScore / 5;
-    return 1;
+    return sum / 10;
   };
 
   render() {
@@ -73,14 +67,13 @@ export default class ReviewStar extends Component {
       modalContents,
       modalOption,
     } = this.state;
-    const { handelModal } = this;
-    console.log(starArr);
+    const { handelModal, starAvg } = this;
 
     return (
       <div className="reviewStar">
         <div className="starAvgWrap">
           <div>
-            <div className="starAvg">요기</div>
+            <div className="starAvg">{starAvg()}</div>
             <span>{total}개 리뷰 평점</span>
           </div>
         </div>
@@ -92,11 +85,7 @@ export default class ReviewStar extends Component {
                 <div className="starBar">
                   <div
                     className="innerStarBar redStarBar"
-                    style={{
-                      // width: starArr[index] * (total / 500) + 'px',
-                      // width: (500 / 100) * (100 / total) * starArr[index] + '%',
-                      width: (100 / total) * starArr[index] + 'px',
-                    }}
+                    style={{ width: (100 / total) * starArr[index] + 'px' }}
                   ></div>
                 </div>
                 <span>({starArr[index]})</span>

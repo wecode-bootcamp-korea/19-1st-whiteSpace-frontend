@@ -51,16 +51,23 @@ export default class AddReview extends Component {
         review: [...review, { star, reviewContents: reviewContents.trim() }],
       });
 
-      const data = new FormData();
-      data.append('data', fileArr.files);
+      const reviewImg = new FormData();
+      reviewImg.append('reviewImg', fileArr.files);
 
-      //   fetch('url', {
-      //     method: 'POST',
-      //     body: data,
+      // fetch('url', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Authorization': localStorage.getItem('token')
+      //   },
+      //   body: JSON.stringify({
+      //     img_url: ['url',
+      //       'url',
+      //     ],
+      //     review: review
       //   })
-      //     .then(res => {})
-      //     .then(res => {});
-      // }
+      // })
+      //   .then(res => {})
+      //   .then(res => {});
     }
   };
 
