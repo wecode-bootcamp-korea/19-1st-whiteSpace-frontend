@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Nav from '../../Components/Nav/Nav';
-import { prefix } from '../../config';
 import './Signup.scss';
+import { SIGNUP } from '../../config';
+import { EMAIL_CHECK } from '../../config';
 
 const ID_REGEX = /^[a-zA-Z0-9+-_]+@[a-z]+\.[a-z]+$/;
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(\S){8,16}$/;
@@ -18,17 +19,20 @@ class Signup extends Component {
 
   signUp = () => {
     const { signId, signPw, signPwCheck, name, phone_number } = this.state;
-    const { signUp } = prefix;
-    fetch(`${signUp}/users/sign-up`, {
-      method: 'POST',
-      body: JSON.stringify({
-        email: signId,
-        password: signPw,
-        password_check: signPwCheck,
-        name: name,
-        phone_number: phone_number,
-      }),
-    })
+
+    fetch(
+      { SIGNUP },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: signId,
+          password: signPw,
+          password_check: signPwCheck,
+          name: name,
+          phone_number: phone_number,
+        }),
+      }
+    )
       .then(res => res.json())
       .then(res => {
         console.log(res);
@@ -43,14 +47,16 @@ class Signup extends Component {
 
   checkIdValid = () => {
     const { signId } = this.state;
-    const { emailCheck } = prefix;
 
-    fetch(`${emailCheck}/users/check-email`, {
-      method: 'POST',
-      body: JSON.stringify({
-        email: signId,
-      }),
-    })
+    fetch(
+      { EMAIL_CHECK },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: signId,
+        }),
+      }
+    )
       .then(res => res.json())
       .then(res => {
         if (res['MESSAGE'] === 'EMAIL ALREADY EXISTS') {

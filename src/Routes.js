@@ -5,6 +5,8 @@ import Nav from './Components/Nav/Nav';
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
 import Main from './Pages/Main/Main';
 import Signup from './Pages/Signup/Signup';
+import Tos from './Components/Footer/Component/Tos';
+import Footer from './Components/Footer/Footer';
 
 export default class Routes extends Component {
   render() {
