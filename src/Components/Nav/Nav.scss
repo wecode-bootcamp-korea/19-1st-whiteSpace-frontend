@@ -23,6 +23,10 @@
     color: black;
     z-index: 9;
 
+    // 클래스이름을 null로 할 수 없어서 임의로 추가
+    &.scrollTopON {
+    }
+
     &.scrollTopOff {
       padding-bottom: 20px;
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 15%);

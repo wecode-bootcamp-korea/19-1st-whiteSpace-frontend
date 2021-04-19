@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavMenuList from './Component/NavMenuList';
+import { Link } from 'react-router-dom';
 import './Nav.scss';
 
 export class Nav extends Component {
@@ -56,30 +57,14 @@ export class Nav extends Component {
   render() {
     const { categoryList, checkScrollTop } = this.state;
     return (
-      <div id="nav" className={!checkScrollTop && 'scrollTopOff'}>
+      <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <nav>
-          <h1>여백 0100</h1>
+          <h1>
+            <Link to="/">여백 0100</Link>
+          </h1>
+
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
-          {/* Component화 하기 전의 오른쪽 menu 구조 (아래) 참고용으로 보존함 */}
-          {/* <div className="navRightMenu">
-            <ul>
-              <li>
-                <Link to="/">로그인</Link>
-              </li>
-              <li>
-                <Link to="/">회원가입</Link>
-              </li>
-              <li>
-                <Link to="/">장바구니</Link>
-              </li>
-              <li>
-                <button>
-                  <i class="fas fa-search"></i>
-                </button>
-              </li>
-            </ul>
-          </div> */}
         </nav>
       </div>
     );
@@ -92,12 +77,12 @@ const NAV_RIGHT_MENU = [
   {
     id: 1,
     text: '로그인',
-    path: '/users/sign-in',
+    path: '/login',
   },
   {
     id: 2,
     text: '회원가입',
-    path: '/users/sign-up',
+    path: '/signup',
   },
   {
     id: 3,
