@@ -1,0 +1,43 @@
+@import '../../../../Styles/common.scss';
+
+.orderInfo {
+  @extend %flexCenter;
+  padding-top: 3rem;
+
+  th,
+  td {
+    text-align: center;
+  }
+
+  th,
+  tr:last-child {
+    background-color: $background;
+  }
+
+  .totalPrice {
+    text-align: right;
+
+    span {
+      &:first-child {
+        margin: 1rem;
+      }
+
+      &:last-child {
+        font-size: 1.2rem;
+        color: $blue;
+      }
+    }
+  }
+
+  .orderProductName {
+    text-align: left;
+  }
+
+  .orderProductThum {
+    width: 80px;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}

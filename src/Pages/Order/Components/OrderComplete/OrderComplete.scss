@@ -1,0 +1,27 @@
+@import '../../../../Styles/common.scss';
+
+.orderComplete {
+  width: 80vw;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid $hoverColor;
+
+  p {
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+    padding: 0.7rem 0;
+  }
+
+  button {
+    width: 30%;
+    margin: 1rem 0;
+    height: 8vh;
+    border: none;
+    background-color: $hoverColor;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $black;
+    }
+  }
+}

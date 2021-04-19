@@ -1,0 +1,26 @@
+@import '../../../../Styles/common.scss';
+
+.tableWrap {
+  th,
+  td {
+    padding: 1.5rem;
+    vertical-align: middle;
+    font-size: 0.85rem;
+  }
+
+  header {
+    padding-bottom: 1rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+
+    span {
+      padding-bottom: 0.1rem;
+      border-bottom: 2px solid $yellow;
+    }
+  }
+  table {
+    width: 80vw;
+    border: 1px solid $hoverColor;
+    text-align: left;
+  }
+}
