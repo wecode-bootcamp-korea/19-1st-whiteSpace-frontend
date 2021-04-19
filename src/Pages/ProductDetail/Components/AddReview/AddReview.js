@@ -23,11 +23,11 @@ export default class AddReview extends Component {
     });
   };
 
-  deleteFile = name => {
+  deleteFile = file => {
     this.setState(prevState => {
       const list = [];
-      prevState.files.map(file => {
-        file.name !== name && list.push(file);
+      prevState.files.map(prevStateFile => {
+        prevStateFile !== file && list.push(prevStateFile);
       });
       return {
         files: list,
@@ -49,8 +49,8 @@ export default class AddReview extends Component {
     if (changedFileIndex >= 0) {
       this.setState(prevState => {
         const list = [];
-        prevState.files.map((file, i) => {
-          list.push(i === prevState.changedFileIndex ? changedFile : file);
+        prevState.files.map((file, index) => {
+          list.push(index === prevState.changedFileIndex ? changedFile : file);
         });
         return {
           files: list,
@@ -131,10 +131,11 @@ export default class AddReview extends Component {
             name="reviewContents"
           />
           {files.map((file, index) => {
-            const { name, lastModified } = file;
+            console.log(file);
+            const { lastModified } = file;
             return (
               <div key={lastModified} className="reviewImageWrap">
-                <button onClick={() => deleteFile(name)}>
+                <button onClick={() => deleteFile(file)}>
                   <i className="xi-minus"></i>
                 </button>
                 <button onClick={() => changeFile(index)}>
