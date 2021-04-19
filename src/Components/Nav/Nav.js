@@ -65,25 +65,6 @@ export class Nav extends Component {
 
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
-          {/* Component화 하기 전의 오른쪽 menu 구조 (아래) 참고용으로 보존함 */}
-          {/* <div className="navRightMenu">
-            <ul>
-              <li>
-                <Link to="/">로그인</Link>
-              </li>
-              <li>
-                <Link to="/">회원가입</Link>
-              </li>
-              <li>
-                <Link to="/">장바구니</Link>
-              </li>
-              <li>
-                <button>
-                  <i class="fas fa-search"></i>
-                </button>
-              </li>
-            </ul>
-          </div> */}
         </nav>
       </div>
     );
