@@ -19,7 +19,7 @@ export default class CategoryProduct extends Component {
   }
 
   fetchProduct = idx => {
-    fetch(`http://10.58.2.186:8000/products?page=${idx}`)
+    fetch(`http://10.58.4.178:8000/products?page=${idx}`)
       .then(res => res.json())
       .then(productData => {
         this.setState({ categoryProductArr: productData.products });
@@ -36,11 +36,10 @@ export default class CategoryProduct extends Component {
     //       categoryName: category,
     //     });
     //   });
-
     const { categoryId } = this.props.location.state;
 
     if (!categoryId) {
-      fetch('http://10.58.2.186:8000/products?page=1')
+      fetch('http://10.58.4.178:8000/products?page=1')
         .then(res => res.json())
         .then(productList => {
           const { products, category, count } = productList;
@@ -51,7 +50,7 @@ export default class CategoryProduct extends Component {
           });
         });
     } else {
-      fetch(`http://192.168.0.74:8000/products?category=${categoryId}&page=1`)
+      fetch(`http://10.58.4.178:8000/products?category=${categoryId}&page=1`)
         .then(res => res.json())
         .then(productList => {
           const { products, category, count } = productList;
