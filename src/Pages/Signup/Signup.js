@@ -34,7 +34,6 @@ class Signup extends Component {
     )
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res['MESSAGE'] === 'SUCCESS') {
           this.props.history.push({
             pathname: '/welcome',

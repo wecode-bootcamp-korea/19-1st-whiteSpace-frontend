@@ -87,10 +87,9 @@ export default class AddReview extends Component {
 
   fetchReview = (newReview, formData) => {
     //formdata 확인방법
-    for (let [key, value] of formData) {
-      console.log(`${key}: ${value}`);
-    }
-
+    // for (let [key, value] of formData) {
+    //   console.log(`${key}: ${value}`);
+    // }
     // fetch('url', {
     //   method: 'POST',
     //   headers: {
@@ -131,7 +130,6 @@ export default class AddReview extends Component {
             name="reviewContents"
           />
           {files.map((file, index) => {
-            console.log(file);
             const { lastModified } = file;
             return (
               <div key={lastModified} className="reviewImageWrap">
