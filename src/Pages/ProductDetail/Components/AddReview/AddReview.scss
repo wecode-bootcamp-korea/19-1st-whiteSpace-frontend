@@ -33,6 +33,18 @@
       margin-right: 0.5rem;
       width: 70px;
       height: 70px;
+      text-align: right;
+
+      button {
+        border: none;
+        background-color: transparent;
+        padding: 0 0.2rem;
+        cursor: pointer;
+
+        i {
+          font-size: 0.8rem;
+        }
+      }
 
       img {
         width: 100%;

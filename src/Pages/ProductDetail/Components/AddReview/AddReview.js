@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { isCompositeComponent } from 'react-dom/test-utils';
 import { stars } from '../Review/reviewData';
 import './AddReview.scss';
 
@@ -7,34 +6,14 @@ export default class AddReview extends Component {
   constructor() {
     super();
     this.state = {
-      fileArr: [],
+      files: [],
+      changedFileIndex: -1,
       review: [],
       reviewContents: '',
       star: '5',
     };
+    this.fileUploaderRef = React.createRef();
   }
-
-  handleFileInput = e => {
-    const { fileArr } = this.state;
-    const { files } = e.target;
-    const newArr = [];
-
-    for (let i = 0; i < files.length; i++) {
-      newArr.push({
-        id: i,
-        files: files[i],
-        src: window.URL.createObjectURL(files[i]),
-      });
-    }
-
-    console.log(newArr);
-
-    // const newFile = [...fileArr, newArr];
-
-    // this.setState({
-    //   fileArr: newFile,
-    // });
-  };
 
   handleReviewValue = e => {
     const { value, name } = e.target;
@@ -43,45 +22,82 @@ export default class AddReview extends Component {
     });
   };
 
-  deletePhoto = id => {
-    const { fileArr } = this.state;
-    this.setState({
-      fileArr: fileArr.filter(file => file.id !== id),
+  deleteFile = name => {
+    this.setState(prevState => {
+      const list = [];
+      prevState.files.map((file, i) => {
+        file.name !== name && list.push(file);
+      });
+      return {
+        files: list,
+        changedFileIndex: -1,
+      };
     });
   };
 
+  changeFile = index => {
+    this.setState({ changedFileIndex: index });
+    this.fileUploaderRef.current.click();
+  };
+
+  fileUpload = e => {
+    const { changedFileIndex, files } = this.state;
+    let changedFile = e.target.files[0];
+    let uploadedFiles = e.target.files;
+
+    if (changedFileIndex >= 0) {
+      this.setState(prevState => {
+        const list = [];
+        prevState.files.map((file, i) => {
+          list.push(i === prevState.changedFileIndex ? changedFile : file);
+        });
+        return {
+          files: list,
+          changedFileIndex: -1,
+        };
+      });
+    } else if (files.length > 0) {
+      this.setState(prevState => {
+        return { files: [...prevState.files, ...uploadedFiles] };
+      });
+    } else this.setState({ files: [...e.target.files] });
+  };
+
   addReview = e => {
-    const { reviewContents, review, star, fileArr } = this.state;
+    const { reviewContents, review, star, files } = this.state;
     const { fetchReview } = this;
 
     if (!reviewContents.trim()) {
       alert('리뷰 내용을 입력해주세요.');
     } else {
-      // const newReview = [
-      //   ...review,
-      //   { star, reviewContents: reviewContents.trim() },
-      // ];
-      // this.setState({ review: newReview });
-      // const reviewImg = new FormData();
-      // fileArr.map( (file) => {
-      // });
-      // reviewImg.append('reviewImg', fileArr.files);
-      // fetchReview(newReview);
+      const newReview = [
+        ...review,
+        { star, reviewContents: reviewContents.trim() },
+      ];
+      this.setState({ review: newReview });
+
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append(`files${i}`, files[i]);
+      }
+      fetchReview(newReview, formData);
     }
   };
 
-  fetchReview = nextReview => {
-    // console.log(nextReview);
+  fetchReview = (newReview, formData) => {
+    //formdata 확인방법
+    for (let [key, value] of formData) {
+      console.log(`${key}: ${value}`);
+    }
+
     // fetch('url', {
     //   method: 'POST',
     //   headers: {
     //     'Authorization': localStorage.getItem('token')
     //   },
     //   body: JSON.stringify({
-    //     img_url: ['url',
-    //       'url',
-    //     ],
-    //     review: review
+    //     images: formData,
+    //     review: newReview
     //   })
     // })
     //   .then(res => {})
@@ -89,8 +105,14 @@ export default class AddReview extends Component {
   };
 
   render() {
-    const { fileArr } = this.state;
-    const { deletePhoto, handleReviewValue, handleFileInput, addReview } = this;
+    const { files } = this.state;
+    const {
+      deleteFile,
+      handleReviewValue,
+      changeFile,
+      addReview,
+      fileUpload,
+    } = this;
     return (
       <div className="addReviewWrap">
         <p>후기</p>
@@ -103,21 +125,22 @@ export default class AddReview extends Component {
         </div>
         <div className="textareaWrap">
           <textarea onChange={handleReviewValue} name="reviewContents" />
-          {fileArr.map(images => {
-            console.log(fileArr);
-            images.map(image => {
-              const { id, src } = image;
-              return (
-                <div
-                  key={id}
-                  className="reviewImageWrap"
-                  onClick={() => deletePhoto(id)}
-                >
-                  <img src={src} alt="reviewImage" />
-                  <div className="deleteImage">삭제</div>
-                </div>
-              );
-            });
+          {files.map((images, index) => {
+            const { name, lastModified } = images;
+            return (
+              <div key={lastModified} className="reviewImageWrap">
+                <button onClick={() => deleteFile(name)}>
+                  <i className="xi-minus"></i>
+                </button>
+                <button onClick={() => changeFile(index)}>
+                  <i className="xi-renew"></i>
+                </button>
+                <img
+                  src={window.URL.createObjectURL(images)}
+                  alt="reviewImage"
+                />
+              </div>
+            );
           })}
         </div>
         <div className="reviewFooter">
@@ -132,11 +155,12 @@ export default class AddReview extends Component {
               type="file"
               id="inputFile"
               multiple
-              onChange={handleFileInput}
+              onChange={fileUpload}
+              ref={this.fileUploaderRef}
             />
           </div>
           <select onChange={handleReviewValue} name="star">
-            {stars.map(star => {
+            {stars.reverse().map(star => {
               const { value, reviewStar, comment } = star;
               return (
                 <option key={value} value={value}>

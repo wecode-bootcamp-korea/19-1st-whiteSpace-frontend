@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AddReview from '../AddReview/AddReview';
+import ReviewTest from '../AddReview/ReviewTest';
 import ReviewStar from '../ReviewStar/ReviewStar';
 import ReviewList from '../ReviewList/ReviewList';
 
@@ -36,7 +37,8 @@ export default class Review extends Component {
     return (
       <>
         <AddReview />
-        <ReviewStar
+        <ReviewTest />
+        {/* <ReviewStar
           total={reviewArr.length}
           starArr={starArr}
           productName={productName}
@@ -49,7 +51,7 @@ export default class Review extends Component {
           productName={productName}
           productUrl={productUrl}
           reviewArr={reviewArr}
-        />
+        /> */}
       </>
     );
   }
