@@ -19,8 +19,8 @@ const POPUP_DATA = [
   {
     content: '지금 회원가입시 여백 1천원 적립금 지급',
     style: {
-      backgroundColor: 'yellow',
-      padding: '20px 0',
+      backgroundColor: '#ffd711',
+      padding: '15px 0',
       textAlign: 'center',
     },
   },
@@ -28,7 +28,7 @@ const POPUP_DATA = [
     content: '카카오 플친 추가시 2,000원 할인 쿠폰 지급!',
     style: {
       backgroundColor: 'skyblue',
-      padding: '20px 0',
+      padding: '15px 0',
       textAlign: 'center',
     },
   },

@@ -122,11 +122,11 @@ class Carousel extends Component {
     return (
       <div className="carousel-container">
         <div className="carousel-wrapper">
-          {/* {this.state.currentIndex > 0 && (
+          {this.state.currentIndex > 0 && (
             <button className="left-arrow" onClick={this.prev}>
               &lt;
             </button>
-          )} */}
+          )}
           <div
             className="carousel-content-wrapper"
             onMouseDown={e => this.onMouseDown(e)}
@@ -146,11 +146,11 @@ class Carousel extends Component {
               {children}
             </div>
           </div>
-          {/* {this.state.currentIndex < this.state.length - 1 && (
+          {this.state.currentIndex < this.state.length - 1 && (
             <button className="right-arrow" onClick={this.next}>
               &gt;
             </button>
-          )} */}
+          )}
         </div>
       </div>
     );

@@ -20,6 +20,8 @@
         scrollbar-width: none; /* hide scrollbar in Firefox */
 
         > * {
+          color: white;
+          font-weight: bold;
           width: 100%;
           flex-shrink: 0;
           flex-grow: 1;
@@ -38,11 +40,13 @@
       z-index: 1;
       top: 50%;
       transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 24px;
-      background-color: white;
-      border: 1px solid #ddd;
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-weight: bold;
     }
 
     .left-arrow {
