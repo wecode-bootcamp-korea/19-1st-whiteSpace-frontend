@@ -19,7 +19,6 @@ export default class CategoryProduct extends Component {
   }
 
   fetchProduct = idx => {
-    // const { currentIdx } = this.state;
     fetch(`http://10.58.2.186:8000/products?page=${idx}`)
       .then(res => res.json())
       .then(productData => {
@@ -28,7 +27,6 @@ export default class CategoryProduct extends Component {
   };
 
   componentDidMount() {
-    // console.log(this.props.location.state.categoryId); //메인에서 클릭했을때만 찍힘
     // fetch('data/categoryProductData.json')
     //   .then(res => res.json())
     //   .then(productData => {
@@ -75,10 +73,12 @@ export default class CategoryProduct extends Component {
       this.setState({
         currentIdx: currentIdx - 1, //prev일때 idx처리해줘야함...
       });
+      idx = currentIdx - 1;
     } else if (idx === 'next') {
       this.setState({
         currentIdx: currentIdx + 1,
       });
+      idx = currentIdx + 1;
     } else {
       this.setState({
         currentIdx: idx,
@@ -88,6 +88,7 @@ export default class CategoryProduct extends Component {
   };
 
   render() {
+    console.log(this.props.location.state.categoryId);
     const {
       categoryProductArr,
       categoryName,

@@ -15,7 +15,23 @@ export default class TopButton extends Component {
     });
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('scroll', () => {
+      this.showButton();
+    });
+  }
+
   showButton() {
+    // if (window.pageYOffset > 200) {
+    //   this.setState({
+    //     show: true,
+    //   });
+    // } else {
+    //   this.setState({
+    //     show: false,
+    //   });
+    // }
+
     this.setState({
       show: window.pageYOffset > 200,
     });
