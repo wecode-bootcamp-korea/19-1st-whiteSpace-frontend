@@ -48,6 +48,38 @@
         font-size: 2em;
       }
     }
+
+    .searchBox {
+      display: flex;
+      // align-items: flex-end;
+      // justify-content: end;
+      flex-direction: column;
+      position: relative;
+
+      i {
+        &:hover {
+          @extend %hover;
+        }
+      }
+
+      input {
+        position: absolute;
+        bottom: -36px;
+        right: -3px;
+        width: 18vw;
+        border: 1px solid $border;
+        padding: 2px 10px;
+        border-radius: 10px;
+
+        &::placeholder {
+          color: $blue;
+          // padding-left: 8px;
+          opacity: 0.7;
+          font-size: 0.8rem;
+        }
+        // display: none;
+      }
+    }
   }
 }
 

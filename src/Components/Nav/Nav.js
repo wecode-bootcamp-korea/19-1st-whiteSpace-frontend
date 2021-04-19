@@ -9,6 +9,7 @@ export class Nav extends Component {
     this.state = {
       checkScrollTop: true,
       categoryList: [],
+      searchInputValue: '',
     };
   }
 
@@ -50,12 +51,25 @@ export class Nav extends Component {
     }
   };
 
+  searchInputChange = e => {
+    this.setState({
+      searchInputValue: e.target.value,
+    });
+  };
+
+  searchInputEnter = e => {
+    if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
+      console.log(this.state.searchInputValue);
+    }
+  };
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
   render() {
     const { categoryList, checkScrollTop } = this.state;
+    const { searchInputChange, searchInputEnter } = this;
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <nav>
@@ -65,6 +79,14 @@ export class Nav extends Component {
 
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
+          <div className="searchBox">
+            <i class="fas fa-search"></i>
+            <input
+              placeholder="검색어"
+              onChange={searchInputChange}
+              onKeyUp={searchInputEnter}
+            />
+          </div>
         </nav>
       </div>
     );
