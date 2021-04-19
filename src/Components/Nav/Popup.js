@@ -1,7 +1,7 @@
 import Carousel from './Component/Carousel';
 // import '../../Styles/common.scss';
 
-const App = () => {
+const Popup = () => {
   return (
     <div>
       <Carousel>
@@ -13,7 +13,7 @@ const App = () => {
   );
 };
 
-export default App;
+export default Popup;
 
 const POPUP_DATA = [
   {

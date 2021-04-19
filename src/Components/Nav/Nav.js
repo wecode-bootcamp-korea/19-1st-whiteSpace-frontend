@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavMenuList from './Component/NavMenuList';
+import Popup from './Popup';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
 
@@ -58,6 +59,7 @@ export class Nav extends Component {
     const { categoryList, checkScrollTop } = this.state;
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
+        <Popup />
         <nav>
           <h1>
             <Link to="/">여백 0100</Link>
