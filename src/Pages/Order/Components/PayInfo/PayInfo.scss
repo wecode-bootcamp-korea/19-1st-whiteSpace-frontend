@@ -1,0 +1,32 @@
+@import '../../../../Styles/common.scss';
+
+.payInfo {
+  @extend %flexCenter;
+  padding-top: 3rem;
+
+  th,
+  td {
+    &:first-child {
+      background-color: $background;
+    }
+
+    p {
+      padding: 0.2rem 0;
+    }
+  }
+
+  th {
+    &:first-child {
+      width: 15%;
+    }
+  }
+
+  .totalPrice {
+    font-size: 1rem;
+    color: $blue;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}
