@@ -19,9 +19,8 @@ export default class CategoryProduct extends Component {
   }
 
   fetchProduct = idx => {
-    console.log('dddd');
     // const { currentIdx } = this.state;
-    fetch(`http://192.168.0.74:8000/products?page=${idx}`)
+    fetch(`http://10.58.2.186:8000/products?page=${idx}`)
       .then(res => res.json())
       .then(productData => {
         this.setState({ categoryProductArr: productData.products });
@@ -29,26 +28,27 @@ export default class CategoryProduct extends Component {
   };
 
   componentDidMount() {
-    fetch('data/categoryProductData.json')
-      .then(res => res.json())
-      .then(productData => {
-        const { products, category } = productData;
-        this.setState({
-          categoryProductArr: products,
-          categoryName: category,
-        });
-      });
-    // fetch('http://192.168.0.74:8000/products?page=1')
-    //   // fetch('http://192.168.0.74:8000/products?category=2&page=1')
+    // console.log(this.props.location.state.categoryId); //메인에서 클릭했을때만 찍힘
+    // fetch('data/categoryProductData.json')
     //   .then(res => res.json())
-    //   .then(productList => {
-    //     const { products, category, count } = productList;
+    //   .then(productData => {
+    //     const { products, category } = productData;
     //     this.setState({
     //       categoryProductArr: products,
     //       categoryName: category,
-    //       totalAmount: count,
     //     });
     //   });
+    fetch('http://10.58.2.186:8000/products?page=1')
+      // fetch('http://192.168.0.74:8000/products?category=2&page=1')
+      .then(res => res.json())
+      .then(productList => {
+        const { products, category, count } = productList;
+        this.setState({
+          categoryProductArr: products,
+          categoryName: category,
+          totalAmount: count,
+        });
+      });
   }
 
   pagingBtnOnClick = idx => {
@@ -73,7 +73,7 @@ export default class CategoryProduct extends Component {
     // }
     if (idx === 'prev') {
       this.setState({
-        currentIdx: currentIdx - 1,
+        currentIdx: currentIdx - 1, //prev일때 idx처리해줘야함...
       });
     } else if (idx === 'next') {
       this.setState({
@@ -84,7 +84,6 @@ export default class CategoryProduct extends Component {
         currentIdx: idx,
       });
     }
-
     fetchProduct(idx);
   };
 
