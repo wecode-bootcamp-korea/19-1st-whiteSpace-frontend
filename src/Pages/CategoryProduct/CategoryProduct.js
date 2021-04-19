@@ -36,42 +36,40 @@ export default class CategoryProduct extends Component {
     //       categoryName: category,
     //     });
     //   });
-    fetch('http://10.58.2.186:8000/products?page=1')
-      // fetch('http://192.168.0.74:8000/products?category=2&page=1')
-      .then(res => res.json())
-      .then(productList => {
-        const { products, category, count } = productList;
-        this.setState({
-          categoryProductArr: products,
-          categoryName: category,
-          totalAmount: count,
+
+    const { categoryId } = this.props.location.state;
+
+    if (!categoryId) {
+      fetch('http://10.58.2.186:8000/products?page=1')
+        .then(res => res.json())
+        .then(productList => {
+          const { products, category, count } = productList;
+          this.setState({
+            categoryProductArr: products,
+            categoryName: category,
+            totalAmount: count,
+          });
         });
-      });
+    } else {
+      fetch(`http://192.168.0.74:8000/products?category=${categoryId}&page=1`)
+        .then(res => res.json())
+        .then(productList => {
+          const { products, category, count } = productList;
+          this.setState({
+            categoryProductArr: products,
+            categoryName: category,
+            totalAmount: count,
+          });
+        });
+    }
   }
 
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
     const { currentIdx } = this.state;
-    // switch (idx) {
-    //   case 'prev':
-    //     this.setState({
-    //       currentIdx: currentIdx - 1,
-    //     });
-    //     break;
-    //   case 'next':
-    //     this.setState({
-    //       currentIdx: currentIdx + 1,
-    //     });
-    //     break;
-    //   default:
-    //     fetchProduct(idx);
-    //     this.setState({
-    //       currentIdx: idx,
-    //     });
-    // }
     if (idx === 'prev') {
       this.setState({
-        currentIdx: currentIdx - 1, //prev일때 idx처리해줘야함...
+        currentIdx: currentIdx - 1,
       });
       idx = currentIdx - 1;
     } else if (idx === 'next') {
@@ -88,7 +86,7 @@ export default class CategoryProduct extends Component {
   };
 
   render() {
-    console.log(this.props.location.state.categoryId);
+    // console.log(this.props.location.state.categoryId);
     const {
       categoryProductArr,
       categoryName,

@@ -18,6 +18,7 @@ export class navMenuList extends Component {
                 <Link
                   to={{
                     pathname: urlName,
+                    // pathname: urlName/ data[keys[0]],
                     state: {
                       categoryId: data[keys[0]],
                     },

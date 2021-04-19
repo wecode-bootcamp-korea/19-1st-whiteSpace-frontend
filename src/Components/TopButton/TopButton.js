@@ -22,19 +22,16 @@ export default class TopButton extends Component {
   }
 
   showButton() {
-    // if (window.pageYOffset > 200) {
-    //   this.setState({
-    //     show: true,
-    //   });
-    // } else {
-    //   this.setState({
-    //     show: false,
-    //   });
-    // }
-
-    this.setState({
-      show: window.pageYOffset > 200,
-    });
+    const { show } = this.state;
+    if (show && window.pageYOffset < 200) {
+      this.setState({
+        show: false,
+      });
+    } else if (!show && window.pageYOffset > 200) {
+      this.setState({
+        show: true,
+      });
+    }
   }
 
   scrollToTop() {
