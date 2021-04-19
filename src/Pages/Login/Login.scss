@@ -1,0 +1,132 @@
+@import '../../Styles/common.scss';
+
+.Login {
+  height: 100vh;
+  @extend %flexCenter;
+
+  .LoginContainer {
+    header {
+      margin-bottom: 2.5rem;
+      font-family: $font-nexon;
+      font-size: 2rem;
+      text-align: center;
+    }
+    .Containers {
+      @extend %flexCenter;
+
+      .inputContainer {
+        margin-right: 0.5rem;
+
+        .container {
+          input {
+            width: 20rem;
+            height: 3.5rem;
+            font-family: $font-nexon;
+            text-indent: 10px;
+          }
+        }
+
+        .id {
+          margin-bottom: 0.5rem;
+        }
+      }
+      .loginButton {
+        width: 9.375rem;
+        height: 7.5rem;
+        margin: auto;
+        border: none;
+        background-color: $subTitleColor;
+        font-family: $font-nexon;
+        font-size: 2rem;
+        cursor: pointer;
+
+        &:disabled {
+          background-color: $hoverColor;
+        }
+      }
+    }
+  }
+  footer {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin: 2.5rem auto;
+    color: $border;
+    span:nth-child(1) {
+      color: $yellow;
+    }
+  }
+}
+
+@media #{$tablet} {
+  .Login {
+    .LoginContainer {
+      header {
+        font-size: 1.5rem;
+      }
+      .Containers {
+        .inputContainer {
+          margin-right: 0.5rem;
+          .idContainer {
+            input {
+              margin-bottom: 0.5rem;
+            }
+          }
+        }
+        .loginButton {
+          width: 7rem;
+          height: 7.5rem;
+          margin: auto;
+          font-size: 1rem;
+        }
+      }
+    }
+    footer {
+      width: 80%;
+      margin: 2.5rem auto;
+    }
+  }
+}
+
+@media #{$phone} {
+  .Login {
+    .LoginContainer {
+      header {
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+      }
+      .Containers {
+        display: flex;
+        .inputContainer {
+          margin-right: 0.5rem;
+          .idContainer {
+            input {
+              width: 10rem;
+              height: 3.5rem;
+              margin-bottom: 0.5rem;
+              text-indent: 10px;
+            }
+          }
+          .passwordContainer {
+            input {
+              width: 10rem;
+              height: 3.5rem;
+              text-indent: 10px;
+            }
+          }
+        }
+        .loginButton {
+          width: 5rem;
+          height: 7.5rem;
+          margin: auto;
+          font-size: 1rem;
+        }
+      }
+    }
+    footer {
+      width: 80%;
+      margin: 2.5rem auto;
+      font-size: 0.8rem;
+    }
+  }
+}
