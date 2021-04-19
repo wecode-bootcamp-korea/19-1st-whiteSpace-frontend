@@ -71,6 +71,9 @@
     border: none;
     resize: none;
     font-size: 0.8rem;
+
+    &:disabled {
+    }
   }
 
   .reviewFooter {

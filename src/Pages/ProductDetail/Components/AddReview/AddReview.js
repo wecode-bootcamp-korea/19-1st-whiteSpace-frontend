@@ -12,11 +12,12 @@ export default class AddReview extends Component {
       reviewContents: '',
       star: '5',
     };
-    this.fileUploaderRef = React.createRef();
+    this.fileUploader = React.createRef();
   }
 
   handleReviewValue = e => {
     const { value, name } = e.target;
+
     this.setState({
       [name]: value,
     });
@@ -25,7 +26,7 @@ export default class AddReview extends Component {
   deleteFile = name => {
     this.setState(prevState => {
       const list = [];
-      prevState.files.map((file, i) => {
+      prevState.files.map(file => {
         file.name !== name && list.push(file);
       });
       return {
@@ -37,7 +38,7 @@ export default class AddReview extends Component {
 
   changeFile = index => {
     this.setState({ changedFileIndex: index });
-    this.fileUploaderRef.current.click();
+    this.fileUploader.current.click();
   };
 
   fileUpload = e => {
@@ -63,7 +64,7 @@ export default class AddReview extends Component {
     } else this.setState({ files: [...e.target.files] });
   };
 
-  addReview = e => {
+  addReview = () => {
     const { reviewContents, review, star, files } = this.state;
     const { fetchReview } = this;
 
@@ -124,9 +125,13 @@ export default class AddReview extends Component {
           </span>
         </div>
         <div className="textareaWrap">
-          <textarea onChange={handleReviewValue} name="reviewContents" />
-          {files.map((images, index) => {
-            const { name, lastModified } = images;
+          <textarea
+            // disabled
+            onChange={handleReviewValue}
+            name="reviewContents"
+          />
+          {files.map((file, index) => {
+            const { name, lastModified } = file;
             return (
               <div key={lastModified} className="reviewImageWrap">
                 <button onClick={() => deleteFile(name)}>
@@ -135,10 +140,7 @@ export default class AddReview extends Component {
                 <button onClick={() => changeFile(index)}>
                   <i className="xi-renew"></i>
                 </button>
-                <img
-                  src={window.URL.createObjectURL(images)}
-                  alt="reviewImage"
-                />
+                <img src={window.URL.createObjectURL(file)} alt="reviewImage" />
               </div>
             );
           })}
@@ -156,7 +158,7 @@ export default class AddReview extends Component {
               id="inputFile"
               multiple
               onChange={fileUpload}
-              ref={this.fileUploaderRef}
+              ref={this.fileUploader}
             />
           </div>
           <select onChange={handleReviewValue} name="star">
