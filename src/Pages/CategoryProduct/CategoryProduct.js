@@ -54,23 +54,38 @@ export default class CategoryProduct extends Component {
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
     const { currentIdx } = this.state;
-    switch (idx) {
-      case 'prev':
-        this.setState({
-          currentIdx: currentIdx - 1,
-        });
-        break;
-      case 'next':
-        this.setState({
-          currentIdx: currentIdx + 1,
-        });
-        break;
-      default:
-        fetchProduct(idx);
-        this.setState({
-          currentIdx: idx,
-        });
+    // switch (idx) {
+    //   case 'prev':
+    //     this.setState({
+    //       currentIdx: currentIdx - 1,
+    //     });
+    //     break;
+    //   case 'next':
+    //     this.setState({
+    //       currentIdx: currentIdx + 1,
+    //     });
+    //     break;
+    //   default:
+    //     fetchProduct(idx);
+    //     this.setState({
+    //       currentIdx: idx,
+    //     });
+    // }
+    if (idx === 'prev') {
+      this.setState({
+        currentIdx: currentIdx - 1,
+      });
+    } else if (idx === 'next') {
+      this.setState({
+        currentIdx: currentIdx + 1,
+      });
+    } else {
+      this.setState({
+        currentIdx: idx,
+      });
     }
+
+    fetchProduct(idx);
   };
 
   render() {
