@@ -17,7 +17,7 @@ export default App;
 
 const POPUP_DATA = [
   {
-    content: '지금 회원가입시 여백 3천원 할인 쿠폰 발급',
+    content: '지금 회원가입시 여백 1천원 적립금 지급',
     style: {
       backgroundColor: 'yellow',
       padding: '20px 0',

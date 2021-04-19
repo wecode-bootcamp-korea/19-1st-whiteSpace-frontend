@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+@import '../../Styles/common.scss';
+
+.productWrap {
+  text-align: center;
+  margin: 0 auto;
+
+  .title {
+    margin: 5rem 0 2rem 0;
+    font-size: 1.6em;
+    color: #39393a;
+  }
+
+  .bestTitle {
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 2px;
+  }
+
+  .categoryTitle {
+    display: inline-block;
+    padding: 0 0 10px 0;
+    border-bottom: 2px solid $yellow;
+    font-weight: 600;
+  }
+}
