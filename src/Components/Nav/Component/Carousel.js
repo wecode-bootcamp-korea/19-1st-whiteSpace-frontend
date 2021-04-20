@@ -30,10 +30,6 @@ class Carousel extends Component {
       'translateX(-' + this.state.currentIndex * 100 + '%)';
   }
 
-  cursorOn() {
-    this.contentParent.current.style.cursor = 'pointer';
-  }
-
   onMouseDown = e => {
     this.setState({
       isMouseEvent: true,
@@ -50,6 +46,8 @@ class Carousel extends Component {
     const x = e.pageX - this.transRef.current.offsetLeft;
     const walk = (x - this.state.startX) * 1;
 
+    console.log(x);
+    console.log(walk);
     if (walk > 150) {
       this.prev();
     }
@@ -57,13 +55,16 @@ class Carousel extends Component {
     if (walk < -150) {
       this.next();
     }
+
+    // console.log(
+    //   'this.Slides[index].offsetLeft' + this.Slides[index].offsetLeft
+    // );
   };
 
   onMouseLeave = index => {
     this.setState({
       isMouseEvent: false,
     });
-    this.contentParent.current.style.cursor = 'default';
     // this.Slides[index].classList.remove('active');
   };
 
@@ -73,16 +74,6 @@ class Carousel extends Component {
     });
     // this.Slides[index].classList.remove('active');
   };
-
-  transitionEnd() {
-    if (this.state.direction === 1) {
-      this.contentParent.style.justifyContent = 'flex-end';
-      this.contentParent.prepend(this.contentParent);
-    } else {
-      this.contentParent.style.justifyContent = 'flex-start';
-      this.contentParent.appendChild(this.contentParent);
-    }
-  }
 
   next = () => {
     // if (this.state.currentIndex === this.state.length - 1) {
@@ -100,6 +91,16 @@ class Carousel extends Component {
     }
   };
 
+  transitionEnd() {
+    if (this.state.direction === 1) {
+      this.contentParent.style.justifyContent = 'flex-end';
+      this.contentParent.prepend(this.contentParent);
+    } else {
+      this.contentParent.style.justifyContent = 'flex-start';
+      this.contentParent.appendChild(this.contentParent);
+    }
+  }
+
   prev = () => {
     // if (this.state.currentIndex === 0) {
     //   this.setState({
@@ -115,17 +116,8 @@ class Carousel extends Component {
     // this.transitionEnd();
   };
 
-  popupClick() {
-    if (this.state.length - 1 > this.state.currentIndex) {
-      this.next();
-    } else {
-      this.prev();
-    }
-  }
-
   render() {
     const { children } = this.props;
-    console.log(this.state.isMouseEvent);
 
     return (
       <div className="carousel-container">
@@ -141,8 +133,6 @@ class Carousel extends Component {
             onMouseLeave={() => this.onMouseLeave()}
             onMouseUp={() => this.onMouseUp()}
             onMouseMove={e => this.onMouseMove(e)}
-            onMouseOver={() => this.cursorOn()}
-            onClick={() => this.popupClick()}
             ref={this.contentParent}
           >
             <div

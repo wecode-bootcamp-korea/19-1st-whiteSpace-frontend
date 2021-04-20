@@ -81,7 +81,6 @@ export default class CategoryProduct extends Component {
   };
 
   render() {
-    console.log(this.props);
     const {
       categoryProductArr,
       categoryName,
