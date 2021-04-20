@@ -47,16 +47,15 @@ export default class ReviewList extends Component {
           </span>
         </header>
         {reviewArr.map(review => {
-          const { id, star, content, starComment, author, images } = review;
+          const { id, rating, text, author, image_urls } = review;
           return (
             <Review
               key={id}
               id={id}
-              star={star}
-              content={content}
-              starComment={starComment}
+              star={rating}
+              content={text}
               author={author}
-              images={images}
+              images={image_urls}
             />
           );
         })}

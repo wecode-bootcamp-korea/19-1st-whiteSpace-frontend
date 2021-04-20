@@ -15,6 +15,7 @@ export default class ReviewStar extends Component {
       modalStar: '',
       starAvg: 0,
     };
+    this.modalRef = React.createRef();
   }
 
   componentDidMount() {
@@ -37,17 +38,18 @@ export default class ReviewStar extends Component {
         modalImage: image,
         modalId,
         modalStar:
-          '★'.repeat(reviewArr[modalId - 1].star) +
-          '☆'.repeat(5 - reviewArr[modalId - 1].star),
+          '★'.repeat(reviewArr[modalId - 1].rating) +
+          '☆'.repeat(5 - reviewArr[modalId - 1].rating),
         modalAutor: reviewArr[modalId - 1].author,
-        modalContents: reviewArr[modalId - 1].content,
-        modalOption: reviewArr[modalId - 1].option,
+        modalContents: reviewArr[modalId - 1].text,
+        modalOption: reviewArr[modalId - 1].bundle,
       });
     }
   };
 
   handleClickOutside = e => {
     const { className } = e.target;
+
     if (className.includes('openModal')) {
       this.setState({
         modalOpen: false,
@@ -104,16 +106,18 @@ export default class ReviewStar extends Component {
           <div>
             {reviewArr.map((review, index) => {
               return (
-                <a href="#!" key={index}>
-                  <img
-                    className="reviewThum"
-                    src={review.images[0]}
-                    alt="reviewThumnail"
-                    onClick={() => {
-                      handleModal(1, review.id, review.images[0]);
-                    }}
-                  />
-                </a>
+                review.image_urls.length !== 0 && (
+                  <a href="#!" key={index}>
+                    <img
+                      className="reviewThum"
+                      src={review.image_urls[0]}
+                      alt="reviewThumnail"
+                      onClick={() => {
+                        handleModal(1, review.id, review.image_urls[0]);
+                      }}
+                    />
+                  </a>
+                )
               );
             })}
           </div>
@@ -124,7 +128,7 @@ export default class ReviewStar extends Component {
             handleModal(0);
           }}
         >
-          <div className="modalReviewWrap">
+          <div className="modalReviewWrap" ref={this.modalRef}>
             <div>
               <div className="reviewImageWrap">
                 <img src={modalImage} alt="modalImage" />

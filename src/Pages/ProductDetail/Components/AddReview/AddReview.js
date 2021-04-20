@@ -11,6 +11,8 @@ export default class AddReview extends Component {
       review: [],
       reviewContents: '',
       star: '5',
+      imageUrl: '',
+      imageArr: [],
     };
     this.fileUploader = React.createRef();
   }
@@ -29,6 +31,13 @@ export default class AddReview extends Component {
       // alert('구매한 상품에만 리뷰를 작성할 수 있습니다.');
     }
   };
+
+  // deletePhoto = id => {
+  //   const { imageArr } = this.state;
+  //   this.setState({
+  //     imageArr: imageArr.filter(file => file.id !== id),
+  //   });
+  // };
 
   deleteFile = file => {
     this.setState(prevState => {
@@ -72,7 +81,29 @@ export default class AddReview extends Component {
     } else this.setState({ files: [...e.target.files] });
   };
 
+  // handleInput = e => {
+  //   const { value } = e.target;
+  //   const { imageUrl, imageArr } = this.state;
+  //   this.setState({
+  //     imageUrl: value,
+  //   });
+
+  //   if (e.key === 'Enter') {
+  //     this.setState({
+  //       imageArr: [
+  //         ...imageArr,
+  //         {
+  //           id: imageArr.length + 1,
+  //           url: imageUrl,
+  //         },
+  //       ],
+  //       imageUrl: '',
+  //     });
+  //   }
+  // };
+
   addReview = () => {
+    console.log('addreview');
     const { reviewContents, review, star, files } = this.state;
     const { fetchReview } = this;
 
@@ -98,40 +129,31 @@ export default class AddReview extends Component {
     // for (let [key, value] of formData) {
     //   console.log(`${key}: ${value}`);
     // }
-    // console.log(newReview);
-
+    // console.log(newReview[0].reviewContents);
+    // console.log(newReview[0].star);
     fetch('http://10.58.7.33:8000/products/3/reviews', {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('access_token'),
       },
       body: JSON.stringify({
-        image_urls: formData,
-        text: newReview.reviewContents,
-        rating: newReview.star,
+        image_urls: [],
+        // image_urls: formData,
+        text: newReview[0].reviewContents,
+        rating: newReview[0].star,
         bundle_id: null,
         color_size_id: null,
       }),
     })
-      .then(res => {})
-      .then(res => {
-        console.log(res);
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
       });
   };
 
-  newWindow = () => {
-    window.open('childcomponent.js', '_blank', 'height=250,width=250');
-  };
-
   render() {
-    const { files } = this.state;
-    const {
-      deleteFile,
-      handleReviewValue,
-      changeFile,
-      addReview,
-      fileUpload,
-    } = this;
+    const { files, imageUrl } = this.state;
+    const { handleReviewValue, addReview, deletePhoto, handleInput } = this;
 
     return (
       <div className="addReviewWrap">
@@ -149,14 +171,27 @@ export default class AddReview extends Component {
             onChange={handleReviewValue}
             name="reviewContents"
           />
+          {/* {this.state.imageArr.map((image, index) => {
+            console.log(this.state.imageArr[index]);
+            return (
+              <div
+                key={this.state.imageArr[index].url}
+                className="reviewImageWrap"
+                onClick={() => deletePhoto(this.state.imageArr[index].id)}
+              >
+                <img src={this.state.imageArr[index].url} alt="reviewImage" />
+                <div className="deleteImage">삭제</div>
+              </div>
+            );
+          })} */}
           {files.map((file, index) => {
             const { lastModified } = file;
             return (
               <div key={lastModified} className="reviewImageWrap">
-                <button onClick={() => changeFile(index)}>
+                <button onClick={() => this.changeFile(index)}>
                   <i className="xi-renew"></i>
                 </button>
-                <button onClick={() => deleteFile(file)}>
+                <button onClick={() => this.deleteFile(file)}>
                   <i className="xi-close"></i>
                 </button>
                 <img src={window.URL.createObjectURL(file)} alt="reviewImage" />
@@ -166,6 +201,14 @@ export default class AddReview extends Component {
         </div>
         <div className="reviewFooter">
           <div className="addPhoto">
+            {/* <input
+              class="addPhotoInput"
+              type="text"
+              placeholder="이미지 url을 입력하세요"
+              onChange={handleInput}
+              onKeyUp={handleInput}
+              value={imageUrl}
+            /> */}
             <div>
               <label htmlFor="inputFile">
                 <i className="xi-camera"></i>
@@ -176,11 +219,10 @@ export default class AddReview extends Component {
               type="file"
               id="inputFile"
               multiple
-              onChange={fileUpload}
+              onChange={this.fileUpload}
               ref={this.fileUploader}
             />
           </div>
-          <button onClick={this.newWindow}></button>
           <select onChange={handleReviewValue} name="star">
             {stars.reverse().map(star => {
               const { value, reviewStar, comment } = star;

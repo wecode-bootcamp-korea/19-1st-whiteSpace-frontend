@@ -51,7 +51,7 @@ export default class Review extends Component {
 
   render() {
     const { show, modalOpen, modalContents } = this.state;
-    const { id, star, content, starComment, author, images } = this.props;
+    const { id, star, content, author, images } = this.props;
     const { showToggle, handleModal } = this;
     return (
       <>
@@ -59,7 +59,7 @@ export default class Review extends Component {
           <section className="reviewContentSection">
             <span className="star">
               {'★'.repeat(star) + '☆'.repeat(5 - star)}
-              <span className="desc"> - {starComment}</span>
+              {/* <span className="desc"> - {starComment}</span> */}
             </span>
             <div className="reviewContent">
               <p className="content">{content}</p>
@@ -70,6 +70,7 @@ export default class Review extends Component {
             </div>
             <div className="reviewImage">
               {images.map((image, index) => {
+                console.log(image);
                 return (
                   <a href="#!" key={index}>
                     <img

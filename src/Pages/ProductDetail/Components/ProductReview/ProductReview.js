@@ -7,6 +7,7 @@ export default class ProductReview extends Component {
   constructor() {
     super();
     this.state = {
+      count: 0,
       reviewArr: [],
       starArr: [],
       productName: '',
@@ -14,37 +15,49 @@ export default class ProductReview extends Component {
     };
   }
   componentDidMount() {
-    fetch('data/review.json')
+    // fetch('data/review.json')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({
+    //       reviewArr: data.reviews,
+    //       productName: data.product_name,
+    //       productUrl: data.product_url,
+    //       starArr: [
+    //         data.five_star,
+    //         data.four_star,
+    //         data.three_star,
+    //         data.two_star,
+    //         data.one_star,
+    //       ],
+    //     });
+    //   });
+    fetch('http://10.58.7.33:8000/products/2/reviews')
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         this.setState({
           reviewArr: data.reviews,
+          count: data.count,
           productName: data.product_name,
-          productUrl: data.product_url,
-          starArr: [
-            data.five_star,
-            data.four_star,
-            data.three_star,
-            data.two_star,
-            data.one_star,
-          ],
+          productUrl: data.thumbnail_url,
+          starArr: [data.five, data.four, data.three, data.two, data.one],
         });
       });
   }
   render() {
-    const { reviewArr, productName, productUrl, starArr } = this.state;
+    const { reviewArr, productName, productUrl, starArr, count } = this.state;
     return (
       <>
         <AddReview />
         <ReviewStar
-          total={reviewArr.length}
+          total={count}
           starArr={starArr}
           productName={productName}
           productUrl={productUrl}
           reviewArr={reviewArr}
         />
         <ReviewList
-          total={reviewArr.length}
+          total={count}
           starArr={starArr}
           productName={productName}
           productUrl={productUrl}

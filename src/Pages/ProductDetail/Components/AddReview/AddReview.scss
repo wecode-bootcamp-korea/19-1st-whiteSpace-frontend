@@ -112,6 +112,7 @@
 
     .addPhoto {
       display: inline-block;
+      margin: 0 0.5rem;
 
       label {
         color: $border;
@@ -120,6 +121,13 @@
         background-color: $white;
         border: 1px solid $hoverColor;
         cursor: pointer;
+      }
+
+      .addPhotoInput {
+        border: none;
+        border-bottom: 1px solid $hoverColor;
+        font-size: 0.8rem;
+        padding: 0.2rem 1rem;
       }
     }
 
