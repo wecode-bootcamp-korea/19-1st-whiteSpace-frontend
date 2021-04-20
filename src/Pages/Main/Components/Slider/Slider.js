@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { nativeTouchData } from 'react-dom/test-utils';
 import { left, right } from '../../../../config';
 import SlideContents from '../SliderContents/SliderContents';
 import './Slider.scss';

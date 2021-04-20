@@ -1,0 +1,21 @@
+ul {
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 5px;
+    // font-size: 0.7rem;
+
+    span {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+  }
+}
+
+.fontSize07 li {
+  font-size: 0.7rem;
+}
+
+.fontSize08 li {
+  font-size: 0.8rem;
+}
