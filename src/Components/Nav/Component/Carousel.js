@@ -27,13 +27,15 @@ class Carousel extends Component {
       'translateX(-' + this.state.currentIndex * 100 + '%)';
   }
 
+  cursorOn() {
+    this.contentParent.current.style.cursor = 'pointer';
+  }
+
   onMouseDown = e => {
     this.setState({
       isMouseEvent: true,
       startX: e.pageX - this.transRef.current.offsetLeft,
     });
-    // console.log(index);
-    // this.Slides[index].classList.add('active');
   };
 
   onMouseMove = e => {
@@ -66,6 +68,16 @@ class Carousel extends Component {
     // this.Slides[index].classList.remove('active');
   };
 
+  transitionEnd() {
+    if (this.state.direction === 1) {
+      this.contentParent.style.justifyContent = 'flex-end';
+      this.contentParent.prepend(this.contentParent);
+    } else {
+      this.contentParent.style.justifyContent = 'flex-start';
+      this.contentParent.appendChild(this.contentParent);
+    }
+  }
+
   next = () => {
     // if (this.state.currentIndex === this.state.length - 1) {
     //   this.setState({
@@ -82,16 +94,6 @@ class Carousel extends Component {
     }
   };
 
-  transitionEnd() {
-    if (this.state.direction === 1) {
-      this.contentParent.style.justifyContent = 'flex-end';
-      this.contentParent.prepend(this.contentParent);
-    } else {
-      this.contentParent.style.justifyContent = 'flex-start';
-      this.contentParent.appendChild(this.contentParent);
-    }
-  }
-
   prev = () => {
     // if (this.state.currentIndex === 0) {
     //   this.setState({
@@ -106,6 +108,15 @@ class Carousel extends Component {
     }
     // this.transitionEnd();
   };
+
+  // 클릭하면 팝업 넘어가게 하는 기능은 다른 기능을 죽이는 것 같아 주석
+  // popupClick() {
+  //   if (this.state.length - 1 > this.state.currentIndex) {
+  //     this.next();
+  //   } else {
+  //     this.prev();
+  //   }
+  // }
 
   render() {
     const { children } = this.props;
@@ -124,6 +135,8 @@ class Carousel extends Component {
             onMouseLeave={() => this.onMouseLeave()}
             onMouseUp={() => this.onMouseUp()}
             onMouseMove={e => this.onMouseMove(e)}
+            onMouseOver={() => this.cursorOn()}
+            // onClick={() => this.popupClick()}
             ref={this.contentParent}
           >
             <div
