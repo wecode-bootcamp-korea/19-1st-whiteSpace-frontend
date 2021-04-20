@@ -11,6 +11,7 @@ export class Nav extends Component {
       checkScrollTop: true,
       categoryList: [],
       searchInputValue: '',
+      isSearchBox: false,
     };
   }
 
@@ -60,8 +61,14 @@ export class Nav extends Component {
 
   searchInputEnter = e => {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
-      console.log(this.state.searchInputValue);
+      // console.log(this.state.searchInputValue);
     }
+  };
+
+  searchIconClick = () => {
+    this.setState({
+      isSearchBox: this.state.isSearchBox ? false : true,
+    });
   };
 
   componentWillUnmount() {
@@ -69,8 +76,10 @@ export class Nav extends Component {
   }
 
   render() {
+    // console.log(this.state.isSearchBox);
     const { categoryList, checkScrollTop } = this.state;
-    const { searchInputChange, searchInputEnter } = this;
+    const { searchInputChange, searchInputEnter, searchIconClick } = this;
+    console.log(this.state.isSearchBox);
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <Popup />
@@ -81,9 +90,12 @@ export class Nav extends Component {
 
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
-          <div className="searchBox">
-            <i className="fas fa-search"></i>
+          <div className="searchBox" onClick={searchIconClick}>
+            <i className="fas fa-search" onClick={searchIconClick}></i>
             <input
+              className={
+                this.state.isSearchBox ? 'searchInputShow' : 'searchInputNone'
+              }
               placeholder="검색어"
               onChange={searchInputChange}
               onKeyUp={searchInputEnter}
