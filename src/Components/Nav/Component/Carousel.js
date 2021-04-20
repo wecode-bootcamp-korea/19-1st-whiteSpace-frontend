@@ -20,12 +20,9 @@ class Carousel extends Component {
     this.setState({
       length: this.props.children.length,
     });
-    // console.log(this.props.children);
-    // console.log(this.props.children.length);
   }
 
   componentDidUpdate() {
-    // console.log(this.state.currentIndex);
     this.transRef.current.style.transform =
       'translateX(-' + this.state.currentIndex * 100 + '%)';
   }
@@ -46,8 +43,6 @@ class Carousel extends Component {
     const x = e.pageX - this.transRef.current.offsetLeft;
     const walk = (x - this.state.startX) * 1;
 
-    console.log(x);
-    console.log(walk);
     if (walk > 150) {
       this.prev();
     }
@@ -55,10 +50,6 @@ class Carousel extends Component {
     if (walk < -150) {
       this.next();
     }
-
-    // console.log(
-    //   'this.Slides[index].offsetLeft' + this.Slides[index].offsetLeft
-    // );
   };
 
   onMouseLeave = index => {
