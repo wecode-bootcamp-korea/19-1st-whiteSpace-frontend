@@ -16,9 +16,9 @@ export default class Routes extends Component {
       <Router>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Nav} />
-          {/*
           <Route exact path="/" component={Main} />
+          {/*
+          <Route exact path="/" component={Nav} />
           {/* <Route exact path="/products" component={ProductDetail} /> */}
           <Route exact path="/login" component={Login} />
           <Route exact path="/Signup" component={Signup} />
@@ -26,7 +26,7 @@ export default class Routes extends Component {
           <Route exact path="/signup" component={Signup} />
         </Switch>
         <TopButton />
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     );
   }
