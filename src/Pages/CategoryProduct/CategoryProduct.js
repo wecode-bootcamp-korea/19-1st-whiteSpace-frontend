@@ -27,8 +27,13 @@ export default class CategoryProduct extends Component {
     //   }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=${idx}`
     // )
     //   .then(res => res.json())
-    //   .then(productData => {
-    //     this.setState({ categoryProductArr: productData.products });
+    //   .then(productList => {
+    //     const { products, category, count } = productList;
+    //     this.setState({
+    //       categoryProductArr: products,
+    //       categoryName: category,
+    //       totalAmount: count,
+    //     });
     //   });
   };
 
@@ -80,7 +85,6 @@ export default class CategoryProduct extends Component {
       <>
         <ProductWrap
           category={searchKeyword ? 'search' : 'categoryList'}
-          // text={categoryName}
           text={searchKeyword ? searchKeyword : categoryName}
         >
           <ProductList type="category" productArr={categoryProductArr} />
