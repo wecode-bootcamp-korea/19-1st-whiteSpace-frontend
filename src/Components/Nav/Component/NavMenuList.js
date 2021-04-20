@@ -4,7 +4,6 @@ import './NavMenuList.scss';
 
 export class navMenuList extends Component {
   render() {
-    // console.log(this.props.dataList);
     const { dataList, className } = this.props;
     return (
       <div className={className}>
