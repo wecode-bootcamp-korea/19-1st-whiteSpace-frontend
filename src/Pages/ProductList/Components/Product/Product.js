@@ -85,7 +85,7 @@ export default class Product extends Component {
                         (type === 'best' ? 'bestProduct' : 'product') + 'Price'
                       }
                     >
-                      {price.toLocaleString()}원
+                      {Number(price.split('.')[0]).toLocaleString()}원
                     </p>
                   }
                 </div>
