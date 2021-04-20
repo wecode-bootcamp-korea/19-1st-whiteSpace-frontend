@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './Pages/Login/Login';
 import Nav from './Components/Nav/Nav';
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
+import CategoryProduct from './Pages/CategoryProduct/CategoryProduct';
 import Main from './Pages/Main/Main';
 import Signup from './Pages/Signup/Signup';
-import Tos from './Components/Footer/Component/Tos';
-import Footer from './Components/Footer/Footer';
+// import Tos from './Components/Footer/Component/Tos';
+// import Footer from './Components/Footer/Footer';
 
 export default class Routes extends Component {
   render() {
@@ -14,7 +15,8 @@ export default class Routes extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route exact path="/products" component={ProductDetail} />
+          <Route exact path="/products" component={CategoryProduct} />
+          <Route exact path="/products/:id" component={ProductDetail} />
 
           {/* 
           <Route exact path="/login" component={Login} />

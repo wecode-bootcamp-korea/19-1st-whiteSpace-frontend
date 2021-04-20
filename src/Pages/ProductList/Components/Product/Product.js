@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import StatusBtn from '../StatusBtn/StatusBtn';
 import './Product.scss';
 
@@ -10,6 +9,12 @@ export default class Product extends Component {
       productArr: [],
     };
   }
+
+  goToProductDetail = id => {
+    // console.log(id);
+    const { history } = this.props;
+    // this.props.history.push(`/products/${id}`);
+  };
 
   componentDidMount() {
     fetch('data/productData.json')
@@ -23,6 +28,7 @@ export default class Product extends Component {
 
   render() {
     const { productArr, type } = this.props;
+    const { goToProductDetail } = this;
     return (
       <div className="productList">
         <ul>
@@ -34,20 +40,28 @@ export default class Product extends Component {
                 key={id}
                 style={{ padding: type !== 'best' ? 2 + 'rem' : '' }}
               >
-                <Link to="#!">
-                  <div className="imageWrap">
-                    <img
-                      className="productImage"
-                      alt="productImage"
-                      src={thumbnail_url}
-                    />
-                  </div>
-                </Link>
+                <div
+                  className="imageWrap"
+                  onClick={() => {
+                    goToProductDetail(id);
+                  }}
+                >
+                  <img
+                    className="productImage"
+                    alt="productImage"
+                    src={thumbnail_url}
+                  />
+                </div>
                 <div className="contentWrap">
                   <div>
-                    <Link to="#!">
-                      <span className="productName">{name}</span>
-                    </Link>
+                    <span
+                      className="productName"
+                      onClick={() => {
+                        goToProductDetail(id);
+                      }}
+                    >
+                      {name}
+                    </span>
                     {!stock ? (
                       <StatusBtn text="SOLDOUT" color="red" />
                     ) : (
