@@ -5,7 +5,10 @@ export default class ProductWrap extends Component {
   render() {
     const { children, category, text } = this.props;
     return (
-      <div className="productWrap">
+      <div
+        className="productWrap"
+        style={{ paddingTop: category !== 'best' ? 5 + 'rem' : '' }}
+      >
         <header>
           <h1
             className={
