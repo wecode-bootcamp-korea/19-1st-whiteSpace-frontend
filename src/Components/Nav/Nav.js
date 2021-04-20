@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavMenuList from './Component/NavMenuList';
+import Popup from './Popup';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
 
@@ -15,7 +16,7 @@ export class Nav extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
-    fetch('/data/category.json', {
+    fetch('data/category.json', {
       // fetch('http://10.58.0.130:8000/nav', {  (back-end와 통신 테스트 성공 - category 목록 받아오기)
       method: 'GET',
     })
@@ -72,6 +73,7 @@ export class Nav extends Component {
     const { searchInputChange, searchInputEnter } = this;
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
+        <Popup />
         <nav>
           <h1>
             <Link to="/">여백 0100</Link>
@@ -80,7 +82,7 @@ export class Nav extends Component {
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
           <div className="searchBox">
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
             <input
               placeholder="검색어"
               onChange={searchInputChange}
