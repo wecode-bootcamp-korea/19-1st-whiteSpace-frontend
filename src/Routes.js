@@ -7,6 +7,7 @@ import ProductDetail from './Pages/ProductDetail/ProductDetail';
 import Main from './Pages/Main/Main';
 import Signup from './Pages/Signup/Signup';
 import TopButton from './Components/TopButton/TopButton';
+import Popup from './Components/Nav/Popup';
 import Footer from './Components/Footer/Footer';
 
 export default class Routes extends Component {
@@ -15,6 +16,8 @@ export default class Routes extends Component {
       <Router>
         <Nav />
         <Switch>
+          <Route exact path="/" component={Nav} />
+          {/*
           <Route exact path="/" component={Main} />
           {/* <Route exact path="/products" component={ProductDetail} /> */}
           <Route exact path="/login" component={Login} />

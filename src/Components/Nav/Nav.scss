@@ -19,10 +19,14 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
     width: 100vw;
     color: black;
     z-index: 9;
 
+    > div {
+      width: 100%;
+    }
     // 클래스이름을 null로 할 수 없어서 임의로 추가
     &.scrollTopON {
     }
@@ -34,7 +38,6 @@
       transition: box-shadow 0.25s ease-in-out,
         background-color 0.25s ease-in-out, padding 0.25s ease-in-out;
     }
-
     > nav {
       @extend %flexCenter;
       justify-content: space-around;
