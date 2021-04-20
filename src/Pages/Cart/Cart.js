@@ -6,7 +6,25 @@ import './Cart.scss';
 const num = 2;
 
 export class Cart extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cartData: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch('data/cartData.json')
+      .then(res => res.json)
+      .then(data => {
+        this.setState({
+          cartData: data,
+        });
+      });
+  }
+
   render() {
+    const { cartData } = this.state;
     return (
       <>
         <div id="Cart">
@@ -62,9 +80,11 @@ export class Cart extends Component {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colSpan="9">
+                    <td colSpan="3">
                       <span>기본배송</span>
-                      <div>
+                    </td>
+                    <td colSpan="6">
+                      <div className="totalPrice">
                         상품구매금액<span>총액</span>
                       </div>
                     </td>
@@ -72,6 +92,7 @@ export class Cart extends Component {
                 </tfoot>
               </table>
             </TableWrap>
+            <hr />
           </div>
         </div>
       </>
