@@ -99,18 +99,28 @@ export default class AddReview extends Component {
     //   console.log(`${key}: ${value}`);
     // }
     // console.log(newReview);
-    // fetch('url', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': localStorage.getItem('token')
-    //   },
-    //   body: JSON.stringify({
-    //     images: formData,
-    //     review: newReview
-    //   })
-    // })
-    //   .then(res => {})
-    //   .then(res => {});
+
+    fetch('http://10.58.7.33:8000/products/3/reviews', {
+      method: 'POST',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+      body: JSON.stringify({
+        image_urls: formData,
+        text: newReview.reviewContents,
+        rating: newReview.star,
+        bundle_id: null,
+        color_size_id: null,
+      }),
+    })
+      .then(res => {})
+      .then(res => {
+        console.log(res);
+      });
+  };
+
+  newWindow = () => {
+    window.open('childcomponent.js', '_blank', 'height=250,width=250');
   };
 
   render() {
@@ -170,6 +180,7 @@ export default class AddReview extends Component {
               ref={this.fileUploader}
             />
           </div>
+          <button onClick={this.newWindow}></button>
           <select onChange={handleReviewValue} name="star">
             {stars.reverse().map(star => {
               const { value, reviewStar, comment } = star;

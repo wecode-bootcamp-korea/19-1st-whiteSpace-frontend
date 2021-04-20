@@ -1,0 +1,131 @@
+@import '../../Styles/common.scss';
+
+#footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 25px;
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    width: 86vw;
+
+    > div {
+      // padding: 10px;
+    }
+
+    .footerLeftBox {
+      padding-top: 24px;
+
+      h1 {
+        margin-bottom: 14px;
+        font-weight: bold;
+        font-size: 0.8rem;
+        // display: block;
+      }
+    }
+
+    .footerRightBox {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-top: 35px;
+
+      > div,
+      > ul {
+        padding: 16px 30px;
+        border: 1px solid $black;
+
+        &:last-child {
+          border-left: 0;
+        }
+
+        h2 {
+          font-weight: bold;
+          font-size: 0.8rem;
+        }
+
+        div {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+
+        li {
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1254px) {
+  #root {
+    #footer {
+      .footerRightBox {
+        > div,
+        > ul {
+          border: 1px solid $black;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 1210px) {
+  #root {
+    #footer {
+      .footerLeftBox {
+        padding-top: 15px;
+      }
+
+      .footerRightBox {
+        padding-top: 25px;
+
+        > div,
+        > ul {
+          // padding: 10px 20px;
+          border: 1px solid $black;
+
+          h2 {
+            font-weight: bold;
+            font-size: 0.6rem;
+          }
+
+          div {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1174px) {
+  #root {
+    #footer {
+      .footerLeftBox {
+        padding-top: 15px;
+      }
+
+      .footerRightBox {
+        padding-top: 25px;
+
+        > div,
+        > ul {
+          // padding: 10px 20px;
+          border: 1px solid $black;
+
+          h2 {
+            font-weight: bold;
+            font-size: 0.6rem;
+          }
+
+          div {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,14 +1,14 @@
 @import '../../Styles/common.scss';
-@import url('//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
 
 .paging {
   @extend %flexCenter;
 
   button {
     @extend %hover;
+    margin: 0.2rem;
     background: none;
     border: none;
-    margin: 0.2rem;
     transition: 0.3s;
   }
 

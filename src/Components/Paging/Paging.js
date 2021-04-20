@@ -9,14 +9,24 @@ export default class Paging extends Component {
     return (
       <div className="paging">
         {currentIdx !== 1 && (
-          <button
-            className="prevBtn"
-            onClick={() => {
-              pagingBtnOnClick('prev');
-            }}
-          >
-            <i className="xi-angle-left-min"></i>
-          </button>
+          <>
+            <button
+              className="firstPageBtn"
+              onClick={() => {
+                pagingBtnOnClick(1);
+              }}
+            >
+              <i className="fas fa-angle-double-left"></i>
+            </button>
+            <button
+              className="prevBtn"
+              onClick={() => {
+                pagingBtnOnClick(currentIdx - 1);
+              }}
+            >
+              <i className="fas fa-angle-left"></i>
+            </button>
+          </>
         )}
         {pagesArr.map(page => {
           return (
@@ -32,14 +42,24 @@ export default class Paging extends Component {
           );
         })}
         {currentIdx < btnAmount && (
-          <button
-            className="nextBtn"
-            onClick={() => {
-              pagingBtnOnClick('next');
-            }}
-          >
-            <i className="xi-angle-right-min"></i>
-          </button>
+          <>
+            <button
+              className="nextBtn"
+              onClick={() => {
+                pagingBtnOnClick(currentIdx + 1);
+              }}
+            >
+              <i className="fas fa-angle-right"></i>
+            </button>
+            <button
+              className="nextBtn"
+              onClick={() => {
+                pagingBtnOnClick(btnAmount);
+              }}
+            >
+              <i className="fas fa-angle-double-right"></i>
+            </button>
+          </>
         )}
       </div>
     );

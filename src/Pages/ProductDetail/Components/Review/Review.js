@@ -10,6 +10,7 @@ export default class Review extends Component {
       modalContents: '',
       show: false,
     };
+    this.modalRef = React.createRef();
   }
 
   componentDidMount() {
@@ -40,6 +41,12 @@ export default class Review extends Component {
         modalOpen: false,
       });
     }
+
+    // if (!this.modalRef.current.contains(e.target)) {
+    //   this.setState({
+    //     modalOpen: false,
+    //   });
+    // }
   };
 
   render() {
@@ -111,7 +118,12 @@ export default class Review extends Component {
             handleModal(0);
           }}
         >
-          <img className="originImage" alt="originImage" src={modalContents} />
+          <img
+            className="originImage"
+            alt="originImage"
+            src={modalContents}
+            ref={this.modalRef}
+          />
         </Modal>
       </>
     );
