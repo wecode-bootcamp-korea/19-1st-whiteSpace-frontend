@@ -7,7 +7,7 @@ import './CategoryProduct.scss';
 
 const LIMIT = 9;
 
-export default class CategoryProduct extends Component {
+class CategoryProduct extends Component {
   constructor() {
     super();
     this.state = {
@@ -39,8 +39,17 @@ export default class CategoryProduct extends Component {
   };
 
   componentDidMount() {
-    const categoryId = this.props.match.params.categoryId;
+    let categoryId = this.props.match.params.categoryId;
     const searchKeyword = this.props.location.search.split('=')[1];
+
+    console.log('keyword : ', searchKeyword);
+    console.log('categoryId : ', categoryId);
+
+    if (categoryId === undefined) {
+      categoryId = 0;
+    }
+
+    console.log(categoryId);
     // fetch('data/categoryProductData.json')
     //   .then(res => res.json())
     //   .then(productList => {
@@ -58,12 +67,13 @@ export default class CategoryProduct extends Component {
     )
       .then(res => res.json())
       .then(productList => {
-        const { products, category, count } = productList;
-        this.setState({
-          productArr: products,
-          categoryName: category,
-          totalAmount: count,
-        });
+        console.log(productList);
+        // const { products, category, count } = productList;
+        // this.setState({
+        //   productArr: products,
+        //   categoryName: category,
+        //   totalAmount: count,
+        // });
       });
   }
 
@@ -88,12 +98,14 @@ export default class CategoryProduct extends Component {
         >
           <ProductList type="category" productArr={productArr} />
         </ProductWrap>
-        {/* <Paging
+        <Paging
           currentIdx={currentIdx}
           btnAmount={btnAmount}
           pagingBtnOnClick={pagingBtnOnClick}
-        /> */}
+        />
       </>
     );
   }
 }
+
+export default withRouter(CategoryProduct);

@@ -64,7 +64,9 @@ class Nav extends Component {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
       // console.log(this.state.searchInputValue);
 
-      this.props.history.push(`products?search=${this.state.searchInputValue}`);
+      this.props.history.push(
+        `/products?search=${this.state.searchInputValue}`
+      );
     }
   };
 
