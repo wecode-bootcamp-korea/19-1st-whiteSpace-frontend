@@ -14,6 +14,7 @@ export default class Routes extends Component {
   render() {
     return (
       <Router>
+        <Popup />
         <Nav />
         <Switch>
           <Route exact path="/" component={Main} />
@@ -23,10 +24,15 @@ export default class Routes extends Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/Signup" component={Signup} />
           <Route exact path="/products" component={CategoryProduct} />
+          <Route
+            exact
+            path="/products/:categoryId"
+            component={CategoryProduct}
+          />
           <Route exact path="/signup" component={Signup} />
         </Switch>
         <TopButton />
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     );
   }

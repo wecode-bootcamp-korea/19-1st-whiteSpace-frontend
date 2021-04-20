@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import NavMenuList from './Component/NavMenuList';
 import Popup from './Popup';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
 
-export class Nav extends Component {
+class Nav extends Component {
   constructor() {
     super();
     this.state = {
       checkScrollTop: true,
       categoryList: [],
+      searchInputValue: '',
+      isSearchBox: false,
     };
   }
 
@@ -51,12 +54,33 @@ export class Nav extends Component {
     }
   };
 
+  searchInputChange = e => {
+    this.setState({
+      searchInputValue: e.target.value,
+    });
+  };
+
+  searchInputEnter = e => {
+    if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
+      // console.log(this.state.searchInputValue);
+
+      this.props.history.push(`products?search=${this.state.searchInputValue}`);
+    }
+  };
+
+  searchIconClick = () => {
+    this.setState({
+      isSearchBox: this.state.isSearchBox ? false : true,
+    });
+  };
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
   render() {
     const { categoryList, checkScrollTop } = this.state;
+    const { searchInputChange, searchInputEnter, searchIconClick } = this;
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <Popup />
@@ -67,13 +91,24 @@ export class Nav extends Component {
 
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
+          <div className="searchBox">
+            <i className="fas fa-search" onClick={searchIconClick}></i>
+            <input
+              className={
+                this.state.isSearchBox ? 'searchInputShow' : 'searchInputNone'
+              }
+              placeholder="검색어"
+              onChange={searchInputChange}
+              onKeyUp={searchInputEnter}
+            />
+          </div>
         </nav>
       </div>
     );
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
 
 const NAV_RIGHT_MENU = [
   {

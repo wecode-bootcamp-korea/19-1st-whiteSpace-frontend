@@ -12,13 +12,13 @@ export default class Product extends Component {
   }
 
   componentDidMount() {
-    fetch('data/productData.json')
-      .then(res => res.json())
-      .then(productData => {
-        this.setState({
-          productArr: productData,
-        });
-      });
+    // fetch('data/productData.json')
+    //   .then(res => res.json())
+    //   .then(productData => {
+    //     this.setState({
+    //       productArr: productData,
+    //     });
+    //   });
   }
 
   render() {

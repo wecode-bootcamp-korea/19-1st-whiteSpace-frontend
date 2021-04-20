@@ -1,67 +1,70 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ProductList from '../ProductList/ProductList';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import Paging from '../../Components/Paging/Paging';
 import './CategoryProduct.scss';
 
 const LIMIT = 9;
-// const categoryId = this.props.match.params.categoryId;
-// const searchKeyword = this.props.location.search.split('=')[1];
-const searchKeyword = '검색어';
 
 export default class CategoryProduct extends Component {
   constructor() {
     super();
     this.state = {
       totalAmount: '',
-      categoryProductArr: [],
+      productArr: [],
       categoryName: '',
       currentIdx: 1,
     };
   }
 
   fetchProduct = idx => {
-    // fetch(
-    //   `http://10.58.4.178:8000/products${
-    //     categoryId ? `?category=${categoryId}` : ``
-    //   }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=${idx}`
-    // )
-    //   .then(res => res.json())
-    //   .then(productList => {
-    //     const { products, category, count } = productList;
-    //     this.setState({
-    //       categoryProductArr: products,
-    //       categoryName: category,
-    //       totalAmount: count,
-    //     });
-    //   });
+    const categoryId = this.props.match.params.categoryId;
+    const searchKeyword = this.props.location.search.split('=')[1];
+
+    fetch(
+      `http://10.58.7.33:8000/products${
+        categoryId ? `?category=${categoryId}` : ``
+      }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=${idx}`
+    )
+      .then(res => res.json())
+      .then(productList => {
+        const { products, category, count } = productList;
+        this.setState({
+          productArr: products,
+          categoryName: category,
+          totalAmount: count,
+        });
+      });
   };
 
   componentDidMount() {
-    fetch('data/categoryProductData.json')
-      .then(res => res.json())
-      .then(productData => {
-        const { products, category } = productData;
-        this.setState({
-          categoryProductArr: products,
-          categoryName: category,
-        });
-      });
-
-    // fetch(
-    //   `http://10.58.4.178:8000/products${
-    //     categoryId ? `?category=${categoryId}` : ``
-    //   }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=1`
-    // )
+    const categoryId = this.props.match.params.categoryId;
+    const searchKeyword = this.props.location.search.split('=')[1];
+    // fetch('data/categoryProductData.json')
     //   .then(res => res.json())
     //   .then(productList => {
-    //     const { products, category, count } = productList;
+    //     const { products, category } = productList;
     //     this.setState({
-    //       categoryProductArr: products,
+    //       productArr: products,
     //       categoryName: category,
-    //       totalAmount: count,
     //     });
     //   });
+
+    fetch(
+      `http://10.58.7.33:8000/products${
+        categoryId ? `?category=${categoryId}` : ``
+      }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=1`
+    )
+      .then(res => res.json())
+      .then(productList => {
+        const { products, category, count } = productList;
+        this.setState({
+          productArr: products,
+          categoryName: category,
+          totalAmount: count,
+        });
+      });
   }
 
   pagingBtnOnClick = idx => {
@@ -73,27 +76,23 @@ export default class CategoryProduct extends Component {
   };
 
   render() {
-    const {
-      categoryProductArr,
-      categoryName,
-      currentIdx,
-      totalAmount,
-    } = this.state;
+    const { productArr, categoryName, currentIdx, totalAmount } = this.state;
     const { pagingBtnOnClick } = this;
     const btnAmount = Math.ceil(totalAmount / LIMIT);
+    const searchKeyword = this.props.location.search.split('=')[1];
     return (
       <>
         <ProductWrap
           category={searchKeyword ? 'search' : 'categoryList'}
           text={searchKeyword ? searchKeyword : categoryName}
         >
-          <ProductList type="category" productArr={categoryProductArr} />
+          <ProductList type="category" productArr={productArr} />
         </ProductWrap>
-        <Paging
+        {/* <Paging
           currentIdx={currentIdx}
           btnAmount={btnAmount}
           pagingBtnOnClick={pagingBtnOnClick}
-        />
+        /> */}
       </>
     );
   }
