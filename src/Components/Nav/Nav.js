@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import NavMenuList from './Component/NavMenuList';
 import Popup from './Popup';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './Nav.scss';
 
 export class Nav extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       checkScrollTop: true,
       categoryList: [],
@@ -62,7 +62,6 @@ export class Nav extends Component {
   searchInputEnter = e => {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
       // console.log(this.state.searchInputValue);
-
       this.props.history.push(`products?search=${this.state.searchInputValue}`);
     }
   };
@@ -81,7 +80,7 @@ export class Nav extends Component {
     // console.log(this.state.isSearchBox);
     const { categoryList, checkScrollTop } = this.state;
     const { searchInputChange, searchInputEnter, searchIconClick } = this;
-    console.log(this.state.isSearchBox);
+    // console.log(this.state.isSearchBox);
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <Popup />
@@ -109,7 +108,7 @@ export class Nav extends Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
 
 const NAV_RIGHT_MENU = [
   {
