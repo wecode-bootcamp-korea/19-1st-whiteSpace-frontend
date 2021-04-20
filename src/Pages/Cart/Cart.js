@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Nav from '../../Components/Nav/Nav';
+import TableWrap from '../Order/Components/TableWrap/TableWrap';
 import './Cart.scss';
+
+const num = 2;
 
 export class Cart extends Component {
   render() {
@@ -10,40 +13,65 @@ export class Cart extends Component {
           <Nav />
           <div>
             <h1>SHOPPING CART</h1>
-            <div>일반상품</div>
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    <input type="checkbox" />
-                  </th>
-                  <th>이미지</th>
-                  <th>상품정보</th>
-                  <th>판매가</th>
-                  <th>수량</th>
-                  <th>적립금</th>
-                  <th>배송비</th>
-                  <th>합계</th>
-                  <th>선택</th>
-                </tr>
-              </thead>
-              {CART_DATA.map(cart => (
-                <tr>
-                  <td>
-                    <input type="checkbox" />
-                  </td>
-                  <td>
-                    <img src={cart.product_image} alt={cart.product_name} />
-                  </td>
-                  <td>
-                    <div>{cart.product_name}</div>
-                    <div>{cart.product_name}</div>
-                  </td>
-                  <td>{cart.default_price}</td>
-                  <td>{cart.default_price}</td>
-                </tr>
-              ))}
-            </table>
+            <TableWrap title={'일반상품' + num}>
+              <table className="cartTable">
+                <thead>
+                  <tr>
+                    <th className="tableCheckBoxWidth">
+                      <input type="checkbox" />
+                    </th>
+                    <th className="tableImgWidth">이미지</th>
+                    <th>상품정보</th>
+                    <th>판매가</th>
+                    <th>수량</th>
+                    <th>적립금</th>
+                    <th>배송비</th>
+                    <th>합계</th>
+                    <th>선택</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {CART_DATA.map(cart => (
+                    <tr>
+                      <td className="tbodyCheckBoxLine">
+                        <input type="checkbox" />
+                      </td>
+                      <td className="tbodyImgLine">
+                        <img src={cart.product_image} alt={cart.product_name} />
+                      </td>
+                      <td className="tbodyProductLine">
+                        <div>{cart.product_name}</div>
+                        <div>{cart.product_name}</div>
+                      </td>
+                      <td>{cart.default_price}</td>
+                      <td className="tbodyUpDownLine">
+                        <span>
+                          <input type="text" />
+                          <button>&#9650;</button>
+                          <button>&#9660;</button>
+                        </span>
+                      </td>
+                      <td>적립금</td>
+                      <td>배송비</td>
+                      <td>합계</td>
+                      <td className="tbodyChiceLine">
+                        <button>삭제</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colSpan="9">
+                      <span>기본배송</span>
+                      <div>
+                        상품구매금액<span>총액</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </TableWrap>
           </div>
         </div>
       </>
