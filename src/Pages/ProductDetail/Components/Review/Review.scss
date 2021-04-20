@@ -1,0 +1,88 @@
+@import '../../../../Styles/common.scss';
+
+.reviewContentWrap {
+  .reviewContentSection {
+    padding: 2rem 0;
+    border-bottom: 1px solid $hoverColor;
+
+    .star {
+      .desc {
+        padding: 0rem 0.5rem;
+        color: $subTitleColor;
+      }
+    }
+
+    .reviewContent {
+      display: flex;
+      padding: 2rem 0rem;
+
+      .content {
+        line-height: 1.5;
+      }
+
+      div {
+        width: 100%;
+        padding-right: 2rem;
+        text-align: right;
+        color: $subTitleColor;
+
+        p {
+          padding: 0.2rem 0;
+        }
+
+        p:last-child {
+          color: $black;
+          font-weight: bold;
+        }
+      }
+    }
+    .reviewImage {
+      padding-bottom: 1rem;
+      img {
+        width: 120px;
+        height: 120px;
+        margin-right: 0.5rem;
+        cursor: pointer;
+      }
+    }
+
+    .originImage {
+      max-width: 100%;
+    }
+
+    .reviewComment {
+      display: flex;
+      width: 50%;
+      padding: 2rem;
+      margin: 1rem 0;
+      border: 1px solid $hoverColor;
+      line-height: 1.6;
+      font-size: 0.7rem;
+      animation: show 0.5s;
+
+      span:first-child {
+        width: 20%;
+      }
+    }
+  }
+
+  .toggleText {
+    cursor: pointer;
+  }
+
+  .blue {
+    color: $blue;
+    font-weight: bold;
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -2rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

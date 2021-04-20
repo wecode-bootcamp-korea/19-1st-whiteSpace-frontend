@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import OneReview from '../OneReview/OneReview';
+import Review from '../Review/Review';
 import './ReviewList.scss';
 
 export default class ReviewList extends Component {
@@ -49,7 +49,7 @@ export default class ReviewList extends Component {
         {reviewArr.map(review => {
           const { id, star, content, starComment, author, images } = review;
           return (
-            <OneReview
+            <Review
               key={id}
               id={id}
               star={star}

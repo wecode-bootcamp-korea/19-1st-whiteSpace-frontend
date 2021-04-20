@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { stars } from '../Review/reviewData';
+import { stars } from '../ProductReview/reviewData';
 import './AddReview.scss';
 
 export default class AddReview extends Component {
@@ -90,6 +90,7 @@ export default class AddReview extends Component {
     // for (let [key, value] of formData) {
     //   console.log(`${key}: ${value}`);
     // }
+    // console.log(newReview);
     // fetch('url', {
     //   method: 'POST',
     //   headers: {
@@ -133,11 +134,11 @@ export default class AddReview extends Component {
             const { lastModified } = file;
             return (
               <div key={lastModified} className="reviewImageWrap">
-                <button onClick={() => deleteFile(file)}>
-                  <i className="xi-minus"></i>
-                </button>
                 <button onClick={() => changeFile(index)}>
                   <i className="xi-renew"></i>
+                </button>
+                <button onClick={() => deleteFile(file)}>
+                  <i className="xi-close"></i>
                 </button>
                 <img src={window.URL.createObjectURL(file)} alt="reviewImage" />
               </div>

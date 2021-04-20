@@ -30,9 +30,9 @@
     .reviewImageWrap {
       display: inline-block;
       position: relative;
-      margin-right: 0.5rem;
       width: 70px;
       height: 70px;
+      margin-right: 0.5rem;
       text-align: right;
 
       button {
@@ -71,9 +71,6 @@
     border: none;
     resize: none;
     font-size: 0.8rem;
-
-    &:disabled {
-    }
   }
 
   .reviewFooter {
@@ -117,9 +114,9 @@
       display: inline-block;
 
       label {
-        color: #999;
-        padding: 0.5rem 2.5rem 0.5rem 2.5rem;
+        color: $border;
         margin-right: 1rem;
+        padding: 0.5rem 2.5rem 0.5rem 2.5rem;
         background-color: $white;
         border: 1px solid $hoverColor;
         cursor: pointer;

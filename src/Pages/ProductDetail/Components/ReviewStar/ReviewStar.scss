@@ -42,8 +42,8 @@
       margin: 0.5rem 0 0.5rem 0;
 
       span {
-        margin: 0 0.2rem 0 0.2rem;
         width: 50px;
+        margin: 0 0.2rem 0 0.2rem;
         text-align: center;
       }
     }
@@ -110,15 +110,15 @@
         justify-content: space-around;
 
         div {
-          width: 60%;
           display: block;
+          width: 60%;
           padding: 1rem;
 
           p {
+            padding-top: 0.2rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            padding-top: 0.2rem;
           }
 
           .reviewAuthor {
@@ -134,8 +134,8 @@
 
       .reviewOption {
         justify-content: center;
-        padding: 1rem 0;
         margin: 1rem 0;
+        padding: 1rem 0;
         text-align: center;
         border-top: 1px dashed $hoverColor;
         border-bottom: 1px dashed $hoverColor;
