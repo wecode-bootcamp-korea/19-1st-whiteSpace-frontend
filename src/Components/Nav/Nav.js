@@ -62,6 +62,8 @@ export class Nav extends Component {
   searchInputEnter = e => {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
       // console.log(this.state.searchInputValue);
+
+      this.props.history.push(`products?search=${this.state.searchInputValue}`);
     }
   };
 
@@ -90,7 +92,7 @@ export class Nav extends Component {
 
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
           <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
-          <div className="searchBox" onClick={searchIconClick}>
+          <div className="searchBox">
             <i className="fas fa-search" onClick={searchIconClick}></i>
             <input
               className={
