@@ -4,11 +4,16 @@
 .productWrap {
   text-align: center;
   margin: 0 auto;
+  padding-top: 5rem;
 
   .title {
     margin: 5rem 0 2rem 0;
     font-size: 1.6em;
     color: #39393a;
+  }
+
+  .searchResult {
+    font-size: 1.2rem;
   }
 
   .bestTitle {
