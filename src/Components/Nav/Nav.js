@@ -65,7 +65,7 @@ class Nav extends Component {
       // console.log(this.state.searchInputValue);
 
       this.props.history.push(
-        `/products?search=${this.state.searchInputValue}`
+        `/category?search=${this.state.searchInputValue}`
       );
     }
   };
