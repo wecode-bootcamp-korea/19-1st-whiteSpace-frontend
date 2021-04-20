@@ -28,7 +28,7 @@ export default class AddReview extends Component {
   onClickTextArea = e => {
     if (true) {
       // e.target.disabled = true;
-      // alert('구매한 상품에만 리뷰를 작성할 수 있습니다.');
+      // alert('로그인 후 작성하실 수 있습니다.');
     }
   };
 
