@@ -23,12 +23,20 @@ export default class AddReview extends Component {
     });
   };
 
+  onClickTextArea = e => {
+    if (true) {
+      // e.target.disabled = true;
+      // alert('구매한 상품에만 리뷰를 작성할 수 있습니다.');
+    }
+  };
+
   deleteFile = file => {
     this.setState(prevState => {
       const list = [];
       prevState.files.map(prevStateFile => {
         prevStateFile !== file && list.push(prevStateFile);
       });
+
       return {
         files: list,
         changedFileIndex: -1,
@@ -114,6 +122,7 @@ export default class AddReview extends Component {
       addReview,
       fileUpload,
     } = this;
+
     return (
       <div className="addReviewWrap">
         <p>후기</p>
@@ -126,7 +135,7 @@ export default class AddReview extends Component {
         </div>
         <div className="textareaWrap">
           <textarea
-            // disabled
+            onClick={this.onClickTextArea}
             onChange={handleReviewValue}
             name="reviewContents"
           />

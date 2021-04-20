@@ -26,7 +26,7 @@ export default class Review extends Component {
     window.scrollTo({ bottom: 2 });
   };
 
-  handelModal = (modalOpen, image) => {
+  handleModal = (modalOpen, image) => {
     this.setState({
       modalOpen,
       modalContents: image,
@@ -45,7 +45,7 @@ export default class Review extends Component {
   render() {
     const { show, modalOpen, modalContents } = this.state;
     const { id, star, content, starComment, author, images } = this.props;
-    const { showToggle, handelModal } = this;
+    const { showToggle, handleModal } = this;
     return (
       <>
         <div className="reviewContentWrap">
@@ -70,7 +70,7 @@ export default class Review extends Component {
                       src={image}
                       alt="reviewThumnail"
                       onClick={() => {
-                        handelModal(1, image);
+                        handleModal(1, image);
                       }}
                     />
                   </a>
@@ -108,7 +108,7 @@ export default class Review extends Component {
         <Modal
           open={modalOpen}
           close={() => {
-            handelModal(0);
+            handleModal(0);
           }}
         >
           <img className="originImage" alt="originImage" src={modalContents} />

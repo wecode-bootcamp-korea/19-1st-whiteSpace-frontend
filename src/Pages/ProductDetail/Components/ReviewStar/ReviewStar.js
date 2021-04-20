@@ -12,6 +12,7 @@ export default class ReviewStar extends Component {
       modalContents: '',
       modalAutor: '',
       modalOption: '',
+      modalStar: '',
       starAvg: 0,
     };
   }
@@ -24,19 +25,25 @@ export default class ReviewStar extends Component {
     document.removeEventListener('click', this.handleClickOutside, true);
   }
 
-  handelModal = (modalOpen, modalId, image) => {
+  handleModal = (modalOpen, modalId, image) => {
     const { reviewArr } = this.props;
-    this.setState({
-      modalOpen,
-      modalImage: image,
-      modalId,
-      modalStar:
-        '★'.repeat(reviewArr[modalId - 1].star) +
-        '☆'.repeat(5 - reviewArr[modalId - 1].star),
-      modalAutor: reviewArr[modalId - 1].author,
-      modalContents: reviewArr[modalId - 1].content,
-      modalOption: reviewArr[modalId - 1].option,
-    });
+    if (!modalOpen) {
+      this.setState({
+        modalOpen,
+      });
+    } else {
+      this.setState({
+        modalOpen,
+        modalImage: image,
+        modalId,
+        modalStar:
+          '★'.repeat(reviewArr[modalId - 1].star) +
+          '☆'.repeat(5 - reviewArr[modalId - 1].star),
+        modalAutor: reviewArr[modalId - 1].author,
+        modalContents: reviewArr[modalId - 1].content,
+        modalOption: reviewArr[modalId - 1].option,
+      });
+    }
   };
 
   handleClickOutside = e => {
@@ -67,7 +74,7 @@ export default class ReviewStar extends Component {
       modalContents,
       modalOption,
     } = this.state;
-    const { handelModal, starAvg } = this;
+    const { handleModal, starAvg } = this;
 
     return (
       <div className="reviewStar">
@@ -103,7 +110,7 @@ export default class ReviewStar extends Component {
                     src={review.images[0]}
                     alt="reviewThumnail"
                     onClick={() => {
-                      handelModal(1, review.id, review.images[0]);
+                      handleModal(1, review.id, review.images[0]);
                     }}
                   />
                 </a>
@@ -114,7 +121,7 @@ export default class ReviewStar extends Component {
         <Modal
           open={modalOpen}
           close={() => {
-            handelModal(0);
+            handleModal(0);
           }}
         >
           <div className="modalReviewWrap">
