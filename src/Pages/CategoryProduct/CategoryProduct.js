@@ -6,6 +6,8 @@ import './CategoryProduct.scss';
 
 const LIMIT = 9;
 // const categoryId = this.props.match.params.categoryId;
+// const searchKeyword = this.props.location.search.split('=')[1];
+const searchKeyword = '검색어';
 
 export default class CategoryProduct extends Component {
   constructor() {
@@ -20,9 +22,9 @@ export default class CategoryProduct extends Component {
 
   fetchProduct = idx => {
     // fetch(
-    //   `http://10.58.4.178:8000/products?${
-    //     categoryId ? `category=${categoryId}` : ``
-    //   }page=${idx}`
+    //   `http://10.58.4.178:8000/products${
+    //     categoryId ? `?category=${categoryId}` : ``
+    //   }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=${idx}`
     // )
     //   .then(res => res.json())
     //   .then(productData => {
@@ -43,8 +45,8 @@ export default class CategoryProduct extends Component {
 
     // fetch(
     //   `http://10.58.4.178:8000/products${
-    //     categoryId ? `category=${categoryId}` : ``
-    //   }?page=1`
+    //     categoryId ? `?category=${categoryId}` : ``
+    //   }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=1`
     // )
     //   .then(res => res.json())
     //   .then(productList => {
@@ -76,7 +78,11 @@ export default class CategoryProduct extends Component {
     const btnAmount = Math.ceil(totalAmount / LIMIT);
     return (
       <>
-        <ProductWrap category="categoryList" text={categoryName}>
+        <ProductWrap
+          category={searchKeyword ? 'search' : 'categoryList'}
+          // text={categoryName}
+          text={searchKeyword ? searchKeyword : categoryName}
+        >
           <ProductList type="category" productArr={categoryProductArr} />
         </ProductWrap>
         <Paging
