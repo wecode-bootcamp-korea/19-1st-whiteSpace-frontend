@@ -11,6 +11,7 @@ class Carousel extends Component {
       startX: 0,
       offsetLeft: 0,
       direction: 0,
+      isMouseOver: false,
     };
     this.transRef = React.createRef();
     this.contentParent = React.createRef();
@@ -20,12 +21,9 @@ class Carousel extends Component {
     this.setState({
       length: this.props.children.length,
     });
-    // console.log(this.props.children);
-    // console.log(this.props.children.length);
   }
 
   componentDidUpdate() {
-    // console.log(this.state.currentIndex);
     this.transRef.current.style.transform =
       'translateX(-' + this.state.currentIndex * 100 + '%)';
   }
@@ -35,8 +33,6 @@ class Carousel extends Component {
       isMouseEvent: true,
       startX: e.pageX - this.transRef.current.offsetLeft,
     });
-    // console.log(index);
-    // this.Slides[index].classList.add('active');
   };
 
   onMouseMove = e => {
@@ -46,8 +42,6 @@ class Carousel extends Component {
     const x = e.pageX - this.transRef.current.offsetLeft;
     const walk = (x - this.state.startX) * 1;
 
-    console.log(x);
-    console.log(walk);
     if (walk > 150) {
       this.prev();
     }
@@ -55,15 +49,12 @@ class Carousel extends Component {
     if (walk < -150) {
       this.next();
     }
-
-    // console.log(
-    //   'this.Slides[index].offsetLeft' + this.Slides[index].offsetLeft
-    // );
   };
 
   onMouseLeave = index => {
     this.setState({
       isMouseEvent: false,
+      isMouseOver: false,
     });
     // this.Slides[index].classList.remove('active');
   };
@@ -74,6 +65,17 @@ class Carousel extends Component {
     });
     // this.Slides[index].classList.remove('active');
   };
+
+  // 추후에 구현해볼 무한 루프 관련?
+  transitionEnd() {
+    if (this.state.direction === 1) {
+      this.contentParent.style.justifyContent = 'flex-end';
+      this.contentParent.prepend(this.contentParent);
+    } else {
+      this.contentParent.style.justifyContent = 'flex-start';
+      this.contentParent.appendChild(this.contentParent);
+    }
+  }
 
   next = () => {
     // if (this.state.currentIndex === this.state.length - 1) {
@@ -91,16 +93,6 @@ class Carousel extends Component {
     }
   };
 
-  transitionEnd() {
-    if (this.state.direction === 1) {
-      this.contentParent.style.justifyContent = 'flex-end';
-      this.contentParent.prepend(this.contentParent);
-    } else {
-      this.contentParent.style.justifyContent = 'flex-start';
-      this.contentParent.appendChild(this.contentParent);
-    }
-  }
-
   prev = () => {
     // if (this.state.currentIndex === 0) {
     //   this.setState({
@@ -116,8 +108,18 @@ class Carousel extends Component {
     // this.transitionEnd();
   };
 
+  // 클릭하면 팝업 넘어가게 하는 기능은 다른 기능을 죽이는 것 같아 주석
+  // popupClick() {
+  //   if (this.state.length - 1 > this.state.currentIndex) {
+  //     this.next();
+  //   } else {
+  //     this.prev();
+  //   }
+  // }
+
   render() {
     const { children } = this.props;
+    const { isMouseOver } = this.state;
 
     return (
       <div className="carousel-container">
@@ -128,11 +130,19 @@ class Carousel extends Component {
             </button>
           )}
           <div
-            className="carousel-content-wrapper"
+            className={
+              'carousel-content-wrapper ' + (isMouseOver ? 'isMouseOver' : '')
+            }
             onMouseDown={e => this.onMouseDown(e)}
             onMouseLeave={() => this.onMouseLeave()}
             onMouseUp={() => this.onMouseUp()}
             onMouseMove={e => this.onMouseMove(e)}
+            onMouseOver={() =>
+              this.setState({
+                isMouseOver: true,
+              })
+            }
+            // onClick={() => this.popupClick()}
             ref={this.contentParent}
           >
             <div
