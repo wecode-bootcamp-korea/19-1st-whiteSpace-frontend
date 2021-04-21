@@ -18,8 +18,9 @@ class Nav extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
-    fetch('data/category.json', {
-      // fetch('http://10.58.0.130:8000/nav', {  (back-end와 통신 테스트 성공 - category 목록 받아오기)
+    // fetch('data/category.json', {
+    //(back-end와 통신 테스트 성공 - category 목록 받아오기)
+    fetch('http://10.58.2.3:8000/nav', {
       method: 'GET',
     })
       .then(res => res.json())

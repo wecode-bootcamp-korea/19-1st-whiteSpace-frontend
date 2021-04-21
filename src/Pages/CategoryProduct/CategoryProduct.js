@@ -22,39 +22,39 @@ class CategoryProduct extends Component {
     let categoryId = this.props.match.params.categoryId;
     const searchKeyword = this.props.location.search.split('=')[1];
 
-    console.log('keyword : ', searchKeyword);
+    console.log('searchKeyword : ', searchKeyword);
     console.log('categoryId : ', categoryId);
 
     if (categoryId === undefined) {
       categoryId = 0;
     }
 
-    fetch('data/categoryProductData.json')
-      .then(res => res.json())
-      .then(productList => {
-        console.log(productList);
-        const { products, category } = productList;
-        this.setState({
-          productArr: products,
-          categoryName: category,
-        });
-      });
-
-    // fetch(
-    //   `http://10.58.7.33:8000/products${
-    //     categoryId ? `?category=${categoryId}` : ``
-    //   }${searchKeyword !== undefined ? `?search=${searchKeyword}` : ``}?page=1`
-    // )
+    // fetch('data/categoryProductData.json')
     //   .then(res => res.json())
     //   .then(productList => {
     //     console.log(productList);
-    //     const { products, category, count } = productList;
-    // this.setState({
-    //   productArr: products,
-    //   categoryName: category,
-    //   totalAmount: count,
-    // });
-    // });
+    //     const { products, category } = productList;
+    //     this.setState({
+    //       productArr: products,
+    //       categoryName: category,
+    //     });
+    //   });
+
+    fetch(
+      `http://10.58.2.3:8000/products?${
+        categoryId ? `category=${categoryId}&` : ``
+      }${searchKeyword !== undefined ? `search=${searchKeyword}&` : ``}page=1`
+    )
+      .then(res => res.json())
+      .then(productList => {
+        console.log(productList);
+        const { products, category, count } = productList;
+        this.setState({
+          productArr: products,
+          categoryName: category,
+          totalAmount: count,
+        });
+      });
   }
 
   pagingBtnOnClick = idx => {
@@ -66,23 +66,27 @@ class CategoryProduct extends Component {
   };
 
   fetchProduct = idx => {
-    const categoryId = this.props.match.params.categoryId;
+    let categoryId = this.props.match.params.categoryId;
     const searchKeyword = this.props.location.search.split('=')[1];
 
+    if (categoryId === undefined) {
+      categoryId = 0;
+    }
+
     fetch(
-      `http://10.58.7.33:8000/products${
+      `http://10.58.2.3:8000/products${
         categoryId ? `?category=${categoryId}` : ``
-      }${searchKeyword ? `?search=${searchKeyword}` : ``}?page=${idx}`
+      }${searchKeyword ? `&search=${searchKeyword}` : ``}&page=${idx}`
     )
       .then(res => res.json())
       .then(productList => {
         console.log(productList);
         const { products, category, count } = productList;
-        // this.setState({
-        //   productArr: products,
-        //   categoryName: category,
-        //   totalAmount: count,
-        // });
+        this.setState({
+          productArr: products,
+          categoryName: category,
+          totalAmount: count,
+        });
       });
   };
 
