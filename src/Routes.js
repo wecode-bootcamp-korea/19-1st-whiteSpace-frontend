@@ -6,6 +6,8 @@ import CategoryProduct from './Pages/CategoryProduct/CategoryProduct';
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
 import Main from './Pages/Main/Main';
 import Signup from './Pages/Signup/Signup';
+// import Tos from './Components/Footer/Component/Tos';
+// import Footer from './Components/Footer/Footer';
 import TopButton from './Components/TopButton/TopButton';
 import Popup from './Components/Nav/Popup';
 import Footer from './Components/Footer/Footer';
