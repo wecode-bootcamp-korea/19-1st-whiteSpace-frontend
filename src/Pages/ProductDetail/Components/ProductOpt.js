@@ -17,18 +17,24 @@ class ProductOpt extends Component {
       valueLists: [...valueLists, name],
       activeName: index,
     });
+    localStorage.setItem('colorId', e.target.id);
   };
 
   changeSize = e => {
     const { valueLists } = this.state;
+    const selectOpt = e.target;
+    const selectOptId = selectOpt.children[selectOpt.selectedIndex].id;
     this.setState({
       selectedSize: e.target.value,
       valueLists: [...valueLists, e.target.value],
     });
+    localStorage.setItem('sizeId', selectOptId);
   };
 
   changeBundle = e => {
     const { valueLists } = this.state;
+    const selectOpt = e.target;
+    const selectOptId = selectOpt.children[selectOpt.selectedIndex].id;
     this.setState(
       {
         selectedBundle: e.target.value,
@@ -36,6 +42,7 @@ class ProductOpt extends Component {
       },
       () => this.props.calBundlePrice(e.target.value)
     );
+    localStorage.setItem('bundleId', selectOptId);
   };
 
   render() {
@@ -58,8 +65,6 @@ class ProductOpt extends Component {
     } = this.props;
 
     const { changeColor, changeSize, changeBundle } = this;
-
-    // console.log('state 객체 >>> ', this.state);
 
     return (
       <div className="productOpt">

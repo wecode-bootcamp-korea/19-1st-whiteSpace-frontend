@@ -10,7 +10,9 @@ class ProductTotalPrice extends Component {
       <>
         <div className="totalPrice">
           <span className="total">Total:</span>
-          <span className="total price">{total > 0 ? total : 0}원</span>
+          <span className="total price">
+            {total > 0 ? total.toLocaleString() : 0}원
+          </span>
         </div>
       </>
     );

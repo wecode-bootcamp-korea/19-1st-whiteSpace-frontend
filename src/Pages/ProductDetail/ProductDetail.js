@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import './ProductDetail.scss';
+import { PRODUCT_DETAIL } from '../../config';
+import { CART } from '../../config';
 import ProductSubImg from './Components/ProductSubImg';
 import ProductDesc from './Components/ProductDesc';
 import ProductOpt from './Components/ProductOpt';
 import ProductTotalPrice from './Components/ProductTotalPrice';
 import ProductBtn from './Components/ProductBtn';
 import ProductDescImg from './Components/ProductDescImg';
+import './ProductDetail.scss';
 
 class ProductDetail extends Component {
   state = {
@@ -23,7 +25,8 @@ class ProductDetail extends Component {
   };
 
   componentDidMount() {
-    fetch('http://10.58.2.3:8000/products/26')
+    const productId = this.props.location.match.params;
+    fetch(`${PRODUCT_DETAIL}/${productId}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -40,22 +43,29 @@ class ProductDetail extends Component {
   }
 
   goToCart = () => {
-    const { count } = this.state;
-    fetch('http://10.58.7.33:8000/cart', {
-      method: 'POST',
-      body: JSON.stringify({
-        total_price: 35000,
-        products: [
-          {
-            product_id: 11,
-            bundle_id: 6,
-            color_id: 2,
-            size_id: 1,
-            quantity: count,
-          },
-        ],
-      }),
-    });
+    const productId = this.props.location.match.params;
+    const colorId = localStorage.getItem('colorId');
+    const sizeId = localStorage.getItem('sizeId');
+    const bundleId = localStorage.getItem('bundleId');
+    const { price, bundlePrice, count } = this.state;
+    fetch(
+      { CART },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          total_price: (price + bundlePrice) * count,
+          products: [
+            {
+              product_id: productId,
+              bundle_id: bundleId,
+              color_id: colorId,
+              size_id: sizeId,
+              quantity: count,
+            },
+          ],
+        }),
+      }
+    );
   };
 
   changeImg = index => {
@@ -74,7 +84,7 @@ class ProductDetail extends Component {
   decrQty = () => {
     const count = this.state.count - 1;
     this.setState({
-      count: count < 0 ? 0 : count,
+      count: count < 0 ? (0, alert('최소 구매 수량은 1개입니다')) : count,
     });
   };
 
@@ -109,13 +119,12 @@ class ProductDetail extends Component {
       count,
       index,
     } = this.state;
-    const { incrQty, decrQty, delProduct, calBundlePrice } = this;
+    const { incrQty, decrQty, delProduct, calBundlePrice, goToCart } = this;
     const { changeImg } = this;
-
+    console.log('state::', this.state);
     const intPrice = parseInt(price.replace(',', ''));
     const intBundlePrice = parseInt(bundlePrice.replace(',', ''));
     const intDcPrice = Math.floor(price - price * discountRate);
-
     const strDcPrice = Math.floor(
       price - price * discountRate
     ).toLocaleString();
@@ -151,7 +160,7 @@ class ProductDetail extends Component {
               intDcPrice={intDcPrice}
               intBundlePrice={intBundlePrice}
             />
-            <ProductBtn />
+            <ProductBtn goToCart={goToCart} />
           </div>
         </main>
         <ProductDescImg descImgArr={descImgArr} />

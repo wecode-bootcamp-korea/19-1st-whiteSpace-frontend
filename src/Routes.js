@@ -8,6 +8,7 @@ import Main from './Pages/Main/Main';
 import Signup from './Pages/Signup/Signup';
 // import Tos from './Components/Footer/Component/Tos';
 // import Footer from './Components/Footer/Footer';
+// import CART from './Pages/Cart/Cart';
 import TopButton from './Components/TopButton/TopButton';
 import Popup from './Components/Nav/Popup';
 import Footer from './Components/Footer/Footer';
@@ -25,11 +26,16 @@ export default class Routes extends Component {
             path="/category/:categoryId"
             component={CategoryProduct}
           />
-          <Route exact path="/products/:productId" component={ProductDetail} />
+          <Route exact path="/products/:produtId" component={ProductDetail} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/Signup" component={Signup} />
-          <Route exact path="/products" component={CategoryProduct} />
-          <Route exact path="/products/:id" component={CategoryProduct} />
+          <Route exact path="/category" component={CategoryProduct} />
+          {/* <Route exact path="/cart" component={Cart} /> */}
+          <Route
+            exact
+            path="/category/:categoryId"
+            component={CategoryProduct}
+          />
           <Route exact path="/signup" component={Signup} />
         </Switch>
         <TopButton />
