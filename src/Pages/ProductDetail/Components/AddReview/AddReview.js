@@ -42,7 +42,7 @@ export default class AddReview extends Component {
   deleteFile = file => {
     this.setState(prevState => {
       const list = [];
-      prevState.files.map(prevStateFile => {
+      prevState.files.filter(prevStateFile => {
         prevStateFile !== file && list.push(prevStateFile);
       });
 
@@ -66,7 +66,7 @@ export default class AddReview extends Component {
     if (changedFileIndex >= 0) {
       this.setState(prevState => {
         const list = [];
-        prevState.files.map((file, index) => {
+        prevState.files.filter((file, index) => {
           list.push(index === prevState.changedFileIndex ? changedFile : file);
         });
         return {
