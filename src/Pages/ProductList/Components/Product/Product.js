@@ -11,7 +11,6 @@ export default class Product extends Component {
   }
 
   goToProductDetail = id => {
-    // console.log(id);
     const { history } = this.props;
     // this.props.history.push(`/products/${id}`);
   };

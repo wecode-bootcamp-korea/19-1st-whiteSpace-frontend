@@ -62,6 +62,9 @@ export class Nav extends Component {
 
   searchInputEnter = e => {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
+      this.setState({
+        searchInputValue: '',
+      });
       this.props.history.push(
         `/products/search?keyword=${this.state.searchInputValue}`
       );

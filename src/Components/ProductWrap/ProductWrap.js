@@ -9,7 +9,6 @@ export default class ProductWrap extends Component {
         className="productWrap"
         style={{
           paddingTop: category !== 'best' ? 5 + 'rem' : '',
-          padding: category === 'noResult' ? 10 + 'rem' : '',
         }}
       >
         <header>

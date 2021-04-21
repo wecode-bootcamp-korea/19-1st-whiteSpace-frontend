@@ -17,7 +17,6 @@ export default class Routes extends Component {
   render() {
     return (
       <Router>
-        <Popup />
         <Nav />
         <Switch>
           <Route exact path="/" component={Main} />

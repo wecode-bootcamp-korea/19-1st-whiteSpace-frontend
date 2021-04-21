@@ -84,8 +84,8 @@ class CategoryProduct extends Component {
 
     fetch(
       `http://10.58.2.3:8000/products${
-        categoryId ? `?category=${categoryId}` : ``
-      }&page=${idx}`
+        categoryId ? `?category=${categoryId}&` : `?`
+      }page=${idx}`
     )
       .then(res => res.json())
       .then(productList => {

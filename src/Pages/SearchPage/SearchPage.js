@@ -17,7 +17,7 @@ class SearchPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
+    if (prevProps.location.search !== this.props.location.search) {
       this.fetchProduct();
     }
   }
@@ -28,8 +28,7 @@ class SearchPage extends Component {
     fetch(`http://10.58.2.3:8000/products/search?keyword=${searchKeyword}`)
       .then(res => res.json())
       .then(searchList => {
-        console.log(searchList);
-        const { products, category } = searchList;
+        const { products } = searchList;
 
         if (searchList.MESSAGE === 'NO MATCH') {
           this.setState({
