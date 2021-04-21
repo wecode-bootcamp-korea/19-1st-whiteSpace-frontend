@@ -11,7 +11,7 @@ class CategoryProduct extends Component {
   constructor() {
     super();
     this.state = {
-      totalAmount: 30,
+      totalAmount: 0,
       productArr: [],
       categoryName: '',
       currentIdx: 1,
@@ -19,31 +19,73 @@ class CategoryProduct extends Component {
   }
 
   componentDidMount() {
-    let categoryId = this.props.match.params.categoryId;
-    const searchKeyword = this.props.location.search.split('=')[1];
+    const { currentIdx } = this.state;
+    const { fetchProduct } = this;
 
-    console.log('searchKeyword : ', searchKeyword);
-    console.log('categoryId : ', categoryId);
+    fetch('data/categoryProductData.json')
+      .then(res => res.json())
+      .then(productList => {
+        console.log(productList);
+        const { products, category } = productList;
+        this.setState({
+          productArr: products,
+          categoryName: category,
+        });
+      });
+
+    // fetch(
+    //   `http://10.58.2.3:8000/products?${
+    //     categoryId ? `category=${categoryId}&` : ``
+    //   }page=1`
+    // )
+    //   .then(res => res.json())
+    //   .then(productList => {
+    //     console.log(productList);
+    //     const { products, category, count } = productList;
+    //     this.setState({
+    //       productArr: products,
+    //       categoryName: category,
+    //       totalAmount: count,
+    //     });
+    //   });
+
+    fetchProduct(currentIdx);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { currentIdx } = this.state;
+    const { fetchProduct } = this;
+
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      //   fetch(
+      //     `http://10.58.2.3:8000/products?${
+      //       categoryId ? `category=${categoryId}&` : ``
+      //     }page=1`
+      //   )
+      //     .then(res => res.json())
+      //     .then(productList => {
+      //       const { products, category, count } = productList;
+      //       this.setState({
+      //         productArr: products,
+      //         categoryName: category,
+      //         totalAmount: count,
+      //       });
+      //     });
+      // }
+      fetchProduct(currentIdx);
+    }
+  }
+  fetchProduct = idx => {
+    let categoryId = this.props.match.params.categoryId;
 
     if (categoryId === undefined) {
       categoryId = 0;
     }
 
-    // fetch('data/categoryProductData.json')
-    //   .then(res => res.json())
-    //   .then(productList => {
-    //     console.log(productList);
-    //     const { products, category } = productList;
-    //     this.setState({
-    //       productArr: products,
-    //       categoryName: category,
-    //     });
-    //   });
-
     fetch(
-      `http://10.58.2.3:8000/products?${
-        categoryId ? `category=${categoryId}&` : ``
-      }${searchKeyword !== undefined ? `search=${searchKeyword}&` : ``}page=1`
+      `http://10.58.2.3:8000/products${
+        categoryId ? `?category=${categoryId}` : ``
+      }&page=${idx}`
     )
       .then(res => res.json())
       .then(productList => {
@@ -55,7 +97,7 @@ class CategoryProduct extends Component {
           totalAmount: count,
         });
       });
-  }
+  };
 
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
@@ -65,42 +107,13 @@ class CategoryProduct extends Component {
     fetchProduct(idx);
   };
 
-  fetchProduct = idx => {
-    let categoryId = this.props.match.params.categoryId;
-    const searchKeyword = this.props.location.search.split('=')[1];
-
-    if (categoryId === undefined) {
-      categoryId = 0;
-    }
-
-    fetch(
-      `http://10.58.2.3:8000/products${
-        categoryId ? `?category=${categoryId}` : ``
-      }${searchKeyword ? `&search=${searchKeyword}` : ``}&page=${idx}`
-    )
-      .then(res => res.json())
-      .then(productList => {
-        console.log(productList);
-        const { products, category, count } = productList;
-        this.setState({
-          productArr: products,
-          categoryName: category,
-          totalAmount: count,
-        });
-      });
-  };
-
   render() {
     const { productArr, categoryName, currentIdx, totalAmount } = this.state;
     const { pagingBtnOnClick } = this;
     const btnAmount = Math.ceil(totalAmount / LIMIT);
-    const searchKeyword = this.props.location.search.split('=')[1];
     return (
       <>
-        <ProductWrap
-          category={searchKeyword !== undefined ? 'search' : 'categoryList'}
-          text={searchKeyword !== undefined ? searchKeyword : categoryName}
-        >
+        <ProductWrap category="categoryList" text={categoryName}>
           <ProductList type="category" productArr={productArr} />
         </ProductWrap>
         <Paging
@@ -112,5 +125,4 @@ class CategoryProduct extends Component {
     );
   }
 }
-
 export default withRouter(CategoryProduct);
