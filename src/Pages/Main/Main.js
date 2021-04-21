@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Nav from '../../Components/Nav/Nav';
+import Popup from '../../Components/Nav/Popup';
 import Slider from './Components/Slider/Slider';
 import BestProduct from './Components/BestProduct/BestProduct';
 import './Main.scss';
@@ -38,7 +38,6 @@ export default class Main extends Component {
     const { mainImageArr, productArr } = this.state;
     return (
       <div className="main">
-        <Nav />
         <Slider mainImageArr={mainImageArr} />
         <BestProduct productArr={productArr} />
       </div>

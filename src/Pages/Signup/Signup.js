@@ -83,7 +83,6 @@ class Signup extends Component {
 
     return (
       <>
-        <Nav />
         <div className="Signup">
           <header>회원가입</header>
           <div className="containers">
