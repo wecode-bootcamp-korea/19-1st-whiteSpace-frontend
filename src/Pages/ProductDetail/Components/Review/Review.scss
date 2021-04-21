@@ -1,6 +1,8 @@
 @import '../../../../Styles/common.scss';
 
 .reviewContentWrap {
+  width: 100%;
+
   .reviewContentSection {
     padding: 2rem 0;
     border-bottom: 1px solid $hoverColor;
@@ -15,9 +17,12 @@
     .reviewContent {
       display: flex;
       padding: 2rem 0rem;
+      text-align: center;
 
       .content {
         line-height: 1.5;
+        width: 50%;
+        text-align: left;
       }
 
       div {
@@ -47,7 +52,7 @@
     }
 
     .originImage {
-      max-width: 100%;
+      // width: 100%;
     }
 
     .reviewComment {

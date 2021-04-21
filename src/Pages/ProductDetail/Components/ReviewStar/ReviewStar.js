@@ -59,11 +59,15 @@ export default class ReviewStar extends Component {
 
   starAvg = () => {
     const { starArr } = this.props;
+    let totalAmount = this.props.total;
     let sum = 0;
     for (let i = 0; i < starArr.length; i++) {
-      sum += starArr[i] * i;
+      if (starArr[i] === 0) {
+        totalAmount = totalAmount - 1;
+      }
+      sum += starArr[i];
     }
-    return sum / 10;
+    return sum / totalAmount;
   };
 
   render() {
@@ -106,14 +110,14 @@ export default class ReviewStar extends Component {
           <div>
             {reviewArr.map((review, index) => {
               return (
-                review.image_urls.length !== 0 && (
+                review.image_urls.length > 0 && (
                   <a href="#!" key={index}>
                     <img
                       className="reviewThum"
-                      src={review.image_urls[0]}
+                      src={review.image_urls}
                       alt="reviewThumnail"
                       onClick={() => {
-                        handleModal(1, review.id, review.image_urls[0]);
+                        handleModal(1, index, review.image_urls);
                       }}
                     />
                   </a>
@@ -143,8 +147,9 @@ export default class ReviewStar extends Component {
                   </div>
                 </div>
                 <div className="reviewOption">
-                  <span>선택한 옵션</span>
-                  <span>{modalOption}</span>
+                  <span>선택한 옵션 : </span>
+                  <span>{productName}</span>
+                  <span>{modalOption === null ? '없음' : modalOption}</span>
                 </div>
                 <p className="reviewContent">{modalContents}</p>
               </div>

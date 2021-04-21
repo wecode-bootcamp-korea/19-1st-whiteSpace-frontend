@@ -31,15 +31,14 @@ export default class ProductReview extends Component {
     //       ],
     //     });
     //   });
-    fetch('http://10.58.7.33:8000/products/2/reviews')
+    fetch('http://10.58.2.3:8000/products/2/reviews')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
           reviewArr: data.reviews,
           count: data.count,
           productName: data.product_name,
-          productUrl: data.thumbnail_url,
+          productUrl: data.reviews[0].thumbnail_url,
           starArr: [data.five, data.four, data.three, data.two, data.one],
         });
       });

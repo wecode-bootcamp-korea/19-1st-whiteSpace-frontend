@@ -11,6 +11,10 @@
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.6);
 
+  .originImage {
+    width: 100%;
+  }
+
   button {
     outline: none;
     border: 0;
