@@ -25,12 +25,10 @@ class SearchPage extends Component {
   fetchProduct = () => {
     const searchKeyword = this.props.location.search.split('=')[1];
 
-    fetch(
-      `http://10.58.2.3:8000/products/search?keyword=${searchKeyword}
-      }`
-    )
+    fetch(`http://10.58.2.3:8000/products/search?keyword=${searchKeyword}`)
       .then(res => res.json())
       .then(searchList => {
+        console.log(searchList);
         const { products, category } = searchList;
 
         if (searchList.MESSAGE === 'NO MATCH') {
@@ -38,10 +36,9 @@ class SearchPage extends Component {
             noResult: true,
           });
         }
-        // this.setState({
-        //   productArr: products,
-        //   categoryName: category,
-        // });
+        this.setState({
+          productArr: products,
+        });
       });
   };
 

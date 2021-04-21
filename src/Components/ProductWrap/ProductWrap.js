@@ -21,7 +21,7 @@ export default class ProductWrap extends Component {
             {text}
           </h1>
           {category === 'search' ? (
-            <span className="searchResult"> 로 검색한 결과입니다.</span>
+            <span className="searchResult">(으)로 검색한 결과입니다.</span>
           ) : (
             ''
           )}
