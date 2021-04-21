@@ -1,8 +1,41 @@
-#mainTest {
-  background-color: burlywood;
-  height: 100vh;
-  p {
-    font-size: 5em;
-    color: aqua;
+@import '../../Styles/common.scss';
+
+.main {
+  .modal {
+    background: transparent;
+
+    section {
+      width: 25%;
+      height: 63%;
+    }
+
+    main,
+    header {
+      padding: 0rem;
+      font-size: 0.85rem;
+    }
+
+    .signUpPopup {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      img {
+        width: 100%;
+      }
+
+      div {
+        padding: 1.3rem 0;
+      }
+
+      button {
+        width: 70%;
+        margin: 0 auto;
+        padding: 1rem;
+        background-color: $blue;
+        font-size: 0.9rem;
+        color: $white;
+      }
+    }
   }
 }

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import Popup from '../../Components/Nav/Popup';
+import { Link } from 'react-router-dom';
+import { popUpImage } from '../../config';
 import Slider from './Components/Slider/Slider';
 import BestProduct from './Components/BestProduct/BestProduct';
+import Modal from '../ProductDetail/Components/Modal/Modal';
 import './Main.scss';
+
+const token = localStorage.getItem('token');
 
 export default class Main extends Component {
   constructor() {
@@ -10,8 +14,10 @@ export default class Main extends Component {
     this.state = {
       mainImageArr: [],
       productArr: [],
+      modalOpen: true,
     };
   }
+
   //백이랑 통신하는 코드
   // componentDidMount() {
   //   fetch('http://10.58.0.130:8000')
@@ -34,12 +40,38 @@ export default class Main extends Component {
         });
       });
   }
+
+  handelModal = modalOpen => {
+    this.setState({
+      modalOpen,
+    });
+  };
+
   render() {
-    const { mainImageArr, productArr } = this.state;
+    const { mainImageArr, productArr, modalOpen } = this.state;
+    const { handelModal } = this;
     return (
       <div className="main">
         <Slider mainImageArr={mainImageArr} />
         <BestProduct productArr={productArr} />
+        {!token && (
+          <Modal
+            open={modalOpen}
+            close={() => {
+              handelModal(0);
+            }}
+          >
+            <div className="signUpPopup">
+              <img alt="signUpPopup" src={popUpImage} />
+              <div>
+                <span>첫구매 추가 할인쿠폰을 꼭 사용하세요 🎉</span>
+              </div>
+              <Link to="/signUp">
+                <button>회원가입하기</button>
+              </Link>
+            </div>
+          </Modal>
+        )}
       </div>
     );
   }
