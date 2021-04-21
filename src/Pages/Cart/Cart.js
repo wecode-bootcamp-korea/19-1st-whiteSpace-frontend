@@ -13,25 +13,47 @@ export class Cart extends Component {
     };
   }
 
+  componentWillMount = () => {
+    this.selectedCheckboxes = new Set();
+  };
+
   componentDidMount() {
     fetch('data/cartData.json')
-      .then(res => res.json)
+      .then(res => res.json())
       .then(data => {
         this.setState({
-          cartData: data,
+          cartData: data.cart,
         });
+        console.log(this.state.cartData);
+        console.log(this.state.cartData.length);
       });
   }
 
+  toggleCheckbox = label => {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
+    }
+  };
+
+  changeGap = price => {
+    const won = price.split('.');
+    return won[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   render() {
     const { cartData } = this.state;
+    const { changeGap } = this;
+    const title =
+      '일반상품' + (cartData.length > 0 ? ' (' + cartData.length + ')' : '');
     return (
       <>
+        <Nav />
         <div id="Cart">
-          <Nav />
           <div>
             <h1>SHOPPING CART</h1>
-            <TableWrap title={'일반상품' + num}>
+            <TableWrap title={title}>
               <table className="cartTable">
                 <thead>
                   <tr>
@@ -42,15 +64,14 @@ export class Cart extends Component {
                     <th>상품정보</th>
                     <th>판매가</th>
                     <th>수량</th>
-                    <th>적립금</th>
                     <th>배송비</th>
                     <th>합계</th>
                     <th>선택</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {CART_DATA.map(cart => (
-                    <tr>
+                  {cartData.map(cart => (
+                    <tr key={cart.order_product_id}>
                       <td className="tbodyCheckBoxLine">
                         <input type="checkbox" />
                       </td>
@@ -58,18 +79,25 @@ export class Cart extends Component {
                         <img src={cart.product_image} alt={cart.product_name} />
                       </td>
                       <td className="tbodyProductLine">
-                        <div>{cart.product_name}</div>
-                        <div>{cart.product_name}</div>
+                        <div>{cart.name}</div>
+                        <div className="bundleName">{`[${cart.bundle_name}]`}</div>
+                        {cart.price_gap && (
+                          <div className="priceGap">
+                            `({changeGap(cart.price_gap)})`
+                          </div>
+                        )}
                       </td>
-                      <td>{cart.default_price}</td>
+                      <td>{changeGap(cart.default_price) + '원'}</td>
                       <td className="tbodyUpDownLine">
                         <span>
-                          <input type="text" />
+                          <input
+                            type="text"
+                            value={cart.quantity && cart.quantity}
+                          />
                           <button>&#9650;</button>
                           <button>&#9660;</button>
                         </span>
                       </td>
-                      <td>적립금</td>
                       <td>배송비</td>
                       <td>합계</td>
                       <td className="tbodyChiceLine">
