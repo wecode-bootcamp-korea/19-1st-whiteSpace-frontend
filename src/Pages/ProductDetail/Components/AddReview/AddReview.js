@@ -11,8 +11,6 @@ export default class AddReview extends Component {
       review: [],
       reviewContents: '',
       star: '5',
-      imageUrl: '',
-      imageArr: [],
     };
     this.fileUploader = React.createRef();
   }
@@ -119,13 +117,17 @@ export default class AddReview extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        alert(
+          data.MESSAGE === 'SUCCESS'
+            ? '리뷰가 등록되었습니다.'
+            : '리뷰 등록에 실패했습니다.'
+        );
       });
   };
 
   render() {
-    const { files, imageUrl } = this.state;
-    const { handleReviewValue, addReview, deletePhoto, handleInput } = this;
+    const { files } = this.state;
+    const { handleReviewValue, addReview } = this;
 
     return (
       <div className="addReviewWrap">
