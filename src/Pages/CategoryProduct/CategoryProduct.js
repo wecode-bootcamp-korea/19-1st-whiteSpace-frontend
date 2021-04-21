@@ -76,18 +76,14 @@ export default class CategoryProduct extends Component {
     const btnAmount = Math.ceil(totalAmount / LIMIT);
     return (
       <>
-        {/* {categoryId !== undefined && ( */}
-        <>
-          <ProductWrap category="categoryList" text={categoryName}>
-            <ProductList type="category" productArr={categoryProductArr} />
-          </ProductWrap>
-          <Paging
-            currentIdx={currentIdx}
-            btnAmount={btnAmount}
-            pagingBtnOnClick={pagingBtnOnClick}
-          />
-        </>
-        {/* )} */}
+        <ProductWrap category="categoryList" text={categoryName}>
+          <ProductList type="category" productArr={categoryProductArr} />
+        </ProductWrap>
+        <Paging
+          currentIdx={currentIdx}
+          btnAmount={btnAmount}
+          pagingBtnOnClick={pagingBtnOnClick}
+        />
       </>
     );
   }
