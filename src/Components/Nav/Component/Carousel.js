@@ -11,6 +11,7 @@ class Carousel extends Component {
       startX: 0,
       offsetLeft: 0,
       direction: 0,
+      isMouseOver: false,
     };
     this.transRef = React.createRef();
     this.contentParent = React.createRef();
@@ -25,10 +26,6 @@ class Carousel extends Component {
   componentDidUpdate() {
     this.transRef.current.style.transform =
       'translateX(-' + this.state.currentIndex * 100 + '%)';
-  }
-
-  cursorOn() {
-    this.contentParent.current.style.cursor = 'pointer';
   }
 
   onMouseDown = e => {
@@ -57,6 +54,7 @@ class Carousel extends Component {
   onMouseLeave = index => {
     this.setState({
       isMouseEvent: false,
+      isMouseOver: false,
     });
     // this.Slides[index].classList.remove('active');
   };
@@ -68,6 +66,7 @@ class Carousel extends Component {
     // this.Slides[index].classList.remove('active');
   };
 
+  // 추후에 구현해볼 무한 루프 관련?
   transitionEnd() {
     if (this.state.direction === 1) {
       this.contentParent.style.justifyContent = 'flex-end';
@@ -120,6 +119,7 @@ class Carousel extends Component {
 
   render() {
     const { children } = this.props;
+    const { isMouseOver } = this.state;
 
     return (
       <div className="carousel-container">
@@ -130,12 +130,18 @@ class Carousel extends Component {
             </button>
           )}
           <div
-            className="carousel-content-wrapper"
+            className={
+              'carousel-content-wrapper ' + (isMouseOver ? 'isMouseOver' : '')
+            }
             onMouseDown={e => this.onMouseDown(e)}
             onMouseLeave={() => this.onMouseLeave()}
             onMouseUp={() => this.onMouseUp()}
             onMouseMove={e => this.onMouseMove(e)}
-            onMouseOver={() => this.cursorOn()}
+            onMouseOver={() =>
+              this.setState({
+                isMouseOver: true,
+              })
+            }
             // onClick={() => this.popupClick()}
             ref={this.contentParent}
           >
