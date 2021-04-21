@@ -11,23 +11,47 @@ export class Cart extends Component {
     this.state = {
       cartData: [],
       quantity: 0,
+      totalPrice: 0,
+      deliveryPrice: 0,
     };
   }
+
+  getBackDataCart = () => {
+    fetch('data/cartData.json')
+      // fetch('http://10.58.2.3:8000/cart', {
+      //   method: 'GET',
+      //   headers: {
+      //     Authorization: localStorage.getItem('access_token'),
+      //   },
+      // })
+      .then(res => res.json())
+      .then(data => {
+        if (data.cart.length > 0) {
+          const addCartArr = [];
+
+          data.cart.map(cartData =>
+            addCartArr.push({
+              isSelect: false,
+              ...cartData,
+            })
+          );
+
+          this.setState({
+            cartData: addCartArr,
+            deliveryPrice: 2500,
+          });
+        }
+      });
+  };
 
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
 
   componentDidMount() {
-    fetch('data/cartData.json')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          cartData: data.cart,
-        });
-        // console.log(this.state.cartData);
-        // console.log(this.state.cartData.length);
-      });
+    // fetch('http://10.58.7.33:8000/cart')
+    // fetch('data/cartData.json')
+    this.getBackDataCart();
   }
 
   toggleCheckbox = label => {
@@ -38,30 +62,130 @@ export class Cart extends Component {
     }
   };
 
-  priceComma = price => {
-    let won = '';
+  handleDelete = index => {
+    const dataArr = this.state.cartData;
 
-    console.log(price.indexOf('.'));
-    if (price.indexOf('.') > -1) {
-      won = price.split('.');
-      won = won[0];
-    } else {
-      won = price;
+    const deleteDataArr = dataArr[index].order_product_id;
+    // console.log(deleteDataArr);
+
+    // DELETE 10.58.7.33:8000/cart/item_id=2,5,8
+
+    fetch(`http://10.58.2.3:8000/cart?item_id=${deleteDataArr}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
+      .then(res => res) // or res.json()
+      .then(res => {
+        console.log(res.MESSAGE);
+        this.getBackDataCart();
+      });
+  };
+
+  handelQuantity = (changeNum, index) => {
+    if (changeNum === -1 && this.state.cartData[index].quantity <= 0) {
+      return;
     }
+
+    const changeId = this.state.cartData[index].order_product_id;
+    // console.log('fetch - index : ' + index);
+    console.log(changeNum);
+
+    fetch(`http://10.58.2.3:8000/cart/${changeId}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+      body: JSON.stringify({
+        quantity: Number(changeNum),
+      }),
+    })
+      .then(res => res) // or res.json()
+      .then(res => {
+        // console.log(res);
+        // console.log(res.MESSAGE);
+        this.getBackDataCart();
+      });
+  };
+
+  priceComma = price => {
+    const won = Math.floor(price);
+    // this.setState({
+    //   totalPrice: this.state.totalPrice + won,
+    // });
 
     return won.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  changeQuantity = (index) => {
-    if ()
-    this.state.cartData[index].quantity !== 
-  }
+  changeQuantity = (e, index) => {
+    const { cartData } = this.state;
+
+    const sendQuantity = cartData[index].quantity;
+
+    // fetch(`10.58.7.33:8000/cart/${}`)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({
+    //       cartData: data.cart,
+    //     });
+    //   });
+
+    // if ()
+    // this.state.cartData[index].quantity !==
+  };
+
+  totalPriceResult = () => {
+    /* {priceComma(cart.default_price * cart.quantity) + '원'} */
+    const { cartData } = this.state;
+
+    let sumPrice = 0;
+    for (let i = 0; i < cartData.length; i++) {
+      sumPrice = sumPrice + cartData[i].default_price * cartData[i].quantity;
+    }
+
+    // this.state.totalPrice = sumPrice;
+
+    // sumPrice = this.priceComma(sumPrice);
+    return Number(sumPrice);
+
+    // const { cartData } = this.state;
+    // console.log(cartData);
+    // let totalPrice = 0;
+
+    // for (let i of cartData) {
+    //   totalPrice = totalPrice + i.default_price * i.quantity;
+    // }
+
+    // console.log(totalPrice);
+    // return totalPrice;
+  };
+
+  quantityOnChange = (e, index) => {
+    console.log(e);
+    console.log(index);
+    const beforeNum = this.state.cartData[index].quantity;
+    console.log(beforeNum);
+    const newNum = Number(e.target.Value);
+
+    const postNum =
+      beforeNum > newNum ? -(newNum - beforeNum) : newNum - beforeNum;
+
+    this.handelQuantity(postNum, index);
+  };
 
   render() {
-    const { cartData } = this.state;
-    const { priceComma, changeQuantity } = this;
+    const { cartData, quantity, totalPrice, deliveryPrice } = this.state;
+    const {
+      priceComma,
+      totalPriceResult,
+      handleDelete,
+      handelQuantity,
+      quantityOnChange,
+    } = this;
     const title =
       '일반상품' + (cartData.length > 0 ? ' (' + cartData.length + ')' : '');
+    let sumPrice = 0;
     return (
       <>
         <Nav />
@@ -91,41 +215,56 @@ export class Cart extends Component {
                         <input type="checkbox" />
                       </td>
                       <td className="tbodyImgLine">
-                        <img src={cart.product_image} alt={cart.product_name} />
+                        <img
+                          src={cart.thumbnail_image}
+                          alt={cart.product_name}
+                        />
                       </td>
                       <td className="tbodyProductLine">
                         <div>{cart.name}</div>
-                        <div className="bundleName">{`[${cart.bundle_name}]`}</div>
-                        {cart.price_gap && (
+                        {cart.bundle_name !== null && (
+                          <div className="bundleName">[{cart.bundle_name}]</div>
+                        )}
+                        {Number(cart.price_gap) !== 0 && (
                           <div className="priceGap">
-                            `({priceComma(cart.price_gap)})`
+                            ({priceComma(cart.price_gap)})
                           </div>
                         )}
                       </td>
-                      <td>{priceComma(cart.default_price) + '원'}</td>
+
+                      <td>
+                        {priceComma(cart.default_price) + '원'}
+                        {/* + cart.order_product_id} */}
+                      </td>
                       <td className="tbodyUpDownLine">
                         <span>
                           <input
                             type="text"
-                            value={cart.quantity && cart.quantity}
-                            onChange={changeQuantity({target}, index)}
+                            Value={cart.quantity > 0 ? cart.quantity : 0}
+                            onChange={() => quantityOnChange(index)}
                           />
-                          <button>&#9650;</button>
-                          <button>&#9660;</button>
+                          <button onClick={() => handelQuantity(1, index)}>
+                            &#9650;
+                          </button>
+                          <button onClick={() => handelQuantity(-1, index)}>
+                            &#9660;
+                          </button>
                         </span>
                       </td>
+                      {/* {index === 0 && ( */}
+                      {/* <td className="tbodyDelivery" rowSpan={cartData.length}> */}
                       <td className="tbodyDelivery">
-                        {index !== 0 ? '0' : '2,500'}
+                        {index === 0 ? '2,500' : '0'}
                       </td>
-                      {/* {index === 0 && (
-                        <td className="tbodyDelivery" rowSpan={cartData.length}>
-                          2,500
-                        </td>
-                      )} */}
-                      {/* <td>{priceComma(cart.default_price * cart.quantity)}</td> */}
+                      {/* )} */}
+                      <td>
+                        {priceComma(cart.default_price * cart.quantity) + '원'}
+                      </td>
                       {/* <td>{priceComma(cart.default_price * cart.quantity)}</td> */}
                       <td className="tbodyChiceLine">
-                        <button>삭제</button>
+                        <button onClick={() => handleDelete(index)}>
+                          삭제
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -137,7 +276,13 @@ export class Cart extends Component {
                     </td>
                     <td colSpan="6">
                       <div className="totalPrice">
-                        상품구매금액<span>총액</span>
+                        {`상품구매금액 ${priceComma(
+                          totalPriceResult()
+                        )} 배송비  ${priceComma(deliveryPrice)} = `}
+                        합계 :
+                        <span>
+                          {priceComma(totalPriceResult() + deliveryPrice)}
+                        </span>
                       </div>
                     </td>
                   </tr>
@@ -153,45 +298,3 @@ export class Cart extends Component {
 }
 
 export default Cart;
-
-const CART_DATA = [
-  {
-    product_id: 1,
-    product_image:
-      'https://imagena1.lacoste.com/dw/image/v2/AAUP_PRD/on/demandware.static/-/Sites-master/default/dw42b11508/39CFA0036_21G_01.jpg?imwidth=375&impolicy=product',
-    product_name: '포켓 세탁세제',
-    color_name: '파랑',
-    size_name: 'King Size',
-    default_price: 199000,
-    quantity: 4,
-  },
-  {
-    product_id: 2,
-    product_image:
-      'http://cdn.shopify.com/s/files/1/0894/5382/products/Product_Page_Main_Image_1400x1400_White_3_1024x1024.jpg?v=1614829643',
-    product_name: '포켓 세탁세제',
-    color_name: '파랑',
-    size_name: 'King Size',
-    default_price: 199000,
-    quantity: 2,
-  },
-];
-
-// {
-//   "id": 1,
-//   "categoryName": "패브릭",
-//   "name": "발이 가벼운 에어리 욕실화",
-//   "price": 14900,
-//   "thumbnail_url": "https://imagena1.lacoste.com/dw/image/v2/AAUP_PRD/on/demandware.static/-/Sites-master/default/dw42b11508/39CFA0036_21G_01.jpg?imwidth=375&impolicy=product",
-//   "stock": 30,
-//   "is_new": false
-// },
-// {
-//   "id": 2,
-//   "categoryName": "패브릭",
-//   "name": "사계절 이불 오트밀&베이지",
-//   "price": 99000,
-//   "thumbnail_url": "http://cdn.shopify.com/s/files/1/0894/5382/products/Product_Page_Main_Image_1400x1400_White_3_1024x1024.jpg?v=1614829643",
-//   "stock": 10,
-//   "is_new": true
-// },

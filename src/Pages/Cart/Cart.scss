@@ -43,6 +43,10 @@
           &:first-child {
             border-left: 1px solid #ccc;
           }
+
+          &:last-child {
+            border-right: 1px solid #ccc;
+          }
           // display: inlie;
           // flex-direction: inherit;
           // justify-items: center;
@@ -113,8 +117,14 @@
           }
         }
 
+        .tbodyDelivery {
+          // border-left: 1px solid #ededed;
+          // border-right: 1px solid #ededed;
+        }
+
         .tbodyChiceLine {
           padding: 0 5px;
+          border-right: 1px solid #ccc;
 
           button {
             width: 50px;
@@ -133,6 +143,9 @@
           padding-top: 0px;
 
           span {
+            color: $blue;
+            font-size: 1.5rem;
+            margin-left: 10px;
           }
         }
         tfoot {
