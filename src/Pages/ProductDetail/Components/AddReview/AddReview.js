@@ -103,7 +103,6 @@ export default class AddReview extends Component {
   // };
 
   addReview = () => {
-    console.log('addreview');
     const { reviewContents, review, star, files } = this.state;
     const { fetchReview } = this;
 
@@ -118,32 +117,33 @@ export default class AddReview extends Component {
 
       const formData = new FormData();
       for (let i = 0; i < files.length; i++) {
-        formData.append(`files${i}`, files[i]);
+        formData.append('images', files[i]);
       }
+
+      const text = newReview[0].reviewContents;
+      const rating = newReview[0].star;
+
+      formData.append('text', text);
+      formData.append('rating', rating);
+      formData.append('bundle_id', '');
+      formData.append('color_size_id', '');
       fetchReview(newReview, formData);
     }
+
+    this.setState({ reviewContents: '', files: [] });
   };
 
   fetchReview = (newReview, formData) => {
-    //formdata 확인방법
+    // formdata 확인방법
     // for (let [key, value] of formData) {
-    //   console.log(`${key}: ${value}`);
+    //   console.log(key, value);
     // }
-    // console.log(newReview[0].reviewContents);
-    // console.log(newReview[0].star);
-    fetch('http://10.58.7.33:8000/products/3/reviews', {
+    fetch('http://10.58.2.3:8000/products/3/reviews', {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('access_token'),
       },
-      body: JSON.stringify({
-        image_urls: [],
-        // image_urls: formData,
-        text: newReview[0].reviewContents,
-        rating: newReview[0].star,
-        bundle_id: null,
-        color_size_id: null,
-      }),
+      body: formData,
     })
       .then(res => res.json())
       .then(data => {
@@ -170,6 +170,7 @@ export default class AddReview extends Component {
             onClick={this.onClickTextArea}
             onChange={handleReviewValue}
             name="reviewContents"
+            value={this.state.reviewContents}
           />
           {/* {this.state.imageArr.map((image, index) => {
             console.log(this.state.imageArr[index]);
