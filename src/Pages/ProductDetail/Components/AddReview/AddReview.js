@@ -32,13 +32,6 @@ export default class AddReview extends Component {
     }
   };
 
-  // deletePhoto = id => {
-  //   const { imageArr } = this.state;
-  //   this.setState({
-  //     imageArr: imageArr.filter(file => file.id !== id),
-  //   });
-  // };
-
   deleteFile = file => {
     this.setState(prevState => {
       const list = [];
@@ -80,27 +73,6 @@ export default class AddReview extends Component {
       });
     } else this.setState({ files: [...e.target.files] });
   };
-
-  // handleInput = e => {
-  //   const { value } = e.target;
-  //   const { imageUrl, imageArr } = this.state;
-  //   this.setState({
-  //     imageUrl: value,
-  //   });
-
-  //   if (e.key === 'Enter') {
-  //     this.setState({
-  //       imageArr: [
-  //         ...imageArr,
-  //         {
-  //           id: imageArr.length + 1,
-  //           url: imageUrl,
-  //         },
-  //       ],
-  //       imageUrl: '',
-  //     });
-  //   }
-  // };
 
   addReview = () => {
     const { reviewContents, review, star, files } = this.state;
@@ -172,19 +144,6 @@ export default class AddReview extends Component {
             name="reviewContents"
             value={this.state.reviewContents}
           />
-          {/* {this.state.imageArr.map((image, index) => {
-            console.log(this.state.imageArr[index]);
-            return (
-              <div
-                key={this.state.imageArr[index].url}
-                className="reviewImageWrap"
-                onClick={() => deletePhoto(this.state.imageArr[index].id)}
-              >
-                <img src={this.state.imageArr[index].url} alt="reviewImage" />
-                <div className="deleteImage">삭제</div>
-              </div>
-            );
-          })} */}
           {files.map((file, index) => {
             const { lastModified } = file;
             return (
@@ -202,14 +161,6 @@ export default class AddReview extends Component {
         </div>
         <div className="reviewFooter">
           <div className="addPhoto">
-            {/* <input
-              class="addPhotoInput"
-              type="text"
-              placeholder="이미지 url을 입력하세요"
-              onChange={handleInput}
-              onKeyUp={handleInput}
-              value={imageUrl}
-            /> */}
             <div>
               <label htmlFor="inputFile">
                 <i className="xi-camera"></i>
