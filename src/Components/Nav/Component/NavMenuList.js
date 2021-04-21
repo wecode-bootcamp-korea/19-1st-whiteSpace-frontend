@@ -4,7 +4,6 @@ import './NavMenuList.scss';
 
 export class navMenuList extends Component {
   render() {
-    // console.log(this.props.dataList);
     const { dataList, className } = this.props;
     return (
       <div className={className}>
@@ -12,7 +11,9 @@ export class navMenuList extends Component {
           {dataList.map(data => {
             const keys = Object.keys(data);
             const urlName =
-              className === 'navRightMenu' ? data[keys[2]] : '/products';
+              className === 'navRightMenu'
+                ? data[keys[2]]
+                : '/products/' + data[keys[0]];
 
             return (
               <li key={data[keys[0]]}>
