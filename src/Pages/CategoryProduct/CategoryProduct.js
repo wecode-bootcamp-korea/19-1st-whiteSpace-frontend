@@ -59,21 +59,6 @@ export default class CategoryProduct extends Component {
 
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
-    // if (idx === 'prev') {
-    //   this.setState({
-    //     currentIdx: currentIdx - 1,
-    //   });
-    //   idx = currentIdx - 1;
-    // } else if (idx === 'next') {
-    //   this.setState({
-    //     currentIdx: currentIdx + 1,
-    //   });
-    //   idx = currentIdx + 1;
-    // } else {
-    //   this.setState({
-    //     currentIdx: idx,
-    //   });
-    // }
     this.setState({
       currentIdx: idx,
     });
@@ -91,14 +76,18 @@ export default class CategoryProduct extends Component {
     const btnAmount = Math.ceil(totalAmount / LIMIT);
     return (
       <>
-        <ProductWrap category="categoryList" text={categoryName}>
-          <ProductList type="category" productArr={categoryProductArr} />
-        </ProductWrap>
-        <Paging
-          currentIdx={currentIdx}
-          btnAmount={btnAmount}
-          pagingBtnOnClick={pagingBtnOnClick}
-        />
+        {/* {categoryId !== undefined && ( */}
+        <>
+          <ProductWrap category="categoryList" text={categoryName}>
+            <ProductList type="category" productArr={categoryProductArr} />
+          </ProductWrap>
+          <Paging
+            currentIdx={currentIdx}
+            btnAmount={btnAmount}
+            pagingBtnOnClick={pagingBtnOnClick}
+          />
+        </>
+        {/* )} */}
       </>
     );
   }
