@@ -10,6 +10,7 @@ export class Cart extends Component {
     super();
     this.state = {
       cartData: [],
+      quantity: 0,
     };
   }
 
@@ -24,8 +25,8 @@ export class Cart extends Component {
         this.setState({
           cartData: data.cart,
         });
-        console.log(this.state.cartData);
-        console.log(this.state.cartData.length);
+        // console.log(this.state.cartData);
+        // console.log(this.state.cartData.length);
       });
   }
 
@@ -37,14 +38,28 @@ export class Cart extends Component {
     }
   };
 
-  changeGap = price => {
-    const won = price.split('.');
-    return won[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  priceComma = price => {
+    let won = '';
+
+    console.log(price.indexOf('.'));
+    if (price.indexOf('.') > -1) {
+      won = price.split('.');
+      won = won[0];
+    } else {
+      won = price;
+    }
+
+    return won.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
+
+  changeQuantity = (index) => {
+    if ()
+    this.state.cartData[index].quantity !== 
+  }
 
   render() {
     const { cartData } = this.state;
-    const { changeGap } = this;
+    const { priceComma, changeQuantity } = this;
     const title =
       '일반상품' + (cartData.length > 0 ? ' (' + cartData.length + ')' : '');
     return (
@@ -70,7 +85,7 @@ export class Cart extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {cartData.map(cart => (
+                  {cartData.map((cart, index) => (
                     <tr key={cart.order_product_id}>
                       <td className="tbodyCheckBoxLine">
                         <input type="checkbox" />
@@ -83,23 +98,32 @@ export class Cart extends Component {
                         <div className="bundleName">{`[${cart.bundle_name}]`}</div>
                         {cart.price_gap && (
                           <div className="priceGap">
-                            `({changeGap(cart.price_gap)})`
+                            `({priceComma(cart.price_gap)})`
                           </div>
                         )}
                       </td>
-                      <td>{changeGap(cart.default_price) + '원'}</td>
+                      <td>{priceComma(cart.default_price) + '원'}</td>
                       <td className="tbodyUpDownLine">
                         <span>
                           <input
                             type="text"
                             value={cart.quantity && cart.quantity}
+                            onChange={changeQuantity({target}, index)}
                           />
                           <button>&#9650;</button>
                           <button>&#9660;</button>
                         </span>
                       </td>
-                      <td>배송비</td>
-                      <td>합계</td>
+                      <td className="tbodyDelivery">
+                        {index !== 0 ? '0' : '2,500'}
+                      </td>
+                      {/* {index === 0 && (
+                        <td className="tbodyDelivery" rowSpan={cartData.length}>
+                          2,500
+                        </td>
+                      )} */}
+                      {/* <td>{priceComma(cart.default_price * cart.quantity)}</td> */}
+                      {/* <td>{priceComma(cart.default_price * cart.quantity)}</td> */}
                       <td className="tbodyChiceLine">
                         <button>삭제</button>
                       </td>
