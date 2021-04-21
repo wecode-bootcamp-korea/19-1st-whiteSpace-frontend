@@ -17,13 +17,15 @@ export default class Routes extends Component {
         <Nav />
         <Switch>
           <Route exact path="/" component={Main} />
-          {/*
-          <Route exact path="/" component={Nav} />
-          {/* <Route exact path="/products" component={ProductDetail} /> */}
+          <Route exact path="/category" component={CategoryProduct} />
+          <Route
+            exact
+            path="/category/:categoryId"
+            component={CategoryProduct}
+          />
+          <Route exact path="/products/:productId" component={ProductDetail} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/Signup" component={Signup} />
-          <Route exact path="/products" component={CategoryProduct} />
-          <Route exact path="/signup" component={Signup} />
         </Switch>
         <TopButton />
         <Footer />
