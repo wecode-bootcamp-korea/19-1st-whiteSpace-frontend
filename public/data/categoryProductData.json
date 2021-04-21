@@ -1,0 +1,30 @@
+{
+  "category": "ALL",
+  "count": 3,
+  "products": [
+    {
+      "id": 2,
+      "is_new": false,
+      "name": "[제습제 증정]한여름 이불",
+      "price": "99000.00",
+      "stock": 520,
+      "thumbnail_url": "http://mobileimages.lowes.com//product/converted/100125/1001257872.jpg?size=pdhi"
+    },
+    {
+      "id": 3,
+      "is_new": false,
+      "name": "포켓 세탁세제",
+      "price": "20000.00",
+      "stock": 300,
+      "thumbnail_url": "//gong100.kr/web/product/big/202009/dae4dca1967a25564be76083c1035300.jpg"
+    },
+    {
+      "id": 4,
+      "is_new": false,
+      "name": "곰팡이 제거젤",
+      "price": "25800.00",
+      "stock": 200,
+      "thumbnail_url": "//gong100.kr/web/product/big/201905/b44d70395e656e5ad68ebbf22b13bbc2.png"
+    }
+  ]
+}

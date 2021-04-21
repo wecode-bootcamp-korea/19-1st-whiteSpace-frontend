@@ -1,0 +1,29 @@
+@import '../../Styles/common.scss';
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
+
+.paging {
+  @extend %flexCenter;
+
+  button {
+    margin: 0.2rem;
+    background: none;
+    border: none;
+    transition: 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      color: $yellow;
+    }
+  }
+
+  .pagingBtn {
+    @extend %flexCenter;
+    color: $titleColor;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .currentBtn {
+    color: $yellow;
+  }
+}

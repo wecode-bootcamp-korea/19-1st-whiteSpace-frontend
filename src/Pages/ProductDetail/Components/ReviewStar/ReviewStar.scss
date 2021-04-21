@@ -1,0 +1,78 @@
+@import '../../../../Styles/common.scss';
+
+.reviewStar {
+  display: flex;
+  padding: 1rem;
+  border: 1px solid $hoverColor;
+  text-align: center;
+
+  .starAvgWrap {
+    @extend %flexCenter;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+
+    .starAvg {
+      margin-bottom: 0.5rem;
+      padding: 1rem;
+      background-color: $black;
+      color: $white;
+      font-size: 3rem;
+    }
+
+    span {
+      font-size: 0.8rem;
+      color: $titleColor;
+    }
+  }
+
+  .starBarWrap {
+    height: 100%;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    text-align: left;
+    font-size: 0.8rem;
+    color: $titleColor;
+    border-right: 1px solid $hoverColor;
+
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    .starBarContentWrap {
+      margin: 0.5rem 0 0.5rem 0;
+
+      span {
+        margin: 0 0.2rem 0 0.2rem;
+        width: 50px;
+        text-align: center;
+      }
+    }
+
+    .starBar {
+      width: 500px;
+      height: 1rem;
+      background-color: $hoverColor;
+    }
+  }
+
+  .reviewThumWrap {
+    @extend %flexCenter;
+    margin: 0 auto;
+
+    div {
+      width: 80%;
+      margin: 0 0.5rem 0 1.5rem;
+    }
+    .reviewThum {
+      width: 50px;
+      margin: 0.2rem;
+      filter: $border;
+      -webkit-filter: grayscale(100%);
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        filter: none;
+        -webkit-filter: grayscale(0%);
+      }
+    }
+  }
+}
