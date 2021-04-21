@@ -64,6 +64,7 @@ export class Nav extends Component {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
       this.setState({
         searchInputValue: '',
+        isSearchBox: false,
       });
       this.props.history.push(
         `/products/search?keyword=${this.state.searchInputValue}`
@@ -100,7 +101,7 @@ export class Nav extends Component {
               className={
                 this.state.isSearchBox ? 'searchInputShow' : 'searchInputNone'
               }
-              placeholder="검색어"
+              placeholder="검색어를 입력해주세요."
               onChange={searchInputChange}
               onKeyUp={searchInputEnter}
             />
