@@ -1,0 +1,24 @@
+@import '../../../Styles/common.scss';
+
+.orderBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 110px;
+
+  button {
+    height: 5vh;
+    margin: 5px 0;
+    cursor: pointer;
+    border: none;
+    color: $white;
+    background-color: $black;
+    font-size: 0.9rem;
+    font-weight: lighter;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

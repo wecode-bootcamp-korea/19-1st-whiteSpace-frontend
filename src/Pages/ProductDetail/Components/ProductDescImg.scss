@@ -1,0 +1,36 @@
+@import '../../../Styles/common.scss';
+
+.infoWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .infoCategory {
+    display: flex;
+    justify-content: start;
+    width: 85%;
+    height: 15vh;
+    line-height: 10vh;
+    border-bottom: 1px solid $hoverColor;
+    padding: 40px 0;
+    li {
+      background-color: transparent;
+      color: $titleColor;
+      font-size: 0.8rem;
+      list-style: none;
+      cursor: pointer;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .descImgArr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    margin: 50px auto;
+    .descImg {
+      margin: 20px 0;
+    }
+  }
+}
