@@ -34,10 +34,12 @@ class SearchPage extends Component {
           this.setState({
             noResult: true,
           });
+        } else {
+          this.setState({
+            productArr: products,
+            noResult: false,
+          });
         }
-        this.setState({
-          productArr: products,
-        });
       });
   };
 

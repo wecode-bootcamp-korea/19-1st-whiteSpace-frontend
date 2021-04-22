@@ -22,34 +22,6 @@ class CategoryProduct extends Component {
   componentDidMount() {
     const { currentIdx } = this.state;
     const { fetchProduct } = this;
-
-    fetch('data/categoryProductData.json')
-      .then(res => res.json())
-      .then(productList => {
-        console.log(productList);
-        const { products, category } = productList;
-        this.setState({
-          productArr: products,
-          categoryName: category,
-        });
-      });
-
-    // fetch(
-    //   `${API}/products?${
-    //     categoryId ? `category=${categoryId}&` : ``
-    //   }page=1`
-    // )
-    //   .then(res => res.json())
-    //   .then(productList => {
-    //     console.log(productList);
-    //     const { products, category, count } = productList;
-    //     this.setState({
-    //       productArr: products,
-    //       categoryName: category,
-    //       totalAmount: count,
-    //     });
-    //   });
-
     fetchProduct(currentIdx);
   }
 
@@ -58,26 +30,14 @@ class CategoryProduct extends Component {
     const { fetchProduct } = this;
 
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      //   fetch(
-      //     `${API}/products?${
-      //       categoryId ? `category=${categoryId}&` : ``
-      //     }page=1`
-      //   )
-      //     .then(res => res.json())
-      //     .then(productList => {
-      //       const { products, category, count } = productList;
-      //       this.setState({
-      //         productArr: products,
-      //         categoryName: category,
-      //         totalAmount: count,
-      //       });
-      //     });
-      // }
       fetchProduct(currentIdx);
     }
   }
+
   fetchProduct = idx => {
     let categoryId = this.props.match.params.categoryId;
+
+    console.log('categoryId', categoryId);
 
     if (categoryId === undefined) {
       categoryId = 0;
@@ -90,7 +50,6 @@ class CategoryProduct extends Component {
     )
       .then(res => res.json())
       .then(productList => {
-        console.log(productList);
         const { products, category, count } = productList;
         this.setState({
           productArr: products,

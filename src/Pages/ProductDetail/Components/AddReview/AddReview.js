@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { stars } from '../ProductReview/reviewData';
+import { API } from '../../../../config';
 import './AddReview.scss';
 
 export default class AddReview extends Component {
@@ -108,7 +109,7 @@ export default class AddReview extends Component {
     // for (let [key, value] of formData) {
     //   console.log(key, value);
     // }
-    fetch('http://10.58.2.3:8000/products/3/reviews', {
+    fetch(`${API}/products/3/reviews`, {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('access_token'),

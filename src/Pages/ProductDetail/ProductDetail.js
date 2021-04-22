@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { PRODUCT_DETAIL } from '../../config';
-import { CART } from '../../config';
-import { ORDER } from '../../config';
+import { API } from '../../config';
 import ProductSubImg from './Components/ProductSubImg';
 import ProductDesc from './Components/ProductDesc';
 import ProductOpt from './Components/ProductOpt';
@@ -28,8 +26,8 @@ class ProductDetail extends Component {
   };
 
   componentDidMount() {
-    const productId = this.props.location.match.params;
-    fetch(`${PRODUCT_DETAIL}/${productId}`)
+    const productId = this.props.match.params.produtId;
+    fetch(`${API}/products/${productId}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -46,55 +44,51 @@ class ProductDetail extends Component {
   }
 
   goToCart = () => {
-    const productId = this.props.location.match.params;
+    const productId = this.props.match.params.produtId;
     const colorId = localStorage.getItem('colorId');
     const sizeId = localStorage.getItem('sizeId');
     const bundleId = localStorage.getItem('bundleId');
     const { price, bundlePrice, count } = this.state;
-    fetch(
-      { CART },
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          total_price: (price + bundlePrice) * count,
-          products: [
-            {
-              product_id: productId,
-              bundle_id: bundleId,
-              color_id: colorId,
-              size_id: sizeId,
-              quantity: count,
-            },
-          ],
-        }),
-      }
-    );
+
+    fetch(`${API}/cart`, {
+      method: 'POST',
+      body: JSON.stringify({
+        total_price: (price + bundlePrice) * count,
+        products: [
+          {
+            product_id: productId,
+            bundle_id: bundleId,
+            color_id: colorId,
+            size_id: sizeId,
+            quantity: count,
+          },
+        ],
+      }),
+    });
   };
 
   goToOrder = () => {
-    const productId = this.props.location.match.params;
+    const productId = this.props.match.params.produtId;
     const colorId = localStorage.getItem('colorId');
     const sizeId = localStorage.getItem('sizeId');
     const bundleId = localStorage.getItem('bundleId');
     const { price, bundlePrice, count } = this.state;
-    fetch(
-      { ORDER },
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          total_price: (price + bundlePrice) * count,
-          products: [
-            {
-              product_id: productId,
-              bundle_id: bundleId,
-              color_id: colorId,
-              size_id: sizeId,
-              quantity: count,
-            },
-          ],
-        }),
-      }
-    );
+
+    fetch(`${API}/order`, {
+      method: 'POST',
+      body: JSON.stringify({
+        total_price: (price + bundlePrice) * count,
+        products: [
+          {
+            product_id: productId,
+            bundle_id: bundleId,
+            color_id: colorId,
+            size_id: sizeId,
+            quantity: count,
+          },
+        ],
+      }),
+    });
   };
 
   changeImg = index => {
@@ -200,9 +194,7 @@ class ProductDetail extends Component {
           </div>
         </main>
         <ProductDescImg descImgArr={descImgArr} />
-        <div className="productDetail">
-          <ProductReview />
-        </div>
+        <ProductReview />
       </>
     );
   }

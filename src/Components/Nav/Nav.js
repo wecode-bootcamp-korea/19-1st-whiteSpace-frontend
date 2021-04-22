@@ -67,9 +67,7 @@ export class Nav extends Component {
         searchInputValue: '',
         isSearchBox: false,
       });
-      this.props.history.push(
-        `/products/search?keyword=${this.state.searchInputValue}`
-      );
+      this.props.history.push(`/search?keyword=${this.state.searchInputValue}`);
     }
   };
 

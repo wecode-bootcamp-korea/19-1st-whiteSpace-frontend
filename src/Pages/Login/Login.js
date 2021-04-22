@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { LOGIN } from '../../config';
+import { API } from '../../config';
 import './Login.scss';
 
 class Login extends Component {
@@ -11,16 +11,13 @@ class Login extends Component {
 
   checkValidation = () => {
     const { loginId, loginPw } = this.state;
-    fetch(
-      { LOGIN },
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          email: loginId,
-          password: loginPw,
-        }),
-      }
-    )
+    fetch(`${API}/users/sign_in`, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: loginId,
+        password: loginPw,
+      }),
+    })
       .then(res => res.json())
       .then(res => {
         if (res.access_token) {

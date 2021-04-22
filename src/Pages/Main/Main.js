@@ -17,24 +17,13 @@ export default class Main extends Component {
   }
 
   //백이랑 통신하는 코드
-  // componentDidMount() {
-  //   fetch(`${API}`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       this.setState({
-  //         mainImageArr: data.banner_images,
-  //         productArr: data.best_sellers,
-  //       });
-  //     });
-  // }
-
   componentDidMount() {
-    fetch('data/productData.json')
+    fetch({ API })
       .then(res => res.json())
       .then(data => {
         this.setState({
-          mainImageArr: data[0].banner_images,
-          productArr: data[0].best_sellers,
+          mainImageArr: data.banner_images,
+          productArr: data.best_sellers,
         });
       });
   }
