@@ -21,17 +21,6 @@ class CategoryProduct extends Component {
   componentDidMount() {
     const { currentIdx } = this.state;
     const { fetchProduct } = this;
-
-    // fetch('data/categoryProductData.json')
-    //   .then(res => res.json())
-    //   .then(productList => {
-    //     console.log(productList);
-    //     const { products, category } = productList;
-    //     this.setState({
-    //       productArr: products,
-    //       categoryName: category,
-    //     });
-    //   });
     fetchProduct(currentIdx);
   }
 

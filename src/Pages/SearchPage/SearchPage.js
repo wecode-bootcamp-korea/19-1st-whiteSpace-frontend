@@ -28,21 +28,27 @@ class SearchPage extends Component {
       .then(res => res.json())
       .then(searchList => {
         const { products } = searchList;
+        console.log(searchList);
+        // console.log(searchList.MESSAGE);
 
         if (searchList.MESSAGE === 'NO MATCH') {
           this.setState({
             noResult: true,
           });
+        } else {
+          this.setState({
+            productArr: products,
+            noResult: false,
+          });
         }
-        this.setState({
-          productArr: products,
-        });
       });
   };
 
   render() {
     const { productArr, noResult } = this.state;
     const searchKeyword = this.props.location.search.split('=')[1];
+    console.log(productArr);
+    console.log(noResult);
     return (
       <>
         {noResult ? (

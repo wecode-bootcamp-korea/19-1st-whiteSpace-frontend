@@ -28,7 +28,7 @@ class ProductDetail extends Component {
   };
 
   componentDidMount() {
-    const productId = this.props.location.match.params;
+    const productId = this.props.match.params.produtId;
     fetch(`${PRODUCT_DETAIL}/${productId}`)
       .then(res => res.json())
       .then(data => {
@@ -46,7 +46,7 @@ class ProductDetail extends Component {
   }
 
   goToCart = () => {
-    const productId = this.props.location.match.params;
+    const productId = this.props.match.params.produtId;
     const colorId = localStorage.getItem('colorId');
     const sizeId = localStorage.getItem('sizeId');
     const bundleId = localStorage.getItem('bundleId');
@@ -72,7 +72,7 @@ class ProductDetail extends Component {
   };
 
   goToOrder = () => {
-    const productId = this.props.location.match.params;
+    const productId = this.props.match.params.produtId;
     const colorId = localStorage.getItem('colorId');
     const sizeId = localStorage.getItem('sizeId');
     const bundleId = localStorage.getItem('bundleId');
@@ -200,9 +200,7 @@ class ProductDetail extends Component {
           </div>
         </main>
         <ProductDescImg descImgArr={descImgArr} />
-        <div className="productDetail">
-          <ProductReview />
-        </div>
+        <ProductReview />
       </>
     );
   }

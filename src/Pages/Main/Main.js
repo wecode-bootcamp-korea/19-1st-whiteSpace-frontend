@@ -24,16 +24,6 @@ export default class Main extends Component {
       });
   }
 
-  // componentDidMount() {
-  //   fetch('data/productData.json')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       this.setState({
-  //         mainImageArr: data[0].banner_images,
-  //         productArr: data[0].best_sellers,
-  //       });
-  //     });
-  // }
   render() {
     const { mainImageArr, productArr } = this.state;
     return (
