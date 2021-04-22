@@ -24,6 +24,7 @@ export default class Routes extends Component {
           <Route exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/cart" component={Cart} />
           <Route exact path="/welcome" component={Welcome} />
           <Route exact path="/category" component={CategoryProduct} />
           <Route
@@ -36,8 +37,6 @@ export default class Routes extends Component {
           <Route exact path="/order" component={Order} />
           <Route exact path="/orderComplete" component={OrderComplete} />
         </Switch>
-        <TopButton />
-        <Footer />
       </Router>
     );
   }
