@@ -1,0 +1,36 @@
+@import '../../../../Styles/common.scss';
+
+.reviewListWrap {
+  height: 500px;
+  overflow: auto;
+  font-size: 0.8rem;
+
+  .listHeader {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $hoverColor;
+    font-size: 1rem;
+
+    span {
+      margin-right: 1rem;
+    }
+
+    .starSortingList,
+    .newSortingList {
+      color: $subTitleColor;
+      cursor: pointer;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+::-webkit-scrollbar-thumb {
+  background: $hoverColor;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
