@@ -6,8 +6,6 @@ import BestProduct from './Components/BestProduct/BestProduct';
 import Modal from '../ProductDetail/Components/Modal/Modal';
 import './Main.scss';
 
-const token = localStorage.getItem('token');
-
 export default class Main extends Component {
   constructor() {
     super();
@@ -48,6 +46,7 @@ export default class Main extends Component {
   };
 
   render() {
+    const token = localStorage.getItem('token');
     const { mainImageArr, productArr, modalOpen } = this.state;
     const { handelModal } = this;
     return (
