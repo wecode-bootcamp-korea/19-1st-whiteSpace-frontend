@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AddReview from '../AddReview/AddReview';
 import ReviewStar from '../ReviewStar/ReviewStar';
 import ReviewList from '../ReviewList/ReviewList';
+import './ProductReview.scss';
 
 export default class ProductReview extends Component {
   constructor() {
@@ -39,7 +40,7 @@ export default class ProductReview extends Component {
       ratingAvg,
     } = this.state;
     return (
-      <>
+      <div className="productReview">
         <AddReview />
         <ReviewStar
           total={count}
@@ -56,7 +57,7 @@ export default class ProductReview extends Component {
           productUrl={productUrl}
           reviewArr={reviewArr}
         />
-      </>
+      </div>
     );
   }
 }
