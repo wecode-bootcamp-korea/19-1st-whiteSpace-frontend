@@ -79,7 +79,7 @@ export default class ReviewStar extends Component {
       <div className="reviewStar">
         <div className="starAvgWrap">
           <div>
-            <div className="starAvg">{ratingAvg}</div>
+            <div className="starAvg">{ratingAvg.toFixed(1)}</div>
             <span>{total}개 리뷰 평점</span>
           </div>
         </div>
@@ -110,10 +110,10 @@ export default class ReviewStar extends Component {
                   <a href="#!" key={index}>
                     <img
                       className="reviewThum"
-                      src={review.image_urls}
+                      src={review.image_urls[0]}
                       alt="reviewThumnail"
                       onClick={() => {
-                        handleModal(1, index, review.image_urls);
+                        handleModal(1, index, review.image_urls[0]);
                       }}
                     />
                   </a>

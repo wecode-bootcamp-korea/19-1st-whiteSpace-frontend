@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { stars } from '../ProductReview/reviewData';
 import { API } from '../../../../config';
 import './AddReview.scss';
 
-export default class AddReview extends Component {
+class AddReview extends Component {
   constructor() {
     super();
     this.state = {
@@ -26,14 +27,14 @@ export default class AddReview extends Component {
 
   onClickTextArea = e => {
     const productId = this.props.match.params.productId;
-    fetch(`${API}/products/${productId}/reviews/auth`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
-          e.target.disabled = true;
-          alert('구매한 회원만 작성하실 수 있습니다.');
-        }
-      });
+    // fetch(`${API}/products/${productId}/reviews/auth`)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
+    //       e.target.disabled = true;
+    //       alert('구매한 회원만 작성하실 수 있습니다.');
+    //     }
+    //   });
   };
 
   deleteFile = file => {
@@ -130,8 +131,15 @@ export default class AddReview extends Component {
   };
 
   render() {
-    const { files } = this.state;
-    const { handleReviewValue, addReview } = this;
+    const { files, reviewContents } = this.state;
+    const {
+      handleReviewValue,
+      addReview,
+      onClickTextArea,
+      changeFile,
+      deleteFile,
+      fileUpload,
+    } = this;
 
     return (
       <div className="addReviewWrap">
@@ -145,19 +153,19 @@ export default class AddReview extends Component {
         </div>
         <div className="textareaWrap">
           <textarea
-            onClick={this.onClickTextArea}
+            onClick={onClickTextArea}
             onChange={handleReviewValue}
             name="reviewContents"
-            value={this.state.reviewContents}
+            value={reviewContents}
           />
           {files.map((file, index) => {
             const { lastModified } = file;
             return (
               <div key={lastModified} className="reviewImageWrap">
-                <button onClick={() => this.changeFile(index)}>
+                <button onClick={() => changeFile(index)}>
                   <i className="xi-renew"></i>
                 </button>
-                <button onClick={() => this.deleteFile(file)}>
+                <button onClick={() => deleteFile(file)}>
                   <i className="xi-close"></i>
                 </button>
                 <img src={window.URL.createObjectURL(file)} alt="reviewImage" />
@@ -177,7 +185,7 @@ export default class AddReview extends Component {
               type="file"
               id="inputFile"
               multiple
-              onChange={this.fileUpload}
+              onChange={fileUpload}
               ref={this.fileUploader}
             />
           </div>
@@ -201,3 +209,5 @@ export default class AddReview extends Component {
     );
   }
 }
+
+export default withRouter(AddReview);
