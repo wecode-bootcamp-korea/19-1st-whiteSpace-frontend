@@ -10,41 +10,16 @@ export default class ReviewList extends Component {
     };
   }
 
-  newSorting = () => {
-    // fetch('url')
-    //   .then(res => res.json())
-    //   .then(reviewData => {
-    //     this.setState({
-    //       reviewArr: reviewData,
-    //     });
-    //   });
-  };
-
-  starSorting = () => {
-    // fetch('url')
-    //   .then(res => res.json())
-    //   .then(reviewData => {
-    //     this.setState({
-    //       reviewArr: reviewData,
-    //     });
-    //   });
-  };
-
   render() {
     const { total, reviewArr } = this.props;
-    const { newSorting, starSorting } = this;
     return (
       <div className="reviewListWrap">
         <header className="listHeader">
           <span>리뷰 ({total}) </span>
           <span> | </span>
-          <span className="newSortingList" onClick={newSorting}>
-            최신순
-          </span>
+          <span className="newSortingList">최신순</span>
           <span> | </span>
-          <span className="starSortingList" onClick={starSorting}>
-            별점순
-          </span>
+          <span className="starSortingList">별점순</span>
         </header>
         {reviewArr.map(review => {
           const { id, rating, text, author, image_urls } = review;
