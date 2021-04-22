@@ -112,7 +112,7 @@ export default class AddReview extends Component {
     // for (let [key, value] of formData) {
     //   console.log(key, value);
     // }
-    fetch('http://10.58.2.3:8000/products/3/reviews', {
+    fetch('http://10.58.2.3:8000/products/2/reviews', {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('access_token'),

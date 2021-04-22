@@ -10,7 +10,6 @@ export default class Review extends Component {
       modalContents: '',
       show: false,
     };
-    this.modalRef = React.createRef();
   }
 
   componentDidMount() {
@@ -41,12 +40,6 @@ export default class Review extends Component {
         modalOpen: false,
       });
     }
-
-    // if (!this.modalRef.current.contains(e.target)) {
-    //   this.setState({
-    //     modalOpen: false,
-    //   });
-    // }
   };
 
   render() {
@@ -59,7 +52,7 @@ export default class Review extends Component {
           <section className="reviewContentSection">
             <span className="star">
               {'★'.repeat(star) + '☆'.repeat(5 - star)}
-              {/* <span className="desc"> - {starComment}</span> */}
+              <span className="desc"> - {STAR_DESC[star]}</span>
             </span>
             <div className="reviewContent">
               <p className="content">{content}</p>
@@ -70,7 +63,6 @@ export default class Review extends Component {
             </div>
             <div className="reviewImage">
               {images.map((image, index) => {
-                console.log(image);
                 return (
                   <a href="#!" key={index}>
                     <img
@@ -119,14 +111,17 @@ export default class Review extends Component {
             handleModal(0);
           }}
         >
-          <img
-            className="originImage"
-            alt="originImage"
-            src={modalContents}
-            ref={this.modalRef}
-          />
+          <img className="originImage" alt="originImage" src={modalContents} />
         </Modal>
       </>
     );
   }
 }
+
+const STAR_DESC = {
+  1: '별로예요',
+  2: '그냥 그래요',
+  3: '보통이예요',
+  4: '맘에 들어요',
+  5: '아주 좋아요',
+};
