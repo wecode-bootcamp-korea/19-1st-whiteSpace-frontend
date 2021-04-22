@@ -21,7 +21,7 @@
 
       .content {
         line-height: 1.5;
-        width: 50%;
+        width: 200%;
         text-align: left;
       }
 
@@ -46,13 +46,10 @@
       img {
         width: 120px;
         height: 120px;
+        object-fit: cover;
         margin-right: 0.5rem;
         cursor: pointer;
       }
-    }
-
-    .originImage {
-      // width: 100%;
     }
 
     .reviewComment {

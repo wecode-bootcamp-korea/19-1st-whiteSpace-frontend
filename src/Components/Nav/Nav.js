@@ -39,9 +39,6 @@ export class Nav extends Component {
     // const { innerHeight } = window;
     // const { scrollHeight } = document.body;
     const myScroll = e.srcElement.scrollingElement.scrollTop;
-    // console.log('전체 body 의 높이 : ' + scrollHeight);
-    // console.log('전체 스크롤바 높이 : ' + innerHeight);
-    // console.log('현재 스크롤 위치 : ' + myScroll);
 
     // 스크롤이 최상단이거나 아니거나 변경할 필요가 있을 때만 변경해주도록 함.
     const checkScroll =

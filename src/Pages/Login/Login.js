@@ -11,7 +11,7 @@ class Login extends Component {
 
   checkValidation = () => {
     const { loginId, loginPw } = this.state;
-    fetch(`${API}/users/sign_in`, {
+    fetch(`${API}/users/sign-in`, {
       method: 'POST',
       body: JSON.stringify({
         email: loginId,
@@ -23,7 +23,7 @@ class Login extends Component {
         if (res.access_token) {
           alert('여백 0100 환영합니다');
           localStorage.setItem('access_token', res.access_token);
-          this.props.history.push('/Main');
+          this.props.history.push('/');
         }
       });
   };

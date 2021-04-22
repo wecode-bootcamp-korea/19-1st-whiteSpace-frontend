@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { API } from '../../config';
 import ProductSubImg from './Components/ProductSubImg';
 import ProductDesc from './Components/ProductDesc';
@@ -26,7 +27,7 @@ class ProductDetail extends Component {
   };
 
   componentDidMount() {
-    const productId = this.props.match.params.produtId;
+    const productId = this.props.match.params.productId;
     fetch(`${API}/products/${productId}`)
       .then(res => res.json())
       .then(data => {
@@ -44,16 +45,22 @@ class ProductDetail extends Component {
   }
 
   goToCart = () => {
-    const productId = this.props.match.params.produtId;
+    const productId = this.props.match.params.productId;
     const colorId = localStorage.getItem('colorId');
     const sizeId = localStorage.getItem('sizeId');
     const bundleId = localStorage.getItem('bundleId');
     const { price, bundlePrice, count } = this.state;
+
+    console.log((Number(price) + Number(bundlePrice)) * count);
 
     fetch(`${API}/cart`, {
       method: 'POST',
+      headers: {
+        Authorization:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxN30.MhiiQX5r1bcFbPI5DpQpwXiZ9SzSgnXL_1rgJHnenIo',
+      },
       body: JSON.stringify({
-        total_price: (price + bundlePrice) * count,
+        total_price: (Number(price) + Number(bundlePrice)) * count,
         products: [
           {
             product_id: productId,
@@ -64,31 +71,14 @@ class ProductDetail extends Component {
           },
         ],
       }),
-    });
-  };
-
-  goToOrder = () => {
-    const productId = this.props.match.params.produtId;
-    const colorId = localStorage.getItem('colorId');
-    const sizeId = localStorage.getItem('sizeId');
-    const bundleId = localStorage.getItem('bundleId');
-    const { price, bundlePrice, count } = this.state;
-
-    fetch(`${API}/order`, {
-      method: 'POST',
-      body: JSON.stringify({
-        total_price: (price + bundlePrice) * count,
-        products: [
-          {
-            product_id: productId,
-            bundle_id: bundleId,
-            color_id: colorId,
-            size_id: sizeId,
-            quantity: count,
-          },
-        ],
-      }),
-    });
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (res['MESSAGE'] === 'SUCCESS') {
+          this.props.history.push('/cart');
+        }
+      });
   };
 
   changeImg = index => {
@@ -142,16 +132,10 @@ class ProductDetail extends Component {
       count,
       index,
     } = this.state;
-    const {
-      incrQty,
-      decrQty,
-      delProduct,
-      calBundlePrice,
-      goToCart,
-      goToOrder,
-    } = this;
+
+    const { incrQty, decrQty, delProduct, calBundlePrice, goToCart } = this;
+
     const { changeImg } = this;
-    console.log('state::', this.state);
     const intPrice = parseInt(price.replace(',', ''));
     const intBundlePrice = parseInt(bundlePrice.replace(',', ''));
     const intDcPrice = Math.floor(price - price * discountRate);
@@ -190,7 +174,7 @@ class ProductDetail extends Component {
               intDcPrice={intDcPrice}
               intBundlePrice={intBundlePrice}
             />
-            <ProductBtn goToCart={goToCart} goToOrder={goToOrder} />
+            <ProductBtn goToCart={goToCart} />
           </div>
         </main>
         <ProductDescImg descImgArr={descImgArr} />
@@ -200,4 +184,4 @@ class ProductDetail extends Component {
   }
 }
 
-export default ProductDetail;
+export default withRouter(ProductDetail);

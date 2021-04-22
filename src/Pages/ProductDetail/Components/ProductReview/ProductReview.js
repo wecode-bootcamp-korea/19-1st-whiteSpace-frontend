@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { API } from '../../../../config';
 import AddReview from '../AddReview/AddReview';
 import ReviewStar from '../ReviewStar/ReviewStar';
 import ReviewList from '../ReviewList/ReviewList';
+import './ProductReview.scss';
 
-export default class ProductReview extends Component {
+class ProductReview extends Component {
   constructor() {
     super();
     this.state = {
@@ -13,44 +15,40 @@ export default class ProductReview extends Component {
       starArr: [],
       productName: '',
       productUrl: '',
+      ratingAvg: 0,
     };
   }
   componentDidMount() {
-    // fetch('data/review.json')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({
-    //       reviewArr: data.reviews,
-    //       productName: data.product_name,
-    //       productUrl: data.product_url,
-    //       starArr: [
-    //         data.five_star,
-    //         data.four_star,
-    //         data.three_star,
-    //         data.two_star,
-    //         data.one_star,
-    //       ],
-    //     });
-    //   });
-    // fetch(`${API}/products/2/reviews`)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({
-    //       reviewArr: data.reviews,
-    //       count: data.count,
-    //       productName: data.product_name,
-    //       productUrl: data.reviews[0].thumbnail_url,
-    //       starArr: [data.five, data.four, data.three, data.two, data.one],
-    //     });
-    //   });
+    const productId = this.props.match.params.productId;
+
+    fetch(`${API}/products/${productId}/reviews`)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          reviewArr: data.reviews,
+          count: data.count,
+          productName: data.reviews[0].product_name,
+          productUrl: data.reviews[0].thumbnail_url,
+          starArr: [data.five, data.four, data.three, data.two, data.one],
+          ratingAvg: data.average_rating,
+        });
+      });
   }
   render() {
-    const { reviewArr, productName, productUrl, starArr, count } = this.state;
+    const {
+      reviewArr,
+      productName,
+      productUrl,
+      starArr,
+      count,
+      ratingAvg,
+    } = this.state;
     return (
-      <>
+      <div className="productReview">
         <AddReview />
         <ReviewStar
           total={count}
+          ratingAvg={ratingAvg}
           starArr={starArr}
           productName={productName}
           productUrl={productUrl}
@@ -63,7 +61,9 @@ export default class ProductReview extends Component {
           productUrl={productUrl}
           reviewArr={reviewArr}
         />
-      </>
+      </div>
     );
   }
 }
+
+export default withRouter(ProductReview);

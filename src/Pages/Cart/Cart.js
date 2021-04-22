@@ -5,7 +5,6 @@ import Nav from '../../Components/Nav/Nav';
 import TableWrap from '../Order/Components/TableWrap/TableWrap';
 import CartTotalPrice from './Component/CartTotalPrice';
 import CartButton from './Component/CartButton';
-import Checkbox from './Component/Checkbox';
 import './Cart.scss';
 
 export class Cart extends Component {
@@ -20,8 +19,11 @@ export class Cart extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getBackDataCart();
+  }
+
   getBackDataCart = () => {
-    // fetch('data/cartData.json')
     fetch(`${API}/cart`, {
       method: 'GET',
       headers: {
@@ -30,23 +32,12 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.cart.length > 0) {
-          const addCartArr = [];
-
-          for (let i = 0; i < data.cart.length; i++) {
-            addCartArr.push({
-              isSelect: false,
-              ...data.cart[i],
-            });
-          }
-
-          this.setState({
-            cartId: data.cart_id,
-            cartData: addCartArr,
-            deliveryPrice: 2500,
-            totalPrice: Number(data.total_price),
-          });
-        }
+        this.setState({
+          cartId: data.cart_id,
+          cartData: data.cart,
+          deliveryPrice: 2500,
+          totalPrice: Number(data.total_price),
+        });
       });
   };
 
@@ -54,16 +45,9 @@ export class Cart extends Component {
     this.props.history.push(`/order/${this.state.cartId}`);
   };
 
-  // 체크박스를 set으로 관리하는 것을 본 적이 있어 일단 추가해둠
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
-
-  componentDidMount() {
-    // fetch(`${API}/cart`)
-    // fetch('data/cartData.json')
-    this.getBackDataCart();
-  }
 
   toggleCheckbox = label => {
     if (this.selectedCheckboxes.has(label)) {
@@ -75,16 +59,13 @@ export class Cart extends Component {
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
-
-    for (const checkbox of this.selectedCheckboxes) {
-    }
   };
 
   handleDelete = index => {
     const dataArr = this.state.cartData;
     const deleteDataArr = dataArr[index].order_product_id;
 
-    fetch(`${API}/cart?item_id=${deleteDataArr}`, {
+    fetch({ API } + `/cart?item_id=${deleteDataArr}`, {
       method: 'DELETE',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -92,11 +73,9 @@ export class Cart extends Component {
     })
       .then(res => res) // or res.json()
       .then(res => {
-        // console.log(res.MESSAGE);
         this.getBackDataCart();
       });
   };
-
   handelQuantity = (e, changeNum, index) => {
     if (changeNum === -1 && this.state.cartData[index].quantity <= 0) {
       return;
@@ -104,7 +83,7 @@ export class Cart extends Component {
 
     const changeId = this.state.cartData[index].order_product_id;
 
-    fetch(`${API}/cart/${changeId}`, {
+    fetch({ API } + '/cart/' + changeId, {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -127,14 +106,11 @@ export class Cart extends Component {
     //   checkArr.push(checkbox);
     // }
     // setItem;
-    // console.log(e);
   };
-
   quantityOnChange = (e, index) => {
     const beforeNum = this.state.cartData[index].quantity;
     const newNum = Number(e.target.value);
     const postNum = newNum - beforeNum;
-
     if (newNum > 0) {
       e.target.value = newNum;
       // if (newNum > 10) {
@@ -155,28 +131,47 @@ export class Cart extends Component {
     e.target.value = '';
   };
 
+  allCartDelete = e => {
+    const dataArr = this.state.cartData;
+    let deleteData = '';
+    // dataArr[index].order_product_id;
+
+    if (!(dataArr.length > 0)) {
+      // alert('삭제할 정보가 없습니다');
+      return;
+    }
+
+    for (let i = 0; i < dataArr.length; i++) {
+      deleteData += dataArr[i].order_product_id;
+
+      i !== dataArr.length - 1 && (deleteData += ',');
+    }
+
+    fetch(`${API}/cart?item_id=${deleteData}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
+      .then(res => res) // or res.json()
+      .then(res => {
+        // console.log(res.MESSAGE);
+        this.getBackDataCart();
+      });
+  };
+
   render() {
-    const {
-      cartData,
-      totalPrice,
-      deliveryPrice,
-      cartId,
-      allCartSelect,
-    } = this.state;
-    const url = '/order/' + { cartId };
-    // console.log(cartId);
+    const { cartData, totalPrice, deliveryPrice, cartId } = this.state;
     const {
       handleDelete,
       handelQuantity,
       quantityOnChange,
-      goToOrder,
       allCartDelete,
-      checkInputQuantity,
       quantityInput,
     } = this;
     const title =
-      '일반상품' + (cartData.length > 0 ? ' (' + cartData.length + ')' : '');
-    let sumPrice = 0;
+      '일반상품' +
+      (cartData && cartData.length > 0 ? ' (' + cartData.length + ')' : '');
     return (
       <>
         <Nav />
@@ -300,7 +295,11 @@ export class Cart extends Component {
                 <CartButton>x 삭제하기</CartButton>
               </div> */}
               <div></div>
-              <CartButton className="clearCart" onClick={allCartDelete}>
+              <CartButton
+                className="clearCart"
+                onClick={allCartDelete}
+                disabled={cartData.length === 0}
+              >
                 장바구니비우기
               </CartButton>
             </div>
@@ -310,6 +309,7 @@ export class Cart extends Component {
                 deliveryPrice: deliveryPrice,
               }}
             />
+
             <div className="cartButtonPosition">
               <Link
                 to={{
@@ -322,7 +322,7 @@ export class Cart extends Component {
                   },
                 }}
               >
-                <CartButton className="totalOrderButton" onClick={goToOrder}>
+                <CartButton className="totalOrderButton" blockButton={false}>
                   전체상품주문
                 </CartButton>
               </Link>
@@ -333,7 +333,10 @@ export class Cart extends Component {
                 선택상품주문
               </CartButton> */}
               <Link to="/">
-                <CartButton className="countineShoppingButton">
+                <CartButton
+                  className="countineShoppingButton"
+                  blockButton={false}
+                >
                   쇼핑계속하기
                 </CartButton>
               </Link>

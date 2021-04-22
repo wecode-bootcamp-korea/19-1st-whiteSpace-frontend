@@ -12,15 +12,15 @@ export default class PayMethod extends Component {
 
   handleInputChange = e => {
     const { value } = e.target;
-
     this.setState({
       method: value,
     });
   };
-
   render() {
     const { method } = this.state;
     const { handleInputChange } = this;
+    const { goToPay } = this.props;
+
     return (
       <div className="payMethod">
         <TableWrap>
@@ -94,7 +94,9 @@ export default class PayMethod extends Component {
               </tr>
               <tr>
                 <td>
-                  <button className="payBtn">결제하기</button>
+                  <button className="payBtn" onClick={goToPay}>
+                    결제하기
+                  </button>
                 </td>
               </tr>
             </tbody>

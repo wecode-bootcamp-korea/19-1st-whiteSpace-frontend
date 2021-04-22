@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import TableWrap from '../TableWrap/TableWrap';
+import AddressModal from './AddressModal';
 import './ShippingLocation.scss';
 
 export default class ShippingLocation extends Component {
   render() {
-    const { status } = this.props;
     return (
       <div className="shippingLocation">
         <TableWrap title="배송지정보">
@@ -19,32 +19,9 @@ export default class ShippingLocation extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>우편번호</td>
-                <td>
-                  <p>
-                    <input
-                      disabled={status === 'complete' && true}
-                      type="text"
-                      value="98765"
-                    />
-                  </p>
-                </td>
-              </tr>
-              <tr>
                 <td>주소</td>
                 <td classNam>
-                  <input
-                    disabled={status === 'complete' && true}
-                    type="text"
-                    className="addressInput"
-                    value="서울시 강남구 테헤란로 427"
-                  />
-                  <input
-                    disabled={status === 'complete' && true}
-                    type="text"
-                    className="addressInput"
-                    value="위워크 타워 1층"
-                  />
+                  <AddressModal />
                 </td>
               </tr>
               <tr>

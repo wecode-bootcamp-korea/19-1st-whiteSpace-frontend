@@ -13,7 +13,6 @@ export default class ReviewStar extends Component {
       modalAutor: '',
       modalOption: '',
       modalStar: '',
-      starAvg: 0,
     };
     this.modalRef = React.createRef();
   }
@@ -38,11 +37,11 @@ export default class ReviewStar extends Component {
         modalImage: image,
         modalId,
         modalStar:
-          '★'.repeat(reviewArr[modalId - 1].rating) +
-          '☆'.repeat(5 - reviewArr[modalId - 1].rating),
-        modalAutor: reviewArr[modalId - 1].author,
-        modalContents: reviewArr[modalId - 1].text,
-        modalOption: reviewArr[modalId - 1].bundle,
+          '★'.repeat(reviewArr[modalId].rating) +
+          '☆'.repeat(5 - reviewArr[modalId].rating),
+        modalAutor: reviewArr[modalId].author,
+        modalContents: reviewArr[modalId].text,
+        modalOption: reviewArr[modalId].bundle,
       });
     }
   };
@@ -57,21 +56,15 @@ export default class ReviewStar extends Component {
     }
   };
 
-  starAvg = () => {
-    const { starArr } = this.props;
-    let totalAmount = this.props.total;
-    let sum = 0;
-    for (let i = 0; i < starArr.length; i++) {
-      if (starArr[i] === 0) {
-        totalAmount = totalAmount - 1;
-      }
-      sum += starArr[i];
-    }
-    return sum / totalAmount;
-  };
-
   render() {
-    const { total, reviewArr, productName, productUrl, starArr } = this.props;
+    const {
+      total,
+      reviewArr,
+      productName,
+      productUrl,
+      starArr,
+      ratingAvg,
+    } = this.props;
     const {
       modalOpen,
       modalImage,
@@ -80,13 +73,13 @@ export default class ReviewStar extends Component {
       modalContents,
       modalOption,
     } = this.state;
-    const { handleModal, starAvg } = this;
+    const { handleModal } = this;
 
     return (
       <div className="reviewStar">
         <div className="starAvgWrap">
           <div>
-            <div className="starAvg">{starAvg()}</div>
+            <div className="starAvg">{ratingAvg.toFixed(1)}</div>
             <span>{total}개 리뷰 평점</span>
           </div>
         </div>
@@ -98,7 +91,10 @@ export default class ReviewStar extends Component {
                 <div className="starBar">
                   <div
                     className="innerStarBar redStarBar"
-                    style={{ width: (100 / total) * starArr[index] + 'px' }}
+                    style={{
+                      width:
+                        (100 / total) * starArr[index] * (total * 2) + 'px',
+                    }}
                   ></div>
                 </div>
                 <span>({starArr[index]})</span>
@@ -114,10 +110,10 @@ export default class ReviewStar extends Component {
                   <a href="#!" key={index}>
                     <img
                       className="reviewThum"
-                      src={review.image_urls}
+                      src={review.image_urls[0]}
                       alt="reviewThumnail"
                       onClick={() => {
-                        handleModal(1, index, review.image_urls);
+                        handleModal(1, index, review.image_urls[0]);
                       }}
                     />
                   </a>
@@ -148,7 +144,6 @@ export default class ReviewStar extends Component {
                 </div>
                 <div className="reviewOption">
                   <span>선택한 옵션 : </span>
-                  <span>{productName}</span>
                   <span>{modalOption === null ? '없음' : modalOption}</span>
                 </div>
                 <p className="reviewContent">{modalContents}</p>
