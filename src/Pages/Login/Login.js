@@ -11,7 +11,7 @@ class Login extends Component {
 
   checkValidation = () => {
     const { loginId, loginPw } = this.state;
-    fetch(`${API}/users/sign_in`, {
+    fetch(`${API}/users/sign-in`, {
       method: 'POST',
       body: JSON.stringify({
         email: loginId,

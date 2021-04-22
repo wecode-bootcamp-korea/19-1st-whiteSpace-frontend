@@ -35,7 +35,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     const { mainImageArr, productArr, modalOpen } = this.state;
     const { handelModal } = this;
     return (

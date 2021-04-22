@@ -77,7 +77,6 @@ export class Cart extends Component {
     })
       .then(res => res) // or res.json()
       .then(res => {
-        // console.log(res.MESSAGE);
         this.getBackDataCart();
       });
   };
@@ -112,7 +111,6 @@ export class Cart extends Component {
     //   checkArr.push(checkbox);
     // }
     // setItem;
-    // console.log(e);
   };
 
   quantityOnChange = (e, index) => {
@@ -156,7 +154,7 @@ export class Cart extends Component {
       i !== dataArr.length - 1 && (deleteData += ',');
     }
 
-    fetch(SERVER_IP + `/cart?item_id=${deleteData}`, {
+    fetch(`${API}/cart?item_id=${deleteData}`, {
       method: 'DELETE',
       headers: {
         Authorization: localStorage.getItem('access_token'),
