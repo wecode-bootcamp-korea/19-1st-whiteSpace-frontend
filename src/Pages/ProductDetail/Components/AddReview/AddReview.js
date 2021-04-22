@@ -24,10 +24,12 @@ export default class AddReview extends Component {
   };
 
   onClickTextArea = e => {
-    fetch('api주소')
+    console.log('ddd');
+    fetch('http://10.58.5.243:8000/products/2/reviews/auth')
       .then(res => res.json())
       .then(data => {
-        if (data.MESSAGE === 'DENIED') {
+        // console.log(data);
+        if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
           e.target.disabled = true;
           alert('구매한 회원만 작성하실 수 있습니다.');
         }

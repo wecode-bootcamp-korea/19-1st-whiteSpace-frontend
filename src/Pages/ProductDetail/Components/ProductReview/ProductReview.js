@@ -31,7 +31,7 @@ export default class ProductReview extends Component {
     //       ],
     //     });
     //   });
-    fetch('http://10.58.2.3:8000/products/2/reviews')
+    fetch('http://10.58.5.243:8000/products/2/reviews')
       .then(res => res.json())
       .then(data => {
         this.setState({

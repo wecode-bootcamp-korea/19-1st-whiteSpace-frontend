@@ -59,12 +59,10 @@ export default class ReviewStar extends Component {
 
   starAvg = () => {
     const { starArr } = this.props;
+    console.log(starArr);
     let totalAmount = this.props.total;
     let sum = 0;
     for (let i = 0; i < starArr.length; i++) {
-      if (starArr[i] === 0) {
-        totalAmount = totalAmount - 1;
-      }
       sum += starArr[i];
     }
     return sum / totalAmount;
