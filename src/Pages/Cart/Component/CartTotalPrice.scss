@@ -1,10 +1,13 @@
-@import '../../../../Styles/common.scss';
+@import '../../../Styles/common.scss';
 
-.totalPrice {
+.CartTotalPrice {
   padding-top: 3rem;
 
   .tableWrap {
-    @extend %flexCenter;
+    > table {
+      width: 86vw;
+    }
+    // @extend %flexCenter;
   }
 
   th,

@@ -10,7 +10,7 @@
 #Cart {
   display: flex;
   justify-content: center;
-  padding-top: 120px;
+  padding-top: 150px;
 
   > div {
     width: 86vw;
@@ -30,6 +30,7 @@
         }
       }
       .cartTable {
+        width: 86vw;
         font-size: 0.8rem;
         text-align: center;
 
@@ -84,10 +85,10 @@
         .tbodyUpDownLine {
           > span {
             position: relative;
-            width: 50px;
+            width: 55px;
 
             input {
-              width: 22px;
+              width: 25px;
               height: 23px;
               padding-left: 5px;
               line-height: 23px;
@@ -107,12 +108,12 @@
             // up 버튼
             button:first-of-type {
               top: 0;
-              left: 22px;
+              left: 25px;
             }
             //down 버튼
             button:last-child {
               top: 12px;
-              left: 22px;
+              left: 25px;
             }
           }
         }
@@ -159,9 +160,64 @@
     }
 
     hr {
-      width: 80vw;
-      margin-top: 30px;
+      width: 86vw;
+      margin-top: 50px;
       border-bottom: 1px solid #e8e5e4;
+    }
+    .cartControllButtonBox {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+
+      > div:first-child {
+        display: flex;
+        align-items: center;
+
+        span {
+          display: inline-block;
+          font-size: 0.8rem;
+          font-weight: bold;
+        }
+        > div {
+          > div {
+            padding: 1.5vh 1.5vw;
+            margin-left: 10px;
+            background-color: #8c8c8c;
+          }
+        }
+      }
+
+      .clearCart {
+        padding: 1.5vh 1.5vw;
+        background-color: $white;
+        color: $black;
+      }
+    }
+
+    .cartButtonPosition {
+      display: flex;
+      justify-content: center;
+      margin: 50px 0;
+
+      > div {
+        margin: 0 3px;
+
+        > div {
+          &:hover {
+            background-color: #ccc;
+            color: $white;
+            cursor: pointer;
+          }
+        }
+      }
+      .checkOrderButton {
+        background-color: #eee;
+        color: $black;
+      }
+      .countineShoppingButton {
+        background-color: $white;
+        color: $black;
+      }
     }
   }
 }
