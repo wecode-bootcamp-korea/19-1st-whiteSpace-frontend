@@ -17,7 +17,7 @@ export default class OrderComplete extends Component {
             <p>주문번호 : 20210418-0000355</p>
             <p>주문일자 : 2021-04-18 16:04:38</p>
             <button>
-              <Link to="/products">쇼핑 더하기</Link>
+              <Link to="/category">쇼핑 더하기</Link>
             </button>
           </div>
         </InfomationWrap>

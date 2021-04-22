@@ -3,5 +3,6 @@
 .productList {
   ul {
     @extend %flexCenter;
+    padding-bottom: 3rem;
   }
 }
