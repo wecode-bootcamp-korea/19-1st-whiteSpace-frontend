@@ -14,7 +14,7 @@ export default class Slider extends Component {
 
   componentDidUpdate() {
     const { slideIndex } = this.state;
-    this.slider.current.style.left = `-${slideIndex * 100}%`;
+    this.slider.current.style.left = `-${slideIndex * 1450}px`;
   }
 
   plusSlide = num => {

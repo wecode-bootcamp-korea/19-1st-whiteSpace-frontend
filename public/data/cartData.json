@@ -1,0 +1,48 @@
+{
+  "cart_id": 11,
+  "cart": [
+    {
+      "product_id": 13,
+      "thumbnail_image": "https://images.unsplash.com/photo-1611907992783-08f52a765966?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGRldGVyZ2VudHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=60",
+      "name": "생활 홈 마스크 20개",
+      "order_product_id": 32,
+      "bundle_id": 8,
+      "bundle_name": "생활 홈 마스크 어린이용 10개입",
+      "color_size_id": null,
+      "color_name": null,
+      "size_name": null,
+      "default_price": "20000.00",
+      "price_gap": "-5000.00",
+      "quantity": 5
+    },
+    {
+      "product_id": 14,
+      "thumbnail_image": "https://images.unsplash.com/photo-1583947215538-a731c5a6a0b7?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGJsZWFjaHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=60",
+      "name": "소독 물티슈",
+      "order_product_id": 35,
+      "bundle_id": 5,
+      "bundle_name": "손 소독제 50ml 10개입 추가",
+      "color_size_id": null,
+      "color_name": null,
+      "size_name": null,
+      "default_price": "12000.00",
+      "price_gap": "-9000.00",
+      "quantity": 2
+    },
+    {
+      "product_id": 24,
+      "thumbnail_image": "https://cdn.pixabay.com/photo/2018/07/10/08/54/bedding-3528078_960_720.jpg",
+      "name": "편안한 침구",
+      "order_product_id": 36,
+      "bundle_id": 5,
+      "bundle_name": null,
+      "color_size_id": null,
+      "color_name": null,
+      "size_name": null,
+      "default_price": "12000.00",
+      "price_gap": "0.00",
+      "quantity": 3
+    }
+  ],
+  "total_price": "81000.00"
+}

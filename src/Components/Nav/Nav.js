@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavMenuList from './Component/NavMenuList';
 import Popup from './Popup';
+import { API } from '../../config';
 import { Link, withRouter } from 'react-router-dom';
 import './Nav.scss';
 
@@ -17,8 +18,9 @@ export class Nav extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
-    fetch('data/category.json', {
-      // fetch('http://10.58.0.130:8000/nav', {  (back-end와 통신 테스트 성공 - category 목록 받아오기)
+    // fetch('data/category.json', {
+    //(back-end와 통신 테스트 성공 - category 목록 받아오기)
+    fetch(`${API}/nav`, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -61,8 +63,11 @@ export class Nav extends Component {
 
   searchInputEnter = e => {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
-      // console.log(this.state.searchInputValue);
-      this.props.history.push(`products?search=${this.state.searchInputValue}`);
+      this.setState({
+        searchInputValue: '',
+        isSearchBox: false,
+      });
+      this.props.history.push(`/search?keyword=${this.state.searchInputValue}`);
     }
   };
 
@@ -77,10 +82,8 @@ export class Nav extends Component {
   }
 
   render() {
-    // console.log(this.state.isSearchBox);
     const { categoryList, checkScrollTop } = this.state;
     const { searchInputChange, searchInputEnter, searchIconClick } = this;
-    // console.log(this.state.isSearchBox);
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <Popup />
@@ -97,7 +100,7 @@ export class Nav extends Component {
               className={
                 this.state.isSearchBox ? 'searchInputShow' : 'searchInputNone'
               }
-              placeholder="검색어"
+              placeholder="검색어를 입력해주세요."
               onChange={searchInputChange}
               onKeyUp={searchInputEnter}
             />

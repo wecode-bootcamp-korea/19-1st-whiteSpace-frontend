@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Nav from '../../Components/Nav/Nav';
 import './Signup.scss';
-import { SIGNUP } from '../../config';
-import { EMAIL_CHECK } from '../../config';
+import { API } from '../../config';
 
 const ID_REGEX = /^[a-zA-Z0-9+-_]+@[a-z]+\.[a-z]+$/;
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(\S){8,16}$/;
@@ -20,22 +18,18 @@ class Signup extends Component {
   signUp = () => {
     const { signId, signPw, signPwCheck, name, phone_number } = this.state;
 
-    fetch(
-      { SIGNUP },
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          email: signId,
-          password: signPw,
-          password_check: signPwCheck,
-          name: name,
-          phone_number: phone_number,
-        }),
-      }
-    )
+    fetch(`${API}/users/sign-up`, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: signId,
+        password: signPw,
+        password_check: signPwCheck,
+        name: name,
+        phone_number: phone_number,
+      }),
+    })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res['MESSAGE'] === 'SUCCESS') {
           this.props.history.push({
             pathname: '/welcome',
@@ -48,15 +42,12 @@ class Signup extends Component {
   checkIdValid = () => {
     const { signId } = this.state;
 
-    fetch(
-      { EMAIL_CHECK },
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          email: signId,
-        }),
-      }
-    )
+    fetch(`${API}/users/check-email`, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: signId,
+      }),
+    })
       .then(res => res.json())
       .then(res => {
         if (res['MESSAGE'] === 'EMAIL ALREADY EXISTS') {
@@ -83,7 +74,6 @@ class Signup extends Component {
 
     return (
       <>
-        <Nav />
         <div className="Signup">
           <header>회원가입</header>
           <div className="containers">
@@ -222,5 +212,4 @@ class Signup extends Component {
     );
   }
 }
-
 export default Signup;

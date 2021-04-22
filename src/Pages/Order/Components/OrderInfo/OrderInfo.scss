@@ -5,12 +5,15 @@
   font-size: 1rem;
   font-weight: bold;
 }
+
 .orderInfo {
   @extend %flexCenter;
   padding-top: 3rem;
+
   .orderHeader {
     display: block;
   }
+
   th,
   td {
     text-align: center;
