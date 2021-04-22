@@ -21,28 +21,29 @@ export class Cart extends Component {
   }
 
   getBackDataCart = () => {
-    // fetch('data/cartData.json')
-    fetch(SERVER_IP + '/cart', {
-      method: 'GET',
-      headers: {
-        Authorization: localStorage.getItem('access_token'),
-      },
-    })
+    fetch('data/cartData.json')
+      // fetch(SERVER_IP + '/cart', {
+      //   method: 'GET',
+      //   headers: {
+      //     Authorization: localStorage.getItem('access_token'),
+      //   },
+      // })
       .then(res => res.json())
       .then(data => {
         if (data.cart.length > 0) {
-          const addCartArr = [];
+          // 체크박스 주석으로 인한 주석처리
+          // const addCartArr = [];
 
-          for (let i = 0; i < data.cart.length; i++) {
-            addCartArr.push({
-              isSelect: false,
-              ...data.cart[i],
-            });
-          }
+          // for (let i = 0; i < data.cart.length; i++) {
+          //   addCartArr.push({
+          //     isSelect: false,
+          //     ...data.cart[i],
+          //   });
+          // }
 
           this.setState({
             cartId: data.cart_id,
-            cartData: addCartArr,
+            cartData: data.cart,
             deliveryPrice: 2500,
             totalPrice: Number(data.total_price),
           });
