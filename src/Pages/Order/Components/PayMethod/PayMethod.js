@@ -6,9 +6,8 @@ export default class PayMethod extends Component {
   constructor() {
     super();
     this.state = {
-      method: '',
+      method: 'cash',
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange = e => {

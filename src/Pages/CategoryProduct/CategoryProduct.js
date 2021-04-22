@@ -1,61 +1,103 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ProductList from '../ProductList/ProductList';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import Paging from '../../Components/Paging/Paging';
 import './CategoryProduct.scss';
 
 const LIMIT = 9;
-// const categoryId = this.props.match.params.categoryId;
 
-export default class CategoryProduct extends Component {
+class CategoryProduct extends Component {
   constructor() {
     super();
     this.state = {
-      totalAmount: '',
-      categoryProductArr: [],
+      totalAmount: 0,
+      productArr: [],
       categoryName: '',
       currentIdx: 1,
     };
   }
 
-  fetchProduct = idx => {
-    // fetch(
-    //   `http://10.58.4.178:8000/products?${
-    //     categoryId ? `category=${categoryId}` : ``
-    //   }page=${idx}`
-    // )
-    //   .then(res => res.json())
-    //   .then(productData => {
-    //     this.setState({ categoryProductArr: productData.products });
-    //   });
-  };
-
   componentDidMount() {
+    const { currentIdx } = this.state;
+    const { fetchProduct } = this;
+
     fetch('data/categoryProductData.json')
       .then(res => res.json())
-      .then(productData => {
-        const { products, category } = productData;
+      .then(productList => {
+        console.log(productList);
+        const { products, category } = productList;
         this.setState({
-          categoryProductArr: products,
+          productArr: products,
           categoryName: category,
         });
       });
 
     // fetch(
-    //   `http://10.58.4.178:8000/products${
-    //     categoryId ? `category=${categoryId}` : ``
-    //   }?page=1`
+    //   `http://10.58.2.3:8000/products?${
+    //     categoryId ? `category=${categoryId}&` : ``
+    //   }page=1`
     // )
     //   .then(res => res.json())
     //   .then(productList => {
+    //     console.log(productList);
     //     const { products, category, count } = productList;
     //     this.setState({
-    //       categoryProductArr: products,
+    //       productArr: products,
     //       categoryName: category,
     //       totalAmount: count,
     //     });
     //   });
+
+    fetchProduct(currentIdx);
   }
+
+  componentDidUpdate(prevProps) {
+    const { currentIdx } = this.state;
+    const { fetchProduct } = this;
+
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      //   fetch(
+      //     `http://10.58.2.3:8000/products?${
+      //       categoryId ? `category=${categoryId}&` : ``
+      //     }page=1`
+      //   )
+      //     .then(res => res.json())
+      //     .then(productList => {
+      //       const { products, category, count } = productList;
+      //       this.setState({
+      //         productArr: products,
+      //         categoryName: category,
+      //         totalAmount: count,
+      //       });
+      //     });
+      // }
+      fetchProduct(currentIdx);
+    }
+  }
+  fetchProduct = idx => {
+    let categoryId = this.props.match.params.categoryId;
+
+    if (categoryId === undefined) {
+      categoryId = 0;
+    }
+
+    fetch(
+      `http://10.58.2.3:8000/products${
+        categoryId ? `?category=${categoryId}&` : `?`
+      }page=${idx}`
+    )
+      .then(res => res.json())
+      .then(productList => {
+        console.log(productList);
+        const { products, category, count } = productList;
+        this.setState({
+          productArr: products,
+          categoryName: category,
+          totalAmount: count,
+        });
+      });
+  };
 
   pagingBtnOnClick = idx => {
     const { fetchProduct } = this;
@@ -66,18 +108,13 @@ export default class CategoryProduct extends Component {
   };
 
   render() {
-    const {
-      categoryProductArr,
-      categoryName,
-      currentIdx,
-      totalAmount,
-    } = this.state;
+    const { productArr, categoryName, currentIdx, totalAmount } = this.state;
     const { pagingBtnOnClick } = this;
     const btnAmount = Math.ceil(totalAmount / LIMIT);
     return (
       <>
         <ProductWrap category="categoryList" text={categoryName}>
-          <ProductList type="category" productArr={categoryProductArr} />
+          <ProductList type="category" productArr={productArr} />
         </ProductWrap>
         <Paging
           currentIdx={currentIdx}
@@ -88,3 +125,4 @@ export default class CategoryProduct extends Component {
     );
   }
 }
+export default withRouter(CategoryProduct);

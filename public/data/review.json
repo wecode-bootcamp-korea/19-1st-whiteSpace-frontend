@@ -1,0 +1,58 @@
+{
+  "product_name": "[제습제 증정]한여름 이불",
+  "product_url": "https://assets5.cre.ma/p/gong100-kr/products/00/00/00/05/97/image/extra_small_f5170bce8c0ba53b.jpg",
+  "five_star": 15,
+  "four_star": 10,
+  "three_star": 8,
+  "two_star": 5,
+  "one_star": 2,
+  "reviews": [
+    {
+      "id": 1,
+      "author": "applebanana",
+      "star": "5",
+      "starComment": "아주 좋아요",
+      "option": "오트밀&베이지 이불+베개커버 SS",
+      "content": "사계절 침구세트 구입후. 재구매입니다. 까다로운 큰 아이의 취향을 온전히 만족했다는게 신기할 정도예요. 피부트러블 포근함. 바삭거리는 소리 없음. 예민한 아이가 숙면으로 아침에 일어나기 힘들다는 후기에 깜짝 놀랐네요. 이제 저희집은 모두가. 여백과 함께 숙면을.... 모두가 적극 추천이랍니다~",
+      "images": [
+        "https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/33/95/image1/4028caddbd3b4097.jpg",
+        "https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/33/95/image2/f832611a19ffceb5.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "author": "kimnamsun",
+      "star": "3",
+      "starComment": "보통이예요",
+      "option": "오트밀&베이지 이불+베개커버 SS",
+      "content": "가볍고 몸에 착 감겨요 너무 좋아요 보들보들해서 살에 닿는 촉감이 진짜 최고ㅠ 겨울에도 솜 넣어 쓰면 좋을 것 같아요 부피가 크지 않아서 보관하기도 좋을 것 같아요 색상은 처음에는 너무 진한가 싶었는데 보다 보니 또 잘 어울리고 양면이라 그날 그날 기분따라 바꿀 수 있다는 것도 좋아요 좋다는 말을 몇 번이나 쓴거죠..? 무튼 좋아요 고양이도 좋아해요!!",
+      "images": [
+        "https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/35/73/image1/bab26bc85cb32c9c.jpg",
+        "https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/35/73/image2/3de929fbc8a5ea86.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "author": "whitespace",
+      "star": "4",
+      "starComment": "맘에 들어요",
+      "option": "오트밀&베이지 이불+베개커버+패드세트 Q",
+      "content": "항상 눈여겨 보던 여백 이불인데 구매해보니까 왜 여백이불이 인기인지 알 것 같아요. 가벼운데 따뜻하고 먼지가 일단 안붙고 냥이와 함께하시는 집사님들이라면 무조건 들이셔야합니다. 왜 이제 샀나 싶어요. 색깔도 고급스럽고 호텔 침구처럼 바스락하면서 앞 뒤 색상이 달라서 더 좋아요. 사진은 패드 깔기 전인데 패드가 정말 퐁신퐁신한게 예술입니다. 건조기 세탁기 다 돌릴 수 있어서 더 좋아요. 여백 찬양중",
+      "images": [
+        "https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/34/67/image1/b5e4fa8c89c15327.jpg",
+        "https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/34/67/image2/57ed7fd8f25092e6.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "author": "wecoder",
+      "star": "2",
+      "starComment": "그냥 그래요",
+      "option": "오트밀&베이지 이불+베개커버+패드세트 SK",
+      "content": "남편이 지금까지 산 이불 중 제일 좋다고 칭찬해줬습니당 ㅎㅎ 수퍼킹이라 가격이 부담되지만 너무 만족하며 사용중입니다..ㅎㅎ",
+      "images": [
+        "https://assets5.cre.ma/p/gong100-kr/reviews/00/00/10/32/80/image1/20e5b79f89a1573e.jpg"
+      ]
+    }
+  ]
+}
