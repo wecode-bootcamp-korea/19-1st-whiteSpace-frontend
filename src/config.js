@@ -1,6 +1,10 @@
 export const EMAIL_CHECK = 'http://10.58.4.98:8000/users/check-email';
 export const SIGNUP = 'http://10.58.4.98:8000/users/sign-up';
 export const LOGIN = 'http://10.58.0.130:8000/users/sign_in';
+export const PRODUCT_DETAIL = 'http://10.58.7.33:8000/products';
+export const CART = 'http://10.58.7.33:8000/cart';
+export const ORDER = 'http://10.58.7.33:8000/order';
+export const ORDERCOMPLETE = 'http://10.00.0.00:8000/ordercomplete';
 
 export const left = {
   one: (

@@ -1,0 +1,116 @@
+@import '../../../Styles/common.scss';
+@import url('https://use.fontawesome.com/releases/v5.15.3/css/all.css');
+
+.productOpt {
+  margin: 20px 0;
+  border-bottom: 1px solid $hoverColor;
+  .optionBox {
+    display: flex;
+    margin: 15px 0;
+
+    span {
+      display: inline-block;
+      width: 20%;
+      color: $titleColor;
+      font-size: 0.8rem;
+    }
+    .colorBoxes {
+      display: flex;
+      .colorNname {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .colorBox {
+          width: 30px;
+          height: 30px;
+          margin: 0 5px 5px 0;
+          border: 1.8px solid $hoverColor;
+          box-shadow: inset 0 0 0 2px #fff;
+          cursor: pointer;
+        }
+        .addBorder {
+          border: 2px solid $black;
+        }
+
+        .selectedColorName {
+          width: 35px;
+          height: 15px;
+          margin: 0 0 -10px 0;
+          color: $titleColor;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+select {
+  width: 300px;
+  color: $titleColor;
+  font-size: 0.8rem;
+}
+
+.totalInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $hoverColor;
+
+  .totalDesc {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    .item {
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      color: $titleColor;
+      font-weight: bold;
+    }
+    .optItem {
+      color: $subTitleColor;
+      font-size: 0.8rem;
+    }
+  }
+
+  .countBtnBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $hoverColor;
+    button {
+      border: none;
+      background-color: $white;
+    }
+    .countQty {
+      @extend %flexCenter;
+      width: 100%;
+      height: 20px;
+      border-top: 1px solid $hoverColor;
+      border-bottom: 1px solid $hoverColor;
+      color: $titleColor;
+      font-size: 0.8rem;
+    }
+    .fa-sort-up,
+    .fa-sort-down {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 25px;
+      height: 15px;
+      color: $subTitleColor;
+      background-color: white;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  }
+  .delBtn {
+    outline: none;
+    border: 1px solid $hoverColor;
+    color: $white;
+    background-color: $hoverColor;
+    opacity: 0.8;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+}

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import TableWrap from '../TableWrap/TableWrap';
 import './PayMethod.scss';
+
 export default class PayMethod extends Component {
   constructor() {
     super();
     this.state = {
-      method: '',
+      method: 'cash',
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
+
   handleInputChange = e => {
     const { value } = e.target;
     this.setState({

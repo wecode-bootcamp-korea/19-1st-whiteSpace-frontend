@@ -1,0 +1,11 @@
+@import '../../../Styles/common.scss';
+
+.CartButton {
+  > div {
+    border: 1px solid #ccc;
+    padding: 1.5vh 2.5vw;
+    background-color: #000;
+    color: $white;
+    font-size: 0.8rem;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TableWrap from '../TableWrap/TableWrap';
-import { ORDERCOMPLETE } from '../../config.js';
+import { ORDERCOMPLETE } from '../../../../config';
 import './OrderInfo.scss';
 
 export default class OrderInfo extends Component {
@@ -9,42 +9,42 @@ export default class OrderInfo extends Component {
     phoneNum: '',
   };
 
-  goToPay = () => {
-    const cartId = this.props.location.state.cartId;
-    const totalPrice = this.props.location.state.totalPrice;
-    const deliveryPrice = this.props.location.state.deliveryPrice;
-    const postCode = localStorage.getItem('postCode');
-    const mainAddress = localStorage.getItem('mainAddress');
-    const { detailAddress, phoneNum } = this.state;
-    fetch(
-      { ORDERCOMPLETE },
-      {
-        method: 'POST',
-        body: {
-          cart_id: cartId,
-          total_price: totalPrice + deliveryPrice,
-          product_id: 'q',
-          user_name: 'q',
-          postal_code: postCode,
-          main_address: mainAddress,
-          detail_address: detailAddress,
-          phone_number: phoneNum,
-        },
-      }
-    )
-      .then(res => res.json())
-      .then(res => {
-        this.props.history.push('/ordercomplete');
-      });
-  };
+  // goToPay = () => {
+  //   const cartId = this.props.location.state.cartId;
+  //   const totalPrice = this.props.location.state.totalPrice;
+  //   const deliveryPrice = this.props.location.state.deliveryPrice;
+  //   const postCode = localStorage.getItem('postCode');
+  //   const mainAddress = localStorage.getItem('mainAddress');
+  //   const { detailAddress, phoneNum } = this.state;
+  //   fetch(
+  //     { ORDERCOMPLETE },
+  //     {
+  //       method: 'POST',
+  //       body: {
+  //         cart_id: cartId,
+  //         total_price: totalPrice + deliveryPrice,
+  //         product_id: 'q',
+  //         user_name: 'q',
+  //         postal_code: postCode,
+  //         main_address: mainAddress,
+  //         detail_address: detailAddress,
+  //         phone_number: phoneNum,
+  //       },
+  //     }
+  //   )
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.props.history.push('/ordercomplete');
+  //     });
+  // };
 
   render() {
-    const { goToPay } = this;
-    const cartId = this.props.location.state.cartId;
-    const totalPrice = this.props.location.state.totalPrice;
-    const deliveryPrice = this.props.location.state.deliveryPrice;
-    const data = this.props.location.state.cartData;
-    const { status } = this.props;
+    // const { goToPay } = this;
+    // const cartId = this.props.location.state.cartId;
+    // const totalPrice = this.props.location.state.totalPrice;
+    // const deliveryPrice = this.props.location.state.deliveryPrice;
+    // const data = this.props.location.state.cartData;
+    // const { status } = this.props;
 
     return (
       <>

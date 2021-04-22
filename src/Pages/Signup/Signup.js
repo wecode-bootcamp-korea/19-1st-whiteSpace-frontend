@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Nav from '../../Components/Nav/Nav';
 import './Signup.scss';
 import { SIGNUP } from '../../config';
 import { EMAIL_CHECK } from '../../config';
@@ -35,7 +34,6 @@ class Signup extends Component {
     )
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res['MESSAGE'] === 'SUCCESS') {
           this.props.history.push({
             pathname: '/welcome',
@@ -83,7 +81,6 @@ class Signup extends Component {
 
     return (
       <>
-        <Nav />
         <div className="Signup">
           <header>회원가입</header>
           <div className="containers">
@@ -222,5 +219,4 @@ class Signup extends Component {
     );
   }
 }
-
 export default Signup;

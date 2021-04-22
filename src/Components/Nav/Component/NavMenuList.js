@@ -13,7 +13,7 @@ export class navMenuList extends Component {
             const urlName =
               className === 'navRightMenu'
                 ? data[keys[2]]
-                : '/products/' + data[keys[0]];
+                : '/category' + (!data[keys[0]] ? '' : '/' + data[keys[0]]);
 
             return (
               <li key={data[keys[0]]}>

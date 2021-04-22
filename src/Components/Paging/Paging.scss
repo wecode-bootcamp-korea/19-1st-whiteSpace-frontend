@@ -3,22 +3,19 @@
 
 .paging {
   @extend %flexCenter;
+  padding: 1rem 0;
 
   button {
+    @extend %hover;
     margin: 0.2rem;
     background: none;
     border: none;
+    color: $titleColor;
     transition: 0.3s;
-
-    &:hover {
-      cursor: pointer;
-      color: $yellow;
-    }
   }
 
   .pagingBtn {
     @extend %flexCenter;
-    color: $titleColor;
     font-size: 0.8rem;
     font-weight: bold;
   }
