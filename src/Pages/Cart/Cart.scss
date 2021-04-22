@@ -190,6 +190,7 @@
       .clearCart {
         padding: 1.5vh 1.5vw;
         background-color: $white;
+        cursor: pointer;
         color: $black;
       }
     }
@@ -202,7 +203,7 @@
       > div {
         margin: 0 3px;
 
-        > div {
+        > button {
           &:hover {
             background-color: #ccc;
             color: $white;

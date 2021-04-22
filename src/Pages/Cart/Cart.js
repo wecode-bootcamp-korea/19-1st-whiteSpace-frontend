@@ -39,10 +39,6 @@ export class Cart extends Component {
       });
   };
 
-  goToOrder = () => {
-    this.props.history.push(`order/${this.state.cartId}`);
-  };
-
   // 체크박스를 set으로 관리하는 것을 본 적이 있어 일단 추가해둠
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
@@ -142,6 +138,35 @@ export class Cart extends Component {
     e.target.value = '';
   };
 
+  allCartDelete = e => {
+    const dataArr = this.state.cartData;
+    let deleteData = '';
+    // dataArr[index].order_product_id;
+
+    if (!(dataArr.length > 0)) {
+      // alert('삭제할 정보가 없습니다');
+      return;
+    }
+
+    for (let i = 0; i < dataArr.length; i++) {
+      deleteData += dataArr[i].order_product_id;
+
+      i !== dataArr.length - 1 && (deleteData += ',');
+    }
+
+    fetch(`${API}/cart?item_id=${deleteData}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
+      .then(res => res) // or res.json()
+      .then(res => {
+        // console.log(res.MESSAGE);
+        this.getBackDataCart();
+      });
+  };
+
   render() {
     const {
       cartData,
@@ -150,19 +175,17 @@ export class Cart extends Component {
       cartId,
       allCartSelect,
     } = this.state;
-    const url = '/order/' + { cartId };
     const {
       handleDelete,
       handelQuantity,
       quantityOnChange,
-      goToOrder,
       allCartDelete,
       checkInputQuantity,
       quantityInput,
     } = this;
     const title =
       '일반상품' + (cartData.length > 0 ? ' (' + cartData.length + ')' : '');
-    let sumPrice = 0;
+    console.log('렌더');
     return (
       <>
         <Nav />
@@ -286,7 +309,11 @@ export class Cart extends Component {
                 <CartButton>x 삭제하기</CartButton>
               </div> */}
               <div></div>
-              <CartButton className="clearCart" onClick={allCartDelete}>
+              <CartButton
+                className="clearCart"
+                onClick={allCartDelete}
+                disabled={cartData.length === 0}
+              >
                 장바구니비우기
               </CartButton>
             </div>
@@ -308,7 +335,7 @@ export class Cart extends Component {
                   },
                 }}
               >
-                <CartButton className="totalOrderButton" onClick={goToOrder}>
+                <CartButton className="totalOrderButton" blockButton={false}>
                   전체상품주문
                 </CartButton>
               </Link>
@@ -319,7 +346,10 @@ export class Cart extends Component {
                 선택상품주문
               </CartButton> */}
               <Link to="/">
-                <CartButton className="countineShoppingButton">
+                <CartButton
+                  className="countineShoppingButton"
+                  blockButton={false}
+                >
                   쇼핑계속하기
                 </CartButton>
               </Link>
