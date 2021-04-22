@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavMenuList from './Component/NavMenuList';
 import Popup from './Popup';
+import { API } from '../../config';
 import { Link, withRouter } from 'react-router-dom';
 import './Nav.scss';
 
@@ -19,7 +20,7 @@ export class Nav extends Component {
     window.addEventListener('scroll', this.handleScroll);
     // fetch('data/category.json', {
     //(back-end와 통신 테스트 성공 - category 목록 받아오기)
-    fetch('http://10.58.5.243:8000/nav', {
+    fetch(`${API}/nav`, {
       method: 'GET',
     })
       .then(res => res.json())

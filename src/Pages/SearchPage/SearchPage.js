@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { API } from '../../config';
 import { withRouter } from 'react-router-dom';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import ProductList from '../ProductList/ProductList';
@@ -24,12 +25,10 @@ class SearchPage extends Component {
   fetchProduct = () => {
     const searchKeyword = this.props.location.search.split('=')[1];
 
-    fetch(`http://10.58.5.243:8000/products/search?keyword=${searchKeyword}`)
+    fetch(`${API}/products/search?keyword=${searchKeyword}`)
       .then(res => res.json())
       .then(searchList => {
         const { products } = searchList;
-        console.log(searchList);
-        // console.log(searchList.MESSAGE);
 
         if (searchList.MESSAGE === 'NO MATCH') {
           this.setState({
@@ -47,8 +46,6 @@ class SearchPage extends Component {
   render() {
     const { productArr, noResult } = this.state;
     const searchKeyword = this.props.location.search.split('=')[1];
-    console.log(productArr);
-    console.log(noResult);
     return (
       <>
         {noResult ? (

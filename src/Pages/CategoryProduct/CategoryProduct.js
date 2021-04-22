@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { API } from '../../config';
 import ProductList from '../ProductList/ProductList';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import Paging from '../../Components/Paging/Paging';
@@ -43,7 +44,7 @@ class CategoryProduct extends Component {
     }
 
     fetch(
-      `http://10.58.5.243:8000/products${
+      `${API}/products${
         categoryId ? `?category=${categoryId}&` : `?`
       }page=${idx}`
     )
