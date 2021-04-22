@@ -1,4 +1,3 @@
-import { fireEvent } from '@testing-library/dom';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
@@ -25,7 +24,7 @@ class SearchPage extends Component {
   fetchProduct = () => {
     const searchKeyword = this.props.location.search.split('=')[1];
 
-    fetch(`http://10.58.2.3:8000/products/search?keyword=${searchKeyword}`)
+    fetch(`http://10.58.5.243:8000/products/search?keyword=${searchKeyword}`)
       .then(res => res.json())
       .then(searchList => {
         const { products } = searchList;
