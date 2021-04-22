@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { SERVER_IP } from '../../config';
+import { API } from '../../config';
 import Nav from '../../Components/Nav/Nav';
 import TableWrap from '../Order/Components/TableWrap/TableWrap';
 import CartTotalPrice from './Component/CartTotalPrice';
@@ -22,7 +22,7 @@ export class Cart extends Component {
 
   getBackDataCart = () => {
     // fetch('data/cartData.json')
-    fetch(SERVER_IP + '/cart', {
+    fetch(`${API}/cart`, {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -30,24 +30,12 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.cart.length > 0) {
-          // 체크박스 주석으로 인한 주석처리
-          // const addCartArr = [];
-
-          // for (let i = 0; i < data.cart.length; i++) {
-          //   addCartArr.push({
-          //     isSelect: false,
-          //     ...data.cart[i],
-          //   });
-          // }
-
-          this.setState({
-            cartId: data.cart_id,
-            cartData: data.cart,
-            deliveryPrice: 2500,
-            totalPrice: Number(data.total_price),
-          });
-        }
+        this.setState({
+          cartId: data.cart_id,
+          cartData: data.cart,
+          deliveryPrice: 2500,
+          totalPrice: Number(data.total_price),
+        });
       });
   };
 
@@ -57,7 +45,7 @@ export class Cart extends Component {
   };
 
   componentDidMount() {
-    // fetch('http://10.58.7.33:8000/cart')
+    // fetch(`${API}/cart`)
     // fetch('data/cartData.json')
     this.getBackDataCart();
   }
@@ -81,7 +69,7 @@ export class Cart extends Component {
     const dataArr = this.state.cartData;
     const deleteDataArr = dataArr[index].order_product_id;
 
-    fetch(SERVER_IP + `/cart?item_id=${deleteDataArr}`, {
+    fetch(`${API}/cart?item_id=${deleteDataArr}`, {
       method: 'DELETE',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -101,7 +89,7 @@ export class Cart extends Component {
 
     const changeId = this.state.cartData[index].order_product_id;
 
-    fetch(SERVER_IP + '/cart/' + changeId, {
+    fetch(`${API}/cart/${changeId}`, {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('access_token'),

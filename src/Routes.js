@@ -8,6 +8,7 @@ import Signup from './Pages/Signup/Signup';
 import Welcome from './Pages/Signup/Welcome/Welcome';
 import CategoryProduct from './Pages/CategoryProduct/CategoryProduct';
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
+import SearchPage from './Pages/SearchPage/SearchPage';
 import Cart from './Pages/Cart/Cart';
 import Order from './Pages/Order/Order';
 import OrderComplete from './Pages/Order/Components/OrderComplete/OrderComplete';
@@ -24,7 +25,6 @@ export default class Routes extends Component {
           <Route exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/cart" component={Cart} />
           <Route exact path="/welcome" component={Welcome} />
           <Route exact path="/category" component={CategoryProduct} />
           <Route
@@ -32,11 +32,14 @@ export default class Routes extends Component {
             path="/category/:categoryId"
             component={CategoryProduct}
           />
+          <Route exact path="/search" component={SearchPage} />
           <Route exact path="/products/:productId" component={ProductDetail} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/order" component={Order} />
           <Route exact path="/orderComplete" component={OrderComplete} />
         </Switch>
+        <TopButton />
+        <Footer />
       </Router>
     );
   }

@@ -13,7 +13,6 @@ export default class ReviewStar extends Component {
       modalAutor: '',
       modalOption: '',
       modalStar: '',
-      starAvg: 0,
     };
     this.modalRef = React.createRef();
   }
@@ -57,21 +56,15 @@ export default class ReviewStar extends Component {
     }
   };
 
-  starAvg = () => {
-    const { starArr } = this.props;
-    let totalAmount = this.props.total;
-    let sum = 0;
-    for (let i = 0; i < starArr.length; i++) {
-      if (starArr[i] === 0) {
-        totalAmount = totalAmount - 1;
-      }
-      sum += starArr[i];
-    }
-    return sum / totalAmount;
-  };
-
   render() {
-    const { total, reviewArr, productName, productUrl, starArr } = this.props;
+    const {
+      total,
+      reviewArr,
+      productName,
+      productUrl,
+      starArr,
+      ratingAvg,
+    } = this.props;
     const {
       modalOpen,
       modalImage,
@@ -80,13 +73,13 @@ export default class ReviewStar extends Component {
       modalContents,
       modalOption,
     } = this.state;
-    const { handleModal, starAvg } = this;
+    const { handleModal } = this;
 
     return (
       <div className="reviewStar">
         <div className="starAvgWrap">
           <div>
-            <div className="starAvg">{starAvg()}</div>
+            <div className="starAvg">{ratingAvg}</div>
             <span>{total}개 리뷰 평점</span>
           </div>
         </div>
@@ -98,7 +91,10 @@ export default class ReviewStar extends Component {
                 <div className="starBar">
                   <div
                     className="innerStarBar redStarBar"
-                    style={{ width: (100 / total) * starArr[index] + 'px' }}
+                    style={{
+                      width:
+                        (100 / total) * starArr[index] * (total * 2) + 'px',
+                    }}
                   ></div>
                 </div>
                 <span>({starArr[index]})</span>
