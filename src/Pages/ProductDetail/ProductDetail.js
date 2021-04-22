@@ -49,15 +49,12 @@ class ProductDetail extends Component {
     const colorId = localStorage.getItem('colorId');
     const sizeId = localStorage.getItem('sizeId');
     const bundleId = localStorage.getItem('bundleId');
-    const { price, bundlePrice, count } = this.state;
-
-    console.log((Number(price) + Number(bundlePrice)) * count);
+    const { price, bundlePrice, count, discountRate } = this.state;
 
     fetch(`${API}/cart`, {
       method: 'POST',
       headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxN30.MhiiQX5r1bcFbPI5DpQpwXiZ9SzSgnXL_1rgJHnenIo',
+        Authorization: localStorage.getItem('access_token'),
       },
       body: JSON.stringify({
         total_price: (Number(price) + Number(bundlePrice)) * count,
