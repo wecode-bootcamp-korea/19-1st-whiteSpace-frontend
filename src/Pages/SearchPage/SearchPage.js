@@ -47,10 +47,7 @@ class SearchPage extends Component {
     return (
       <>
         {noResult ? (
-          <ProductWrap
-            category="noResult"
-            text="검색한 결과가 없습니다."
-          ></ProductWrap>
+          <ProductWrap category="noResult" text="검색한 결과가 없습니다." />
         ) : (
           <ProductWrap category="search" text={searchKeyword}>
             <ProductList type="category" productArr={productArr} />
