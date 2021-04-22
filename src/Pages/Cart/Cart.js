@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { SURVER_IP } from '../../config';
+import { SERVER_IP } from '../../config';
 import Nav from '../../Components/Nav/Nav';
 import TableWrap from '../Order/Components/TableWrap/TableWrap';
 import CartTotalPrice from './Component/CartTotalPrice';
@@ -8,25 +8,21 @@ import CartButton from './Component/CartButton';
 import Checkbox from './Component/Checkbox';
 import './Cart.scss';
 
-const num = 2;
-
 export class Cart extends Component {
   constructor() {
     super();
     this.state = {
       cartData: [],
-      quantity: 0,
       totalPrice: 0,
-      deliveryPrice: 0,
+      deliveryPrice: 2500,
       cartId: '',
       allCartSelect: false,
     };
-    this.quantityRef = React.createRef();
   }
 
   getBackDataCart = () => {
     // fetch('data/cartData.json')
-    fetch(SURVER_IP + '/cart', {
+    fetch(SERVER_IP + '/cart', {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -37,12 +33,12 @@ export class Cart extends Component {
         if (data.cart.length > 0) {
           const addCartArr = [];
 
-          data.cart.map(cartData =>
+          for (let i = 0; i < data.cart.length; i++) {
             addCartArr.push({
               isSelect: false,
-              ...cartData,
-            })
-          );
+              ...data.cart[i],
+            });
+          }
 
           this.setState({
             cartId: data.cart_id,
@@ -58,6 +54,7 @@ export class Cart extends Component {
     this.props.history.push(`order/${this.state.cartId}`);
   };
 
+  // 체크박스를 set으로 관리하는 것을 본 적이 있어 일단 추가해둠
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
@@ -74,28 +71,20 @@ export class Cart extends Component {
     } else {
       this.selectedCheckboxes.add(label);
     }
-
-    console.log(label);
-    // console.log(e);
   };
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
-    console.log(formSubmitEvent);
     for (const checkbox of this.selectedCheckboxes) {
-      console.log(checkbox, 'is selected.');
     }
   };
 
   handleDelete = index => {
     const dataArr = this.state.cartData;
     const deleteDataArr = dataArr[index].order_product_id;
-    // console.log(deleteDataArr);
 
-    // DELETE 10.58.7.33:8000/cart/item_id=2,5,8
-
-    fetch(SURVER_IP + `/cart?item_id=${deleteDataArr}`, {
+    fetch(SERVER_IP + `/cart?item_id=${deleteDataArr}`, {
       method: 'DELETE',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -103,22 +92,19 @@ export class Cart extends Component {
     })
       .then(res => res) // or res.json()
       .then(res => {
-        console.log(res.MESSAGE);
+        // console.log(res.MESSAGE);
         this.getBackDataCart();
       });
   };
 
   handelQuantity = (e, changeNum, index) => {
-    const { quantityRef } = this;
     if (changeNum === -1 && this.state.cartData[index].quantity <= 0) {
       return;
     }
 
     const changeId = this.state.cartData[index].order_product_id;
-    // console.log('fetch - index : ' + index);
-    // console.log(changeNum);
 
-    fetch(SURVER_IP + '/cart/' + changeId, {
+    fetch(SERVER_IP + '/cart/' + changeId, {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -129,24 +115,10 @@ export class Cart extends Component {
     })
       .then(res => res) // or res.json()
       .then(res => {
-        // console.log(res);
-        // console.log(res.MESSAGE);
         this.getBackDataCart();
       });
 
-    quantityRef.current.value = changeNum;
-  };
-
-  priceComma = price => {
-    const won = Math.floor(price);
-
-    return won.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  };
-
-  changeQuantity = (e, index) => {
-    const { cartData } = this.state;
-
-    const sendQuantity = cartData[index].quantity;
+    e.target.value = changeNum;
   };
 
   allCheckClick = e => {
@@ -161,12 +133,7 @@ export class Cart extends Component {
   quantityOnChange = (e, index) => {
     const beforeNum = this.state.cartData[index].quantity;
     const newNum = Number(e.target.value);
-    // console.log(e);
-    // console.log(index);
     const postNum = newNum - beforeNum;
-
-    console.log(e.target);
-    console.log(e.target.value);
 
     if (newNum > 0) {
       e.target.value = newNum;
@@ -178,7 +145,7 @@ export class Cart extends Component {
     } else {
       e.target.value = 0;
       alert('잘못된 값을 입력하셨습니다.');
-      return false;
+      return;
     }
 
     this.handelQuantity(e, postNum, index);
@@ -191,7 +158,6 @@ export class Cart extends Component {
   render() {
     const {
       cartData,
-      quantity,
       totalPrice,
       deliveryPrice,
       cartId,
@@ -200,14 +166,13 @@ export class Cart extends Component {
     const url = '/order/' + { cartId };
     // console.log(cartId);
     const {
-      priceComma,
       handleDelete,
       handelQuantity,
       quantityOnChange,
       goToOrder,
       allCartDelete,
-      quantityRef,
       checkInputQuantity,
+      quantityInput,
     } = this;
     const title =
       '일반상품' + (cartData.length > 0 ? ' (' + cartData.length + ')' : '');
@@ -263,12 +228,12 @@ export class Cart extends Component {
                         )}
                         {Number(cart.price_gap) !== 0 && (
                           <div className="priceGap">
-                            ({priceComma(cart.price_gap)})
+                            ({cart.price_gap.toLocaleString('ko')})
                           </div>
                         )}
                       </td>
                       <td>
-                        {priceComma(cart.default_price) + '원'}
+                        {(cart.default_price * 1).toLocaleString('ko') + '원'}
                         {/* + cart.order_product_id} */}
                       </td>
                       <td className="tbodyUpDownLine">
@@ -278,8 +243,7 @@ export class Cart extends Component {
                             maxLength="1"
                             value={cart.quantity > 0 ? cart.quantity : 0}
                             onChange={e => quantityOnChange(e, index)}
-                            onKeyDown={this.quantityInput}
-                            ref={quantityRef}
+                            onKeyDown={quantityInput}
                           />
                           <button onClick={e => handelQuantity(e, 1, index)}>
                             &#9650;
@@ -296,9 +260,10 @@ export class Cart extends Component {
                       </td>
                       {/* )} */}
                       <td>
-                        {priceComma(cart.default_price * cart.quantity) + '원'}
+                        {(cart.default_price * cart.quantity).toLocaleString(
+                          'ko'
+                        ) + '원'}
                       </td>
-                      {/* <td>{priceComma(cart.default_price * cart.quantity)}</td> */}
                       <td className="tbodyChiceLine">
                         <button onClick={() => handleDelete(index)}>
                           삭제
@@ -314,12 +279,13 @@ export class Cart extends Component {
                     </td>
                     <td colSpan="6">
                       <div className="totalPrice">
-                        {`상품구매금액 ${priceComma(
-                          totalPrice
-                        )} 배송비  ${priceComma(deliveryPrice)} = `}
+                        {`상품구매금액 ${totalPrice.toLocaleString(
+                          'ko'
+                        )} 배송비  ${deliveryPrice.toLocaleString('ko')} = `}
                         합계 :
                         <span>
-                          {priceComma(totalPrice + deliveryPrice) + '원'}
+                          {(totalPrice + deliveryPrice).toLocaleString('ko') +
+                            '원'}
                         </span>
                       </div>
                     </td>
@@ -343,14 +309,23 @@ export class Cart extends Component {
                 totalPrice: totalPrice,
                 deliveryPrice: deliveryPrice,
               }}
-              priceComma={priceComma}
             />
             <div className="cartButtonPosition">
-              {/* <Link to={url}> */}
-              <CartButton className="totalOrderButton" onClick={goToOrder}>
-                전체상품주문
-              </CartButton>
-              {/* </Link> */}
+              <Link
+                to={{
+                  pathname: '/order',
+                  state: {
+                    cartId: cartId,
+                    totalPrice: totalPrice,
+                    cartData: cartData,
+                    deliveryPrice: deliveryPrice,
+                  },
+                }}
+              >
+                <CartButton className="totalOrderButton" onClick={goToOrder}>
+                  전체상품주문
+                </CartButton>
+              </Link>
               {/* <CartButton
                 className="checkOrderButton"
                 onClick={this.handleFormSubmit}

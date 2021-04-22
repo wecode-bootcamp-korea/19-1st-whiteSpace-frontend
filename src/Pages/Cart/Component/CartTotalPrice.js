@@ -23,14 +23,16 @@ export default class CartTotalPrice extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>{priceComma(totalCartInfo.totalPrice) + '원'}</td>
-                <td>{'+' + priceComma(totalCartInfo.deliveryPrice)}</td>
+                <td>{totalCartInfo.totalPrice.toLocaleString('ko') + '원'}</td>
+                <td>
+                  {'+' + totalCartInfo.deliveryPrice.toLocaleString('ko')}
+                </td>
                 <td>
                   <p className="blue">
                     {'=' +
-                      priceComma(
+                      (
                         totalCartInfo.totalPrice + totalCartInfo.deliveryPrice
-                      ) +
+                      ).toLocaleString('ko') +
                       '원'}
                   </p>
                 </td>

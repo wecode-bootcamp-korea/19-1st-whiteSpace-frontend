@@ -8,21 +8,8 @@ import Signup from './Pages/Signup/Signup';
 import Welcome from './Pages/Signup/Welcome/Welcome';
 import CategoryProduct from './Pages/CategoryProduct/CategoryProduct';
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
-import TopButton from './Components/TopButton/TopButton';
-import Footer from './Components/Footer/Footer';
 import Cart from './Pages/Cart/Cart';
 import Order from './Pages/Order/Order';
-
-import InfomationWrap from './Components/InfomationWrap/InfomationWrap';
-import Paging from './Components/Paging/Paging';
-import ProductWrap from './Components/ProductWrap/ProductWrap';
-
-import OrderComplete from './Pages/Order/Components/OrderComplete/OrderComplete';
-import OrderInfo from './Pages/Order/Components/OrderInfo/OrderInfo';
-import PayInfo from './Pages/Order/Components/PayInfo/PayInfo';
-import ShippingLocation from './Pages/Order/Components/ShippingLocation/ShippingLocation';
-import TableWrap from './Pages/Order/Components/TableWrap/TableWrap';
-import TotalPrice from './Pages/Order/Components/TotalPrice/TotalPrice';
 
 export default class Routes extends Component {
   render() {
