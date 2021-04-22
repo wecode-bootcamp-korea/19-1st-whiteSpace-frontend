@@ -28,7 +28,6 @@ export default class AddReview extends Component {
     fetch('http://10.58.5.243:8000/products/2/reviews/auth')
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
         if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
           e.target.disabled = true;
           alert('구매한 회원만 작성하실 수 있습니다.');
@@ -110,10 +109,6 @@ export default class AddReview extends Component {
   };
 
   fetchReview = (newReview, formData) => {
-    // formdata 확인방법
-    // for (let [key, value] of formData) {
-    //   console.log(key, value);
-    // }
     fetch('http://10.58.2.3:8000/products/2/reviews', {
       method: 'POST',
       headers: {

@@ -16,22 +16,6 @@ export default class ProductReview extends Component {
     };
   }
   componentDidMount() {
-    // fetch('data/review.json')
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({
-    //       reviewArr: data.reviews,
-    //       productName: data.product_name,
-    //       productUrl: data.product_url,
-    //       starArr: [
-    //         data.five_star,
-    //         data.four_star,
-    //         data.three_star,
-    //         data.two_star,
-    //         data.one_star,
-    //       ],
-    //     });
-    //   });
     fetch('http://10.58.5.243:8000/products/2/reviews')
       .then(res => res.json())
       .then(data => {
