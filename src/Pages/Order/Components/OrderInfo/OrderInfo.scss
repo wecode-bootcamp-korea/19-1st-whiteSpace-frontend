@@ -6,6 +6,13 @@
   font-weight: bold;
 }
 
+.orderHeader {
+  padding-top: 10rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .orderInfo {
   @extend %flexCenter;
   padding-top: 3rem;

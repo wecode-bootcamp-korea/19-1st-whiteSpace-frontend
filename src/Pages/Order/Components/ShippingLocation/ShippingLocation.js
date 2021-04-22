@@ -5,7 +5,6 @@ import './ShippingLocation.scss';
 
 export default class ShippingLocation extends Component {
   render() {
-    const { status } = this.props;
     return (
       <div className="shippingLocation">
         <TableWrap title="배송지정보">

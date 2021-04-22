@@ -74,10 +74,9 @@ class ProductOpt extends Component {
             {colors.map((color, index) => {
               return (
                 <>
-                  <div className="colorNname">
+                  <div className="colorNname" key={index}>
                     <div
                       id={color.id}
-                      key={color.id}
                       className={
                         activeName === index
                           ? 'addBorder colorBox'
@@ -88,7 +87,7 @@ class ProductOpt extends Component {
                       }}
                       onClick={e => changeColor(e, index, color.name)}
                     ></div>
-                    <p key={index} className="selectedColorName">
+                    <p className="selectedColorName">
                       {activeName === index && color.name}
                     </p>
                   </div>

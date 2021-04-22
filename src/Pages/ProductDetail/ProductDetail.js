@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { API } from '../../config';
 import ProductSubImg from './Components/ProductSubImg';
 import ProductDesc from './Components/ProductDesc';
@@ -183,4 +184,4 @@ class ProductDetail extends Component {
   }
 }
 
-export default ProductDetail;
+export default withRouter(ProductDetail);

@@ -32,7 +32,6 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
           cartId: data.cart_id,
           cartData: data.cart,
@@ -43,7 +42,7 @@ export class Cart extends Component {
   };
 
   goToOrder = () => {
-    this.props.history.push(`order/${this.state.cartId}`);
+    this.props.history.push(`/order/${this.state.cartId}`);
   };
 
   componentWillMount = () => {
@@ -60,9 +59,6 @@ export class Cart extends Component {
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
-
-    for (const checkbox of this.selectedCheckboxes) {
-    }
   };
 
   handleDelete = index => {
@@ -110,7 +106,6 @@ export class Cart extends Component {
     //   checkArr.push(checkbox);
     // }
     // setItem;
-    // console.log(e);
   };
   quantityOnChange = (e, index) => {
     const beforeNum = this.state.cartData[index].quantity;
@@ -136,29 +131,47 @@ export class Cart extends Component {
     e.target.value = '';
   };
 
+  allCartDelete = e => {
+    const dataArr = this.state.cartData;
+    let deleteData = '';
+    // dataArr[index].order_product_id;
+
+    if (!(dataArr.length > 0)) {
+      // alert('삭제할 정보가 없습니다');
+      return;
+    }
+
+    for (let i = 0; i < dataArr.length; i++) {
+      deleteData += dataArr[i].order_product_id;
+
+      i !== dataArr.length - 1 && (deleteData += ',');
+    }
+
+    fetch(`${API}/cart?item_id=${deleteData}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
+      .then(res => res) // or res.json()
+      .then(res => {
+        // console.log(res.MESSAGE);
+        this.getBackDataCart();
+      });
+  };
+
   render() {
-    const {
-      cartData,
-      totalPrice,
-      deliveryPrice,
-      cartId,
-      allCartSelect,
-    } = this.state;
-    const url = '/order/' + { cartId };
-    // console.log(cartId);
+    const { cartData, totalPrice, deliveryPrice, cartId } = this.state;
     const {
       handleDelete,
       handelQuantity,
       quantityOnChange,
-      goToOrder,
       allCartDelete,
-      checkInputQuantity,
       quantityInput,
     } = this;
     const title =
       '일반상품' +
       (cartData && cartData.length > 0 ? ' (' + cartData.length + ')' : '');
-    let sumPrice = 0;
     return (
       <>
         <Nav />
@@ -187,7 +200,7 @@ export class Cart extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {cartData?.map((cart, index) => (
+                  {cartData.map((cart, index) => (
                     <tr key={cart.order_product_id}>
                       {/* <td className="tbodyCheckBoxLine">
                         <input type="checkbox" />
@@ -282,7 +295,11 @@ export class Cart extends Component {
                 <CartButton>x 삭제하기</CartButton>
               </div> */}
               <div></div>
-              <CartButton className="clearCart" onClick={allCartDelete}>
+              <CartButton
+                className="clearCart"
+                onClick={allCartDelete}
+                disabled={cartData.length === 0}
+              >
                 장바구니비우기
               </CartButton>
             </div>
@@ -305,7 +322,7 @@ export class Cart extends Component {
                   },
                 }}
               >
-                <CartButton className="totalOrderButton" onClick={goToOrder}>
+                <CartButton className="totalOrderButton" blockButton={false}>
                   전체상품주문
                 </CartButton>
               </Link>
@@ -316,7 +333,10 @@ export class Cart extends Component {
                 선택상품주문
               </CartButton> */}
               <Link to="/">
-                <CartButton className="countineShoppingButton">
+                <CartButton
+                  className="countineShoppingButton"
+                  blockButton={false}
+                >
                   쇼핑계속하기
                 </CartButton>
               </Link>

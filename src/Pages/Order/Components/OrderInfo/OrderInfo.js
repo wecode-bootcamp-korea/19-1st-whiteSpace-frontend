@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TableWrap from '../TableWrap/TableWrap';
-import { ORDERCOMPLETE } from '../../../../config';
+// import { ORDERCOMPLETE } from '../../../../config';
 import './OrderInfo.scss';
 
 export default class OrderInfo extends Component {
@@ -39,8 +39,8 @@ export default class OrderInfo extends Component {
   // };
 
   render() {
-    const { goToPay } = this;
-    const cartId = this.props.location.state.cartId;
+    // const { goToPay } = this;
+    // const cartId = this.props.location.state.cartId;
     const totalPrice = this.props.location.state.totalPrice;
     const deliveryPrice = this.props.location.state.deliveryPrice;
     const data = this.props.location.state.cartData;

@@ -68,6 +68,8 @@
         .tbodyProductLine,
         tfoot {
           text-align: left;
+
+          .bundleName,
           .priceGap {
             color: $subTitleColor;
             font-size: 0.8rem;
@@ -107,10 +109,6 @@
               left: 25px;
             }
           }
-        }
-        .tbodyDelivery {
-          // border-left: 1px solid #ededed;
-          // border-right: 1px solid #ededed;
         }
 
         .tbodyChiceLine {
@@ -179,6 +177,7 @@
       .clearCart {
         padding: 1.5vh 1.5vw;
         background-color: $white;
+        cursor: pointer;
         color: $black;
       }
     }
@@ -191,7 +190,7 @@
       > div {
         margin: 0 3px;
 
-        > div {
+        > button {
           &:hover {
             background-color: #ccc;
             color: $white;

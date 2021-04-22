@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { API } from '../../../../config';
 import AddReview from '../AddReview/AddReview';
 import ReviewStar from '../ReviewStar/ReviewStar';
 import ReviewList from '../ReviewList/ReviewList';
 import './ProductReview.scss';
 
-export default class ProductReview extends Component {
+class ProductReview extends Component {
   constructor() {
     super();
     this.state = {
@@ -18,13 +19,15 @@ export default class ProductReview extends Component {
     };
   }
   componentDidMount() {
-    fetch(`${API}/products/2/reviews`)
+    const productId = this.props.match.params.productId;
+
+    fetch(`${API}/products/${productId}/reviews`)
       .then(res => res.json())
       .then(data => {
         this.setState({
           reviewArr: data.reviews,
           count: data.count,
-          productName: data.product_name,
+          productName: data.reviews[0].product_name,
           productUrl: data.reviews[0].thumbnail_url,
           starArr: [data.five, data.four, data.three, data.two, data.one],
           ratingAvg: data.average_rating,
@@ -62,3 +65,5 @@ export default class ProductReview extends Component {
     );
   }
 }
+
+export default withRouter(ProductReview);
