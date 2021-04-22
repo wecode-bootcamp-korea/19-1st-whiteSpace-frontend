@@ -22,9 +22,9 @@ export default class OrderComplete extends Component {
           </div>
         </InfomationWrap>
         <PayInfo />
-        <OrderInfo />
+        <OrderInfo status="complete" />
         <TotalPrice />
-        <ShippingLocation />
+        <ShippingLocation status="complete" />
       </>
     );
   }
