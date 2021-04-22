@@ -13,11 +13,7 @@ export default class ShippingLocation extends Component {
               <tr>
                 <th>받으시는분</th>
                 <th>
-                  <input
-                    disabled={status === 'complete' && true}
-                    type="text"
-                    value="김남선"
-                  />
+                  <input type="text" value="김남선" disabled />
                 </th>
               </tr>
             </thead>
@@ -28,7 +24,7 @@ export default class ShippingLocation extends Component {
                   <p>
                     <input
                       disabled={status === 'complete' && true}
-                      type="number"
+                      type="text"
                       value="98765"
                     />
                   </p>
@@ -36,23 +32,25 @@ export default class ShippingLocation extends Component {
               </tr>
               <tr>
                 <td>주소</td>
-                <td>
+                <td classNam>
                   <input
                     disabled={status === 'complete' && true}
                     type="text"
                     className="addressInput"
-                    value="서울시 강남구 테헤란로 427 위워크 타워"
+                    value="서울시 강남구 테헤란로 427"
+                  />
+                  <input
+                    disabled={status === 'complete' && true}
+                    type="text"
+                    className="addressInput"
+                    value="위워크 타워 1층"
                   />
                 </td>
               </tr>
               <tr>
                 <td>휴대전화</td>
                 <td>
-                  <input
-                    disabled={status === 'complete' && true}
-                    type="phone"
-                    value="01012345678"
-                  />
+                  <input type="phone" value="01012345678" disabled />
                 </td>
               </tr>
             </tbody>
