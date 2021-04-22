@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { PRODUCT_DETAIL } from '../../config';
 import { CART } from '../../config';
+import { ORDER } from '../../config';
 import ProductSubImg from './Components/ProductSubImg';
 import ProductDesc from './Components/ProductDesc';
 import ProductOpt from './Components/ProductOpt';
 import ProductTotalPrice from './Components/ProductTotalPrice';
 import ProductBtn from './Components/ProductBtn';
 import ProductDescImg from './Components/ProductDescImg';
+import ProductReview from './Components/ProductReview/ProductReview';
 import './ProductDetail.scss';
 
 class ProductDetail extends Component {
@@ -22,6 +24,7 @@ class ProductDetail extends Component {
     descImgArr: [],
     index: 0,
     count: 1,
+    cart_id: '',
   };
 
   componentDidMount() {
@@ -50,6 +53,32 @@ class ProductDetail extends Component {
     const { price, bundlePrice, count } = this.state;
     fetch(
       { CART },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          total_price: (price + bundlePrice) * count,
+          products: [
+            {
+              product_id: productId,
+              bundle_id: bundleId,
+              color_id: colorId,
+              size_id: sizeId,
+              quantity: count,
+            },
+          ],
+        }),
+      }
+    );
+  };
+
+  goToOrder = () => {
+    const productId = this.props.location.match.params;
+    const colorId = localStorage.getItem('colorId');
+    const sizeId = localStorage.getItem('sizeId');
+    const bundleId = localStorage.getItem('bundleId');
+    const { price, bundlePrice, count } = this.state;
+    fetch(
+      { ORDER },
       {
         method: 'POST',
         body: JSON.stringify({
@@ -119,7 +148,14 @@ class ProductDetail extends Component {
       count,
       index,
     } = this.state;
-    const { incrQty, decrQty, delProduct, calBundlePrice, goToCart } = this;
+    const {
+      incrQty,
+      decrQty,
+      delProduct,
+      calBundlePrice,
+      goToCart,
+      goToOrder,
+    } = this;
     const { changeImg } = this;
     console.log('state::', this.state);
     const intPrice = parseInt(price.replace(',', ''));
@@ -160,10 +196,13 @@ class ProductDetail extends Component {
               intDcPrice={intDcPrice}
               intBundlePrice={intBundlePrice}
             />
-            <ProductBtn goToCart={goToCart} />
+            <ProductBtn goToCart={goToCart} goToOrder={goToOrder} />
           </div>
         </main>
         <ProductDescImg descImgArr={descImgArr} />
+        <div className="productDetail">
+          <ProductReview />
+        </div>
       </>
     );
   }

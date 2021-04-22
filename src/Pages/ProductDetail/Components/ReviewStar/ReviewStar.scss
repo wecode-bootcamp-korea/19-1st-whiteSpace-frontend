@@ -2,6 +2,7 @@
 
 .reviewStar {
   display: flex;
+  margin-bottom: 3rem;
   padding: 1rem;
   border: 1px solid $hoverColor;
   text-align: center;
@@ -41,8 +42,8 @@
       margin: 0.5rem 0 0.5rem 0;
 
       span {
-        margin: 0 0.2rem 0 0.2rem;
         width: 50px;
+        margin: 0 0.2rem 0 0.2rem;
         text-align: center;
       }
     }
@@ -51,6 +52,14 @@
       width: 500px;
       height: 1rem;
       background-color: $hoverColor;
+
+      .innerStarBar {
+        height: 100%;
+      }
+
+      .redStarBar {
+        background-color: $red;
+      }
     }
   }
 
@@ -64,6 +73,7 @@
     }
     .reviewThum {
       width: 50px;
+      height: 50px;
       margin: 0.2rem;
       filter: $border;
       -webkit-filter: grayscale(100%);
@@ -74,5 +84,98 @@
         -webkit-filter: grayscale(0%);
       }
     }
+  }
+
+  .modalReviewWrap {
+    display: flex;
+
+    div {
+      display: contents;
+      text-align: left;
+    }
+
+    .reviewImageWrap {
+      width: 100%;
+    }
+
+    .reviewContentWrap {
+      display: block;
+      padding: 3rem 1rem 0rem 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      overflow: auto;
+
+      > div {
+        display: flex;
+        justify-content: space-around;
+
+        div {
+          display: block;
+          width: 60%;
+          padding: 1rem;
+
+          p {
+            padding-top: 0.2rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .reviewAuthor {
+            color: $hoverColor;
+          }
+        }
+      }
+
+      img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .reviewOption {
+        justify-content: center;
+        margin: 1rem 0;
+        padding: 1rem 0;
+        text-align: center;
+        border-top: 1px dashed $hoverColor;
+        border-bottom: 1px dashed $hoverColor;
+
+        span:first-child {
+          font-weight: bold;
+          text-overflow: ellipsis;
+        }
+        span:last-child {
+          padding-left: 2rem;
+          text-align: right;
+        }
+      }
+    }
+
+    .reviewContent {
+      height: 100px;
+      margin: 1.5rem 0;
+      padding: 0 1.5rem;
+      color: $titleColor;
+      line-height: 1.8;
+      font-weight: 100;
+    }
+
+    img {
+      width: 50%;
+      margin: 0;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $hoverColor;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
   }
 }

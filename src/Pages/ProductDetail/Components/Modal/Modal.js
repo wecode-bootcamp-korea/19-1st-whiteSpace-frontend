@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './Modal.scss';
 
 export default class Modal extends Component {

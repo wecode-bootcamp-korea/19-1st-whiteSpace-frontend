@@ -1,7 +1,7 @@
 @import url('//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
 @import '../../../../Styles/common.scss';
 
-.reviewWrap {
+.addReviewWrap {
   width: 100%;
   margin-bottom: 3rem;
   font-size: 0.8rem;
@@ -30,9 +30,21 @@
     .reviewImageWrap {
       display: inline-block;
       position: relative;
-      margin-right: 0.5rem;
       width: 70px;
       height: 70px;
+      margin-right: 0.5rem;
+      text-align: right;
+
+      button {
+        border: none;
+        background-color: transparent;
+        padding: 0 0.2rem;
+        cursor: pointer;
+
+        i {
+          font-size: 0.8rem;
+        }
+      }
 
       img {
         width: 100%;
@@ -100,14 +112,22 @@
 
     .addPhoto {
       display: inline-block;
+      margin: 0 0.5rem;
 
       label {
-        color: #999;
-        padding: 0.5rem 2.5rem 0.5rem 2.5rem;
+        color: $border;
         margin-right: 1rem;
+        padding: 0.5rem 2.5rem 0.5rem 2.5rem;
         background-color: $white;
         border: 1px solid $hoverColor;
         cursor: pointer;
+      }
+
+      .addPhotoInput {
+        border: none;
+        border-bottom: 1px solid $hoverColor;
+        font-size: 0.8rem;
+        padding: 0.2rem 1rem;
       }
     }
 

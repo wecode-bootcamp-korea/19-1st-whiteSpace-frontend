@@ -11,19 +11,18 @@ export default class Product extends Component {
   }
 
   goToProductDetail = id => {
-    // console.log(id);
     const { history } = this.props;
     history.push(`/products/${id}`);
   };
 
   componentDidMount() {
-    fetch('data/productData.json')
-      .then(res => res.json())
-      .then(productData => {
-        this.setState({
-          productArr: productData,
-        });
-      });
+    // fetch('data/productData.json')
+    //   .then(res => res.json())
+    //   .then(productData => {
+    //     this.setState({
+    //       productArr: productData,
+    //     });
+    //   });
   }
 
   render() {
