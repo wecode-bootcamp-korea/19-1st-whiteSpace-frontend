@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Login from './Pages/Login/Login';
 import Nav from './Components/Nav/Nav';
-import ProductDetail from './Pages/ProductDetail/ProductDetail';
+import Popup from './Components/Nav/Popup';
 import Main from './Pages/Main/Main';
+import Login from './Pages/Login/Login';
 import Signup from './Pages/Signup/Signup';
+import Welcome from './Pages/Signup/Welcome/Welcome';
+import CategoryProduct from './Pages/CategoryProduct/CategoryProduct';
+import ProductDetail from './Pages/ProductDetail/ProductDetail';
+import TopButton from './Components/TopButton/TopButton';
 import Footer from './Components/Footer/Footer';
 import Cart from './Pages/Cart/Cart';
 import Order from './Pages/Order/Order';
@@ -24,26 +28,17 @@ export default class Routes extends Component {
   render() {
     return (
       <Router>
+        <Popup />
+        <Nav />
         <Switch>
-          <Route exact path="/" component={Cart} />
-          <Route exact path="/products" component={ProductDetail} />
-
-          <Route exact path="/order" component={OrderComplete} />
-          <Route exact path="/order:id" component={OrderComplete} />
-          <Route exact path="/oi" component={OrderInfo} />
-          <Route exact path="/pi" component={PayInfo} />
-          <Route exact path="/sl" component={ShippingLocation} />
-          <Route exact path="/tw" component={TableWrap} />
-          <Route exact path="/tp" component={TotalPrice} />
-          <Route exact path="/o" component={Order} />
-          {/* 
+          <Route exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />
-        */}
-          <Route exact path="/iw" component={InfomationWrap} />
-          <Route exact path="/p" component={Paging} />
-          <Route exact path="/pw" component={ProductWrap} />
-
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/welcome" component={Welcome} />
+          <Route exact path="/category" component={CategoryProduct} />
+          <Route exact path="/category/:id" component={CategoryProduct} />
+          <Route exact path="/products/:productId" component={ProductDetail} />
         </Switch>
       </Router>
     );
