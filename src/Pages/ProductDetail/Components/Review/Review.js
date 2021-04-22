@@ -58,7 +58,7 @@ export default class Review extends Component {
               <p className="content">{content}</p>
               <div>
                 <p>작성자</p>
-                <p>{author.slice(0, -3) + '*'.repeat(3)}</p>
+                <p>{author.slice(0, -2) + '*'.repeat(2)}</p>
               </div>
             </div>
             <div className="reviewImage">

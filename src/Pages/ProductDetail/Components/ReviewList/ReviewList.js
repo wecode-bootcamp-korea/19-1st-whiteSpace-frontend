@@ -21,12 +21,12 @@ export default class ReviewList extends Component {
           <span> | </span>
           <span className="starSortingList">별점순</span>
         </header>
-        {reviewArr.map(review => {
-          const { id, rating, text, author, image_urls } = review;
+        {reviewArr.map((review, index) => {
+          const { rating, text, author, image_urls } = review;
           return (
             <Review
-              key={id}
-              id={id}
+              key={index}
+              id={index}
               star={rating}
               content={text}
               author={author}

@@ -12,6 +12,7 @@ export default class ProductReview extends Component {
       starArr: [],
       productName: '',
       productUrl: '',
+      ratingAvg: 0,
     };
   }
   componentDidMount() {
@@ -40,16 +41,25 @@ export default class ProductReview extends Component {
           productName: data.product_name,
           productUrl: data.reviews[0].thumbnail_url,
           starArr: [data.five, data.four, data.three, data.two, data.one],
+          ratingAvg: data.average_rating,
         });
       });
   }
   render() {
-    const { reviewArr, productName, productUrl, starArr, count } = this.state;
+    const {
+      reviewArr,
+      productName,
+      productUrl,
+      starArr,
+      count,
+      ratingAvg,
+    } = this.state;
     return (
       <>
         <AddReview />
         <ReviewStar
           total={count}
+          ratingAvg={ratingAvg}
           starArr={starArr}
           productName={productName}
           productUrl={productUrl}
