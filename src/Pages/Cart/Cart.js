@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { API } from '../../config';
+import { SERVER_IP } from '../../config';
 import Nav from '../../Components/Nav/Nav';
 import TableWrap from '../Order/Components/TableWrap/TableWrap';
 import CartTotalPrice from './Component/CartTotalPrice';
@@ -22,7 +22,7 @@ export class Cart extends Component {
 
   getBackDataCart = () => {
     // fetch('data/cartData.json')
-    fetch(`${API}/cart`, {
+    fetch(SERVER_IP + '/cart', {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -30,23 +30,12 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.cart.length > 0) {
-          const addCartArr = [];
-
-          for (let i = 0; i < data.cart.length; i++) {
-            addCartArr.push({
-              isSelect: false,
-              ...data.cart[i],
-            });
-          }
-
-          this.setState({
-            cartId: data.cart_id,
-            cartData: addCartArr,
-            deliveryPrice: 2500,
-            totalPrice: Number(data.total_price),
-          });
-        }
+        this.setState({
+          cartId: data.cart_id,
+          cartData: data.cart,
+          deliveryPrice: 2500,
+          totalPrice: Number(data.total_price),
+        });
       });
   };
 
@@ -58,13 +47,11 @@ export class Cart extends Component {
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
-
   componentDidMount() {
-    // fetch(`${API}/cart`)
+    // fetch('http://10.58.7.33:8000/cart')
     // fetch('data/cartData.json')
     this.getBackDataCart();
   }
-
   toggleCheckbox = label => {
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
@@ -84,7 +71,7 @@ export class Cart extends Component {
     const dataArr = this.state.cartData;
     const deleteDataArr = dataArr[index].order_product_id;
 
-    fetch(`${API}/cart?item_id=${deleteDataArr}`, {
+    fetch(SERVER_IP + `/cart?item_id=${deleteDataArr}`, {
       method: 'DELETE',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -96,7 +83,6 @@ export class Cart extends Component {
         this.getBackDataCart();
       });
   };
-
   handelQuantity = (e, changeNum, index) => {
     if (changeNum === -1 && this.state.cartData[index].quantity <= 0) {
       return;
@@ -104,7 +90,7 @@ export class Cart extends Component {
 
     const changeId = this.state.cartData[index].order_product_id;
 
-    fetch(`${API}/cart/${changeId}`, {
+    fetch(SERVER_IP + '/cart/' + changeId, {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -129,12 +115,10 @@ export class Cart extends Component {
     // setItem;
     // console.log(e);
   };
-
   quantityOnChange = (e, index) => {
     const beforeNum = this.state.cartData[index].quantity;
     const newNum = Number(e.target.value);
     const postNum = newNum - beforeNum;
-
     if (newNum > 0) {
       e.target.value = newNum;
       // if (newNum > 10) {
@@ -310,6 +294,7 @@ export class Cart extends Component {
                 deliveryPrice: deliveryPrice,
               }}
             />
+
             <div className="cartButtonPosition">
               <Link
                 to={{
