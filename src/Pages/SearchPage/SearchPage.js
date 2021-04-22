@@ -1,5 +1,5 @@
-import { fireEvent } from '@testing-library/dom';
 import React, { Component } from 'react';
+import { API } from '../../config';
 import { withRouter } from 'react-router-dom';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import ProductList from '../ProductList/ProductList';
@@ -25,7 +25,7 @@ class SearchPage extends Component {
   fetchProduct = () => {
     const searchKeyword = this.props.location.search.split('=')[1];
 
-    fetch(`http://10.58.2.3:8000/products/search?keyword=${searchKeyword}`)
+    fetch(`${API}/products/search?keyword=${searchKeyword}`)
       .then(res => res.json())
       .then(searchList => {
         const { products } = searchList;
@@ -47,10 +47,7 @@ class SearchPage extends Component {
     return (
       <>
         {noResult ? (
-          <ProductWrap
-            category="noResult"
-            text="검색한 결과가 없습니다."
-          ></ProductWrap>
+          <ProductWrap category="noResult" text="검색한 결과가 없습니다." />
         ) : (
           <ProductWrap category="search" text={searchKeyword}>
             <ProductList type="category" productArr={productArr} />

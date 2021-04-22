@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { popUpImage } from '../../config';
+import { popUpImage, API } from '../../config';
 import Slider from './Components/Slider/Slider';
 import BestProduct from './Components/BestProduct/BestProduct';
 import Modal from '../ProductDetail/Components/Modal/Modal';
@@ -20,7 +20,7 @@ export default class Main extends Component {
 
   //백이랑 통신하는 코드
   // componentDidMount() {
-  //   fetch('http://10.58.0.130:8000')
+  //   fetch(`${API}`)
   //     .then(res => res.json())
   //     .then(data => {
   //       this.setState({

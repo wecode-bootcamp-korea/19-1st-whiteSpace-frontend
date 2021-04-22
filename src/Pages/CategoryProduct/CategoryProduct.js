@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { API } from '../../config';
 import ProductList from '../ProductList/ProductList';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import Paging from '../../Components/Paging/Paging';
@@ -34,7 +35,7 @@ class CategoryProduct extends Component {
       });
 
     // fetch(
-    //   `http://10.58.2.3:8000/products?${
+    //   `${API}/products?${
     //     categoryId ? `category=${categoryId}&` : ``
     //   }page=1`
     // )
@@ -58,7 +59,7 @@ class CategoryProduct extends Component {
 
     if (prevProps.location.pathname !== this.props.location.pathname) {
       //   fetch(
-      //     `http://10.58.2.3:8000/products?${
+      //     `${API}/products?${
       //       categoryId ? `category=${categoryId}&` : ``
       //     }page=1`
       //   )
@@ -83,7 +84,7 @@ class CategoryProduct extends Component {
     }
 
     fetch(
-      `http://10.58.2.3:8000/products${
+      `${API}/products${
         categoryId ? `?category=${categoryId}&` : `?`
       }page=${idx}`
     )
