@@ -37,8 +37,6 @@ class CategoryProduct extends Component {
   fetchProduct = idx => {
     let categoryId = this.props.match.params.categoryId;
 
-    console.log('categoryId', categoryId);
-
     if (categoryId === undefined) {
       categoryId = 0;
     }
