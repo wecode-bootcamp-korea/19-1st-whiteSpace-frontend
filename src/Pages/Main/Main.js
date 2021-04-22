@@ -13,27 +13,27 @@ export default class Main extends Component {
     };
   }
   //백이랑 통신하는 코드
-  // componentDidMount() {
-  //   fetch('http://10.58.0.130:8000')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       this.setState({
-  //         mainImageArr: data.banner_images,
-  //         productArr: data.best_sellers,
-  //       });
-  //     });
-  // }
-
   componentDidMount() {
-    fetch('data/productData.json')
+    fetch('http://10.58.5.243:8000')
       .then(res => res.json())
       .then(data => {
         this.setState({
-          mainImageArr: data[0].banner_images,
-          productArr: data[0].best_sellers,
+          mainImageArr: data.banner_images,
+          productArr: data.best_sellers,
         });
       });
   }
+
+  // componentDidMount() {
+  //   fetch('data/productData.json')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       this.setState({
+  //         mainImageArr: data[0].banner_images,
+  //         productArr: data[0].best_sellers,
+  //       });
+  //     });
+  // }
   render() {
     const { mainImageArr, productArr } = this.state;
     return (

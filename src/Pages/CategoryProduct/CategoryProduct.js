@@ -22,33 +22,6 @@ class CategoryProduct extends Component {
     const { currentIdx } = this.state;
     const { fetchProduct } = this;
 
-    fetch('data/categoryProductData.json')
-      .then(res => res.json())
-      .then(productList => {
-        console.log(productList);
-        const { products, category } = productList;
-        this.setState({
-          productArr: products,
-          categoryName: category,
-        });
-      });
-
-    // fetch(
-    //   `http://10.58.2.3:8000/products?${
-    //     categoryId ? `category=${categoryId}&` : ``
-    //   }page=1`
-    // )
-    //   .then(res => res.json())
-    //   .then(productList => {
-    //     console.log(productList);
-    //     const { products, category, count } = productList;
-    //     this.setState({
-    //       productArr: products,
-    //       categoryName: category,
-    //       totalAmount: count,
-    //     });
-    //   });
-
     fetchProduct(currentIdx);
   }
 
@@ -57,21 +30,6 @@ class CategoryProduct extends Component {
     const { fetchProduct } = this;
 
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      //   fetch(
-      //     `http://10.58.2.3:8000/products?${
-      //       categoryId ? `category=${categoryId}&` : ``
-      //     }page=1`
-      //   )
-      //     .then(res => res.json())
-      //     .then(productList => {
-      //       const { products, category, count } = productList;
-      //       this.setState({
-      //         productArr: products,
-      //         categoryName: category,
-      //         totalAmount: count,
-      //       });
-      //     });
-      // }
       fetchProduct(currentIdx);
     }
   }
@@ -83,7 +41,7 @@ class CategoryProduct extends Component {
     }
 
     fetch(
-      `http://10.58.2.3:8000/products${
+      `http://10.58.5.243:8000/products${
         categoryId ? `?category=${categoryId}&` : `?`
       }page=${idx}`
     )

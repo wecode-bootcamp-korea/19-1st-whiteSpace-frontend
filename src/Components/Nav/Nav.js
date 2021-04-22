@@ -19,7 +19,7 @@ export class Nav extends Component {
     window.addEventListener('scroll', this.handleScroll);
     // fetch('data/category.json', {
     //(back-end와 통신 테스트 성공 - category 목록 받아오기)
-    fetch('http://10.58.2.3:8000/nav', {
+    fetch('http://10.58.5.243:8000/nav', {
       method: 'GET',
     })
       .then(res => res.json())
