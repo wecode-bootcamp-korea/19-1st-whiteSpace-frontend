@@ -81,7 +81,6 @@ export class Cart extends Component {
     })
       .then(res => res) // or res.json()
       .then(res => {
-        // console.log(res.MESSAGE);
         this.getBackDataCart();
       });
   };
@@ -116,7 +115,6 @@ export class Cart extends Component {
     //   checkArr.push(checkbox);
     // }
     // setItem;
-    // console.log(e);
   };
 
   quantityOnChange = (e, index) => {
@@ -153,7 +151,6 @@ export class Cart extends Component {
       allCartSelect,
     } = this.state;
     const url = '/order/' + { cartId };
-    // console.log(cartId);
     const {
       handleDelete,
       handelQuantity,
