@@ -9,6 +9,7 @@
 
   .starAvgWrap {
     @extend %flexCenter;
+    width: 15%;
     padding: 0.5rem 2rem 0.5rem 2rem;
 
     .starAvg {
@@ -27,7 +28,7 @@
 
   .starBarWrap {
     height: 100%;
-    padding: 0.5rem 2rem 0.5rem 2rem;
+    padding: 0.5rem;
     text-align: left;
     font-size: 0.8rem;
     color: $titleColor;
@@ -65,12 +66,9 @@
 
   .reviewThumWrap {
     @extend %flexCenter;
+    width: 20%;
     margin: 0 auto;
 
-    div {
-      width: 80%;
-      margin: 0 0.5rem 0 1.5rem;
-    }
     .reviewThum {
       width: 50px;
       height: 50px;

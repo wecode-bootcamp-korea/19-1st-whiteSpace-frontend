@@ -25,10 +25,14 @@ export default class AddReview extends Component {
   };
 
   onClickTextArea = e => {
-    if (true) {
-      // e.target.disabled = true;
-      // alert('로그인 후 작성하실 수 있습니다.');
-    }
+    fetch(`${API}/products/2/reviews/auth`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
+          e.target.disabled = true;
+          alert('구매한 회원만 작성하실 수 있습니다.');
+        }
+      });
   };
 
   deleteFile = file => {
