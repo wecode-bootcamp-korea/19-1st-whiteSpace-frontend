@@ -16,4 +16,15 @@
       width: 15%;
     }
   }
+
+  input {
+    font-size: 0.85rem;
+    border-radius: 0%;
+    border: 1px solid $hoverColor;
+  }
+
+  input.addressInput {
+    width: 25%;
+    margin-right: 0.5rem;
+  }
 }
