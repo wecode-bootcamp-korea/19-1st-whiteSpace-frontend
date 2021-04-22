@@ -81,11 +81,34 @@ export class Nav extends Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
+  logoutCheck = (urlName, menuName, id) => {
+    const state = {
+      pathname: urlName,
+      state: {
+        categoryId: id,
+      },
+    };
+
+    console.log(localStorage.getItem('access_token'));
+    // return;
+
+    if (
+      menuName === '로그아웃' &&
+      localStorage.getItem('access_token') !== null
+    ) {
+      localStorage.removeItem('access_token');
+      this.props.history.push(`/`);
+      return;
+    } else {
+      this.props.history.push(state);
+    }
+  };
+
   render() {
     const { categoryList, checkScrollTop } = this.state;
     const { searchInputChange, searchInputEnter, searchIconClick } = this;
     const rightMenuData =
-      localStorage.getItem('access_token').length > 0
+      localStorage.getItem('access_token') !== null
         ? LOGIN_STATE
         : NAV_RIGHT_MENU;
 
@@ -97,8 +120,16 @@ export class Nav extends Component {
             <Link to="/">여백 0100</Link>
           </h1>
 
-          <NavMenuList className="navLeftMenu" dataList={categoryList} />
-          <NavMenuList className="navRightMenu" dataList={rightMenuData} />
+          <NavMenuList
+            className="navLeftMenu"
+            dataList={categoryList}
+            onClick={this.logoutCheck}
+          />
+          <NavMenuList
+            className="navRightMenu"
+            dataList={rightMenuData}
+            onClick={this.logoutCheck}
+          />
           <div className="searchBox">
             <i className="fas fa-search" onClick={searchIconClick}></i>
             <input

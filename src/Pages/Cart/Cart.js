@@ -51,7 +51,7 @@ export class Cart extends Component {
   };
 
   goToOrder = () => {
-    this.props.history.push(`order/${this.state.cartId}`);
+    this.props.history.push(`/order/${this.state.cartId}`);
   };
 
   // 체크박스를 set으로 관리하는 것을 본 적이 있어 일단 추가해둠
