@@ -84,6 +84,11 @@ export class Nav extends Component {
   render() {
     const { categoryList, checkScrollTop } = this.state;
     const { searchInputChange, searchInputEnter, searchIconClick } = this;
+    const rightMenuData =
+      localStorage.getItem('access_token').length > 0
+        ? LOGIN_STATE
+        : NAV_RIGHT_MENU;
+
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <Popup />
@@ -93,7 +98,7 @@ export class Nav extends Component {
           </h1>
 
           <NavMenuList className="navLeftMenu" dataList={categoryList} />
-          <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
+          <NavMenuList className="navRightMenu" dataList={rightMenuData} />
           <div className="searchBox">
             <i className="fas fa-search" onClick={searchIconClick}></i>
             <input
@@ -123,6 +128,14 @@ const NAV_RIGHT_MENU = [
     id: 2,
     text: '회원가입',
     path: '/signup',
+  },
+];
+
+const LOGIN_STATE = [
+  {
+    id: 1,
+    text: '로그아웃',
+    path: '/',
   },
   {
     id: 3,

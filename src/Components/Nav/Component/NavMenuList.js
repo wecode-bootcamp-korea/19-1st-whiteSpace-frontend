@@ -5,6 +5,7 @@ import './NavMenuList.scss';
 export class navMenuList extends Component {
   render() {
     const { dataList, className } = this.props;
+    // console.log(dataList);
     return (
       <div className={className}>
         <ul>
@@ -14,7 +15,8 @@ export class navMenuList extends Component {
               className === 'navRightMenu'
                 ? data[keys[2]]
                 : '/category' + (!data[keys[0]] ? '' : '/' + data[keys[0]]);
-
+            console.log(urlName);
+            console.log(data[keys[0]]);
             return (
               <li key={data[keys[0]]}>
                 <Link

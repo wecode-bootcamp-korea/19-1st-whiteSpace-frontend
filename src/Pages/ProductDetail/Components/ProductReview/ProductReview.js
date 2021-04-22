@@ -32,17 +32,17 @@ export default class ProductReview extends Component {
     //       ],
     //     });
     //   });
-    fetch(`${API}/products/2/reviews`)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          reviewArr: data.reviews,
-          count: data.count,
-          productName: data.product_name,
-          productUrl: data.reviews[0].thumbnail_url,
-          starArr: [data.five, data.four, data.three, data.two, data.one],
-        });
-      });
+    // fetch(`${API}/products/2/reviews`)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.setState({
+    //       reviewArr: data.reviews,
+    //       count: data.count,
+    //       productName: data.product_name,
+    //       productUrl: data.reviews[0].thumbnail_url,
+    //       starArr: [data.five, data.four, data.three, data.two, data.one],
+    //     });
+    //   });
   }
   render() {
     const { reviewArr, productName, productUrl, starArr, count } = this.state;
