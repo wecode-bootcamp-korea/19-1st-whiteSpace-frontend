@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import TableWrap from '../TableWrap/TableWrap';
 import './PayMethod.scss';
 
-export default class PayMethod extends Component {
+class PayMethod extends Component {
   constructor() {
     super();
     this.state = {
@@ -20,6 +21,8 @@ export default class PayMethod extends Component {
     const { method } = this.state;
     const { handleInputChange } = this;
     const { goToPay } = this.props;
+    const totalPrice = this.props.location.state.totalPrice;
+    const deliveryPrice = this.props.location.state.deliveryPrice;
 
     return (
       <div className="payMethod">
@@ -89,7 +92,7 @@ export default class PayMethod extends Component {
                   </>
                 </td>
                 <td className="totalPrice">
-                  <span>159,600원</span>
+                  <span>{(totalPrice + deliveryPrice).toLocaleString()}원</span>
                 </td>
               </tr>
               <tr>
@@ -106,3 +109,5 @@ export default class PayMethod extends Component {
     );
   }
 }
+
+export default withRouter(PayMethod);

@@ -68,7 +68,7 @@ class AddressModal extends Component {
             <div className="zipCode">{zoneCode}</div>
             <div className="address">{fullAddress}</div>
             <div className="addressBox">
-              <input type="text" />
+              <input type="text" placeholder="상세주소를 입력해주세요." />
               <button type="button" onClick={this.handleOpenPost}>
                 <span>우편번호 찾기</span>
               </button>
