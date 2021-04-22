@@ -1,8 +1,19 @@
 @import '../../../../Styles/common.scss';
 
+.orderHeader {
+  padding-top: 10rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .orderInfo {
   @extend %flexCenter;
   padding-top: 3rem;
+
+  .orderHeader {
+    display: block;
+  }
 
   th,
   td {
