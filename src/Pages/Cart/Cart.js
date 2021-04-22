@@ -21,13 +21,13 @@ export class Cart extends Component {
   }
 
   getBackDataCart = () => {
-    fetch('data/cartData.json')
-      // fetch(SERVER_IP + '/cart', {
-      //   method: 'GET',
-      //   headers: {
-      //     Authorization: localStorage.getItem('access_token'),
-      //   },
-      // })
+    // fetch('data/cartData.json')
+    fetch(SERVER_IP + '/cart', {
+      method: 'GET',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
       .then(res => res.json())
       .then(data => {
         if (data.cart.length > 0) {
