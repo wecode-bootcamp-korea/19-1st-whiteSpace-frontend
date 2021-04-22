@@ -4,6 +4,9 @@ import './TotalPrice.scss';
 
 export default class TotalPrice extends Component {
   render() {
+    const totalPrice = this.props.location.state.totalPrice;
+    const deliveryPrice = this.props.location.state.deliveryPrice;
+
     return (
       <div className="totalPrice">
         <TableWrap title=" ">
@@ -16,9 +19,9 @@ export default class TotalPrice extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>159,600원</td>
+                <td>{totalPrice + deliveryPrice}원</td>
                 <td>
-                  <p className="blue">159,600원</p>
+                  <p className="blue">{totalPrice + deliveryPrice}원</p>
                 </td>
               </tr>
             </tbody>

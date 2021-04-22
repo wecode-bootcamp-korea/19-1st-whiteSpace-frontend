@@ -1,0 +1,51 @@
+@import '../../../../Styles/common.scss';
+.payMethod {
+  @extend %flexCenter;
+  padding: 3rem 0 5rem 0;
+  p {
+    padding: 0.5rem 0;
+    color: $blue;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  th,
+  td {
+    text-align: center;
+    &:last-child {
+      padding: 1rem;
+      background-color: $background;
+      border-left: 1px solid $hoverColor;
+    }
+  }
+  input[type='radio'] {
+    margin: 0 0.5rem;
+  }
+  .totalPrice {
+    text-align: right;
+    color: $blue;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .payBtn {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: $titleColor;
+    border: none;
+    color: $white;
+    cursor: pointer;
+  }
+  button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+  }
+  .payco {
+    background: #fa2829;
+    color: $white;
+  }
+  .kakao {
+    background: #fee500;
+    color: $black;
+  }
+}
