@@ -37,11 +37,11 @@ export default class ReviewStar extends Component {
         modalImage: image,
         modalId,
         modalStar:
-          '★'.repeat(reviewArr[modalId - 1].rating) +
-          '☆'.repeat(5 - reviewArr[modalId - 1].rating),
-        modalAutor: reviewArr[modalId - 1].author,
-        modalContents: reviewArr[modalId - 1].text,
-        modalOption: reviewArr[modalId - 1].bundle,
+          '★'.repeat(reviewArr[modalId].rating) +
+          '☆'.repeat(5 - reviewArr[modalId].rating),
+        modalAutor: reviewArr[modalId].author,
+        modalContents: reviewArr[modalId].text,
+        modalOption: reviewArr[modalId].bundle,
       });
     }
   };
@@ -144,7 +144,6 @@ export default class ReviewStar extends Component {
                 </div>
                 <div className="reviewOption">
                   <span>선택한 옵션 : </span>
-                  <span>{productName}</span>
                   <span>{modalOption === null ? '없음' : modalOption}</span>
                 </div>
                 <p className="reviewContent">{modalContents}</p>

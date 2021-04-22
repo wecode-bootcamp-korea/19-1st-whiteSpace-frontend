@@ -27,7 +27,7 @@ class ProductReview extends Component {
         this.setState({
           reviewArr: data.reviews,
           count: data.count,
-          productName: data.product_name,
+          productName: data.reviews[0].product_name,
           productUrl: data.reviews[0].thumbnail_url,
           starArr: [data.five, data.four, data.three, data.two, data.one],
           ratingAvg: data.average_rating,
