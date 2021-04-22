@@ -44,7 +44,7 @@ class ProductReview extends Component {
       ratingAvg,
     } = this.state;
     return (
-      <div className="productReview" id="review">
+      <div className="productReview">
         <AddReview />
         <ReviewStar
           total={count}

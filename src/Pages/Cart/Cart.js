@@ -5,7 +5,6 @@ import Nav from '../../Components/Nav/Nav';
 import TableWrap from '../Order/Components/TableWrap/TableWrap';
 import CartTotalPrice from './Component/CartTotalPrice';
 import CartButton from './Component/CartButton';
-import Checkbox from './Component/Checkbox';
 import './Cart.scss';
 
 export class Cart extends Component {
@@ -20,8 +19,11 @@ export class Cart extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getBackDataCart();
+  }
+
   getBackDataCart = () => {
-    // fetch('data/cartData.json')
     fetch(`${API}/cart`, {
       method: 'GET',
       headers: {
@@ -39,16 +41,13 @@ export class Cart extends Component {
       });
   };
 
-  // 체크박스를 set으로 관리하는 것을 본 적이 있어 일단 추가해둠
+  goToOrder = () => {
+    this.props.history.push(`/order/${this.state.cartId}`);
+  };
+
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
-
-  componentDidMount() {
-    // fetch(`${API}/cart`)
-    // fetch('data/cartData.json')
-    this.getBackDataCart();
-  }
 
   toggleCheckbox = label => {
     if (this.selectedCheckboxes.has(label)) {
@@ -60,16 +59,13 @@ export class Cart extends Component {
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
-
-    for (const checkbox of this.selectedCheckboxes) {
-    }
   };
 
   handleDelete = index => {
     const dataArr = this.state.cartData;
     const deleteDataArr = dataArr[index].order_product_id;
 
-    fetch(`${API}/cart?item_id=${deleteDataArr}`, {
+    fetch({ API } + `/cart?item_id=${deleteDataArr}`, {
       method: 'DELETE',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -80,7 +76,6 @@ export class Cart extends Component {
         this.getBackDataCart();
       });
   };
-
   handelQuantity = (e, changeNum, index) => {
     if (changeNum === -1 && this.state.cartData[index].quantity <= 0) {
       return;
@@ -88,7 +83,7 @@ export class Cart extends Component {
 
     const changeId = this.state.cartData[index].order_product_id;
 
-    fetch(`${API}/cart/${changeId}`, {
+    fetch({ API } + '/cart/' + changeId, {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -112,12 +107,10 @@ export class Cart extends Component {
     // }
     // setItem;
   };
-
   quantityOnChange = (e, index) => {
     const beforeNum = this.state.cartData[index].quantity;
     const newNum = Number(e.target.value);
     const postNum = newNum - beforeNum;
-
     if (newNum > 0) {
       e.target.value = newNum;
       // if (newNum > 10) {
@@ -168,24 +161,17 @@ export class Cart extends Component {
   };
 
   render() {
-    const {
-      cartData,
-      totalPrice,
-      deliveryPrice,
-      cartId,
-      allCartSelect,
-    } = this.state;
+    const { cartData, totalPrice, deliveryPrice, cartId } = this.state;
     const {
       handleDelete,
       handelQuantity,
       quantityOnChange,
       allCartDelete,
-      checkInputQuantity,
       quantityInput,
     } = this;
     const title =
-      '일반상품' + (cartData.length > 0 ? ' (' + cartData.length + ')' : '');
-    console.log('렌더');
+      '일반상품' +
+      (cartData && cartData.length > 0 ? ' (' + cartData.length + ')' : '');
     return (
       <>
         <Nav />
@@ -323,6 +309,7 @@ export class Cart extends Component {
                 deliveryPrice: deliveryPrice,
               }}
             />
+
             <div className="cartButtonPosition">
               <Link
                 to={{

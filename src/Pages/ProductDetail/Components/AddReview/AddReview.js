@@ -27,14 +27,14 @@ class AddReview extends Component {
 
   onClickTextArea = e => {
     const productId = this.props.match.params.productId;
-    // fetch(`${API}/products/${productId}/reviews/auth`)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
-    //       e.target.disabled = true;
-    //       alert('구매한 회원만 작성하실 수 있습니다.');
-    //     }
-    //   });
+    fetch(`${API}/products/${productId}/reviews/auth`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
+          e.target.disabled = true;
+          alert('구매한 회원만 작성하실 수 있습니다.');
+        }
+      });
   };
 
   deleteFile = file => {
