@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Review from './Components/Review/Review';
+import ProductReview from './Components/ProductReview/ProductReview';
 import './ProductDetail.scss';
 
 export default class ProductDetail extends Component {
   render() {
     return (
       <div className="productDetail">
-        <Review />
+        <ProductReview />
       </div>
     );
   }
