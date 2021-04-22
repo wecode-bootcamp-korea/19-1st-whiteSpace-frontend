@@ -11,7 +11,7 @@ import ProductDetail from './Pages/ProductDetail/ProductDetail';
 import SearchPage from './Pages/SearchPage/SearchPage';
 import Cart from './Pages/Cart/Cart';
 import Order from './Pages/Order/Order';
-import Tos from './Components/Footer/Component/Tos';
+import OrderComplete from './Pages/Order/Components/OrderComplete/OrderComplete';
 import TopButton from './Components/TopButton/TopButton';
 import Footer from './Components/Footer/Footer';
 
@@ -31,10 +31,11 @@ export default class Routes extends Component {
             path="/category/:categoryId"
             component={CategoryProduct}
           />
-          <Route exact path="/products/:produtId" component={ProductDetail} />
           <Route exact path="/search" component={SearchPage} />
+          <Route exact path="/products/:productId" component={ProductDetail} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/order" component={Order} />
+          <Route exact path="/orderComplete" component={OrderComplete} />
         </Switch>
         <TopButton />
         <Footer />
