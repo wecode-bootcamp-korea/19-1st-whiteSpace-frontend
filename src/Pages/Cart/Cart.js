@@ -156,7 +156,7 @@ export class Cart extends Component {
       i !== dataArr.length - 1 && (deleteData += ',');
     }
 
-    fetch(SERVER_IP + `/cart?item_id=${deleteData}`, {
+    fetch(`${API}/cart?item_id=${deleteData}`, {
       method: 'DELETE',
       headers: {
         Authorization: localStorage.getItem('access_token'),
