@@ -4,6 +4,9 @@ export const LOGIN = 'http://10.58.0.130:8000/users/sign_in';
 export const API = 'http://10.58.5.243:8000';
 export const popUpImage =
   'https://stylebyemilyhenderson.com/wp-content/uploads/2015/04/Blue-and-Green_GIF.gif';
+export const PRODUCT_DETAIL = 'http://10.58.7.33:8000/products';
+export const CART = 'http://10.58.7.33:8000/cart';
+export const ORDER = 'http://10.58.7.33:8000/order';
 
 export const left = {
   one: (

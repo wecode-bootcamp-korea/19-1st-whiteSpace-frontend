@@ -1,0 +1,26 @@
+@import '../../../Styles/common.scss';
+
+.productDesc {
+  border-bottom: 1px solid $hoverColor;
+  li {
+    margin-bottom: 10px;
+  }
+  .name {
+    margin-bottom: 15px;
+    color: $titleColor;
+    font-size: 1.4rem;
+  }
+  .price {
+    color: $subTitleColor;
+    text-decoration: line-through;
+  }
+
+  .dcPrice {
+    color: $black;
+  }
+  .shipping {
+    margin-bottom: 18px;
+    color: $subTitleColor;
+    font-size: 0.8rem;
+  }
+}
