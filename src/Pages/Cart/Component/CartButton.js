@@ -5,9 +5,13 @@ export default class CartButton extends Component {
   render() {
     return (
       <div className="CartButton">
-        <div className={this.props.className} onClick={this.props.onClick}>
+        <button
+          className={this.props.className}
+          onClick={this.props.onClick}
+          disabled={this.props.disabled}
+        >
           {this.props.children}
-        </div>
+        </button>
       </div>
     );
   }
