@@ -30,23 +30,12 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.cart.length > 0) {
-          const addCartArr = [];
-
-          for (let i = 0; i < data.cart.length; i++) {
-            addCartArr.push({
-              isSelect: false,
-              ...data.cart[i],
-            });
-          }
-
-          this.setState({
-            cartId: data.cart_id,
-            cartData: addCartArr,
-            deliveryPrice: 2500,
-            totalPrice: Number(data.total_price),
-          });
-        }
+        this.setState({
+          cartId: data.cart_id,
+          cartData: data.cart,
+          deliveryPrice: 2500,
+          totalPrice: Number(data.total_price),
+        });
       });
   };
 

@@ -18,7 +18,7 @@ export default class Main extends Component {
 
   //백이랑 통신하는 코드
   componentDidMount() {
-    fetch({ API })
+    fetch(`${API}/main`)
       .then(res => res.json())
       .then(data => {
         this.setState({
