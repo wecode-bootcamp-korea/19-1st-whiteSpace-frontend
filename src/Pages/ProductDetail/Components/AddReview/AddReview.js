@@ -25,7 +25,8 @@ export default class AddReview extends Component {
   };
 
   onClickTextArea = e => {
-    fetch(`${API}/products/2/reviews/auth`)
+    const productId = this.props.match.params.productId;
+    fetch(`${API}/products/${productId}/reviews/auth`)
       .then(res => res.json())
       .then(data => {
         if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
@@ -102,18 +103,16 @@ export default class AddReview extends Component {
       formData.append('rating', rating);
       formData.append('bundle_id', '');
       formData.append('color_size_id', '');
-      fetchReview(newReview, formData);
+      fetchReview(formData);
     }
 
     this.setState({ reviewContents: '', files: [] });
   };
 
-  fetchReview = (newReview, formData) => {
-    // formdata 확인방법
-    // for (let [key, value] of formData) {
-    //   console.log(key, value);
-    // }
-    fetch(`${API}/products/3/reviews`, {
+  fetchReview = formData => {
+    const productId = this.props.match.params.productId;
+
+    fetch(`${API}/products/${productId}/reviews`, {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('access_token'),

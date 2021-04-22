@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './ProductBtn.scss';
 
 class ProductBtn extends Component {
   render() {
     const { goToCart, goToOrder } = this.props;
+    const productId = this.props.match.params.productId;
 
     return (
       <div className="orderBtn">
@@ -19,4 +21,4 @@ class ProductBtn extends Component {
   }
 }
 
-export default ProductBtn;
+export default withRouter(ProductBtn);
