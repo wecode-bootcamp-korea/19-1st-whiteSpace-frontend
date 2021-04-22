@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { stars } from '../ProductReview/reviewData';
+import { API } from '../../../../config';
 import './AddReview.scss';
 
 export default class AddReview extends Component {
@@ -24,8 +25,7 @@ export default class AddReview extends Component {
   };
 
   onClickTextArea = e => {
-    console.log('ddd');
-    fetch('http://10.58.5.243:8000/products/2/reviews/auth')
+    fetch(`${API}/products/2/reviews/auth`)
       .then(res => res.json())
       .then(data => {
         if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
@@ -109,7 +109,11 @@ export default class AddReview extends Component {
   };
 
   fetchReview = (newReview, formData) => {
-    fetch('http://10.58.2.3:8000/products/2/reviews', {
+    // formdata 확인방법
+    // for (let [key, value] of formData) {
+    //   console.log(key, value);
+    // }
+    fetch(`${API}/products/3/reviews`, {
       method: 'POST',
       headers: {
         Authorization: localStorage.getItem('access_token'),

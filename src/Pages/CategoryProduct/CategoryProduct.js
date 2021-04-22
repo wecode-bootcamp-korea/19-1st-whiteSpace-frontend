@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { API } from '../../config';
 import ProductList from '../ProductList/ProductList';
 import ProductWrap from '../../Components/ProductWrap/ProductWrap';
 import Paging from '../../Components/Paging/Paging';
@@ -21,7 +22,6 @@ class CategoryProduct extends Component {
   componentDidMount() {
     const { currentIdx } = this.state;
     const { fetchProduct } = this;
-
     fetchProduct(currentIdx);
   }
 
@@ -33,21 +33,23 @@ class CategoryProduct extends Component {
       fetchProduct(currentIdx);
     }
   }
+
   fetchProduct = idx => {
     let categoryId = this.props.match.params.categoryId;
+
+    console.log('categoryId', categoryId);
 
     if (categoryId === undefined) {
       categoryId = 0;
     }
 
     fetch(
-      `http://10.58.5.243:8000/products${
+      `${API}/products${
         categoryId ? `?category=${categoryId}&` : `?`
       }page=${idx}`
     )
       .then(res => res.json())
       .then(productList => {
-        console.log(productList);
         const { products, category, count } = productList;
         this.setState({
           productArr: products,

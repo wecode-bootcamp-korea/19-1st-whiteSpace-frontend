@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { API } from '../../../../config';
 import AddReview from '../AddReview/AddReview';
 import ReviewStar from '../ReviewStar/ReviewStar';
 import ReviewList from '../ReviewList/ReviewList';
@@ -17,7 +18,7 @@ export default class ProductReview extends Component {
     };
   }
   componentDidMount() {
-    fetch('http://10.58.5.243:8000/products/2/reviews')
+    fetch(`${API}/products/2/reviews`)
       .then(res => res.json())
       .then(data => {
         this.setState({
