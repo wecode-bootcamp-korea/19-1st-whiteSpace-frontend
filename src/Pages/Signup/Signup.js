@@ -96,8 +96,8 @@ class Signup extends Component {
                 />
                 {ID_REGEX.test(signId) ? (
                   <span id="validPass">
-                    <i className="fas fa-check-circle"></i>&nbsp;사용하실 수
-                    있는 아이디입니다.
+                    <i className="fas fa-check-circle"></i>&nbsp;아이디
+                    중복체크를 해주세요
                   </span>
                 ) : (
                   <span id="validFail">

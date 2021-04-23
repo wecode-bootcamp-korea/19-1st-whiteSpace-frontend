@@ -49,7 +49,7 @@ class ProductDetail extends Component {
     const colorId = localStorage.getItem('colorId');
     const sizeId = localStorage.getItem('sizeId');
     const bundleId = localStorage.getItem('bundleId');
-    const { price, bundlePrice, count, discountRate } = this.state;
+    const { price, bundlePrice, count } = this.state;
 
     fetch(`${API}/cart`, {
       method: 'POST',
@@ -71,7 +71,6 @@ class ProductDetail extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res['MESSAGE'] === 'SUCCESS') {
           this.props.history.push('/cart');
         }

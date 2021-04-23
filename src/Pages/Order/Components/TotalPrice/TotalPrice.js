@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import TableWrap from '../TableWrap/TableWrap';
 import './TotalPrice.scss';
 
-class TotalPrice extends Component {
+export default class TotalPrice extends Component {
   render() {
-    const totalPrice = this.props.location.state.totalPrice;
-    const deliveryPrice = this.props.location.state.deliveryPrice;
-
+    const { totalPrice, deliveryPrice } = this.props;
+    console.log(this.props);
     return (
       <div className="totalPrice">
         <TableWrap title=" ">
@@ -35,4 +34,4 @@ class TotalPrice extends Component {
   }
 }
 
-export default withRouter(TotalPrice);
+// export default withRouter(TotalPrice);

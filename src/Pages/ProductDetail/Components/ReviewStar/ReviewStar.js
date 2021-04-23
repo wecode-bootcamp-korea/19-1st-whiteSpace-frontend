@@ -92,8 +92,7 @@ export default class ReviewStar extends Component {
                   <div
                     className="innerStarBar redStarBar"
                     style={{
-                      width:
-                        (100 / total) * starArr[index] * (total * 2) + 'px',
+                      width: (100 / total) * starArr[index] * total + 'px',
                     }}
                   ></div>
                 </div>
