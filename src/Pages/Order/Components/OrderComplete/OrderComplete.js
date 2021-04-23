@@ -13,7 +13,7 @@ export default class OrderComplete extends Component {
         <InfomationWrap>
           <div className="orderComplete">
             <header>고객님의 주문이 완료되었습니다.</header>
-            <p>주문번호 : 20210418-0000355</p>
+            <p>주문번호 : 20210423-000012</p>
             <button>
               <Link to="/category">쇼핑 더하기</Link>
             </button>

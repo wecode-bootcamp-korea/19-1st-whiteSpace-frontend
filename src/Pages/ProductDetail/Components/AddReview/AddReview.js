@@ -34,7 +34,7 @@ class AddReview extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
+        if (data.MESSAGE === 'DENIED') {
           e.target.disabled = true;
           alert('구매한 회원만 작성하실 수 있습니다.');
         }
