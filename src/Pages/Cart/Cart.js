@@ -32,15 +32,12 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        // if (data.cart.length > 0) {
-        console.log(data);
         this.setState({
           cartId: data.cart_id,
           cartData: data.cart,
           deliveryPrice: data.cart.length > 0 ? 2500 : 0,
           totalPrice: Number(data.total_price),
         });
-        // }
       });
   };
 
@@ -148,8 +145,6 @@ export class Cart extends Component {
 
       i !== dataArr.length - 1 && (deleteData += ',');
     }
-
-    console.log(deleteData);
     fetch(`${API}/cart?item_id=${deleteData}`, {
       method: 'DELETE',
       headers: {
@@ -158,7 +153,6 @@ export class Cart extends Component {
     })
       .then(res => res) // or res.json()
       .then(res => {
-        // console.log(res.MESSAGE);
         this.getBackDataCart();
       });
   };

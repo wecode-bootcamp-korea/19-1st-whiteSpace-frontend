@@ -23,7 +23,6 @@ class AddressModal extends Component {
   };
 
   handleAddress = data => {
-    console.log(data);
     let AllAddress = data.address;
     let extraAddress = '';
     let zoneCodes = data.zonecode;
