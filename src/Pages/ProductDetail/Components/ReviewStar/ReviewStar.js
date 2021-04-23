@@ -37,11 +37,11 @@ export default class ReviewStar extends Component {
         modalImage: image,
         modalId,
         modalStar:
-          '★'.repeat(reviewArr[modalId - 1].rating) +
-          '☆'.repeat(5 - reviewArr[modalId - 1].rating),
-        modalAutor: reviewArr[modalId - 1].author,
-        modalContents: reviewArr[modalId - 1].text,
-        modalOption: reviewArr[modalId - 1].bundle,
+          '★'.repeat(reviewArr[modalId].rating) +
+          '☆'.repeat(5 - reviewArr[modalId].rating),
+        modalAutor: reviewArr[modalId].author,
+        modalContents: reviewArr[modalId].text,
+        modalOption: reviewArr[modalId].bundle,
       });
     }
   };
@@ -79,7 +79,8 @@ export default class ReviewStar extends Component {
       <div className="reviewStar">
         <div className="starAvgWrap">
           <div>
-            <div className="starAvg">{ratingAvg}</div>
+            {console.log(ratingAvg)}
+            <div className="starAvg">{ratingAvg.toFixed(1)}</div>
             <span>{total}개 리뷰 평점</span>
           </div>
         </div>
@@ -110,10 +111,10 @@ export default class ReviewStar extends Component {
                   <a href="#!" key={index}>
                     <img
                       className="reviewThum"
-                      src={review.image_urls}
+                      src={review.image_urls[0]}
                       alt="reviewThumnail"
                       onClick={() => {
-                        handleModal(1, index, review.image_urls);
+                        handleModal(1, index, review.image_urls[0]);
                       }}
                     />
                   </a>
@@ -144,7 +145,6 @@ export default class ReviewStar extends Component {
                 </div>
                 <div className="reviewOption">
                   <span>선택한 옵션 : </span>
-                  <span>{productName}</span>
                   <span>{modalOption === null ? '없음' : modalOption}</span>
                 </div>
                 <p className="reviewContent">{modalContents}</p>

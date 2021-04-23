@@ -6,19 +6,21 @@ class ProductDescImg extends Component {
     const { descImgArr } = this.props;
 
     return (
-      <div className="infoWrap">
-        <div className="infoCategory">
-          <li>상세정보&emsp;|</li>
-          <li>&emsp; 후기</li>
+      <>
+        <div className="infoWrap">
+          <div className="infoCategory">
+            <li>상세정보&emsp;|</li>
+            <li>&emsp;후기</li>
+          </div>
+          <div className="descImgArr">
+            {descImgArr.map((img, index) => {
+              return (
+                <img key={index} alt="descImg" className="descImg" src={img} />
+              );
+            })}
+          </div>
         </div>
-        <div className="descImgArr">
-          {descImgArr.map((img, index) => {
-            return (
-              <img key={index} alt="descImg" className="descImg" src={img} />
-            );
-          })}
-        </div>
-      </div>
+      </>
     );
   }
 }

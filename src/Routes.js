@@ -36,7 +36,7 @@ export default class Routes extends Component {
           <Route exact path="/products/:productId" component={ProductDetail} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/order" component={Order} />
-          <Route exact path="/orderComplete" component={OrderComplete} />
+          <Route exact path="/order/complete" component={OrderComplete} />
         </Switch>
         <TopButton />
         <Footer />

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import TableWrap from '../TableWrap/TableWrap';
 import './TotalPrice.scss';
 
-export default class TotalPrice extends Component {
+class TotalPrice extends Component {
   render() {
+    const totalPrice = this.props.location.state.totalPrice;
+    const deliveryPrice = this.props.location.state.deliveryPrice;
+
     return (
       <div className="totalPrice">
         <TableWrap title=" ">
@@ -16,9 +20,11 @@ export default class TotalPrice extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>159,600원</td>
+                <td>{(totalPrice + deliveryPrice).toLocaleString()}원</td>
                 <td>
-                  <p className="blue">159,600원</p>
+                  <p className="blue">
+                    {(totalPrice + deliveryPrice).toLocaleString()}원
+                  </p>
                 </td>
               </tr>
             </tbody>
@@ -28,3 +34,5 @@ export default class TotalPrice extends Component {
     );
   }
 }
+
+export default withRouter(TotalPrice);

@@ -39,9 +39,6 @@ export class Nav extends Component {
     // const { innerHeight } = window;
     // const { scrollHeight } = document.body;
     const myScroll = e.srcElement.scrollingElement.scrollTop;
-    // console.log('전체 body 의 높이 : ' + scrollHeight);
-    // console.log('전체 스크롤바 높이 : ' + innerHeight);
-    // console.log('현재 스크롤 위치 : ' + myScroll);
 
     // 스크롤이 최상단이거나 아니거나 변경할 필요가 있을 때만 변경해주도록 함.
     const checkScroll =
@@ -81,9 +78,37 @@ export class Nav extends Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
+  logoutCheck = (urlName, menuName, id) => {
+    const state = {
+      pathname: urlName,
+      state: {
+        categoryId: id,
+      },
+    };
+
+    // console.log(localStorage.getItem('access_token'));
+    // return;
+
+    if (
+      menuName === '로그아웃' &&
+      localStorage.getItem('access_token') !== null
+    ) {
+      localStorage.removeItem('access_token');
+      this.props.history.push(`/`);
+      return;
+    } else {
+      this.props.history.push(state);
+    }
+  };
+
   render() {
     const { categoryList, checkScrollTop } = this.state;
     const { searchInputChange, searchInputEnter, searchIconClick } = this;
+    const rightMenuData =
+      localStorage.getItem('access_token') !== null
+        ? LOGIN_STATE
+        : NAV_RIGHT_MENU;
+
     return (
       <div id="nav" className={checkScrollTop ? 'scrollTopON' : 'scrollTopOff'}>
         <Popup />
@@ -92,8 +117,16 @@ export class Nav extends Component {
             <Link to="/">여백 0100</Link>
           </h1>
 
-          <NavMenuList className="navLeftMenu" dataList={categoryList} />
-          <NavMenuList className="navRightMenu" dataList={NAV_RIGHT_MENU} />
+          <NavMenuList
+            className="navLeftMenu"
+            dataList={categoryList}
+            onClick={this.logoutCheck}
+          />
+          <NavMenuList
+            className="navRightMenu"
+            dataList={rightMenuData}
+            onClick={this.logoutCheck}
+          />
           <div className="searchBox">
             <i className="fas fa-search" onClick={searchIconClick}></i>
             <input
@@ -123,6 +156,14 @@ const NAV_RIGHT_MENU = [
     id: 2,
     text: '회원가입',
     path: '/signup',
+  },
+];
+
+const LOGIN_STATE = [
+  {
+    id: 1,
+    text: '로그아웃',
+    path: '/',
   },
   {
     id: 3,
