@@ -79,6 +79,7 @@ export default class ReviewStar extends Component {
       <div className="reviewStar">
         <div className="starAvgWrap">
           <div>
+            {console.log(ratingAvg)}
             <div className="starAvg">{ratingAvg.toFixed(1)}</div>
             <span>{total}개 리뷰 평점</span>
           </div>

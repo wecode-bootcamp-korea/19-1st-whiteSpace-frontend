@@ -86,7 +86,7 @@ export class Nav extends Component {
       },
     };
 
-    console.log(localStorage.getItem('access_token'));
+    // console.log(localStorage.getItem('access_token'));
     // return;
 
     if (

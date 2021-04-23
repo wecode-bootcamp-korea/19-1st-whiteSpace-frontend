@@ -1,4 +1,5 @@
 export const API = 'http://13.125.164.134:8000';
+// export const API = 'http://10.58.5.243:8000';
 export const popUpImage =
   'https://stylebyemilyhenderson.com/wp-content/uploads/2015/04/Blue-and-Green_GIF.gif';
 

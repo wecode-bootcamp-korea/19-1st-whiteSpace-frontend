@@ -13,7 +13,7 @@ export class Cart extends Component {
     this.state = {
       cartData: [],
       totalPrice: 0,
-      deliveryPrice: 2500,
+      deliveryPrice: 0,
       cartId: '',
       allCartSelect: false,
     };
@@ -24,7 +24,7 @@ export class Cart extends Component {
   }
 
   getBackDataCart = () => {
-    fetch(`${API}/cart`, {
+    fetch(API + '/cart', {
       method: 'GET',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -32,12 +32,15 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        // if (data.cart.length > 0) {
+        console.log(data);
         this.setState({
           cartId: data.cart_id,
           cartData: data.cart,
-          deliveryPrice: 2500,
+          deliveryPrice: data.cart.length > 0 ? 2500 : 0,
           totalPrice: Number(data.total_price),
         });
+        // }
       });
   };
 
@@ -92,7 +95,7 @@ export class Cart extends Component {
         quantity: Number(changeNum),
       }),
     })
-      .then(res => res) // or res.json()
+      .then(res => res) // or res.json().json()
       .then(res => {
         this.getBackDataCart();
       });
@@ -134,7 +137,6 @@ export class Cart extends Component {
   allCartDelete = e => {
     const dataArr = this.state.cartData;
     let deleteData = '';
-    // dataArr[index].order_product_id;
 
     if (!(dataArr.length > 0)) {
       // alert('삭제할 정보가 없습니다');
@@ -147,6 +149,7 @@ export class Cart extends Component {
       i !== dataArr.length - 1 && (deleteData += ',');
     }
 
+    console.log(deleteData);
     fetch(`${API}/cart?item_id=${deleteData}`, {
       method: 'DELETE',
       headers: {
@@ -160,6 +163,24 @@ export class Cart extends Component {
       });
   };
 
+  // 총액 계산 함수
+  totalPriceResult = () => {
+    const { cartData } = this.state;
+    let sumPrice = 0;
+    let productPrice = 0;
+
+    for (let i = 0; i < cartData.length; i++) {
+      productPrice =
+        cartData[i].discount_rate > 0
+          ? cartData[i].default_price * (1 - cartData[i].discount_rate)
+          : cartData[i].default_price;
+      sumPrice =
+        sumPrice +
+        (productPrice + Number(cartData[i].price_gap)) * cartData[i].quantity;
+    }
+    return Number(sumPrice);
+  };
+
   render() {
     const { cartData, totalPrice, deliveryPrice, cartId } = this.state;
     const {
@@ -168,10 +189,15 @@ export class Cart extends Component {
       quantityOnChange,
       allCartDelete,
       quantityInput,
+      totalPriceResult,
     } = this;
     const title =
       '일반상품' +
       (cartData && cartData.length > 0 ? ' (' + cartData.length + ')' : '');
+    // 정상가 * 할인률 계산 변수 선언
+    let lastProductPrice = 0;
+    let totalResultPrice = 0;
+
     return (
       <>
         <Nav />
@@ -216,6 +242,7 @@ export class Cart extends Component {
                           alt={cart.product_name}
                         />
                       </td>
+                      {/* 상품정보 (옵션은 값이 있을 때만 보이게 처리) */}
                       <td className="tbodyProductLine">
                         <div>{cart.name}</div>
                         {cart.bundle_name !== null && (
@@ -223,12 +250,24 @@ export class Cart extends Component {
                         )}
                         {Number(cart.price_gap) !== 0 && (
                           <div className="priceGap">
-                            ({cart.price_gap.toLocaleString('ko')})
+                            ({Math.floor(cart.price_gap).toLocaleString('ko')})
                           </div>
                         )}
                       </td>
-                      <td>
-                        {(cart.default_price * 1).toLocaleString('ko') + '원'}
+                      {/* 판매가 -> 할인가격 반영해야함(구현중) */}
+                      <td
+                        className={
+                          cart.discount_rate > 0 ? 'disCountOn' : 'disCountOff'
+                        }
+                      >
+                        <div>
+                          {(cart.default_price * 1).toLocaleString('ko') + '원'}
+                        </div>
+                        <div>
+                          {(lastProductPrice =
+                            cart.default_price * (1 - cart.discount_rate) +
+                            Number(cart.price_gap)).toLocaleString('ko') + '원'}
+                        </div>
                         {/* + cart.order_product_id} */}
                       </td>
                       <td className="tbodyUpDownLine">
@@ -253,11 +292,12 @@ export class Cart extends Component {
                       <td className="tbodyDelivery">
                         {index === 0 ? '2,500' : '0'}
                       </td>
-                      {/* )} */}
+                      {/* 합계 부분 (이 라인의 판매가(할인률 구한값) + 배송비) */}
                       <td>
-                        {(cart.default_price * cart.quantity).toLocaleString(
-                          'ko'
-                        ) + '원'}
+                        {(
+                          lastProductPrice * cart.quantity +
+                          (index === 0 ? 2500 : 0)
+                        ).toLocaleString('ko') + '원'}
                       </td>
                       <td className="tbodyChiceLine">
                         <button onClick={() => handleDelete(index)}>
@@ -273,14 +313,15 @@ export class Cart extends Component {
                       <span>[기본배송]</span>
                     </td>
                     <td colSpan="6">
-                      <div className="totalPrice">
-                        {`상품구매금액 ${totalPrice.toLocaleString(
+                      <div className="Result">
+                        {`상품구매금액 ${(totalResultPrice = totalPriceResult()).toLocaleString(
                           'ko'
                         )} 배송비  ${deliveryPrice.toLocaleString('ko')} = `}
                         합계 :
                         <span>
-                          {(totalPrice + deliveryPrice).toLocaleString('ko') +
-                            '원'}
+                          {(totalResultPrice + deliveryPrice).toLocaleString(
+                            'ko'
+                          ) + '원'}
                         </span>
                       </div>
                     </td>
@@ -305,7 +346,7 @@ export class Cart extends Component {
             </div>
             <CartTotalPrice
               totalCartInfo={{
-                totalPrice: totalPrice,
+                totalPrice: totalResultPrice,
                 deliveryPrice: deliveryPrice,
               }}
             />
@@ -316,7 +357,7 @@ export class Cart extends Component {
                   pathname: '/order',
                   state: {
                     cartId: cartId,
-                    totalPrice: totalPrice,
+                    totalPrice: totalResultPrice,
                     cartData: cartData,
                     deliveryPrice: deliveryPrice,
                   },
