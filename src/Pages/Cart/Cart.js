@@ -86,7 +86,7 @@ export class Cart extends Component {
 
     const changeId = this.state.cartData[index].order_product_id;
 
-    fetch(API + '/cart/' + changeId, {
+    fetch(`${API}/cart/${changeId}`, {
       method: 'PATCH',
       headers: {
         Authorization: localStorage.getItem('access_token'),
@@ -373,7 +373,7 @@ export class Cart extends Component {
               >
                 선택상품주문
               </CartButton> */}
-              <Link to="/">
+              <Link to="/category">
                 <CartButton
                   className="countineShoppingButton"
                   blockButton={false}

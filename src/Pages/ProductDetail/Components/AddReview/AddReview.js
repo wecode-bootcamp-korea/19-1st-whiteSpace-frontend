@@ -27,10 +27,15 @@ class AddReview extends Component {
 
   onClickTextArea = e => {
     const productId = this.props.match.params.productId;
-    fetch(`${API}/products/${productId}/reviews/auth`)
+    fetch(`${API}/products/${productId}/reviews/auth`, {
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
       .then(res => res.json())
       .then(data => {
         if (data.MESSAGE === 'UNAUTHORIZED ACCESS') {
+          console.log(data);
           e.target.disabled = true;
           alert('구매한 회원만 작성하실 수 있습니다.');
         }
