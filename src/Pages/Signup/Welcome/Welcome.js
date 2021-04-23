@@ -16,7 +16,7 @@ class Welcome extends Component {
           <p>진심으로 환영합니다.</p>
           <p>당신의 일상에 여백을 더하세요</p>
           <button>
-            <Link to="/">여백 둘러보기</Link>
+            <Link to="/login">로그인하기</Link>
           </button>
         </main>
       </div>

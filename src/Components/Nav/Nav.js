@@ -60,11 +60,11 @@ export class Nav extends Component {
 
   searchInputEnter = e => {
     if (this.state.searchInputValue.length > 0 && e.keyCode === 13) {
+      this.props.history.push(`/search?keyword=${this.state.searchInputValue}`);
       this.setState({
         searchInputValue: '',
         isSearchBox: false,
       });
-      this.props.history.push(`/search?keyword=${this.state.searchInputValue}`);
     }
   };
 
@@ -102,7 +102,7 @@ export class Nav extends Component {
   };
 
   render() {
-    const { categoryList, checkScrollTop } = this.state;
+    const { categoryList, checkScrollTop, searchInputValue } = this.state;
     const { searchInputChange, searchInputEnter, searchIconClick } = this;
     const rightMenuData =
       localStorage.getItem('access_token') !== null
@@ -136,6 +136,7 @@ export class Nav extends Component {
               placeholder="검색어를 입력해주세요."
               onChange={searchInputChange}
               onKeyUp={searchInputEnter}
+              value={searchInputValue}
             />
           </div>
         </nav>

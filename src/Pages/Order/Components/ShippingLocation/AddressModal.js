@@ -9,6 +9,7 @@ class AddressModal extends Component {
       address: '',
       zoneCode: '',
       fullAddress: '',
+      detailAddress: '',
       isDaumPost: false,
       isRegister: false,
       register: [],
@@ -22,6 +23,7 @@ class AddressModal extends Component {
   };
 
   handleAddress = data => {
+    console.log(data);
     let AllAddress = data.address;
     let extraAddress = '';
     let zoneCodes = data.zonecode;
@@ -44,9 +46,14 @@ class AddressModal extends Component {
     localStorage.setItem('mainAddress', data.address);
   };
 
+  getDetailAddress = address => {
+    this.setState({ detailAddress: address });
+    localStorage.setItem('detailAddress', address);
+  };
   render() {
     // const { isModalShow, isModalClose } = this.props;
     const { isDaumPost, fullAddress, zoneCode } = this.state;
+    const { getDetailAddress } = this;
 
     const width = 595;
     const height = 450;
@@ -68,7 +75,11 @@ class AddressModal extends Component {
             <div className="zipCode">{zoneCode}</div>
             <div className="address">{fullAddress}</div>
             <div className="addressBox">
-              <input type="text" placeholder="상세주소를 입력해주세요." />
+              <input
+                type="text"
+                placeholder="상세주소를 입력해주세요."
+                onChange={e => getDetailAddress(e.target.value)}
+              />
               <button type="button" onClick={this.handleOpenPost}>
                 <span>우편번호 찾기</span>
               </button>
