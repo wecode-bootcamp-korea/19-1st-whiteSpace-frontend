@@ -5,13 +5,11 @@ import './NavMenuList.scss';
 export class navMenuList extends Component {
   render() {
     const { dataList, className, onClick } = this.props;
-    // console.log(dataList);
     return (
       <div className={className}>
         <ul>
           {dataList.map(data => {
             const keys = Object.keys(data);
-            // 오른쪽 메뉴 (id, text(메뉴이름), path(/login))
             const urlName =
               className === 'navRightMenu'
                 ? data[keys[2]]
