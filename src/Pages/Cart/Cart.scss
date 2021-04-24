@@ -33,6 +33,13 @@
         text-align: center;
         tr {
           height: 10px;
+
+          .tableCheckBoxWidth {
+            width: 4vw;
+          }
+          .resultPriceWidth {
+            width: 12vw;
+          }
         }
         th {
           border-left: 1px solid #e9e9e9;

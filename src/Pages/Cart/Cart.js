@@ -50,7 +50,6 @@ export class Cart extends Component {
           cartId: data.cart_id,
           cartData: addCartArr,
           deliveryPrice: data.cart.length > 0 ? 2500 : 0,
-          totalPrice: Number(data.total_price),
           allCartSelect: false,
         });
       });
@@ -378,7 +377,7 @@ export class Cart extends Component {
                         {index === 0 ? '2,500' : '0'}
                       </td>
                       {/* 합계 부분 (이 라인의 판매가(할인률 구한값) + 배송비) */}
-                      <td>
+                      <td className="resultPriceWidth">
                         {(
                           lastProductPrice * cart.quantity +
                           (index === 0 ? 2500 : 0)
