@@ -154,6 +154,25 @@
         }
         tfoot {
           border-bottom: 1px solid #ccc;
+
+          tr {
+            td {
+              &:first-child {
+                text-align: left;
+              }
+              &:last-child {
+                text-align: right;
+              }
+            }
+
+            .result {
+              span {
+                margin-left: 15px;
+                color: $blue;
+                font-size: 1.2rem;
+              }
+            }
+          }
         }
         thead,
         tfoot {

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
 import './NavMenuList.scss';
 
 export class navMenuList extends Component {
   render() {
     const { dataList, className, onClick } = this.props;
-    // console.log(dataList);
     return (
       <div className={className}>
         <ul>

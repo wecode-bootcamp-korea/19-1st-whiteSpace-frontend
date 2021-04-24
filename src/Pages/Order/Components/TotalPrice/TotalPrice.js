@@ -6,7 +6,6 @@ import './TotalPrice.scss';
 export default class TotalPrice extends Component {
   render() {
     const { totalPrice, deliveryPrice } = this.props;
-    console.log(this.props);
     return (
       <div className="totalPrice">
         <TableWrap title=" ">

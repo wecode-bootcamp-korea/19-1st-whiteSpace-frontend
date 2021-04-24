@@ -9,7 +9,7 @@ export default class CartTotalPrice extends Component {
 
   componentDidMount() {}
   render() {
-    const { totalCartInfo, priceComma } = this.props;
+    const { totalCartInfo } = this.props;
     return (
       <div className="CartTotalPrice">
         <TableWrap title=" ">
