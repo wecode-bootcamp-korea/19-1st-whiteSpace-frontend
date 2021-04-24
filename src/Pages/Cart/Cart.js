@@ -224,7 +224,6 @@ export class Cart extends Component {
 
       i !== dataArr.length - 1 && (deleteData += ',');
     }
-
     fetch(`${API}/cart?item_id=${deleteData}`, {
       method: 'DELETE',
       headers: {

@@ -9,7 +9,6 @@ export class navMenuList extends Component {
         <ul>
           {dataList.map(data => {
             const keys = Object.keys(data);
-            // 오른쪽 메뉴 (id, text(메뉴이름), path(/login))
             const urlName =
               className === 'navRightMenu'
                 ? data[keys[2]]
