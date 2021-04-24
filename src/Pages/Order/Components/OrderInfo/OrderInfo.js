@@ -56,13 +56,12 @@ class OrderInfo extends Component {
                   {data &&
                     data.map(price => {
                       return (
+                        //판매가
                         <td>
-                          {Number(
-                            (price.default_price + price.price_gap).split(
-                              '.'
-                            )[0]
-                          ).toLocaleString()}
-                          원
+                          {(
+                            price.default_price * (1 - price.discount_rate) +
+                            Number(price.price_gap)
+                          ).toLocaleString('ko') + '원'}
                         </td>
                       );
                     })}
@@ -76,8 +75,8 @@ class OrderInfo extends Component {
                       return (
                         <td className="bold">
                           {(
-                            (Number(sum.default_price.split('.')[0]) +
-                              Number(sum.price_gap.split('.')[0])) *
+                            (sum.default_price * (1 - sum.discount_rate) +
+                              Number(sum.price_gap)) *
                             sum.quantity
                           ).toLocaleString()}
                           원
