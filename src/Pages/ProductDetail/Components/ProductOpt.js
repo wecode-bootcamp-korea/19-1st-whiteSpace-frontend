@@ -4,41 +4,34 @@ import './ProductOpt.scss';
 class ProductOpt extends Component {
   state = {
     activeName: null,
-    valueLists: [],
     selectedColor: '',
     selectedSize: '',
     selectedBundle: '',
   };
 
   changeColor = (e, index, name) => {
-    const { valueLists } = this.state;
     this.setState({
       selectedColor: name,
-      valueLists: [...valueLists, name],
       activeName: index,
     });
     localStorage.setItem('colorId', e.target.id);
   };
 
   changeSize = e => {
-    const { valueLists } = this.state;
     const selectOpt = e.target;
     const selectOptId = selectOpt.children[selectOpt.selectedIndex].id;
     this.setState({
       selectedSize: e.target.value,
-      valueLists: [...valueLists, e.target.value],
     });
     localStorage.setItem('sizeId', selectOptId);
   };
 
   changeBundle = e => {
-    const { valueLists } = this.state;
     const selectOpt = e.target;
     const selectOptId = selectOpt.children[selectOpt.selectedIndex].id;
     this.setState(
       {
         selectedBundle: e.target.value,
-        valueLists: [...valueLists, e.target.value],
       },
       () => this.props.calBundlePrice(e.target.value)
     );
@@ -102,7 +95,7 @@ class ProductOpt extends Component {
           <select onChange={changeSize}>
             <option>-[필수] 옵션을 선택해주세요-</option>
             <option disabled>--------------------------------</option>
-            {(selectedColor || colors) &&
+            {selectedColor &&
               sizes.map(size => {
                 return (
                   <option id={size.id} value={size.name} key={size.id}>
@@ -119,7 +112,7 @@ class ProductOpt extends Component {
           <select onChange={changeBundle}>
             <option>-[필수] 옵션을 선택해주세요-</option>
             <option disabled>--------------------------------</option>
-            {(selectedSize || sizes) &&
+            {selectedSize &&
               bundles.map(bundle => {
                 return (
                   <option id={bundle.id} value={bundle.name} key={bundle.id}>

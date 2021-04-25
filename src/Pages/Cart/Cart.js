@@ -5,6 +5,7 @@ import Nav from '../../Components/Nav/Nav';
 import TableWrap from '../Order/Components/TableWrap/TableWrap';
 import CartTotalPrice from './Component/CartTotalPrice';
 import CartButton from './Component/CartButton';
+import Checkbox from './Component/Checkbox';
 import './Cart.scss';
 
 export class Cart extends Component {
@@ -12,7 +13,6 @@ export class Cart extends Component {
     super();
     this.state = {
       cartData: [],
-      totalPrice: 0,
       deliveryPrice: 0,
       cartId: '',
       allCartSelect: false,
@@ -23,6 +23,10 @@ export class Cart extends Component {
     this.getBackDataCart();
   }
 
+  checkEmptyArr = () => {
+    if (this.state.cartData.length === 0) return;
+  };
+
   getBackDataCart = () => {
     fetch(API + '/cart', {
       method: 'GET',
@@ -32,54 +36,108 @@ export class Cart extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        // if (data.cart.length > 0) {
-        console.log(data);
+        const addCartArr = [];
+
+        if (data.cart.length > 0) {
+          for (let i = 0; i < data.cart.length; i++) {
+            addCartArr.push({
+              isSelect: false,
+              ...data.cart[i],
+            });
+          }
+        }
         this.setState({
           cartId: data.cart_id,
-          cartData: data.cart,
+          cartData: addCartArr,
           deliveryPrice: data.cart.length > 0 ? 2500 : 0,
-          totalPrice: Number(data.total_price),
+          allCartSelect: false,
         });
-        // }
       });
-  };
-
-  goToOrder = () => {
-    this.props.history.push(`/order/${this.state.cartId}`);
   };
 
   componentWillMount = () => {
     this.selectedCheckboxes = new Set();
   };
 
-  toggleCheckbox = label => {
-    if (this.selectedCheckboxes.has(label)) {
-      this.selectedCheckboxes.delete(label);
-    } else {
-      this.selectedCheckboxes.add(label);
+  // 개별 체크박스 클릭시
+  toggleCheckbox = (e, label, index) => {
+    this.checkEmptyArr();
+
+    if (Number(index) === -1) return;
+
+    const cartArr = this.state.cartData;
+    cartArr[index].isSelect = !cartArr[index].isSelect;
+
+    this.setState({
+      cartData: cartArr,
+    });
+  };
+
+  // 전체 체크박스 체크시 처리
+  allCheckClick = e => {
+    this.checkEmptyArr();
+    const { allCartSelect, cartData } = this.state;
+
+    this.setState({
+      allCartSelect: !allCartSelect,
+    });
+
+    for (let i = 0; i < cartData.length; i++) {
+      cartData[i].isSelect = e.target.checked ? true : false;
     }
   };
 
-  handleFormSubmit = formSubmitEvent => {
-    formSubmitEvent.preventDefault();
-  };
+  // 선택상품 주문버튼 클릭시
+  selectCartOrder = () => {
+    this.checkEmptyArr();
+    const checkCartArr = [];
+    const { cartData, cartId, deliveryPrice } = this.state;
+    let totalResultPrice = 0;
+    let isCheckBoxCount = 0;
 
-  handleDelete = index => {
-    const dataArr = this.state.cartData;
-    const deleteDataArr = dataArr[index].order_product_id;
+    for (let i = 0; i < cartData.length; i++) {
+      if (cartData[i].isSelect) {
+        checkCartArr.push(cartData[i]);
+        totalResultPrice =
+          totalResultPrice +
+          cartData[i].default_price *
+            (1 - cartData[i].discount_rate) *
+            cartData[i].quantity;
+        isCheckBoxCount++;
+      }
+    }
 
-    fetch(`${API}/cart?item_id=${deleteDataArr}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: localStorage.getItem('access_token'),
+    // 체크된 상품이 없으면 종료
+    if (isCheckBoxCount === 0) return;
+
+    const state = {
+      pathname: '/order',
+      state: {
+        cartId: cartId,
+        totalPrice: totalResultPrice,
+        cartData: cartData,
+        deliveryPrice: deliveryPrice,
       },
-    })
-      .then(res => res) // or res.json()
-      .then(res => {
-        this.getBackDataCart();
-      });
+    };
+    this.props.history.push(state);
   };
+
+  // 선택한 내역 삭제처리
+  checkedDelete = () => {
+    this.checkEmptyArr();
+    const { cartData } = this.state;
+    const checkData = !(cartData.length > 0);
+
+    if (checkData) return;
+
+    for (let i = 0; i < cartData.length; i++) {
+      cartData[i].isSelect && this.handleDelete(i);
+    }
+  };
+
+  // 수량 변경시 처리 (up, down 버튼)
   handelQuantity = (e, changeNum, index) => {
+    this.checkEmptyArr();
     if (changeNum === -1 && this.state.cartData[index].quantity <= 0) {
       return;
     }
@@ -103,17 +161,19 @@ export class Cart extends Component {
     e.target.value = changeNum;
   };
 
-  allCheckClick = e => {
-    // const checkArr = [];
-    // for (let i = 0; i < this.state.cartData.length; i++) {
-    //   checkArr.push(checkbox);
-    // }
-    // setItem;
+  // 수량 직접 입력 전에 초기화
+  quantityInput = e => {
+    this.checkEmptyArr();
+    e.target.value = '';
   };
+
+  // 수량 직접 입력시
   quantityOnChange = (e, index) => {
+    this.checkEmptyArr();
     const beforeNum = this.state.cartData[index].quantity;
     const newNum = Number(e.target.value);
     const postNum = newNum - beforeNum;
+
     if (newNum > 0) {
       e.target.value = newNum;
       // if (newNum > 10) {
@@ -130,11 +190,27 @@ export class Cart extends Component {
     this.handelQuantity(e, postNum, index);
   };
 
-  quantityInput = e => {
-    e.target.value = '';
+  // 개별 삭제시
+  handleDelete = index => {
+    this.checkEmptyArr();
+    const dataArr = this.state.cartData;
+    const deleteDataArr = dataArr[index].order_product_id;
+
+    fetch(`${API}/cart?item_id=${deleteDataArr}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: localStorage.getItem('access_token'),
+      },
+    })
+      .then(res => res) // or res.json()
+      .then(res => {
+        this.getBackDataCart();
+      });
   };
 
+  // 모든 장바구니 비우기
   allCartDelete = e => {
+    this.checkEmptyArr();
     const dataArr = this.state.cartData;
     let deleteData = '';
 
@@ -148,8 +224,6 @@ export class Cart extends Component {
 
       i !== dataArr.length - 1 && (deleteData += ',');
     }
-
-    console.log(deleteData);
     fetch(`${API}/cart?item_id=${deleteData}`, {
       method: 'DELETE',
       headers: {
@@ -158,13 +232,13 @@ export class Cart extends Component {
     })
       .then(res => res) // or res.json()
       .then(res => {
-        // console.log(res.MESSAGE);
         this.getBackDataCart();
       });
   };
 
   // 총액 계산 함수
   totalPriceResult = () => {
+    this.checkEmptyArr();
     const { cartData } = this.state;
     let sumPrice = 0;
     let productPrice = 0;
@@ -182,7 +256,7 @@ export class Cart extends Component {
   };
 
   render() {
-    const { cartData, totalPrice, deliveryPrice, cartId } = this.state;
+    const { cartData, deliveryPrice, cartId, allCartSelect } = this.state;
     const {
       handleDelete,
       handelQuantity,
@@ -190,6 +264,9 @@ export class Cart extends Component {
       allCartDelete,
       quantityInput,
       totalPriceResult,
+      toggleCheckbox,
+      selectCartOrder,
+      checkedDelete,
     } = this;
     const title =
       '일반상품' +
@@ -208,14 +285,16 @@ export class Cart extends Component {
               <table className="cartTable">
                 <thead>
                   <tr>
-                    {/* <th className="tableCheckBoxWidth">
+                    <th className="tableCheckBoxWidth">
                       <Checkbox
-                        label="allCartSelect"
-                        handleCheckboxChange={this.toggleCheckbox}
+                        // label="allCartSelect"
+                        index="-1"
+                        handleCheckboxChange={toggleCheckbox}
                         key="allCartSelect"
                         onClick={this.allCheckClick}
+                        checked={allCartSelect}
                       />
-                    </th> */}
+                    </th>
                     <th className="tableImgWidth">이미지</th>
                     <th>상품정보</th>
                     <th>판매가</th>
@@ -228,14 +307,16 @@ export class Cart extends Component {
                 <tbody>
                   {cartData.map((cart, index) => (
                     <tr key={cart.order_product_id}>
-                      {/* <td className="tbodyCheckBoxLine">
-                        <input type="checkbox" />
+                      {/* 개별 체크박스 부분 */}
+                      <td className="tbodyCheckBoxLine">
                         <Checkbox
-                          label={cart.order_product_id}
-                          handleCheckboxChange={this.toggleCheckbox}
+                          // label={cart.order_product_id}
+                          index={index}
+                          handleCheckboxChange={toggleCheckbox}
                           key={cart.order_product_id}
+                          checked={cart.isSelect}
                         />
-                      </td> */}
+                      </td>
                       <td className="tbodyImgLine">
                         <img
                           src={cart.thumbnail_image}
@@ -244,7 +325,9 @@ export class Cart extends Component {
                       </td>
                       {/* 상품정보 (옵션은 값이 있을 때만 보이게 처리) */}
                       <td className="tbodyProductLine">
-                        <div>{cart.name}</div>
+                        <Link to={`/products/${cart.product_id}`}>
+                          <div>{cart.name}</div>
+                        </Link>
                         {cart.bundle_name !== null && (
                           <div className="bundleName">[{cart.bundle_name}]</div>
                         )}
@@ -254,7 +337,7 @@ export class Cart extends Component {
                           </div>
                         )}
                       </td>
-                      {/* 판매가 -> 할인가격 반영해야함(구현중) */}
+                      {/* 판매가 - 할인가격 반영 */}
                       <td
                         className={
                           cart.discount_rate > 0 ? 'disCountOn' : 'disCountOff'
@@ -270,6 +353,7 @@ export class Cart extends Component {
                         </div>
                         {/* + cart.order_product_id} */}
                       </td>
+                      {/* 수량 입력 및 up, down 버튼 부분 */}
                       <td className="tbodyUpDownLine">
                         <span>
                           <input
@@ -287,18 +371,18 @@ export class Cart extends Component {
                           </button>
                         </span>
                       </td>
-                      {/* {index === 0 && ( */}
-                      {/* <td className="tbodyDelivery" rowSpan={cartData.length}> */}
+                      {/* 배송비 부분 */}
                       <td className="tbodyDelivery">
                         {index === 0 ? '2,500' : '0'}
                       </td>
                       {/* 합계 부분 (이 라인의 판매가(할인률 구한값) + 배송비) */}
-                      <td>
+                      <td className="resultPriceWidth">
                         {(
                           lastProductPrice * cart.quantity +
                           (index === 0 ? 2500 : 0)
                         ).toLocaleString('ko') + '원'}
                       </td>
+                      {/* 개별 삭제 버튼 부분 */}
                       <td className="tbodyChiceLine">
                         <button onClick={() => handleDelete(index)}>
                           삭제
@@ -313,10 +397,10 @@ export class Cart extends Component {
                       <span>[기본배송]</span>
                     </td>
                     <td colSpan="6">
-                      <div className="Result">
+                      <div className="result">
                         {`상품구매금액 ${(totalResultPrice = totalPriceResult()).toLocaleString(
                           'ko'
-                        )} 배송비  ${deliveryPrice.toLocaleString('ko')} = `}
+                        )} + 배송비  ${deliveryPrice.toLocaleString('ko')} = `}
                         합계 :
                         <span>
                           {(totalResultPrice + deliveryPrice).toLocaleString(
@@ -331,10 +415,10 @@ export class Cart extends Component {
               <hr />
             </TableWrap>
             <div className="cartControllButtonBox">
-              {/* <div>
+              <div>
                 <span>선택상품을 </span>
-                <CartButton>x 삭제하기</CartButton>
-              </div> */}
+                <CartButton onClick={checkedDelete}>x 삭제하기</CartButton>
+              </div>
               <div></div>
               <CartButton
                 className="clearCart"
@@ -367,12 +451,12 @@ export class Cart extends Component {
                   전체상품주문
                 </CartButton>
               </Link>
-              {/* <CartButton
+              <CartButton
                 className="checkOrderButton"
-                onClick={this.handleFormSubmit}
+                onClick={selectCartOrder}
               >
                 선택상품주문
-              </CartButton> */}
+              </CartButton>
               <Link to="/category">
                 <CartButton
                   className="countineShoppingButton"

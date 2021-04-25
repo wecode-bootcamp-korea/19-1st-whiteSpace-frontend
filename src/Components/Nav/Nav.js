@@ -86,9 +86,6 @@ export class Nav extends Component {
       },
     };
 
-    // console.log(localStorage.getItem('access_token'));
-    // return;
-
     if (
       menuName === '로그아웃' &&
       localStorage.getItem('access_token') !== null

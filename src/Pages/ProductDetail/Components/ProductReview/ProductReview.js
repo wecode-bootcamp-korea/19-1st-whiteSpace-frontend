@@ -21,11 +21,9 @@ class ProductReview extends Component {
   componentDidMount() {
     const productId = this.props.match.params.productId;
 
-    // console.log(`${API}/products/${productId}/reviews`);
     fetch(`${API}/products/${productId}/reviews`)
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
         this.setState({
           reviewArr: data.reviews,
           count: data.count,

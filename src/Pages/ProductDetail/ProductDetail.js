@@ -92,13 +92,21 @@ class ProductDetail extends Component {
 
   decrQty = () => {
     const count = this.state.count - 1;
-    this.setState({
-      count: count < 0 ? (0, alert('최소 구매 수량은 1개입니다')) : count,
-    });
+    this.setState(
+      {
+        count: count <= 0 ? alert('최소 구매 수량은 1개입니다') : count,
+      },
+      () => this.alertMinNum()
+    );
+  };
+
+  alertMinNum = () => {
+    this.setState({ count: 1 });
   };
 
   delProduct = e => {
     e.target.closest('div').remove();
+    this.setState({ count: 0 });
   };
 
   calBundlePrice = name => {

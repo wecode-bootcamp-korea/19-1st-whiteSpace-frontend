@@ -6,13 +6,10 @@ class AddressModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: '',
       zoneCode: '',
       fullAddress: '',
       detailAddress: '',
       isDaumPost: false,
-      isRegister: false,
-      register: [],
     };
   }
 
@@ -23,8 +20,7 @@ class AddressModal extends Component {
   };
 
   handleAddress = data => {
-    console.log(data);
-    let AllAddress = data.address;
+    let allAddress = data.address;
     let extraAddress = '';
     let zoneCodes = data.zonecode;
 
@@ -36,10 +32,10 @@ class AddressModal extends Component {
         extraAddress +=
           extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
       }
-      AllAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+      allAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
     this.setState({
-      fullAddress: AllAddress,
+      fullAddress: allAddress,
       zoneCode: zoneCodes,
     });
     localStorage.setItem('postCode', data.zonecode);
@@ -51,9 +47,8 @@ class AddressModal extends Component {
     localStorage.setItem('detailAddress', address);
   };
   render() {
-    // const { isModalShow, isModalClose } = this.props;
     const { isDaumPost, fullAddress, zoneCode } = this.state;
-    const { getDetailAddress } = this;
+    const { handleOpenPost, handleAddress, getDetailAddress } = this;
 
     const width = 595;
     const height = 450;
@@ -80,7 +75,7 @@ class AddressModal extends Component {
                 placeholder="상세주소를 입력해주세요."
                 onChange={e => getDetailAddress(e.target.value)}
               />
-              <button type="button" onClick={this.handleOpenPost}>
+              <button type="button" onClick={handleOpenPost}>
                 <span>우편번호 찾기</span>
               </button>
             </div>
@@ -88,7 +83,7 @@ class AddressModal extends Component {
         </div>
         {isDaumPost ? (
           <DaumPostCode
-            onComplete={this.handleAddress}
+            onComplete={handleAddress}
             autoClose
             width={width}
             height={height}
