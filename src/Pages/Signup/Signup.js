@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Signup.scss';
 import { API } from '../../config';
+import './Signup.scss';
 
 const ID_REGEX = /^[a-zA-Z0-9+-_]+@[a-z]+\.[a-z]+$/;
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*_-])(\S){8,16}$/;

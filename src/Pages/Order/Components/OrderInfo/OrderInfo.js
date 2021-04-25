@@ -23,67 +23,58 @@ class OrderInfo extends Component {
                   })}
                 </tr>
               </thead>
+
               <tbody>
-                <tr>
-                  <td>
-                    {data &&
-                      data.map(thumbnail => {
-                        return (
+                {data &&
+                  data.map(item => {
+                    return (
+                      <tr key={data.id}>
+                        <td>
                           <img
                             className="orderProductThum"
-                            src={thumbnail.thumbnail_image}
+                            src={item.thumbnail_image}
                             alt="orderProductThum"
                           />
-                        );
-                      })}
-                    ;
-                  </td>
-                  <td className="orderProductName">
-                    {data &&
-                      data.map(name => {
-                        return <p>{name.name}</p>;
-                      })}
-                    {data &&
-                      data.map(option => {
-                        return (
-                          <p>
-                            {option.color_name}/{option.size_name}/
-                            {option.bundle_name}
-                          </p>
-                        );
-                      })}
-                  </td>
-                  {data &&
-                    data.map(price => {
-                      return (
-                        //판매가
+                        </td>
                         <td>
-                          {(
-                            price.default_price * (1 - price.discount_rate) +
-                            Number(price.price_gap)
-                          ).toLocaleString('ko') + '원'}
+                          {data && (
+                            <p>
+                              {item.name}
+                              {data && (
+                                <p>
+                                  {item.color_name}/{item.size_name}/
+                                  {item.bundle_name}
+                                </p>
+                              )}
+                            </p>
+                          )}
                         </td>
-                      );
-                    })}
-                  {data &&
-                    data.map(qty => {
-                      return <td>{qty.quantity}</td>;
-                    })}
-                  <td>-</td>
-                  {data &&
-                    data.map(sum => {
-                      return (
+                        <td>
+                          {data && (
+                            <p>
+                              {(
+                                item.default_price * (1 - item.discount_rate) +
+                                Number(item.price_gap)
+                              ).toLocaleString('ko') + '원'}
+                            </p>
+                          )}
+                        </td>
+                        <td>{data && <p>{item.quantity}</p>}</td>
+                        <td>-</td>
                         <td className="bold">
-                          {(
-                            (sum.default_price * (1 - sum.discount_rate) +
-                              Number(sum.price_gap)) *
-                            sum.quantity
-                          ).toLocaleString()}
-                          원
+                          {data && (
+                            <p>
+                              {(
+                                (item.default_price * (1 - item.discount_rate) +
+                                  Number(item.price_gap)) *
+                                item.quantity
+                              ).toLocaleString() + '원'}
+                            </p>
+                          )}
                         </td>
-                      );
-                    })}
-                </tr>
+                      </tr>
+                    );
+                  })}
                 <tr>
                   <td colSpan="6" className="totalPrice">
                     <span>
