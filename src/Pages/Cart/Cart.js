@@ -98,11 +98,10 @@ export class Cart extends Component {
     for (let i = 0; i < cartData.length; i++) {
       if (cartData[i].isSelect) {
         checkCartArr.push(cartData[i]);
-        totalResultPrice =
-          totalResultPrice +
-          cartData[i].default_price *
-            (1 - cartData[i].discount_rate) *
-            cartData[i].quantity;
+        totalResultPrice +=
+          (cartData[i].default_price * (1 - cartData[i].discount_rate) +
+            Number(Math.floor(cartData[i].price_gap))) *
+          cartData[i].quantity;
         isCheckBoxCount++;
       }
     }
@@ -115,7 +114,7 @@ export class Cart extends Component {
       state: {
         cartId: cartId,
         totalPrice: totalResultPrice,
-        cartData: cartData,
+        cartData: checkCartArr,
         deliveryPrice: deliveryPrice,
       },
     };
