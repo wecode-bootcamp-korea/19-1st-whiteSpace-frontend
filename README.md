@@ -160,7 +160,7 @@ https://vimeo.com/540894798
 ## 🔜 Frontend
 
 [김남선](https://velog.io/@nsunny0908/%EA%B3%B5%EB%B0%B1-%EC%9B%B9%EC%82%AC%EC%9D%B4%ED%8A%B8-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D)  
-김동현  
+[김동현](https://velog.io/@kdh24/1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D%EA%B3%B5%EB%B0%B1-%ED%81%B4%EB%A1%A0-%EC%82%AC%EC%9D%B4%ED%8A%B8)  
 [박단비](https://velog.io/@itssweetrain/%EA%B3%B5%EB%B0%B1-%ED%81%B4%EB%A1%A0-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 
 ## 🔙 Backend
